@@ -20,7 +20,7 @@ Demo: <Link to youtube video>
 <Screenshot of application>
 
 ## How To Run
-In the project directory, you can run:
+In the project directory, you run:
 
 ### `npm start`
 
