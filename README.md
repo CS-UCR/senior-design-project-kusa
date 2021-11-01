@@ -20,7 +20,7 @@ Demo: <Link to youtube video>
 <Screenshot of application>
 
 ## Project Setup
-1. `git clone https://github.com/ucr-cs180-fall21/cs180project-021-sea-cream-jasmine.git` to clone this repo
+1. `git clone https://github.com/CS-UCR/senior-design-project-kusa.git` to clone this repo
   
 ## How To Run
   
