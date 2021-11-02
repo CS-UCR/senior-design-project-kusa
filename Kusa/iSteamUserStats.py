@@ -11,6 +11,22 @@ interface = "/ISteamUserStats"
 # http://api.steampowered.com/<interface name>/<method name>/v<version>/?key=<api key>&format=<format>.
 
 def get_global_achievement_percentages_for_app(request):
-    function = "/GetGlobalAchievementPercentagesForApp"
-    game_id = request.get.GET("gameid")
-    response = requests.get(conf["steam_api_url"]+ interface + function + v2 + "/?key=" + conf["steam_api_key"] + "&gameid=" + game_id + "&format=" + format)
+    method = "/GetGlobalAchievementPercentagesForApp"
+    game_id = request.GET.get("gameid")
+    response = requests.get(conf["steam_api_url"]+ interface + method + v2 + "/?key=" + conf["steam_api_key"] + "&gameid=" + game_id + "&format=" + format).json()
+    return JsonResponse(response)
+
+def get_player_achievements(request):
+    method = "/GetPlayerAchievements"
+    steam_id = request.GET.get("steamid")
+    app_id = request.GET.get("appid")
+    response = requests.get(conf["steam_api_url"]+ interface + method + v1 + "/?key=" + conf["steam_api_key"] + "&appid=" + app_id + "&steamid=" + steam_id + "&format=" + format).json()
+    return JsonResponse(response)
+
+def get_user_stats_for_game(request):
+    method = "/GetUserStatsForGame"
+    steam_id = request.GET.get("steamid")
+    app_id = request.GET.get("appid")
+    response = requests.get(conf["steam_api_url"]+ interface + method + v2 + "/?key=" + conf["steam_api_key"] + "&appid=" + app_id + "&steamid=" + steam_id + "&format=" + format).json()
+    return JsonResponse(response)
+
