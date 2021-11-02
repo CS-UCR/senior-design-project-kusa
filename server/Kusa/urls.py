@@ -1,5 +1,4 @@
 """admin URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -13,15 +12,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
+from . import iSteamUserStats, iSteamUser, views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-<<<<<<< HEAD:admin/urls.py
-    path('api/', include('Kusa.urls')),
-=======
-    path('api/', admin.site.urls),
->>>>>>> main:server/admin/urls.py
+    path('test', views.test, name='test'),
+    path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
+    path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
+    path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
+    path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
+    path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
+    path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
 ]

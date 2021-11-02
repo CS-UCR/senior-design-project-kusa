@@ -123,3 +123,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CONF = {
+    "steam_api_key" : "A9CA87DF67FF43A0D58ED82382356CFE",
+    "steam_api_url" : "http://api.steampowered.com",
+}
