@@ -19,10 +19,26 @@ Demo: <Link to youtube video>
 
 <Screenshot of application>
 
+## Project Setup
+1. `git clone https://github.com/CS-UCR/senior-design-project-kusa.git` to clone this repo
+  
 ## How To Run
+  
+### Django Setup
+1. `cd senior-design-project-kusa/`
+2. `python -m venv env` to create a virtual environment
+3. For Linux: `source env/bin/activate` to activate the virtual environment<br />
+For Windows: `admin\env\Scripts\activate.bat` to activate the virtual environment<br />
+4. `pip3 install -r requirements.txt` to install all the dependencies 
+5. `cd admin/`
+6. `python manage.py runserver` to run the server
+7. Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
+  
+### React Setup  
 In the project directory, you can run:
-
-### `npm start`
+### `cd my-app/` to change to the react directory
+### `npm install` to install the required dependencies
+### `npm start` to start server
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -63,6 +79,8 @@ Frontend Structure
 
 
 Overall System Diagram
+![image](https://user-images.githubusercontent.com/65988711/136714242-98f5c0c7-c8e7-41b5-a27d-7a39e1372cd7.png)
+
 
 ## Dependencies
 Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
