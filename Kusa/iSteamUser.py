@@ -8,7 +8,7 @@ v2 = "/v0002"
 v1 = "/v0001"
 format = "JSON"
 interface = "/ISteamUser"
-# http://api.steampowered.com/<interface name>/<method name>/v<version>/?key=<api key>&format=<format>.
+
 def get_player_summaries(request):
     method = "/GetPlayerSummaries"
     steam_ids = request.GET.get("steamids")
