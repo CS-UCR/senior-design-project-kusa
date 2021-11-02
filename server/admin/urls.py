@@ -19,5 +19,9 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD:admin/urls.py
     path('api/', include('Kusa.urls')),
+=======
+    path('api/', admin.site.urls),
+>>>>>>> main:server/admin/urls.py
 ]
