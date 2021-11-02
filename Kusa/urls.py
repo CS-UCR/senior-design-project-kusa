@@ -14,10 +14,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import iSteamUserStats, iSteamUser, views
 
 urlpatterns = [
     path('test', views.test, name='test'),
-    path('GetGlobalAchievementPercentagesForApp/', views.GetGlobalAchievementPercentagesForApp, name='GetGlobalAchievementPercentagesForApp'),
-
+    path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
+    path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
+    path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetPlayerAchievements'),
 ]
