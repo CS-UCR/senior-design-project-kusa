@@ -13,6 +13,10 @@
 
 ## Team
 <a href="https://github.com/msalloum" target="_blank"><img src="https://avatars3.githubusercontent.com/u/1790819?s=400&v=4" align="left" height="30px">Mariam Salloum </a>
+<a>Michelle Chu</a>
+<a>Gabriella O'Brien</a>
+<a>James Ooi</a>
+<a>Yuteng Wu</a>
 
 ## Usage
 Demo: <Link to youtube video>
