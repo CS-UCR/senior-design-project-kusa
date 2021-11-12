@@ -9,14 +9,22 @@
 - [Dependencies](#dependencies)
 
 ## Overview
-<Include project description?
+Problem: Gamers spend an unhealthy amount of time playing games, which introduces health risks and a loss of time that some people want to spend on productive/other tasks
+Goal: Help gamers cut down their addiction or dependencies on video games and to allow them to engage in more productive tasks.
+Our project: Web application
+Gamers can connect their Steam accounts and moderate their activity
+
+This project benefits gamers by
+- better time management skills
+- healthier sleep schedules
+- creating social communities
+
 
 ## Team
-<a href="https://github.com/msalloum" target="_blank"><img src="https://avatars3.githubusercontent.com/u/1790819?s=400&v=4" align="left" height="30px">Mariam Salloum </a>
-<a>Michelle Chu</a>
-<a>Gabriella O'Brien</a>
-<a>James Ooi</a>
-<a>Yuteng Wu</a>
+- Michelle Chu
+- Gabrielle O'Brien
+- James Ooi
+- Yuteng Wu
 
 ## Usage
 Demo: <Link to youtube video>
