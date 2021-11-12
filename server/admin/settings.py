@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from environ import Env
+
+# Setup Environment
+env = Env()                          
+env.read_env(env_file='admin/.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pt)$+vr3dn+=x_*pw&c7ofndf!q651l9@)jgmy40kp=^epkspl'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+STEAM_API_KEY = env('STEAM_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
+
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -125,6 +131,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CONF = {
-    "steam_api_key" : "A9CA87DF67FF43A0D58ED82382356CFE",
+    "steam_api_key" : STEAM_API_KEY,
     "steam_api_url" : "http://api.steampowered.com",
 }

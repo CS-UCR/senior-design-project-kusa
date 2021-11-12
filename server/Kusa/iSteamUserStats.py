@@ -9,7 +9,6 @@ v1 = "/v0001"
 format = "JSON"
 interface = "/ISteamUserStats"
 
-
 def get_global_achievement_percentages_for_app(request):
     method = "/GetGlobalAchievementPercentagesForApp"
     game_id = request.GET.get("gameid")
