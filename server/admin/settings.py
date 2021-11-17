@@ -80,18 +80,26 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-CONNECTION_STRING = 'mongodb+srv://kusaDbAdmin:{DB_PASS}@cluster0.wrtor.mongodb.net/main?retryWrites=true&w=majority'
-# Remove Sqlite3 later
+CONNECTION_STRING = 'mongodb+srv://kusaDbAdmin:{}@cluster0.wrtor.mongodb.net/main?retryWrites=true&w=majority'.format(DB_PASS)
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'main',
         'CLIENT': {
             'host': CONNECTION_STRING,
-            'port': 27017,
             'username': 'kusaDbAdmin',
-            'password': DB_PASS, 
+            'password': DB_PASS,
+            'authSource': 'main',
+            'authMechanism': 'SCRAM-SHA-1'
         },
+        'LOGGING': {
+            'version': 1,
+            'loggers': {
+                'djongo': {
+                    'level': 'DEBUG',
+                    'propagate': False,                        
+                }
+            },
+        }
     }
 }
 
