@@ -1,9 +1,25 @@
+:root {
+  --lightModeBG: linear-gradient(#A4E762,#355A24);
+  --darkModeBG: linear-gradient(#444746,#151615);
+  --gardenBG: linear-gradient(#7FECF3, #6FC08A,#266907);
+  --brownBox: rgba(224, 171, 108, 0.8);
+  --lightBrownBox: #EBCB8B;
+  --grayBox: rgba(112, 125, 124, 0.38);
+  --lightModeTextBubble: #ECEFF4;
+  --textAlmond: #F9FBE8;
+  --textGreen: #1E4418;
+  --textGray: #444444;
+  --textYellow: #FDED5E;
+  --textWhite: #ECEFF4;
+  --textBlue: #88C0D0;
+  }
+
 .App {
   text-align: center;
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUVVvKMEEi-oFraigsF71TyJYhrE2dIFnVhA&usqp=CAU);
   background-size: cover;
   background-position: center;
-  background-image: linear-gradient(#355A24, #A4E762);
+  background-image: var(--lightModeBG);
+
   position: fixed;
   padding:0;
   margin:0;
