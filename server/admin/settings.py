@@ -14,7 +14,7 @@ from pathlib import Path
 from environ import Env
 
 # Setup Environment
-env = Env()                          
+env = Env()
 env.read_env(env_file='admin/.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,12 +31,14 @@ STEAM_API_KEY = env('STEAM_API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
+DB_PASS = env('MONGODB_PASSWORD')
 
 ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
+    'Kusa.apps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,14 +80,28 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+CONNECTION_STRING = 'mongodb+srv://kusaDbAdmin:{}@cluster0.wrtor.mongodb.net/main?retryWrites=true&w=majority'.format(DB_PASS)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'host': CONNECTION_STRING,
+            'username': 'kusaDbAdmin',
+            'password': DB_PASS,
+            'authSource': 'main',
+            'authMechanism': 'SCRAM-SHA-1'
+        },
+        'LOGGING': {
+            'version': 1,
+            'loggers': {
+                'djongo': {
+                    'level': 'DEBUG',
+                    'propagate': False,                        
+                }
+            },
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -131,6 +147,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CONF = {
-    "steam_api_key" : STEAM_API_KEY,
-    "steam_api_url" : "http://api.steampowered.com",
+    "steam_api_key": STEAM_API_KEY,
+    "steam_api_url": "http://api.steampowered.com",
 }
