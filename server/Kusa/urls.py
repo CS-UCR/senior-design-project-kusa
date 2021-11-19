@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import iSteamUserStats, iSteamUser, views
+from . import iSteamUserStats, iSteamUser, views, manageUser
 
 urlpatterns = [
     path('test', views.test, name='test'),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
+    path('RegisterUser/', manageUser.register_user, name='RegisterUser')
 ]
