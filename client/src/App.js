@@ -19,7 +19,7 @@ function App() {
                         height: "100%",
                     },
                     body: {
-                        backgroundColor: theme.palette.primary.main,
+                        backgroundImage: theme.palette.primary.light,
                     },
                 })}
             />
