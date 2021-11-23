@@ -1,7 +1,10 @@
-/* Let's try to remove this :root by moving css variables into MUI components that consume our theme instead...REMOVE THESE EVENTUALLY!! */
 .App {
+  text-align: center;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUVVvKMEEi-oFraigsF71TyJYhrE2dIFnVhA&usqp=CAU);
   background-size: cover;
   background-position: center;
+  background-color: #b53653;
+  background-repeat: no-repeat;
   position: fixed;
   padding:0;
   margin:0;
@@ -12,3 +15,4 @@
   background-attachment: scroll;
   overflow-y: auto;
 }
+
