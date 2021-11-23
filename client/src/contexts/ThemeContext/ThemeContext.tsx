@@ -72,8 +72,6 @@ const lightTheme = createTheme({
 }, crossTheme);
 
 export const CustomThemeProvider = (props: any) => {
-    const theme = React.useContext(UserContext).darkMode
-        ? darkTheme
-        : lightTheme;
-    return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
+    const theme = React.useContext(UserContext).darkMode;
+    return <ThemeProvider theme={theme ? darkTheme : lightTheme}>{props.children}</ThemeProvider>;
 };
