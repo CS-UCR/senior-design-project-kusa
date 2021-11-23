@@ -8,10 +8,17 @@ import { default as suitcase } from "../../assets/profile/suitcase.svg";
 import "./Profile.scss";
 
 export const Profile: React.FC = () => {
+    const iconHeight = 40;
     return (
         <Container>
             <KusaHeader styles={{ marginTop: "7rem" }}>
-                <img src={suitcase} alt="suit" />
+                <img
+                    src={suitcase}
+                    alt="suit"
+                    width={iconHeight}
+                    height={iconHeight}
+                    style={{ marginRight: '1rem' }}
+                />
                 your information
             </KusaHeader>
             <KusaBox width="100%" height="10rem">
@@ -21,7 +28,13 @@ export const Profile: React.FC = () => {
             </KusaBox>
             <div className="inline"></div>
             <KusaHeader>
-                <img src={linkSVG} alt="link" />
+                <img
+                    src={linkSVG}
+                    alt="link"
+                    width={iconHeight}
+                    height={iconHeight}
+                    style={{ marginRight: '1rem' }}
+                />
                 account links
             </KusaHeader>
             <KusaBox
@@ -33,9 +46,14 @@ export const Profile: React.FC = () => {
                     <Grid item xs={4}></Grid>
                 </Grid>
             </KusaBox>
-
-            <KusaHeader color="primary.contrastText">
-                <img src={suitcase} alt="suit" />
+            <KusaHeader>
+                <img
+                    src={suitcase}
+                    alt="suit"
+                    width={iconHeight}
+                    height={iconHeight}
+                    style={{ marginRight: '1rem' }}
+                />
                 account options
             </KusaHeader>
             <Grid
