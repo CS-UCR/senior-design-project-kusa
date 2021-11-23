@@ -43,11 +43,11 @@ function App() {
 
 const ComposeApp = () => {
     return (
-        <CustomThemeProvider>
-            <UserContextProvider>
+        <UserContextProvider>
+            <CustomThemeProvider>
                 <App />
-            </UserContextProvider>
-        </CustomThemeProvider>
+            </CustomThemeProvider>
+        </UserContextProvider>
     );
 };
 
