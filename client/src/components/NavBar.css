@@ -5,6 +5,7 @@
     width: 11%;
     display: grid;
     grid-template-areas: "logo nav";
+    height: 10rem,
   }
   
   .Logo {

@@ -7,30 +7,52 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CustomThemeProvider } from "./contexts/ThemeContext/ThemeContext";
+import { UserContextProvider } from "./contexts/UserContext/UserContext";
+import { GlobalStyles } from "@mui/material";
 
 function App() {
     return (
         <div className="App">
+            <GlobalStyles
+                styles={(theme) => ({
+                    html: {
+                        height: "100%",
+                    },
+                    body: {
+                        backgroundImage: theme.palette.primary.light,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                    },
+                })}
+            />
             <BrowserRouter>
-                <CustomThemeProvider>
-                    <NavBar />
-                    <Routes>
-                        <Route exact path="/" element={<Home />} />
-                        <Route exact path="/" element={<PrivateRoute />}>
-                            <Route
-                                exact
-                                path="/profile"
-                                caseSensitive={false}
-                                element={<Profile />}
-                            />
-                        </Route>
-                    </Routes>
-                </CustomThemeProvider>
+                <NavBar />
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/profile"
+                            caseSensitive={false}
+                            element={<Profile />}
+                        />
+                    </Route>
+                </Routes>
             </BrowserRouter>
         </div>
     );
 }
 
+const ComposeApp = () => {
+    return (
+        <CustomThemeProvider>
+            <UserContextProvider>
+                <App />
+            </UserContextProvider>
+        </CustomThemeProvider>
+    );
+};
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
-export default App;
+export { ComposeApp as App };
