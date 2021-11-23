@@ -19,7 +19,7 @@
   background-size: cover;
   background-position: center;
   background-image: var(--lightModeBG);
-
+  font: var(--textGreen);
   position: fixed;
   padding:0;
   margin:0;

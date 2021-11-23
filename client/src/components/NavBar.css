@@ -1,8 +1,8 @@
 .Header {
     position: fixed;
     top: 1%; /* Stick it to the top */
-    left: 88%;
-    width: 11%;
+    left: 79%;
+    width: 20%;
     display: grid;
     grid-template-areas: "logo nav";
   }
@@ -15,7 +15,7 @@
   .Nav {
     display: grid;
     grid-area: nav;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(7, auto);
     align-items: center;
     justify-items: center;
   }
