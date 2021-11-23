@@ -39,7 +39,9 @@ interface UserContextProviderProps {
 
 export const UserContext = React.createContext<UserContextProps>(defaultValue);
 
-const UserContextProvider: React.FC<React.FC> = (props) => {
+export const UserContextProvider: React.FC<React.FC> = (props) => {
+    const currentMode = getUserStorageDarkMode(defaultValue.username);
+    
     const setUserInfo = (user: UserContextProviderProps) => {
         setState((prevState) => ({ ...prevState, user }));
     };
@@ -50,12 +52,11 @@ const UserContextProvider: React.FC<React.FC> = (props) => {
 
     const [state, setState] = React.useState({
         ...defaultValue,
-        darkMode: getUserStorageDarkMode(defaultValue.username),
+        darkMode: currentMode,
         setDarkMode: setDarkModeStore,
         setUserInfo: setUserInfo,
     });
 
-    return <UserContext.Provider value={state}>{props}</UserContext.Provider>;
+    return <UserContext.Provider value={state}>{props.children}</UserContext.Provider>;
 };
 
-export { UserContextProvider as Provider };
