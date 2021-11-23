@@ -22,7 +22,7 @@ interface UserContextProps {
 
 //defaulted to loggedin for testing purposes, change with authentication implementation
 const defaultValue = {
-    username: null,
+    username: 'test',
     isLoggedIn: true,
     darkMode: false,
     steamname: null,
@@ -57,6 +57,7 @@ export const UserContextProvider: React.FC<React.FC> = (props) => {
         setUserInfo: setUserInfo,
     });
 
+    console.log("currentMode",state.darkMode);
     return <UserContext.Provider value={state}>{props.children}</UserContext.Provider>;
 };
 

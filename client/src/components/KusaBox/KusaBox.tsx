@@ -15,7 +15,7 @@ export const KusaBox: React.FC<KusaBoxProps> = ({
 }) => (
     <Box
         sx={{
-            borderRadius: 1,
+            borderRadius: 2,
             p: 2,
             height: height,
             width: width,
