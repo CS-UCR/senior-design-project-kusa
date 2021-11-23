@@ -21,6 +21,7 @@ export const KusaBox: React.FC<KusaBoxProps> = ({
             width: width,
             backgroundColor: "secondary.main",
             textAlign: "left",
+            boxShadow: 1,
             ...styles
         }}
     >
