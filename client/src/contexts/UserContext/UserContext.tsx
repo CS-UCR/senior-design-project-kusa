@@ -57,7 +57,6 @@ export const UserContextProvider: React.FC<React.FC> = (props) => {
         setUserInfo: setUserInfo,
     });
 
-    console.log("currentMode",state.darkMode);
     return <UserContext.Provider value={state}>{props.children}</UserContext.Provider>;
 };
 
