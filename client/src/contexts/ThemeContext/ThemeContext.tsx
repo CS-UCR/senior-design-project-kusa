@@ -4,16 +4,18 @@ import { UserContext } from "../UserContext/UserContext";
 import { yellow } from "@mui/material/colors";
 
 declare module "@mui/material/styles" {
-    interface Theme {
-        status: {
-            danger: string;
-        };
+    interface Palette {
+        neutral: Palette["primary"];
     }
-    // allow configuration using `createTheme`
-    interface ThemeOptions {
-        status?: {
-            danger?: string;
-        };
+    interface PaletteOptions {
+        neutral: PaletteOptions["primary"];
+    }
+
+    interface PaletteColor {
+        darker?: string;
+    }
+    interface SimplePaletteColorOptions {
+        darker?: string;
     }
 }
 
@@ -33,45 +35,73 @@ const crossTheme = {
     },
 };
 
-const darkTheme = createTheme({
-    palette: {
-        //greys for backgrounds
-        primary: {
-            main: "#444746",
-            dark: "#151615",
-            contrastText: "#ECEFF4",
-            //gradient is stored under light
-            light: "linear-gradient(#444746,#151615)",
-        },
-        //greys for boxes
-        secondary: {
-            main: "rgba(112, 125, 124, 0.38)",
-            contrastText: "#ECEFF4",
+const darkTheme = createTheme(
+    {
+        palette: {
+            //greys for backgrounds
+            primary: {
+                main: "#444746",
+                dark: "#151615",
+                contrastText: "#ECEFF4",
+                //gradient is stored under light
+                light: "linear-gradient(#444746,#151615)",
+            },
+            //greys for boxes
+            secondary: {
+                main: "rgba(112, 125, 124, 0.38)",
+                contrastText: "#ECEFF4",
+            },
+            neutral: {
+                main: "#ffff",
+                dark: "#1E4418",
+            },
         },
     },
-}, crossTheme);
+    crossTheme
+);
 
-const lightTheme = createTheme({
-    palette: {
-        //light green for backgrounds
-        primary: {
-            main: "#A4E762",
-            dark: "#355A24",
-            //gradient is stored under light
-            light: "linear-gradient(to bottom, #A4E762, #355A24)",
-            contrastText: "#000",
-        },
-        //light browns for boxes
-        secondary: {
-            main: "rgba(224, 171, 108, 0.8)",
-            light: "#EBCB8B",
-            dark: "#ECEFF4",
-            contrastText: "#F9FBE8",
+const lightTheme = createTheme(
+    {
+        palette: {
+            //light green for backgrounds
+            primary: {
+                main: "#A4E762",
+                dark: "#355A24",
+                //gradient is stored under light
+                light: "linear-gradient(to bottom, #A4E762, #355A24)",
+                contrastText: "#000",
+            },
+            //light browns for boxes
+            secondary: {
+                main: "rgba(224, 171, 108, 0.8)",
+                light: "#EBCB8B",
+                dark: "#ECEFF4",
+                contrastText: "#F9FBE8",
+            },
+            //dark greens
+            neutral: {
+                main: "#1E4418",
+                dark: "#1E4418",
+            },
+            success: {
+                main: "#7FECF3",
+            },
+            warning: {
+                main: "#FFE600",
+            },
+            error: {
+                main: "#ECA780",
+            },
         },
     },
-}, crossTheme);
+    crossTheme
+);
 
 export const CustomThemeProvider = (props: any) => {
     const theme = React.useContext(UserContext).darkMode;
-    return <ThemeProvider theme={theme ? darkTheme : lightTheme}>{props.children}</ThemeProvider>;
+    return (
+        <ThemeProvider theme={theme ? darkTheme : lightTheme}>
+            {props.children}
+        </ThemeProvider>
+    );
 };
