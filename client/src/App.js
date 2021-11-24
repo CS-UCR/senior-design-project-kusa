@@ -1,6 +1,6 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
-import Home from "./pages/Home";
+import NavBar from "./components/KusaNavBar/NavBar";
+import Home from "./pages/Home/Home";
 import { Profile } from "./pages/Profile/Profile";
 import { PrivateRoute } from "./routes/PrivateRoute/PrivateRoute";
 import React from "react";
@@ -26,7 +26,13 @@ function App() {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
-                    <Route exact path="/" element={<Home />} />
+                    <Route path="/" element={Home} />
+                    {/* <Route path="/garden" element={Garden} />
+                    <Route path="/chat" element={Chat} />
+                    <Route path="/friends" element={Friends} />           
+                    <Route path="/achievements" element={Achievements} />
+                    <Route path="/account" element={Account} />
+                    <Route path="/settings" element={Settings} /> */}
                     <Route exact path="/" element={<PrivateRoute />}>
                         <Route
                             exact
