@@ -2,8 +2,8 @@ import { Box } from "@mui/system";
 import * as React from "react";
 
 interface KusaBoxProps {
-    height: number | string;
-    width: number | string;
+    height?: number | string;
+    width?: number | string;
     styles?: any,
     children: React.ReactChild;
 }
