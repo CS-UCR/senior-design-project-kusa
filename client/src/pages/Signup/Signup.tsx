@@ -9,11 +9,13 @@ import { ProfileField } from "../../components/Profile/ProfileField/ProfileField
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import "./Signup.scss";
 import {LoginButton} from "../../components/Login/LoginButton";
+import { useState } from "react";
 
 export const Signup: React.FC = () => {
     const {email,username } =
         React.useContext(UserContext);
-
+    const [password, setPassword] = useState("");
+    const [reenterPassword, setreenterPassword] = useState("");
 
     const signUp = () => {
     };
@@ -43,7 +45,7 @@ export const Signup: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{username}</ProfileField>
+                        <ProfileField>{password}</ProfileField>
                     </Grid >
                     <Grid item xs={4}>
                         <Typography
@@ -55,7 +57,7 @@ export const Signup: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{username}</ProfileField>
+                        <ProfileField>{reenterPassword}</ProfileField>
                     </Grid >
                     <Grid
                         sx={{ p:7,mx: "auto", width: "90%" }}

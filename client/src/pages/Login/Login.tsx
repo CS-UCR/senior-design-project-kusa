@@ -9,12 +9,15 @@ import { ProfileField } from "../../components/Profile/ProfileField/ProfileField
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import "./Login.scss";
 import {LoginButton} from "../../components/Login/LoginButton";
+import { useState } from "react";
 
 export const Login: React.FC = () => {
     const {email,username } =
         React.useContext(UserContext);
-
+    const [password, setPassword] = useState("");
+    // send email/password to the server to verify 
     const login = () => {
+
     };
     return (
         <Container >
@@ -42,7 +45,7 @@ export const Login: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{username}</ProfileField>
+                        <ProfileField> {password}</ProfileField>
                     </Grid >
                     <Grid
                         sx={{ p:7,mx: "auto", width: "90%" }}
