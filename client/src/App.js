@@ -9,6 +9,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CustomThemeProvider } from "./contexts/ThemeContext/ThemeContext";
 import { UserContextProvider } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
 
 function App() {
     return (
@@ -39,6 +41,22 @@ function App() {
                             path="/profile"
                             caseSensitive={false}
                             element={<Profile />}
+                        />
+                    </Route>
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/login"
+                            caseSensitive={false}
+                            element={<Login />}
+                        />
+                    </Route>
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/signup"
+                            caseSensitive={false}
+                            element={<Signup />}
                         />
                     </Route>
                 </Routes>
