@@ -1,19 +1,12 @@
 import * as React from "react";
 import {
-    Alert,
-    AlertColor,
-    Box,
-    Button,
     Container,
     Grid,
     Typography,
 } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
-import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
-import { KusaButton } from "../../components/Kusa/KusaButton/KusaButton";
 import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
-import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
 import "./Login.scss";
 import {LoginButton} from "../../components/Login/LoginButton";
 
