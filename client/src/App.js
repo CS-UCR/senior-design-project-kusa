@@ -9,6 +9,7 @@ import { CustomThemeProvider } from "./contexts/ThemeContext/ThemeContext";
 import { UserContextProvider } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
+import "./App.css";
 import "animate.css";
 
 /* 
@@ -59,8 +60,8 @@ const ComposeApp = () => {
     );
 };
 
-//revisit - probably not performant to be rerendering the routes on new location change -> see if memo improves
-const AnimatedApp = React.memo(() => {
+//revisit - probably not performant to be rerendering the routes on new location change
+const AnimatedApp = () => {
     const location = useLocation();
     return (
         <Routes>
@@ -75,7 +76,7 @@ const AnimatedApp = React.memo(() => {
                                 appear
                                 in={location.pathname === path}
                                 key={name}
-                                classNames="fade"
+                                classNames="screen"
                                 timeout={100}
                             >
                                 <Component />
@@ -86,7 +87,7 @@ const AnimatedApp = React.memo(() => {
             })}
         </Routes>
     );
-});
+};
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
