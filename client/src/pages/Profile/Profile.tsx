@@ -23,6 +23,7 @@ import { CSSTransition } from "react-transition-group";
 
 import "./Profile.scss";
 
+//revisit - have some weird render issues with animations here
 const bounceStyles = {
     appear: 'animate__animated',
     appearActive: 'animate_animated animate__bounceInUp',
@@ -234,7 +235,7 @@ export const Profile: React.FC = () => {
                         in={StatusMap[status] !== null}
                         key={StatusMap[status]}
                         classNames={bounceStyles}
-                        timeout={100}
+                        timeout={10}
                     >
                         <Alert
                             severity={status}

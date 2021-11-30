@@ -1,5 +1,3 @@
-@import "~animate.css/animate.css";
-
 .App {
   background-size: cover;
   background-position: center;
@@ -14,29 +12,29 @@
   overflow-y: auto;
 }
 
-.fade-appear {
+.screen-appear {
   opacity: 0;
 }
 
-.fade-appear-active {
+.screen-appear-active {
   opacity: 1;
   transition: opacity 1000ms;
 }
 
-.fade-enter {
+.screen-enter {
   opacity: 0;
 }
 
-.fade-enter-active {
+.screen-enter-active {
   opacity: 1;
   transition: opacity 1000ms;
 }
 
-.fade-exit {
+.screen-exit {
   opacity: 1;
 }
 
-.fade-exit-active {
+.screen-exit-active {
   opacity: 0;
   transition: opacity 1000ms;
 }
