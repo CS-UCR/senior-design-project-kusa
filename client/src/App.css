@@ -1,4 +1,5 @@
-/* Let's try to remove this :root by moving css variables into MUI components that consume our theme instead...REMOVE THESE EVENTUALLY!! */
+@import "~animate.css/animate.css";
+
 .App {
   background-size: cover;
   background-position: center;
