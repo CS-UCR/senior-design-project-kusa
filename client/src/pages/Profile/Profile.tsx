@@ -171,6 +171,7 @@ export const Profile: React.FC = () => {
                 account options
             </KusaHeader>
             <Grid
+                container
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
