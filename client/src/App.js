@@ -10,7 +10,6 @@ import { UserContextProvider } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
 import "animate.css";
-import "./App.css";
 
 /* 
 <Route path="/garden" element={Garden} />
@@ -61,7 +60,7 @@ const ComposeApp = () => {
 };
 
 //revisit - probably not performant to be rerendering the routes on new location change -> see if memo improves
-const AnimatedApp = () => {
+const AnimatedApp = React.memo(() => {
     const location = useLocation();
     return (
         <Routes>
@@ -87,7 +86,7 @@ const AnimatedApp = () => {
             })}
         </Routes>
     );
-};
+});
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
