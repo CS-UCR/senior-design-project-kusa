@@ -1,6 +1,6 @@
 import "./App.css";
 import NavBar from "./components/KusaNavBar/NavBar";
-import Home from "./pages/Home/Home";
+import { Home } from "./pages/Home/Home";
 import { Profile } from "./pages/Profile/Profile";
 import { PrivateRoute } from "./routes/PrivateRoute/PrivateRoute";
 import React from "react";
@@ -26,8 +26,16 @@ function App() {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
-                    <Route path="/" element={Home} />
-                    {/* <Route path="/garden" element={Garden} />
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/home"
+                            caseSensitive={false}
+                            element={<Home />}
+                        />
+                    </Route>
+                    {/* <Route path="/" element={Home} />
+                    <Route path="/garden" element={Garden} />
                     <Route path="/chat" element={Chat} />
                     <Route path="/friends" element={Friends} />           
                     <Route path="/achievements" element={Achievements} />
