@@ -11,8 +11,7 @@ export const LoginButton = styled(Button)(({ theme }) => ({
   },
   textTransform: "lowercase",
   fontSize: "1.6rem",
-  borderRadius: 20,
-//tried to make a yellow outline but i think my code here is wrong
+  borderRadius: 25,
   border:'solid',
   borderWidth:2,
   borderColor:'yellow',

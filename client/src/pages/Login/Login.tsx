@@ -1,15 +1,17 @@
 import * as React from "react";
 import {
+    Box,
     Container,
     Grid,
     Typography,
 } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
-import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import "./Login.scss";
-import {LoginButton} from "../../components/Login/LoginButton";
+import {LoginButton} from "../../components/Login/LoginButton/LoginButton";
 import { useState } from "react";
+import { LoginField } from "../../components/Login/LoginField/LoginField";
+
 
 export const Login: React.FC = () => {
     const {email,username } =
@@ -21,7 +23,7 @@ export const Login: React.FC = () => {
     };
     return (
         <Container >
-            <KusaBox height="300px" width="90%" styles={{ mx: "auto", width: "90%" ,padding: "2rem", marginTop: "7rem"}}>
+            <KusaBox height="300px" width="80%" styles={{ mx: "auto", width: "80%" ,padding: "2rem", marginTop: "7rem"}}>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <Typography
@@ -33,7 +35,7 @@ export const Login: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{email}</ProfileField>
+                        <LoginField>{email}</LoginField>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
@@ -45,19 +47,17 @@ export const Login: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField> {password}</ProfileField>
+                        <LoginField> {password}</LoginField>
                     </Grid >
                     <Grid
-                        sx={{ p:7,mx: "auto", width: "90%" }}
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
+                        sx={{ p:7, mx: "auto"}}
+                        // direction="row"
+                        // justifyContent="center"
+                        // alignItems="center"
                         textAlign="center"
                     >
                         <Grid>
-                            <LoginButton variant="contained"
-                                        onClick={login}
-                            >
+                            <LoginButton variant="contained" onClick={login}>
                                 login
                              </LoginButton>
                         </Grid>
@@ -65,18 +65,16 @@ export const Login: React.FC = () => {
                 </Grid>
                 
             </KusaBox>
-            
             <Grid
-                sx={{ p:3,mx: "auto", width: "90%"  }}
+                sx={{ p:3,mx: "auto"}}
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
                 textAlign="center"
                 >
                 <Grid item>
-                    <LoginButton  onClick={event =>  window.location.href='/signup'} variant="contained"
-                                >
-                        or sign up 
+                    <LoginButton  onClick={event =>  window.location.href='/signup'} variant="contained">
+                            or sign up 
                     </LoginButton>
                 </Grid>
             </Grid>
