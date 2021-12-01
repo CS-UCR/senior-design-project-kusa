@@ -9,6 +9,8 @@ import { CustomThemeProvider } from "./contexts/ThemeContext/ThemeContext";
 import { UserContextProvider } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
 import "./App.css";
 import "animate.css";
 
@@ -27,7 +29,10 @@ const routes = [
     { path: "/", name: "Home", Component: PrivateRoute },
     //private routes go here
     { path: "/profile", name: "Profile", Component: Profile },
+
 ];
+
+
 
 function App() {
     return (
@@ -45,6 +50,39 @@ function App() {
             <BrowserRouter>
                 <NavBar />
                 <AnimatedApp />
+                <Routes>
+                    <Route path="/" element={Home} />
+                    {/* <Route path="/garden" element={Garden} />
+                    <Route path="/chat" element={Chat} />
+                    <Route path="/friends" element={Friends} />           
+                    <Route path="/achievements" element={Achievements} />
+                    <Route path="/account" element={Account} />
+                    <Route path="/settings" element={Settings} /> */}
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/profile"
+                            caseSensitive={false}
+                            element={<Profile />}
+                        />
+                    </Route>
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/login"
+                            caseSensitive={false}
+                            element={<Login />}
+                        />
+                    </Route>
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/signup"
+                            caseSensitive={false}
+                            element={<Signup />}
+                        />
+                    </Route>
+                </Routes>
             </BrowserRouter>
         </div>
     );
