@@ -19,6 +19,7 @@ import { default as insta } from "../../assets/socials/insta.svg";
 import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
+import { Bubbles } from "../../components/Bubbles/Bubbles";
 import "./Home.scss";
 
 export const Home: React.FC = () => {
@@ -64,6 +65,7 @@ export const Home: React.FC = () => {
 
     return (
         <Container>
+            
             <KusaHeader styles={{ marginTop: "7rem" }}>
                 <img
                     src={trophy}
