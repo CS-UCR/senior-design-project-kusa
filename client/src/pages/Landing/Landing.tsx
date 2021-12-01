@@ -20,6 +20,8 @@ import { ProfileField } from "../../components/Profile/ProfileField/ProfileField
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
 import { Bubbles } from "../../components/Bubbles/Bubbles";
+import { Login } from "../Login/Login";
+import {LandingButton} from "../../components/Landing/LandingButton/LandingButton";
 
 export const Landing: React.FC = () => {
     const { username, email, steamname, connections } =
@@ -28,7 +30,6 @@ export const Landing: React.FC = () => {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
     const iconHeight = 40;
-
     //implement with backend, sends requests to endpoints per action
     const getPasswordReset = () => {
         setLoading(true);
@@ -64,6 +65,26 @@ export const Landing: React.FC = () => {
 
     return (
         <Container>
+            <Grid
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                >
+                <Grid item>
+                    <KusaHeader styles={{marginTop: "8rem",fontSize: 140}}>
+                        kusa.
+                    </KusaHeader>
+                    <KusaHeader color="#FDED5E" styles={{marginTop: "1rem",fontSize: 85}}>
+                        let's get on track.
+                    </KusaHeader>
+                    <LandingButton onClick={(event: any) =>  window.location.href='/signup'} variant="contained">
+                            play
+                    </LandingButton>
+
+                </Grid>
+
+            </Grid>
             <Box
                 className="popin"
                 sx={{
