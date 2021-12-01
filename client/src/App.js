@@ -1,7 +1,8 @@
 import React from "react";
 import NavBar from "./components/KusaNavBar/NavBar";
-import Home from "./pages/Home/Home";
+import { Home } from "./pages/Home/Home.tsx";
 import { Profile } from "./pages/Profile/Profile";
+import { Landing } from "./pages/Landing/Landing.tsx";
 import { PrivateRoute } from "./routes/PrivateRoute/PrivateRoute";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
@@ -22,10 +23,11 @@ import "animate.css";
 */
 
 const routes = [
-    { path: "/", name: "Home", Component: Home },
+    { path: "/", name: "Landing", Component: Landing },
     //public routes go here
-    { path: "/", name: "Home", Component: PrivateRoute },
+    { path: "/", name: "Landing", Component: PrivateRoute },
     //private routes go here
+    { path: "/home", name: "Home", Component: Home },
     { path: "/profile", name: "Profile", Component: Profile },
 ];
 
@@ -44,7 +46,40 @@ function App() {
             />
             <BrowserRouter>
                 <NavBar />
-                <AnimatedApp />
+                <Routes>
+                    <Route exact path="/">
+                    <   Route
+                            exact
+                            path="/"
+                            caseSensitive={false}
+                            element={<Landing />}
+                        />
+                    </Route>
+
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/home"
+                            caseSensitive={false}
+                            element={<Home />}
+                        />
+                    </Route>
+                    {/* <Route path="/" element={Home} />
+                    <Route path="/garden" element={Garden} />
+                    <Route path="/chat" element={Chat} />
+                    <Route path="/friends" element={Friends} />           
+                    <Route path="/achievements" element={Achievements} />
+                    <Route path="/account" element={Account} />
+                    <Route path="/settings" element={Settings} /> */}
+                    <Route exact path="/" element={<PrivateRoute />}>
+                        <Route
+                            exact
+                            path="/profile"
+                            caseSensitive={false}
+                            element={<Profile />}
+                        />
+                    </Route>
+                </Routes>
             </BrowserRouter>
         </div>
     );
