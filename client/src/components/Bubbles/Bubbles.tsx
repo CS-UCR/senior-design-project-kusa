@@ -7,7 +7,7 @@ import { default as darkstar } from "../../assets/socials/darkstar.svg";
 import Particles from "react-tsparticles";
 import "./Bubbles.css";
 
-export const Bubbles: React.FC<number | null> = (bubbleNum) => {
+export const Bubbles: React.FC<any> = (bubbleNum) => {
     const { darkMode } = React.useContext(UserContext);
     const n = bubbleNum ? bubbleNum : 5;
     return (
