@@ -19,7 +19,29 @@ import { default as insta } from "../../assets/socials/insta.svg";
 import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
+import { CSSTransition } from "react-transition-group";
+
 import "./Profile.scss";
+
+//revisit - have some weird render issues with animations here
+const bounceStyles = {
+    appear: 'animate__animated',
+    appearActive: 'animate_animated animate__bounceInUp',
+    appearDone: 'animate__animated animate__bounceInUp',
+    enter: 'animate__animated',
+    enterActive: 'animate__bounceOutBottom',
+    enterDone: 'animate__animated',
+    exit: 'animate__animated',
+    exitActive: 'animate__bounceOutBottom',
+    exitDone: 'animate_animated',
+};
+
+const StatusMap: { [key in AlertColor]: string } = {
+    success: "success",
+    warning: "warning",
+    error: "error",
+    info: "info",
+};
 
 export const Profile: React.FC = () => {
     const { username, email, steamname, connections } =
@@ -171,6 +193,7 @@ export const Profile: React.FC = () => {
                 account options
             </KusaHeader>
             <Grid
+                container
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
@@ -207,21 +230,29 @@ export const Profile: React.FC = () => {
                 }}
             >
                 {!loading && status && (
-                    <Alert
-                        severity={status}
-                        color="success"
-                        action={
-                            <Button
-                                color="inherit"
-                                size="small"
-                                onClick={() => setStatus(null)}
-                            >
-                                X
-                            </Button>
-                        }
+                    <CSSTransition
+                        appear
+                        in={StatusMap[status] !== null}
+                        key={StatusMap[status]}
+                        classNames={bounceStyles}
+                        timeout={10}
                     >
-                        {operation}
-                    </Alert>
+                        <Alert
+                            severity={status}
+                            color="success"
+                            action={
+                                <Button
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => setStatus(null)}
+                                >
+                                    X
+                                </Button>
+                            }
+                        >
+                            {operation}
+                        </Alert>
+                    </CSSTransition>
                 )}
             </Box>
         </Container>

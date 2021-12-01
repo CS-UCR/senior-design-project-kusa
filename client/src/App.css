@@ -1,4 +1,3 @@
-/* Let's try to remove this :root by moving css variables into MUI components that consume our theme instead...REMOVE THESE EVENTUALLY!! */
 .App {
   background-size: cover;
   background-position: center;
@@ -11,4 +10,31 @@
   height: 100%;
   background-attachment: scroll;
   overflow-y: auto;
+}
+
+.screen-appear {
+  opacity: 0;
+}
+
+.screen-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.screen-enter {
+  opacity: 0;
+}
+
+.screen-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.screen-exit {
+  opacity: 1;
+}
+
+.screen-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
 }
