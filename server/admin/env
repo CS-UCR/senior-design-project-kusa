@@ -1,0 +1,3 @@
+DJANGO_SECRET_KEY='django-insecure-pt)$+vr3dn+=x_*pw&c7ofndf!q651l9@)jgmy40kp=^epkspl'
+STEAM_API_KEY='A9CA87DF67FF43A0D58ED82382356CFE'
+DEBUG=True

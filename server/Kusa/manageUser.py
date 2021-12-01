@@ -22,3 +22,13 @@ def register_user(request):
         return JsonResponse({'result':"Inset successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result':"An exception occurred"}, status=400, safe=False)
+
+
+def login_user(request):
+    # email = request.GET.get('email')
+    # email = request.GET.get('email')
+    pass
+
+
+def logout_user(request):
+    pass
