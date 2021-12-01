@@ -5,10 +5,10 @@ import {
     Typography,
 } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
-import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
+import { LoginField } from "../../components/Login/LoginField/LoginField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import "./Signup.scss";
-import {LoginButton} from "../../components/Login/LoginButton";
+import {LoginButton} from "../../components/Login/LoginButton/LoginButton";
 import { useState } from "react";
 
 export const Signup: React.FC = () => {
@@ -33,7 +33,7 @@ export const Signup: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{email}</ProfileField>
+                        <LoginField>{email}</LoginField>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
@@ -45,7 +45,7 @@ export const Signup: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{password}</ProfileField>
+                        <LoginField>{password}</LoginField>
                     </Grid >
                     <Grid item xs={4}>
                         <Typography
@@ -57,7 +57,7 @@ export const Signup: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{reenterPassword}</ProfileField>
+                        <LoginField>{reenterPassword}</LoginField>
                     </Grid >
                     <Grid
                         sx={{ p:7,mx: "auto", width: "90%" }}
