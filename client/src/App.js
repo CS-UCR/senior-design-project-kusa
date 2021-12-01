@@ -10,6 +10,8 @@ import { CustomThemeProvider } from "./contexts/ThemeContext/ThemeContext";
 import { UserContextProvider } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
 import "./App.css";
 import "animate.css";
 
@@ -29,7 +31,11 @@ const routes = [
     //private routes go here
     { path: "/home", name: "Home", Component: Home },
     { path: "/profile", name: "Profile", Component: Profile },
+
 ];
+
+
+
 
 function App() {
     return (
@@ -47,15 +53,26 @@ function App() {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
-                    <Route exact path="/">
+                   
                     <   Route
                             exact
                             path="/"
                             caseSensitive={false}
                             element={<Landing />}
                         />
-                    </Route>
-
+        
+                    <   Route
+                            exact
+                            path="/login"
+                            caseSensitive={false}
+                            element={<Login />}
+                        />
+                    <   Route
+                            exact
+                            path="/signup"
+                            caseSensitive={false}
+                            element={<Signup />}
+                        />
                     <Route exact path="/" element={<PrivateRoute />}>
                         <Route
                             exact
@@ -77,6 +94,7 @@ function App() {
                             path="/profile"
                             caseSensitive={false}
                             element={<Profile />}
+
                         />
                     </Route>
                 </Routes>
