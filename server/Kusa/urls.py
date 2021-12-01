@@ -14,15 +14,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import iSteamUserStats, iSteamUser, views, manageUser
+from . import iSteamUserStats, iSteamUser, views, manageUser, authentication
 
 urlpatterns = [
     path('test', views.test, name='test'),
+    # steam api calls
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
-    path('RegisterUser/', manageUser.register_user, name='RegisterUser')
+    path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+
+    # # auth api calls
+    # path('register/',authentication.register,name='register'),
+    # path('login/',authentication.login_view,name='login'),
+    # path('logout/',authentication.logout_view,name='logout'),
 ]
