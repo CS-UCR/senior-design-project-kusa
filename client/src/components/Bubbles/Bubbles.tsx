@@ -7,71 +7,68 @@ import { default as darkstar } from "../../assets/socials/darkstar.svg";
 import Particles from "react-tsparticles";
 import "./Bubbles.css";
 
-export const Bubbles: React.FC<any> = (bubbleNum) => {
+export const Bubbles: React.FC<any> = () => {
     const { darkMode } = React.useContext(UserContext);
-    const n = bubbleNum ? bubbleNum : 5;
+    const n = 15;
     return (
-            <Particles
-                id="tsparticles"
-                options={{
-                    background: {
-                        size: "20%",
+        <Particles
+            className="tsparticles"
+            height="3rem"
+            options={{
+                autoPlay: true,
+                fullScreen: {
+                    enable: true,
+                    zIndex: -1,
+                },
+                fpsLimit: 60,
+                particles: {
+                    number: {
+                        value: n,
                     },
-                    fpsLimit: 60,
-                    emitters: {
-                        direction: "top",
-                        size: {
+                shape: {
+                    type: "images",
+                    images: [
+                        {
+                            height: 100,
+                            src: darkMode ? darkstar : star,
                             width: 100,
-                            height: 10,
+                            replaceColor: false,
+                            replace_color: false,
                         },
-                        position: {
-                            x: 50,
-                            y: 100,
+                        {
+                            height: 100,
+                            src: darkMode ? darksteam : steam,
+                            width: 100,
+                            replaceColor: false,
+                            replace_color: false,
                         },
-                        rate: {
-                            delay: 0.5,
-                            quantity: 1,
-                        },
-                    },
-                    particles: {
-                        number: {
-                            value: n,
-                            limit: n,
-                        },
-                        color: {
-                            value: "#ffffff",
-                        },
-                        shape: {
-                            type: "image",
-                            image: [
-                                {
-                                    src: darkMode ? darksteam : steam,
-                                    width: 100,
-                                    height: 100,
-                                },
-                                {
-                                    height: 100,
-                                    src: darkMode ? darkstar : star,
-                                    width: 100,
-                                },
-                            ],
-                        },
-                        opacity: {
-                            value: 0.5,
-                        },
-                        size: {
-                            value: 30,
-                        },
-                        move: {
-                            enable: true,
-                            speed: 3,
-                            direction: "top",
-                            random: false,
-                            straight: false,
-                            out_mode: "destroy",
-                        },
-                    },
-                }}
-            />
-    );
+                    ],
+                },
+                opacity: {
+                    value: 0.5,
+                },
+                size: {
+                    value: 30,
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: "top",
+                    random: false,
+                    straight: false,
+                },
+            },
+            retina_detect: true,
+        }}
+    />
+);
 };
+
+/*
+{
+height: 100,
+src: darkMode ? darkstar : star,
+width: 100,
+replaceColor: false,
+}
+*/
