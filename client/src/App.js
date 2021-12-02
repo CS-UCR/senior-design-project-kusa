@@ -27,15 +27,13 @@ import "animate.css";
 const routes = [
     { path: "/", name: "Landing", Component: Landing },
     //public routes go here
+    { path: "/login", name: "Home", Component: Login },
+    { path: "/signup", name: "Profile", Component: Signup },
     { path: "/", name: "Landing", Component: PrivateRoute },
     //private routes go here
     { path: "/home", name: "Home", Component: Home },
     { path: "/profile", name: "Profile", Component: Profile },
-
 ];
-
-
-
 
 function App() {
     return (
@@ -52,52 +50,7 @@ function App() {
             />
             <BrowserRouter>
                 <NavBar />
-                <Routes>
-                   
-                    <   Route
-                            exact
-                            path="/"
-                            caseSensitive={false}
-                            element={<Landing />}
-                        />
-        
-                    <   Route
-                            exact
-                            path="/login"
-                            caseSensitive={false}
-                            element={<Login />}
-                        />
-                    <   Route
-                            exact
-                            path="/signup"
-                            caseSensitive={false}
-                            element={<Signup />}
-                        />
-                    <Route exact path="/" element={<PrivateRoute />}>
-                        <Route
-                            exact
-                            path="/home"
-                            caseSensitive={false}
-                            element={<Home />}
-                        />
-                    </Route>
-                    {/* <Route path="/" element={Home} />
-                    <Route path="/garden" element={Garden} />
-                    <Route path="/chat" element={Chat} />
-                    <Route path="/friends" element={Friends} />           
-                    <Route path="/achievements" element={Achievements} />
-                    <Route path="/account" element={Account} />
-                    <Route path="/settings" element={Settings} /> */}
-                    <Route exact path="/" element={<PrivateRoute />}>
-                        <Route
-                            exact
-                            path="/profile"
-                            caseSensitive={false}
-                            element={<Profile />}
-
-                        />
-                    </Route>
-                </Routes>
+                <AnimatedApp />
             </BrowserRouter>
         </div>
     );
@@ -114,7 +67,7 @@ const ComposeApp = () => {
 };
 
 //revisit - probably not performant to be rerendering the routes on new location change
-const AnimatedApp = () => {
+const AnimatedApp = React.memo(() => {
     const location = useLocation();
     return (
         <Routes>
@@ -140,7 +93,7 @@ const AnimatedApp = () => {
             })}
         </Routes>
     );
-};
+});
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);

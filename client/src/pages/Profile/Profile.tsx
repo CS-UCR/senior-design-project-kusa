@@ -86,7 +86,7 @@ export const Profile: React.FC = () => {
 
     return (
         <Container>
-            <KusaHeader styles={{ marginTop: "7rem" }}>
+            <KusaHeader>
                 <img
                     src={suitcase}
                     alt="suit"
