@@ -10,6 +10,8 @@ import { CustomThemeProvider } from "./contexts/ThemeContext/ThemeContext";
 import { UserContextProvider } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
 import "./App.css";
 import "animate.css";
 
@@ -47,15 +49,24 @@ function App() {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
-                    <Route exact path="/">
                     <   Route
                             exact
                             path="/"
                             caseSensitive={false}
                             element={<Landing />}
                         />
-                    </Route>
-
+                                        <   Route
+                            exact
+                            path="/login"
+                            caseSensitive={false}
+                            element={<Login />}
+                        />
+                    <   Route
+                            exact
+                            path="/signup"
+                            caseSensitive={false}
+                            element={<Signup />}
+                        />
                     <Route exact path="/" element={<PrivateRoute />}>
                         <Route
                             exact
