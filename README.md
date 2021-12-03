@@ -29,15 +29,36 @@ This project benefits gamers by
 - Yuteng Wu
 
 ## Usage
-Demo: <Link to youtube video>
+Demo:https://youtu.be/3zdM_QOe3G0
 
-<Screenshot of application>
+  
+![home](https://user-images.githubusercontent.com/43893085/144531563-6e18dbb2-08f8-4c4c-8cf3-f5e2d73444a1.gif)
+![image](https://user-images.githubusercontent.com/43893085/144531453-614725d3-23b9-4535-ad28-58c506e4bc3d.png)
+![image](https://user-images.githubusercontent.com/43893085/144531602-5ba25bc9-f0c7-4398-9757-ee5bf17f16e2.png)
+![image](https://user-images.githubusercontent.com/43893085/144531621-7a0755e6-3493-41af-a370-9bc1248830e5.png)
+![image](https://user-images.githubusercontent.com/43893085/144531643-8ce6f00f-f724-4c49-aabc-2e61114e9107.png)
 
 ## Project Setup
 1. Clone this repo 
   ```sh
    git clone https://github.com/CS-UCR/senior-design-project-kusa.git
   ``` 
+### Docker Setup
+  If you prefer to use Docker to run both the server and the client:
+1. Ensure docker is installed on your device [from here](https://docs.docker.com/get-docker/) and is using Linux containers
+2. cd into the project directory
+  ```sh 
+cd senior-design-project-kusa/
+``` 
+3. Build the docker containers
+  
+  ```docker-compose build```
+  
+4. Put your docker containers up
+  
+  ```docker-compose up -d```
+
+  5. Navigate to the appropriate local ports, `localhost:8000` for the server and `localhost:3000` for the client
   
 ### Django Setup
 1. cd into the project directory
@@ -102,3 +123,16 @@ Overall System Diagram
 ## Dependencies
 Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
 
+### Client Dependencies
+  - react-tsparticles
+  - react-router-dom
+  - animate.css
+  - mui
+  - react-transition-group
+
+
+### Server Dependencies
+  - environ
+  - requests
+  - djongo
+  - sqlparse
