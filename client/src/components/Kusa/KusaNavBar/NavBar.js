@@ -1,5 +1,5 @@
 import { Nav, NavLink, Bars, NavMenu } from './NavBarElements';
-import {DarkToggle} from "../DarkToggle/DarkToggle";
+import { DarkToggle } from './DarkToggle/DarkToggle';
 import "./NavBar.css";
 
 const Navbar = () => {
