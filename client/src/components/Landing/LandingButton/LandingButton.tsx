@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { borders } from '@mui/system';
 
 export const LandingButton = styled(Button)(({ }) => ({
   color: '#FDED5E',
@@ -9,12 +8,15 @@ export const LandingButton = styled(Button)(({ }) => ({
   '&:hover': {
     backgroundColor: '#4a7843',
   },
-  textTransform: "lowercase",
-  fontSize: "1.8rem",
-  borderRadius: 25,
   border:'solid',
-  borderWidth:2,
   borderColor:'yellow',
+  borderRadius: 25,
+  borderWidth:2,
+  fontSize: "1.8rem",
+  marginLeft: '-1.8rem',
+  marginTop: '1.8rem',
+  textTransform: "lowercase",
   width: '200px',
+  
 
 }));

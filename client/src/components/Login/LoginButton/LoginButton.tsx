@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { borders } from '@mui/system';
 
 export const LoginButton = styled(Button)(({ theme }) => ({
   color: '#FDED5E',
@@ -16,5 +15,6 @@ export const LoginButton = styled(Button)(({ theme }) => ({
   borderWidth:2,
   borderColor:'yellow',
   width: '200px',
+
 
 }));
