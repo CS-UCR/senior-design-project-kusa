@@ -5,8 +5,6 @@ import React from 'react';
 
 
 export const LoginField: React.FC<any> = ({ children, styles }) => (
-
-    <Box >
         <Input
           id="component-helper"
           value= {children}
@@ -26,5 +24,4 @@ export const LoginField: React.FC<any> = ({ children, styles }) => (
             ...styles,
         }}
         />
-    </Box>
 );
