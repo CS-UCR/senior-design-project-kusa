@@ -4,7 +4,9 @@
 ## Table of Contents
 - [Overview](#overview)
 - [Usage](#usage)
-- [How To Run](#how-to-run)
+- [Project Setup](#project-setup)
+  - [Django Setup](#django-setup)
+  - [React Setup](#react-setup)
 - [Diagrams](#diagrams)
 - [Dependencies](#dependencies)
 
@@ -32,56 +34,59 @@ Demo: <Link to youtube video>
 <Screenshot of application>
 
 ## Project Setup
-1. `git clone https://github.com/CS-UCR/senior-design-project-kusa.git` to clone this repo
-  
-## How To Run
+1. Clone this repo 
+  ```sh
+   git clone https://github.com/CS-UCR/senior-design-project-kusa.git
+  ``` 
   
 ### Django Setup
-1. `cd senior-design-project-kusa/`
-2. `python -m venv env` to create a virtual environment
-3. For Linux: `source env/bin/activate` to activate the virtual environment<br />
-For Windows: `admin\env\Scripts\activate.bat` to activate the virtual environment<br />
-4. `pip3 install -r requirements.txt` to install all the dependencies 
-5. `cd admin/`
-6. `python manage.py runserver` to run the server
+1. cd into the project directory
+```sh 
+cd senior-design-project-kusa/
+``` 
+2. create a virtual environment
+```sh
+python -m venv env
+```
+3a. For Linux, activate the virtual environment<br />
+```sh
+source env/bin/activate
+```
+3b. For Linux, activate the virtual environment<br />
+```sh
+admin\env\Scripts\activate.bat
+```
+4. cd into the server folder
+```sh
+cd server/
+```
+5. install all the dependencies 
+```sh
+pip3 install -r requirements.txt
+```
+6. run the server
+```sh
+python manage.py runserver
+```
 7. Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
-  
 ### React Setup  
-In the project directory, you can run:
-### `cd my-app/` to change to the react directory
-### `npm install` to install the required dependencies
-### `npm start` to start server
-
-Runs the app in the development mode.<br />
+1. cd into the React folder on a separate terminal
+```sh 
+cd client/ 
+``` 
+2. install required dependencies. Your terminal should tell you which dependencies you're missing. Simply install the missing ones.
+```sh
+npm install
+```
+3. activate the react server
+```sh
+npm start
+```
+4. Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Diagrams
 
