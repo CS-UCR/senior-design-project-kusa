@@ -5,6 +5,8 @@
 - [Overview](#overview)
 - [Usage](#usage)
 - [Project Setup](#project-setup)
+  - [Docker Setup](#docker-setup)
+  - [React Setup](#react-setup)
   - [Django Setup](#django-setup)
   - [React Setup](#react-setup)
 - [Diagrams](#diagrams)
@@ -29,7 +31,7 @@ This project benefits gamers by
 - Yuteng Wu
 
 ## Usage
-Demo:https://youtu.be/3zdM_QOe3G0
+Demo: https://youtu.be/3zdM_QOe3G0
 
   
 ![home](https://user-images.githubusercontent.com/43893085/144531563-6e18dbb2-08f8-4c4c-8cf3-f5e2d73444a1.gif)
@@ -112,9 +114,14 @@ You will also see any lint errors in the console.
 ## Diagrams
 
 Sequence Diagram
+![Kusa_Diagrams-Achievement Flow](https://user-images.githubusercontent.com/43893085/144947522-3b57866e-83e8-4c16-a90e-d657487cc464.png)
+![Kusa_Diagrams-Third Party Info drawio(1)](https://user-images.githubusercontent.com/43893085/144947537-8a0e2921-58a6-4c4f-a11f-96a84ab7ecef.png)
+![Kusa_Diagrams-Friends List drawio(1)](https://user-images.githubusercontent.com/43893085/144947560-bfb4fa8f-22c5-4560-83ec-7aca98ee9efb.png)
+![Kusa_Diagrams-Garden Dataflow](https://user-images.githubusercontent.com/43893085/144947568-9b7f3f41-4113-4b78-8052-f3db629713d1.png)
+![Kusa_Diagrams-Login and Signup](https://user-images.githubusercontent.com/43893085/144947572-f984573b-6d60-40d5-8bac-af608c2786e2.png)
 
 Frontend Structure
-
+![Kusa_Diagrams-Overall User Flow](https://user-images.githubusercontent.com/43893085/144947346-246081d4-d58f-4093-81e9-bafa65fb37e4.png)
 
 Overall System Diagram
 ![image](https://user-images.githubusercontent.com/65988711/136714242-98f5c0c7-c8e7-41b5-a27d-7a39e1372cd7.png)
