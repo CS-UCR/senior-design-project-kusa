@@ -66,7 +66,7 @@ export const Login: React.FC = () => {
 
             </KusaBox>
             <Grid
-                sx={{ p:3,mx: "auto"}}
+                sx={{ p:3, mx: "auto", marginLeft: "-.5rem"}}
                 direction="row"
                 justifyContent="center"
                 alignItems="center"

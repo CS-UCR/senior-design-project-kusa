@@ -79,7 +79,7 @@ export const Signup: React.FC = () => {
             </KusaBox>
 
             <Grid
-                sx={{ p:3,mx: "auto", width: "100%" }}
+                sx={{ p:3, width: "100%", marginLeft: "-.5rem" }}
                 direction="row"
                 justifyContent="center"
                 alignItems="center"

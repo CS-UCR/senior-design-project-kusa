@@ -7,24 +7,24 @@ import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 export const Landing: React.FC = () => {
 
     return (
-        <Container
-            sx={{ display: "grid", height: "80%", alignItems: "center" }}
-        >
-        <Grid 
-            textAlign="center"
-        >
-        <Grid item>
-            <KusaHeader styles={{ fontSize: 140 }}>kusa.</KusaHeader>
-                <KusaHeader
-                    color="#FDED5E"
-                    styles={{ marginTop: "1rem", fontSize: 85 }}
-                >
-                let's get on track.
-                </KusaHeader>
+        <Container sx={{ display: "grid", height: "68%", alignItems: "center" }}>
+                <Grid textAlign="center">
+                    <Grid item>
+                        <KusaHeader styles={{ fontSize: 140, fontWeight: 600  }}>
+                            kusa.
+                        </KusaHeader>
+                            
+                        <KusaHeader
+                            color="#FDED5E"
+                            styles={{ marginTop: "1rem", fontSize: 85, fontWeight: 500 }}
+                        >
+                        let's get on track.
+                        </KusaHeader>
+                        
                         <LandingButton
                             onClick={() => (window.location.href = "/signup")}
                             variant="contained"
-                        >
+                            >
                             play
                         </LandingButton>
                     </Grid>
