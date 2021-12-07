@@ -34,8 +34,8 @@ This project benefits gamers by
 Demo: https://youtu.be/3zdM_QOe3G0
 
 ### Landing Page
-![lightLanding](https://user-images.githubusercontent.com/65988711/144959881-ad95e133-61ee-4fa6-a362-74d9d8d3be9e.gif)
-![darkLanding](https://user-images.githubusercontent.com/65988711/144959885-81844557-6b29-4d1b-aaba-13427edf3f44.gif)
+![lightLanding](https://user-images.githubusercontent.com/65988711/144960400-a49ca631-fd30-4544-8de9-bc842f632ce4.gif)
+![darkLanding](https://user-images.githubusercontent.com/65988711/144960403-cbef342a-3d25-4bd2-8e68-d9a0ea114348.gif)
 
 ### Login/Signin Page
 ![lightLoginSignup](https://user-images.githubusercontent.com/65988711/144959935-29c22e92-8ba9-46f7-bd18-0cd7f4dc3718.gif)
@@ -48,7 +48,8 @@ Demo: https://youtu.be/3zdM_QOe3G0
 
 ### Profile Page
 ![lightProfile](https://user-images.githubusercontent.com/65988711/144959918-bbfc8b6e-c079-43e5-ab86-70a577e68774.gif)
-![darkProfile](https://user-images.githubusercontent.com/65988711/144959925-9e7b0c82-0598-4
+![darkProfile](https://user-images.githubusercontent.com/65988711/144960143-800a44bb-9643-4ddb-81e4-c268a8614de1.gif)
+
 
 ## Project Setup
 1. Clone this repo 
