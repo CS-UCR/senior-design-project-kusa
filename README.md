@@ -39,7 +39,6 @@ Demo: https://youtu.be/3zdM_QOe3G0
 
 ### Login/Signin Page
 ![lightLoginSignup](https://user-images.githubusercontent.com/65988711/144959935-29c22e92-8ba9-46f7-bd18-0cd7f4dc3718.gif)
-807-a524-fc3f31c6ff38.gif)
 ![darkLoginSignup](https://user-images.githubusercontent.com/65988711/144959931-e5d6fd45-03a8-4c48-b4d1-8c9101841a00.gif)
 
 ### Home Page
