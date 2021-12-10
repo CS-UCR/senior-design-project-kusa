@@ -33,12 +33,22 @@ This project benefits gamers by
 ## Usage
 Demo: https://youtu.be/3zdM_QOe3G0
 
-  
-![home](https://user-images.githubusercontent.com/43893085/144531563-6e18dbb2-08f8-4c4c-8cf3-f5e2d73444a1.gif)
-![image](https://user-images.githubusercontent.com/43893085/144531453-614725d3-23b9-4535-ad28-58c506e4bc3d.png)
-![image](https://user-images.githubusercontent.com/43893085/144531602-5ba25bc9-f0c7-4398-9757-ee5bf17f16e2.png)
-![image](https://user-images.githubusercontent.com/43893085/144531621-7a0755e6-3493-41af-a370-9bc1248830e5.png)
-![image](https://user-images.githubusercontent.com/43893085/144531643-8ce6f00f-f724-4c49-aabc-2e61114e9107.png)
+### Landing Page
+![lightLanding](https://user-images.githubusercontent.com/65988711/144960400-a49ca631-fd30-4544-8de9-bc842f632ce4.gif)
+![darkLanding](https://user-images.githubusercontent.com/65988711/144960403-cbef342a-3d25-4bd2-8e68-d9a0ea114348.gif)
+
+### Login/Signin Page
+![lightLoginSignup](https://user-images.githubusercontent.com/65988711/144959935-29c22e92-8ba9-46f7-bd18-0cd7f4dc3718.gif)
+![darkLoginSignup](https://user-images.githubusercontent.com/65988711/144959931-e5d6fd45-03a8-4c48-b4d1-8c9101841a00.gif)
+
+### Home Page
+![lightHome](https://user-images.githubusercontent.com/65988711/144959906-c98d920e-c136-4774-af01-d5bc6b7f29f7.png)
+![darkHome](https://user-images.githubusercontent.com/65988711/144959907-44acf42d-25f6-43c1-b10b-b00ee69a4604.png)
+
+### Profile Page
+![lightProfile](https://user-images.githubusercontent.com/65988711/144959918-bbfc8b6e-c079-43e5-ab86-70a577e68774.gif)
+![darkProfile](https://user-images.githubusercontent.com/65988711/144960143-800a44bb-9643-4ddb-81e4-c268a8614de1.gif)
+
 
 ## Project Setup
 1. Clone this repo 
