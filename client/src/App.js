@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./components/Kusa/KusaNavBar/NavBar";
 import { Home } from "./pages/Home/Home.tsx";
 import { Profile } from "./pages/Profile/Profile";
+import { FriendsList } from "./pages/FriendsList/FriendsList";
 import { Landing } from "./pages/Landing/Landing.tsx";
 import { PrivateRoute } from "./routes/PrivateRoute/PrivateRoute";
 import ReactDOM from "react-dom";
@@ -33,6 +34,7 @@ const routes = [
     //private routes go here
     { path: "/home", name: "Home", Component: Home },
     { path: "/profile", name: "Profile", Component: Profile },
+    { path: "/friends", name: "FriendsList", Component: FriendsList },
 ];
 
 function App() {
