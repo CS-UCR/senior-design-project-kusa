@@ -23,11 +23,11 @@ from Kusa import views
 # router.register(r'todos',views.FriendsListView,'todo')
 
 router = routers.DefaultRouter()
-router.register(r' ', views.GamerView, 'Gamer')
+router.register('GetGamerInfo', views.GamerView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
