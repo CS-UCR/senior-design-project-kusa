@@ -13,8 +13,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import iSteamUserStats, iSteamUser, views, manageUser
+
+from rest_framework import routers
+from Kusa import views
+
+router = routers.DefaultRouter()
+router.register(r'friendsLists',views.FriendsListView,'friendsList')
+
 
 urlpatterns = [
     path('test', views.test, name='test'),
@@ -24,5 +31,6 @@ urlpatterns = [
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
-    path('RegisterUser/', manageUser.register_user, name='RegisterUser')
+    #path('RegisterUser/', manageUser.register_user, name='RegisterUser')
+    path('api/', include(router.urls)),
 ]
