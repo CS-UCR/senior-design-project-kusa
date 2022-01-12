@@ -19,18 +19,22 @@ from . import iSteamUserStats, iSteamUser, views, manageUser
 from rest_framework import routers
 from Kusa import views
 
-router = routers.DefaultRouter()
-router.register(r'friendsLists',views.FriendsListView,'friendsList')
+# router = routers.DefaultRouter()
+# router.register(r'todos',views.FriendsListView,'todo')
 
+router = routers.DefaultRouter()
+router.register(r' ', views.GamerView, 'Gamer')
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
-    path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
     #path('RegisterUser/', manageUser.register_user, name='RegisterUser')
-    path('api/', include(router.urls)),
+    
+    
 ]

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'Kusa',
 ]
 
 MIDDLEWARE = [
@@ -155,6 +156,7 @@ CONF = {
 }
 
 
-CORS_ORIGIN_WHITELIST = [
+CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
+ 
