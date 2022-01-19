@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import {
     Alert,
     AlertColor,
@@ -20,20 +21,21 @@ import { ProfileField } from "../../components/Profile/ProfileField/ProfileField
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
 import { CSSTransition } from "react-transition-group";
-
+import { BACKEND_URL } from "../../constants/backendURL";
+import { headers } from "../../constants/headers";
 import "./Profile.scss";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
-    appear: 'animate__animated',
-    appearActive: 'animate_animated animate__bounceInUp',
-    appearDone: 'animate__animated animate__bounceInUp',
-    enter: 'animate__animated',
-    enterActive: 'animate__bounceOutBottom',
-    enterDone: 'animate__animated',
-    exit: 'animate__animated',
-    exitActive: 'animate__bounceOutBottom',
-    exitDone: 'animate_animated',
+    appear: "animate__animated",
+    appearActive: "animate_animated animate__bounceInUp",
+    appearDone: "animate__animated animate__bounceInUp",
+    enter: "animate__animated",
+    enterActive: "animate__bounceOutBottom",
+    enterDone: "animate__animated",
+    exit: "animate__animated",
+    exitActive: "animate__bounceOutBottom",
+    exitDone: "animate_animated",
 };
 
 const StatusMap: { [key in AlertColor]: string } = {
@@ -44,8 +46,15 @@ const StatusMap: { [key in AlertColor]: string } = {
 };
 
 export const Profile: React.FC = () => {
-    const { username, email, steamname, connections } =
-        React.useContext(UserContext);
+    const {
+        userId,
+        username,
+        email,
+        emailStatus,
+        steamname,
+        connections,
+        setEmailStatus,
+    } = React.useContext(UserContext);
     const [status, setStatus] = React.useState<AlertColor | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
@@ -74,14 +83,29 @@ export const Profile: React.FC = () => {
     };
     const getEmailToggle = () => {
         setLoading(true);
-        let response = "200";
-        if (response[0] && response[0] === "2") {
-            setStatus("success");
-            setOperation("Email notifications have been removed.");
-        } else {
-            setOperation("An error occurred");
-        }
-        setLoading(false);
+        axios
+            .post(
+                `${BACKEND_URL}/ToggleUserEmail/`,
+                JSON.stringify({
+                    emailStatus: !emailStatus,
+                    userID: userId,
+                }),
+                { headers: headers }
+            )
+            .then(() => {
+                if (emailStatus)
+                    setOperation("Email notifications have been removed.");
+                else setOperation("Email notifications have been enabled.");
+                setEmailStatus(!emailStatus);
+                setStatus("success");
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setStatus("error");
+                setOperation("An error occurred");
+                setLoading(false);
+            });
     };
 
     return (
@@ -122,6 +146,20 @@ export const Profile: React.FC = () => {
                     <Grid item xs={8}>
                         <ProfileField>{email}</ProfileField>
                     </Grid>
+                    <Grid item xs={4}>
+                        <Typography
+                            variant="h5"
+                            marginTop={1.5}
+                            color="neutral.main"
+                        >
+                            notifications
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <ProfileField>
+                            {emailStatus ? "enabled" : "disabled"}
+                        </ProfileField>
+                    </Grid>
                 </Grid>
             </KusaBox>
             <KusaHeader>
@@ -136,7 +174,7 @@ export const Profile: React.FC = () => {
             </KusaHeader>
             <KusaBox
                 width="90%"
-                styles={{ marginBottom: "5rem", padding: "2rem" }}
+                styles={{ marginBottom: "4rem", padding: "2rem" }}
             >
                 <Grid container spacing={2}>
                     {steam && (
@@ -225,7 +263,8 @@ export const Profile: React.FC = () => {
             <Box
                 className="popin"
                 sx={{
-                    marginY: "2rem",
+                    position: "absolute",
+                    top: "5%",
                     boxShadow: 4,
                 }}
             >

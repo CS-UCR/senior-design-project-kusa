@@ -1,3 +1,4 @@
+import json
 from operator import truediv
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -25,10 +26,13 @@ def register_user(request):
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
 
 # enable csrf once we've figured out authentication
+# uid probably won't be directly sent -> expect to hash/dehash this
 @csrf_exempt
 def toggle_email(request):
-    emailStatus = request.POST.get('emailStatus')
-    uid = request.POST.get('userID')
+    receiveRequest = json.loads(request.body)
+    print("request", receiveRequest)
+    emailStatus = receiveRequest.get('emailStatus')
+    uid = receiveRequest.get('userID')
     try:
         user = User.objects.get(pk=ObjectId(uid))
         user.emailsEnabled = emailStatus
