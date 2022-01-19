@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from Kusa.models import SteamUser
+
+
+@admin.register(SteamUser)
+class SteamUserAdmin(admin.ModelAdmin):
+    pass

@@ -15,14 +15,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import iSteamUserStats, iSteamUser, views, manageUser
+from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
+from Kusa.views import IndexView, LogoutView
 
+app_name = "Kusa" 
 urlpatterns = [
-    path('test', views.test, name='test'),
+    # path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
-    path('RegisterUser/', manageUser.register_user, name='RegisterUser')
+    # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    path('test',IndexView.as_view(), name='index'),
+    # url(r'^$', IndexView.as_view(), name='index'), 
+    url(r'^logout', login_required(LogoutView.as_view(), login_url='/'), name='logout'),
 ]

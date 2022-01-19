@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from environ import Env
+import os
 
 # Setup Environment
 env = Env()
@@ -38,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Kusa',
     'Kusa.apps',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication',
     'social_django',
 ]
 
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'admin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -161,14 +162,14 @@ CONF = {
     "steam_api_url": "http://api.steampowered.com",
 }
 
-
+API_KEY = STEAM_API_KEY
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 
-AUTH_USER_MODEL = 'authentication.SteamUser'
-SOCIAL_AUTH_USER_MODEL = 'authentication.SteamUser'
+AUTH_USER_MODEL = 'Kusa.SteamUser'
+SOCIAL_AUTH_USER_MODEL = 'Kusa.SteamUser'
 
 SOCIAL_AUTH_PIPELINE = (
     # Get the information we can about the user and return it in a simple
@@ -190,11 +191,11 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_user',
 
     # If there already is an account with the given steamid, pass it on to the pipeline
-    'authentication.pipeline.associate_existing_user',
+    'Kusa.pipeline.associate_existing_user',
 
     # The username for the account is always the steamid
     # 'social_core.pipeline.user.get_username', # Function to get the username was changed
-    'authentication.pipeline.get_username',
+    'Kusa.pipeline.get_username',
 
     # Send a validation email to the user to verify its email address.
     # Disabled by default.
@@ -217,5 +218,5 @@ SOCIAL_AUTH_PIPELINE = (
     # Update the user record with any changed info from the auth service.
     # 'social_core.pipeline.user.user_details',
     # Use a custom function for this, since the details are provided separately
-    'authentication.pipeline.user_details',
+    'Kusa.pipeline.user_details',
 )
