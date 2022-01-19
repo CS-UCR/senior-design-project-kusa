@@ -3,9 +3,11 @@ from djongo import models
 
 
 class User(models.Model):
-    email = models.CharField('User Email')
-    password = models.CharField('User Password')
-    date = models.DateField('Time Registered')
-    steamname = models.CharField('Steam Account Username')
+    _id = models.ObjectIdField(editable=False)
+    email = models.CharField()
+    emailsEnabled = models.BooleanField()
+    password = models.CharField()
+    date = models.DateField()
+    steamname = models.CharField()
     class Meta:
         app_label = 'Kusa'
