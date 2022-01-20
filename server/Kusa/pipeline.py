@@ -34,7 +34,7 @@ def user_details(user, details, strategy, *args, **kwargs):
 
 def associate_existing_user(uid, *args, **kwargs):
     """If there already is an user with the given steamid, hand it over to the pipeline"""
-    if SteamUser.objects.filter(steamid=uid).exists():
+    if SteamUser.objects.filter(id=uid).exists():
         return {
-            'user': SteamUser.objects.get(steamid=uid)
+            'user': SteamUser.objects.get(id=uid)
         }

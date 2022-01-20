@@ -17,7 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class SteamUserManager(BaseUserManager):
-    def _create_user(self, steamid, password, **extra_fields):
+    def _create_user(self, id, password, **extra_fields):
         """
         Creates and saves a User with the given steamid and password.
         """
@@ -26,19 +26,19 @@ class SteamUserManager(BaseUserManager):
             del extra_fields['email']
         except KeyError:
             pass
-        if not steamid:
+        if not id:
             raise ValueError('The given steamid must be set')
-        user = self.model(steamid=steamid, **extra_fields)
+        user = self.model(id=id, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, steamid, password=None, **extra_fields):
+    def create_user(self, id, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(steamid, password, **extra_fields)
+        return self._create_user(id, password, **extra_fields)
 
-    def create_superuser(self, steamid, password, **extra_fields):
+    def create_superuser(self, id, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -47,13 +47,12 @@ class SteamUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self._create_user(steamid, password, **extra_fields)
+        return self._create_user(id, password, **extra_fields)
 
 
 class SteamUser(AbstractBaseUser, PermissionsMixin):
-    USERNAME_FIELD = 'steamid'
-
-    steamid = models.CharField(max_length=17, unique=True)
+    USERNAME_FIELD = 'id'
+    id = models.CharField(max_length=17, unique=True,primary_key=True)
     personaname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
