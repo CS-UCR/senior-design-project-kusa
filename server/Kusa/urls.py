@@ -24,5 +24,6 @@ urlpatterns = [
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
-    path('RegisterUser/', manageUser.register_user, name='RegisterUser')
+    path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail')
 ]
