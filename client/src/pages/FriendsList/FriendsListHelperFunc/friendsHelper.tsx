@@ -2,7 +2,7 @@
 import { person } from "./personHelper";
 import { wsv } from "./WSV";
 
-var data = ["kusa","kusa","kusa","kusa"]
+var data: any[] = []
 var array_of_people:any[] = []
 export function friends()
 {
@@ -14,3 +14,20 @@ export function friends()
     }
     return array_of_people
 }
+
+export function getFriends(name:any)
+{
+    data.push(name)
+}
+
+// export function friends(friend:any)
+// {
+    
+    
+//     array_of_people.push(person(friend))
+//     array_of_people.push(wsv())
+//     return array_of_people
+    
+    
+// }
+
