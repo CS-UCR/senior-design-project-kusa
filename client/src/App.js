@@ -28,11 +28,14 @@ import "animate.css";
 const routes = [
     { path: "/", name: "Landing", Component: Landing },
     //public routes go here
-    { path: "/login", name: "Home", Component: Login },
+    { path: "/login", name: "Login", Component: Login },
+    // { path: "/logout", name: "Logout", Component: Logout },
     { path: "/signup", name: "Profile", Component: Signup },
     { path: "/", name: "Landing", Component: PrivateRoute },
     //private routes go here
     { path: "/home", name: "Home", Component: Home },
+    // { path: "/welcomeback", name: "WelcomeBack", Component: WelcomeBack },
+    // { path: "/signupform", name: "SignUpForm", Component: SignUpForm },
     { path: "/profile", name: "Profile", Component: Profile },
     { path: "/friends", name: "FriendsList", Component: FriendsList },
 ];

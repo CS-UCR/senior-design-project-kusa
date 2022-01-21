@@ -21,8 +21,10 @@ class IndexView(View):
     def get(self, request):
         return render(request, 'index.html')
 
-
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('Kusa:index')
+        return redirect('http://localhost:3000/')

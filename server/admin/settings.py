@@ -162,10 +162,11 @@ CONF = {
     "steam_api_url": "http://api.steampowered.com",
 }
 
+# todo - clean this up after login auth works
 API_KEY = STEAM_API_KEY
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/login'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 
 AUTH_USER_MODEL = 'Kusa.SteamUser'
