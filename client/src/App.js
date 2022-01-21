@@ -30,8 +30,8 @@ const routes = [
     //public routes go here
     { path: "/login", name: "Home", Component: Login },
     { path: "/signup", name: "Profile", Component: Signup },
-    { path: "/", name: "Landing", Component: PrivateRoute },
     //private routes go here
+    { path: "/", name: "Landing", Component: PrivateRoute },
     { path: "/home", name: "Home", Component: Home },
     { path: "/profile", name: "Profile", Component: Profile },
     { path: "/friends", name: "FriendsList", Component: FriendsList },

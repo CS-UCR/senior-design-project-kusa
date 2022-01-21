@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-    Box,
     Container,
     Grid,
     Typography,
@@ -14,7 +13,7 @@ import { LoginField } from "../../components/Login/LoginField/LoginField";
 
 
 export const Login: React.FC = () => {
-    const {email,username } =
+    const {email} =
         React.useContext(UserContext);
     const [password, setPassword] = useState("");
     // send email/password to the server to verify 

@@ -24,6 +24,7 @@ import { CSSTransition } from "react-transition-group";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
 import "./Profile.scss";
+import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
@@ -48,11 +49,12 @@ const StatusMap: { [key in AlertColor]: string } = {
 export const Profile: React.FC = () => {
     const {
         userId,
-        username,
+        name,
         email,
         emailStatus,
-        steamname,
+        darkMode,
         connections,
+        setUserInfo,
         setEmailStatus,
     } = React.useContext(UserContext);
     const [status, setStatus] = React.useState<AlertColor | null>(null);
@@ -61,25 +63,38 @@ export const Profile: React.FC = () => {
     const iconHeight = 40;
 
     //implement with backend, sends requests to endpoints per action
-    const getPasswordReset = () => {
-        setLoading(true);
-        let response = "200";
-        if (response[0] && response[0] === "2") {
-            setStatus("success");
-            setOperation(
-                "Check your email to continue resetting your password."
-            );
-        }
-        setLoading(false);
-    };
     const getDeactivate = () => {
         setLoading(true);
-        let response = "200";
-        if (response[0] && response[0] === "2") {
-            setStatus("success");
-            setOperation("Check your email to confirm deactivation.");
-        }
-        setLoading(false);
+        axios
+            .post(
+                `${BACKEND_URL}/Deactivate/`,
+                JSON.stringify({
+                    userID: userId,
+                }),
+                { headers: headers }
+            )
+            .then(() => {
+                setOperation(
+                    "Your account has been deactivated. Logging out momentarily."
+                );
+                setUserInfo({
+                    userId: null,
+                    name,
+                    email: "",
+                    emailStatus: false,
+                    isLoggedIn: false,
+                    darkMode,
+                    connections: [],
+                });
+                setStatus("success");
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setStatus("error");
+                setOperation("An error occurred");
+                setLoading(false);
+            });
     };
     const getEmailToggle = () => {
         setLoading(true);
@@ -110,6 +125,7 @@ export const Profile: React.FC = () => {
 
     return (
         <Container>
+            <KusaLoadingSpinner loading={loading} />
             <KusaHeader>
                 <img
                     src={suitcase}
@@ -132,7 +148,7 @@ export const Profile: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <ProfileField>{username}</ProfileField>
+                        <ProfileField>{name}</ProfileField>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
@@ -183,7 +199,7 @@ export const Profile: React.FC = () => {
                                 <ProfileIcon svg={steam} />
                             </Grid>
                             <Grid item xs={8}>
-                                <ProfileField>{steamname}</ProfileField>
+                                <ProfileField>{name}</ProfileField>
                             </Grid>
                         </>
                     )}
@@ -238,13 +254,6 @@ export const Profile: React.FC = () => {
                 spacing={2}
                 textAlign="center"
             >
-                <Grid item>
-                    <KusaButton
-                        label="reset password"
-                        color="success"
-                        onClick={getPasswordReset}
-                    />
-                </Grid>
                 <Grid item marginTop={2}>
                     <KusaButton
                         label="toggle emails"
