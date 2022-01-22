@@ -42,28 +42,33 @@ def add_post(request):
     dummy.save()
     return HttpResponse("Inserted")
    
-    pass
+    
 def update_post(request,id):
     pass
 
 def delete_post(request,id):
     pass
 
-def read_post(request):
+def read_post(request,id):
     
-    # dummy = Dummy.objects.get(SteamID=id)
-    # name = "User Name: " + dummy.SteamID
-    # return HttpResponse(name)
+    dummy = Dummy.objects.get(SteamID=id)
+    name = "User Name: " + dummy.Name
+    return HttpResponse(name)
 
     
+    # if request.method == 'GET':
+    #     dummy = Dummy.objects.all()
+    #     dummy_serializer = DummySerializer(dummy,many=True)
+    #     return JsonResponse(dummy_serializer.data,safe=False)
+
+
+    
+def read_post_all(request):
+    # dummy = Dummy.objects.all()
+    # name = dummy.all()
+    # return HttpResponse(name)
+
     if request.method == 'GET':
         dummy = Dummy.objects.all()
         dummy_serializer = DummySerializer(dummy,many=True)
         return JsonResponse(dummy_serializer.data,safe=False)
-
-
-    
-def read_post_all(request,id):
-   
-    pass
-
