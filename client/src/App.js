@@ -27,9 +27,6 @@ import "animate.css";
 function App() {
     const { isLoggedIn } = React.useContext(UserContext);
 
-    const privateRoute = (Component) =>
-        isLoggedIn ? Component : <Navigate to="?" />;
-
     const routes = [
         { path: "/", name: "Landing", Component: Landing },
         //public routes go here
@@ -39,27 +36,43 @@ function App() {
         {
             path: "/home",
             name: "Home",
-            Component: privateRoute(Home),
+            privateRoute: true,
+            Component: Home,
         },
         {
             path: "/profile",
             name: "Profile",
-            Component: privateRoute(Profile),
+            privateRoute: true,
+            Component: Profile,
         },
-        { path: "/friends", name: "FriendsList", Component: FriendsList },
+        {
+            path: "/friends",
+            name: "FriendsList",
+            privateRoute: true,
+            Component: FriendsList,
+        },
     ];
 
     const AnimatedApp = React.memo(() => {
         const location = useLocation();
         return (
             <Routes>
-                {routes.map(({ path, name, Component }) => {
+                {routes.map(({ path, name, Component, privateRoute }) => {
+                    if (privateRoute && !isLoggedIn)
+                        return (
+                            <Route
+                                key={name}
+                                exact
+                                path={path}
+                                element={<Navigate to="/" />}
+                            />
+                        );
                     return (
                         <Route
                             key={name}
                             exact
                             path={path}
-                            render={() => (
+                            element={
                                 <CSSTransition
                                     appear
                                     in={location.pathname === path}
@@ -69,7 +82,7 @@ function App() {
                                 >
                                     <Component />
                                 </CSSTransition>
-                            )}
+                            }
                         />
                     );
                 })}

@@ -25,6 +25,7 @@ import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
 import "./Profile.scss";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
@@ -54,12 +55,14 @@ export const Profile: React.FC = () => {
         emailStatus,
         darkMode,
         connections,
+        isLoggedIn,
         setUserInfo,
         setEmailStatus,
     } = React.useContext(UserContext);
     const [status, setStatus] = React.useState<AlertColor | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
+    const navigate = useNavigate();
     const iconHeight = 40;
 
     //implement with backend, sends requests to endpoints per action
@@ -86,6 +89,8 @@ export const Profile: React.FC = () => {
                     darkMode,
                     connections: [],
                 });
+                console.log("is logged in",isLoggedIn);
+                navigate("/");
                 setStatus("success");
                 setLoading(false);
             })
