@@ -1,3 +1,6 @@
+from email.policy import default
+from django.forms import CharField
+from django.contrib.postgres.fields import ArrayField
 from djongo import models
 # Create your models here.
 
@@ -22,3 +25,11 @@ class Gamer(models.Model):
 #     steamid = models.CharField(default='000000',max_length=120)
 #     # def _str_(self):
 #     #     return self.name
+
+class Dummy(models.Model):
+    Name = models.CharField(default='null',max_length=30)
+    FriendList = models.JSONField()
+    SteamID = models.CharField(default='null',max_length=30)
+
+    # def _str_(self):
+    #     return self.Name

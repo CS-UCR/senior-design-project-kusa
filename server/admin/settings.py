@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'Kusa',
+    
+    
 ]
 
 MIDDLEWARE = [

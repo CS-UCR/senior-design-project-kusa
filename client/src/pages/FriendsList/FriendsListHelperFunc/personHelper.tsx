@@ -15,6 +15,8 @@ import { default as dog } from "../../../assets/friends/dog.svg"; //come back la
 import { default as message } from "../../../assets/friends/message.svg";
 import { KusaWSV } from "../../../components/Kusa/KusaWhiteSpaceVer/KusaWSV";
 
+import { SearchFriend } from "./searchFriendsHelper";
+
 const iconHeight = 40;
 
 
@@ -22,6 +24,7 @@ const iconHeight = 40;
 
 export function person(name:any)
 {
+
     return(
         <KusaBox width="90%" styles={{ padding: "2rem" }}>
             <Grid container spacing={1}>
@@ -39,15 +42,25 @@ export function person(name:any)
                     {name}
                 </Grid>
 
-                <Grid item xs={8}/>
+                <Grid item xs={4}></Grid>
 
-                <Grid item xs={1}>
-                    <img
+                
+                <Grid item xs={4}/>
+                <Button variant="contained" color="success" size="small">
+                    more
+                </Button>
+
+                
+
+
+                <Grid item xs={2}>
+                    {/* <img
                     src={message}
                     alt="invite"
                     width={iconHeight}
                     height={iconHeight}
-                    style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}/>
+                    style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}/> */}
+                
                 </Grid>
                 
             </Grid>

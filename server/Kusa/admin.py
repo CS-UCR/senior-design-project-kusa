@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Gamer
+
 # Register your models here.
 
 # class FriendsListAdmin(admin.ModelAdmin):
@@ -14,3 +15,5 @@ class GamerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Gamer, GamerAdmin)    
+
+

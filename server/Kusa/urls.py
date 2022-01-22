@@ -22,12 +22,12 @@ from Kusa import views
 # router = routers.DefaultRouter()
 # router.register(r'todos',views.FriendsListView,'todo')
 
-router = routers.DefaultRouter()
-router.register('GetGamerInfo', views.GamerView)
+# router = routers.DefaultRouter()
+# router.register('TestInfo', views.TestView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
     path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
@@ -35,6 +35,14 @@ urlpatterns = [
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
     #path('RegisterUser/', manageUser.register_user, name='RegisterUser')
+
+
+    path('add_post/', views.add_post),
+    path('update_post/<str:id>', views.update_post),
+    path('delete_post/<str:id>', views.delete_post),
+    path('read_post/',views.read_post),
+    path('read_post_all/',views.read_post_all),
+    
     
     
 ]

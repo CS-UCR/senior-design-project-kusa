@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.serializers import Serializer
@@ -5,8 +6,12 @@ from admin import settings
 import requests
 
 from rest_framework import viewsets
-from .friendsList.serializer import GamerSerializer
+from .serializer import DummySerializer, GamerSerializer
 from .models import Gamer
+from Kusa.models import Dummy
+from django.views.decorators.csrf import csrf_exempt
+from bson import ObjectId
+
 
 conf =  settings.CONF
 
@@ -30,7 +35,35 @@ class GamerView(viewsets.ModelViewSet):
     queryset = Gamer.objects.all()
 
 
+@csrf_exempt
+def add_post(request):
+    friendList = request.POST.get("FriendList").split(",")
+    dummy=Dummy(Name=request.POST.get("Name"),FriendList=friendList,SteamID = request.POST.get("SteamID"))
+    dummy.save()
+    return HttpResponse("Inserted")
+   
+    pass
+def update_post(request,id):
+    pass
+
+def delete_post(request,id):
+    pass
+
+def read_post(request):
+    
+    # dummy = Dummy.objects.get(SteamID=id)
+    # name = "User Name: " + dummy.SteamID
+    # return HttpResponse(name)
 
     
+    if request.method == 'GET':
+        dummy = Dummy.objects.all()
+        dummy_serializer = DummySerializer(dummy,many=True)
+        return JsonResponse(dummy_serializer.data,safe=False)
 
+
+    
+def read_post_all(request,id):
+   
+    pass
 
