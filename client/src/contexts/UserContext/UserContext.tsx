@@ -9,8 +9,8 @@ interface Connection {
     name: string;
 }
 interface User {
-    userId: string | null;
-    name: string | null;
+    userId: string;
+    name: string;
     email: string;
     emailStatus: boolean;
     isLoggedIn: boolean;
@@ -19,8 +19,8 @@ interface User {
 }
 
 interface UserContextProps {
-    userId: string | null;
-    name: string | null;
+    userId: string;
+    name: string;
     isLoggedIn: boolean;
     email: string;
     emailStatus: boolean;
@@ -34,7 +34,7 @@ interface UserContextProps {
 //defaulted to loggedin for testing purposes, change with authentication implementation
 //userId will be an invalid entry -> will delete entry after development, so no security worries for this fake user
 const defaultValue = {
-    userId: "61eb477256a7f245326eb783",
+    userId: "61ef287bc5c470fe1ca1cfd6",
     email: "test@test.com",
     emailStatus: true,
     isLoggedIn: true,
@@ -47,8 +47,8 @@ const defaultValue = {
 };
 
 interface UserContextProviderProps {
-    userId?: string | null;
-    name?: string | null;
+    userId?: string;
+    name?: string;
     email?: string;
     emailStatus?: boolean;
     isLoggedIn?: boolean;
@@ -60,9 +60,8 @@ export const UserContext = React.createContext<UserContextProps>(defaultValue);
 
 export const UserContextProvider: React.FC<React.FC> = (props) => {
     const currentMode = getUserStorageDarkMode(defaultValue.name);
-
     const setUserInfo = (user: UserContextProviderProps) => {
-        setState((prevState) => ({ ...prevState, user }));
+        setState((prevState) => ({ ...prevState, ...user }));
     };
     const setDarkModeStore = (toggle: boolean) => {
         setUserStorageDarkMode(state.name, toggle);

@@ -81,21 +81,19 @@ export const Profile: React.FC = () => {
                     "Your account has been deactivated. Logging out momentarily."
                 );
                 setUserInfo({
-                    userId: null,
-                    name,
+                    userId: "",
+                    name: "",
                     email: "",
                     emailStatus: false,
                     isLoggedIn: false,
                     darkMode,
                     connections: [],
                 });
-                console.log("is logged in",isLoggedIn);
                 navigate("/");
                 setStatus("success");
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
                 setStatus("error");
                 setOperation("An error occurred");
                 setLoading(false);
@@ -121,7 +119,6 @@ export const Profile: React.FC = () => {
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
                 setStatus("error");
                 setOperation("An error occurred");
                 setLoading(false);
