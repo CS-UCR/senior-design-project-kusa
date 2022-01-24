@@ -34,7 +34,7 @@ interface UserContextProps {
 //defaulted to loggedin for testing purposes, change with authentication implementation
 //userId will be an invalid entry -> will delete entry after development, so no security worries for this fake user
 const defaultValue = {
-    userId: "61ef287bc5c470fe1ca1cfd6",
+    userId: "61ef2a10c5c470fe1ca1cfd7",
     email: "test@test.com",
     emailStatus: true,
     isLoggedIn: true,
