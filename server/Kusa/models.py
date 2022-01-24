@@ -26,10 +26,11 @@ class Gamer(models.Model):
 #     # def _str_(self):
 #     #     return self.name
 
-class Dummy(models.Model):
+class Test(models.Model):
     Name = models.CharField(default='null',max_length=30)
-    FriendList = models.JSONField()
     SteamID = models.CharField(default='null',max_length=30)
+    FriendList = models.JSONField(default=[])
+    FriendRequest = models.JSONField(default=[])
 
     # def _str_(self):
     #     return self.Name

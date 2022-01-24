@@ -6,9 +6,9 @@ from admin import settings
 import requests
 
 from rest_framework import viewsets
-from .serializer import DummySerializer, GamerSerializer
+from .serializer import GamerSerializer,TestSerializer
 from .models import Gamer
-from Kusa.models import Dummy
+from Kusa.models import Test
 from django.views.decorators.csrf import csrf_exempt
 from bson import ObjectId
 
@@ -38,7 +38,7 @@ class GamerView(viewsets.ModelViewSet):
 @csrf_exempt
 def add_post(request):
     friendList = request.POST.get("FriendList").split(",")
-    dummy=Dummy(Name=request.POST.get("Name"),FriendList=friendList,SteamID = request.POST.get("SteamID"))
+    dummy=Test(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,)
     dummy.save()
     return HttpResponse("Inserted")
    
@@ -51,8 +51,8 @@ def delete_post(request,id):
 
 def read_post(request,id):
     
-    dummy = Dummy.objects.get(SteamID=id)
-    name = "User Name: " + dummy.Name
+    test = Test.objects.get(SteamID=id)
+    name = "User Name: " + test.Name
     return HttpResponse(name)
 
     
@@ -69,6 +69,6 @@ def read_post_all(request):
     # return HttpResponse(name)
 
     if request.method == 'GET':
-        dummy = Dummy.objects.all()
-        dummy_serializer = DummySerializer(dummy,many=True)
-        return JsonResponse(dummy_serializer.data,safe=False)
+        test = Test.objects.all()
+        test_serializer = TestSerializer(test,many=True)
+        return JsonResponse(test_serializer.data,safe=False)

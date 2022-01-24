@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import iSteamUserStats, iSteamUser, views, manageUser
+from . import iSteamUserStats, iSteamUser, views, manageUser,friendList
 
 from rest_framework import routers
 from Kusa import views
@@ -40,7 +40,7 @@ urlpatterns = [
     path('add_post/', views.add_post),
     path('update_post/<str:id>', views.update_post),
     path('delete_post/<str:id>', views.delete_post),
-    path('read_post/<str:id>',views.read_post),
+    path('read_post/<str:id>',friendList.read_post),
     path('read_post_all/',views.read_post_all),
     
     
