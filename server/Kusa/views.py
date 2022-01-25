@@ -43,8 +43,8 @@ def add_post(request):
     return HttpResponse("Inserted")
    
     
-def update_post(request,id):
-    pass
+# def update_post(request,id):
+#     pass
 
 def delete_post(request,id):
     pass

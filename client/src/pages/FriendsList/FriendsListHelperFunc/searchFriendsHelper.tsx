@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { getFriends } from "./friendsHelper";
+// import { GetHelper } from "./getHelper";
+import axios from "axios";
 
 import {
     Alert,
@@ -22,11 +24,22 @@ import { FormatUnderlinedSharp } from "@mui/icons-material";
 var userName:string;
 var friendsList: {} | null | undefined = []
 
+
+const baseURL = "http://127.0.0.1:8000/api/read_post/GamerOne";
+
 export function SearchFriend()
 {
+    
+
+    
+    // const [post, setPost] = React.useState(null);
+
     const [open, setOpen] = React.useState(false);
     
+    
     const [value, setValue] = useState("");
+
+    const [post, setPost] = useState(null);
 
     const handleChange = (e: { target: { value: any; }; }) => {
         setValue(e.target.value)
@@ -45,14 +58,27 @@ export function SearchFriend()
          //if user input is null ask them to make a input or cancel -----------------------------------------------
         userName = value;
         setValue("");
-        // console.log(value);
-        console.log(userName);
         setOpen(false);
         getFriends(userName);
         // friendsList = friends(userName) 
         // console.log(friendsList)
+        
+        axios.get(baseURL).then((response) => {
+            setPost(response.data);
+            //console.log(response.data)
+          });
+        
+        console.log(post)
+        //if (!post) return null;
+        
+        
     }
 
+  
+
+   
+    
+    
     
     
 
@@ -85,6 +111,7 @@ export function SearchFriend()
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSearch} >search</Button>
+                    {/* {GetHelper(value)} */}
                 </DialogActions>
             </Dialog>
             {/* {friendsList} */}
