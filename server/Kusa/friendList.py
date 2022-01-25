@@ -29,8 +29,8 @@ def read_post(request,name):
             for i in test_serializer.data:
                 for key in i:
                     if key == "Name":
-                        receiver_steamid = [key]i[key] = 
-                        return JsonResponse(receiver_00000,safe=False)
+                        receiver_steamid = i[key]
+                        return JsonResponse(receiver_steamid,safe=False)
 
         
 

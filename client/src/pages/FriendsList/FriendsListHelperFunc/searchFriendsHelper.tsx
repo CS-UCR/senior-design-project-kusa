@@ -25,7 +25,7 @@ var userName:string;
 var friendsList: {} | null | undefined = []
 
 
-const baseURL = "http://127.0.0.1:8000/api/read_post/GamerOne";
+const baseURL = "http://127.0.0.1:8000/api/read_post_all/";
 
 export function SearchFriend()
 {
