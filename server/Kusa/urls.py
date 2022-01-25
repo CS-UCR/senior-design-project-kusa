@@ -34,4 +34,5 @@ urlpatterns = [
     path('login',LoginView.as_view(), name='login'),
     path('logout',LogoutView.as_view(), name='logout'),
     # url(r'^logout', login_required(LogoutView.as_view(), login_url='/'), name='logout'),
+    path('getToken/',views.getToken, name='getToken'),
 ]
