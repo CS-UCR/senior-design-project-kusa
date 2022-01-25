@@ -38,7 +38,8 @@ class GamerView(viewsets.ModelViewSet):
 @csrf_exempt
 def add_post(request):
     friendList = request.POST.get("FriendList").split(",")
-    dummy=Test(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,)
+    friendRequest = request.POST.get("FriendRequest").split(",")
+    dummy=Test(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,FriendRequest=friendRequest)
     dummy.save()
     return HttpResponse("Inserted")
    
