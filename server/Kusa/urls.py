@@ -25,5 +25,6 @@ urlpatterns = [
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
     path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
-    path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail')
+    path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
+    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser')
 ]
