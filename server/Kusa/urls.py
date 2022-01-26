@@ -14,10 +14,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import iSteamUserStats, iSteamUser, views, manageUser
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
-from Kusa.views import IndexView, LogoutView,LoginView
 
 app_name = "Kusa" 
 urlpatterns = [
@@ -29,10 +28,7 @@ urlpatterns = [
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
     # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
-    # path('test',IndexView.as_view(), name='index'),
-    # url(r'^$', IndexView.as_view(), name='index'), 
-    path('login',LoginView.as_view(), name='login'),
-    path('logout',LogoutView.as_view(), name='logout'),
-    # url(r'^logout', login_required(LogoutView.as_view(), login_url='/'), name='logout'),
-    path('getToken/',views.getToken, name='getToken'),
+    path('login',authentication.LoginView.as_view(), name='login'),
+    path('logout',authentication.LogoutView.as_view(), name='logout'),
+    path('getToken/',authentication.getToken, name='getToken'),
 ]
