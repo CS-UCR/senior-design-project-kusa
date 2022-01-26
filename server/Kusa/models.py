@@ -5,15 +5,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-# class User(models.Model):
-#     email = models.CharField('User Email')
-#     password = models.CharField('User Password')
-#     date = models.DateField('Time Registered')
-#     steamname = models.CharField('Steam Account Username')
-#     class Meta:
-#         app_label = 'Kusa'
-
-
 class SteamUserManager(BaseUserManager):
     def _create_user(self, id, password, **extra_fields):
         """
@@ -72,12 +63,12 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
         return self.personaname
 
 class User(models.Model):
-    _id = models.ObjectIdField(editable=False)
-    email = models.CharField()
-    emailsEnabled = models.BooleanField()
-    password = models.CharField()
-    date = models.DateField()
-    steamname = models.CharField()
+    # _id = models.ObjectIdField(editable=False)
+    email = models.CharField(max_length=255)
+    emailsEnabled = models.BooleanField(max_length=255)
+    password = models.CharField(max_length=255)
+    date = models.DateField(max_length=255)
+    steamname = models.CharField(max_length=255)
     class Meta:
         app_label = 'Kusa'
 

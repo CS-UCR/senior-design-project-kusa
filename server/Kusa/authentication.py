@@ -22,6 +22,6 @@ def getToken(request):
             'steamid': request.user.id,
         }
         encoded = jwt.encode(payload, JWT_SECRET_KEY, algorithm='HS256')
-        return JsonResponse({'access_token:':encoded})
+        return JsonResponse({'access_token:':encoded},safe=False)
     else:
-        return JsonResponse({'error': 'authentication failed'})
+        return JsonResponse({'error': 'authentication failed'}, status=401, safe=False)

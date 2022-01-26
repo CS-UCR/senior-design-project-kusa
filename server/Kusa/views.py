@@ -1,6 +1,4 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
 from admin import settings
 import requests
 from django.views import View
