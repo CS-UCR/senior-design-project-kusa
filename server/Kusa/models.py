@@ -14,8 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 #         app_label = 'Kusa'
 
 
-
-
 class SteamUserManager(BaseUserManager):
     def _create_user(self, id, password, **extra_fields):
         """
@@ -72,3 +70,14 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
+
+class User(models.Model):
+    _id = models.ObjectIdField(editable=False)
+    email = models.CharField()
+    emailsEnabled = models.BooleanField()
+    password = models.CharField()
+    date = models.DateField()
+    steamname = models.CharField()
+    class Meta:
+        app_label = 'Kusa'
+
