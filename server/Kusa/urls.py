@@ -32,5 +32,8 @@ urlpatterns = [
     path('logout',authentication.LogoutView.as_view(), name='logout'),
     path('getToken/',authentication.getToken, name='getToken'),
     path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
-    path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail')
+    path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
+    path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
+    path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
+    path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail')
 ]
