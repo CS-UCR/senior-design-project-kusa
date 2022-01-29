@@ -6,18 +6,18 @@ import { UserContext } from "../../contexts/UserContext/UserContext";
 import "./Signup.scss";
 import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Signup: React.FC = () => {
     const { setUserInfo } = React.useContext(UserContext);
     const [loading, setLoading] = React.useState(false);
     const [steamComplete, setSteamComplete] = React.useState(false);
     const [error, setError] = React.useState("");
+    const navigate = useNavigate();
 
     const sendSignUp = () => {};
 
-    const authenticateSteam = () => {
-    
-    };
+    const authenticateSteam = () => {};
 
     return (
         <Container>
@@ -93,7 +93,7 @@ export const Signup: React.FC = () => {
             >
                 <Grid item>
                     <LoginButton
-                        onClick={(event) => (window.location.href = "/login")}
+                        onClick={() => navigate("/login")}
                         variant="contained"
                     >
                         or login
