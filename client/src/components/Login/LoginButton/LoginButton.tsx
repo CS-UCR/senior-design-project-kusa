@@ -15,6 +15,4 @@ export const LoginButton = styled(Button)(({ theme }) => ({
   borderWidth:2,
   borderColor:'yellow',
   width: '200px',
-
-
 }));

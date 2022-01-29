@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+
 class SteamUserManager(BaseUserManager):
     def _create_user(self, id, password, **extra_fields):
         """

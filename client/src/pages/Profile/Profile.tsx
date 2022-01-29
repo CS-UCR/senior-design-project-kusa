@@ -23,7 +23,6 @@ import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
 import { CSSTransition } from "react-transition-group";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
-import "./Profile.scss";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
