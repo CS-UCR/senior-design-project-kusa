@@ -16,8 +16,12 @@ class Gamer(models.Model):
     Achievements = models.CharField(default='null',max_length=120)
     Blocked = models.CharField(default='null',max_length=120)
     Friends = models.CharField(default='null',max_length=120)
-    FriendsRequest = models.CharField(default='null',max_length=120)
+    FriendRequest = models.CharField(default='null',max_length=120)
     ProfilePic = models.CharField(default='whatever',max_length=120)
+    is_active = models.BooleanField(default=True)
+    
+    def _str_(self):
+        return self.Gamer.UserID
     # class Meta:
     #     app_label = 'Gamer'
 
