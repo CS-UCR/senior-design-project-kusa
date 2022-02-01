@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-=======
-from django.http.response import JsonResponse
-from django.shortcuts import render
-from admin import settings
-from Kusa.models import User
-from datetime import date
-
-from admin.settings import CONNECTION_STRING
->>>>>>> 582a156d56377d1cf5955b8f48dbe54f4d1ae108
 import json
 from operator import truediv
 from django.http.response import JsonResponse
@@ -61,7 +51,3 @@ def deactivate_account(request):
         return JsonResponse({'result': "Deletion successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
-<<<<<<< HEAD
-=======
-
->>>>>>> 582a156d56377d1cf5955b8f48dbe54f4d1ae108
