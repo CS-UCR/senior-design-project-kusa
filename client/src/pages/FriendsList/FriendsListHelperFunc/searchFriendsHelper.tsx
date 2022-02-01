@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { getFriends } from "./friendsHelper";
+//import { getFriends } from "./friendsHelper";
 // import { GetHelper } from "./getHelper";
 import axios from "axios";
 
@@ -23,9 +23,11 @@ import { FormatUnderlinedSharp } from "@mui/icons-material";
 
 var userName:string;
 var friendsList: {} | null | undefined = []
+//account holder id (whoever login we will have his steamid availible)
 
+var thisAccountName = "Yuteng"
 
-const baseURL = "http://127.0.0.1:8000/api/read_post_all/";
+const baseURL = "http://127.0.0.1:8000/api/friendRequest/";
 
 export function SearchFriend()
 {
@@ -59,29 +61,21 @@ export function SearchFriend()
         userName = value;
         setValue("");
         setOpen(false);
-        getFriends(userName);
+        //getFriends(userName);
         // friendsList = friends(userName) 
         // console.log(friendsList)
-        
-        axios.get(baseURL).then((response) => {
+        //+ userName + "&" + thisAccountSteamID
+        axios.get(baseURL + value + "&" + thisAccountName).then((response) => {
             setPost(response.data);
             //console.log(response.data)
           });
         
-        console.log(post)
+        console.log(value)
+        //console.log(post)
         //if (!post) return null;
         
         
     }
-
-  
-
-   
-    
-    
-    
-    
-
 
     return(
         <Grid>

@@ -10,8 +10,8 @@ import { default as smile } from "../../assets/friends/creepySmile.svg";
 import { default as hand } from "../../assets/friends/hand.svg";
 
 
-import { invites } from "./FriendsListHelperFunc/InviteHelper";
-import { friends } from "./FriendsListHelperFunc/friendsHelper";
+import { Invites } from "./FriendsListHelperFunc/InviteHelper";
+import { Friends } from "./FriendsListHelperFunc/friendsHelper";
 import { blocked } from "./FriendsListHelperFunc/blockHelper";
 import { addFriends } from "./FriendsListHelperFunc/addFriendsHelper";
 
@@ -34,7 +34,7 @@ export const FriendsList: React.FC = () => {
                 invites
             </KusaHeader>
             
-            {invites()}
+            {Invites()}
             
 
             <KusaHeader>
@@ -50,7 +50,7 @@ export const FriendsList: React.FC = () => {
             </KusaHeader>
             
             {addFriends()}
-            {friends()}
+            {Friends()}
             
 
             
