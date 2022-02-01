@@ -9,11 +9,11 @@ from admin.settings import CONNECTION_STRING
 from bson.objectid import ObjectId
 from Kusa.models import SteamUser
 from Kusa.serializers import SteamUserSerializer
-
+from Kusa.authentication import validate_token
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
-
+import jwt
 # PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
 def register_user(request):
     #email = request.POST.get('email')
@@ -43,24 +43,28 @@ def toggle_email(request):
 
 @csrf_exempt
 def get_all_users(request):
-    steamusers = SteamUser.objects.all()
-    steamuser_serializer = SteamUserSerializer(steamusers,many=True)
-    return JsonResponse(steamuser_serializer.data, safe=False)
-
+    response = validate_token(request)
+    if "steamid" in response:
+        steamusers = SteamUser.objects.all()
+        steamuser_serializer = SteamUserSerializer(steamusers,many=True)
+        return JsonResponse(steamuser_serializer.data, safe=False)
+    else:
+        return response
 @csrf_exempt
 def delete_a_user(request):
-    steamid = request.GET.get("steamid")
-    steamuser = SteamUser.objects.get(id=steamid)
-    steamuser.delete()
-    return JsonResponse("Deleted Successfully",safe=False)
-
+    response = validate_token(request)
+    if "steamid" in response:
+        steamuser = SteamUser.objects.get(id=response["steamid"])
+        steamuser.delete()
+        return JsonResponse("Deleted Successfully",safe=False)
+    else:
+        return response
 @csrf_exempt
-def steamuser_detail(request):
-    steamid = request.GET.get("steamid")
-    try: 
-        steamuser = SteamUser.objects.get(id=steamid)
+def steamuser_detail(request):       
+    response = validate_token(request)
+    if "steamid" in response:
+        steamuser = SteamUser.objects.get(id=response["steamid"])
         steamuser_serializer = SteamUserSerializer(steamuser)
-        print(steamuser_serializer.data)
         return JsonResponse(steamuser_serializer.data, safe=False) 
-    except SteamUser.DoesNotExist: 
-        return JsonResponse({'message': 'The steam user does not exist'}, status=404, safe=False) 
+    else:
+        return response
