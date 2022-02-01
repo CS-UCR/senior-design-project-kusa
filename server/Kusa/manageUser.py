@@ -29,7 +29,6 @@ def register_user(request):
 @csrf_exempt
 def toggle_email(request):
     receiveRequest = json.loads(request.body)
-    print("request", receiveRequest)
     emailStatus = receiveRequest.get('emailStatus')
     uid = receiveRequest.get('userID')
     try:
@@ -67,3 +66,17 @@ def steamuser_detail(request):
         return JsonResponse(steamuser_serializer.data, safe=False) 
     else:
         return response
+
+# enable csrf once we've figured out authentication
+# uid probably won't be directly sent -> expect to hash/dehash this
+@csrf_exempt
+def deactivate_account(request):
+    receiveRequest = json.loads(request.body)
+    uid = receiveRequest.get('userID')
+    try:
+        user = User.objects.get(pk=ObjectId(uid))
+        user.delete()
+        return JsonResponse({'result': "Deletion successful"}, status=201, safe=False)
+    except:
+        return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
+
