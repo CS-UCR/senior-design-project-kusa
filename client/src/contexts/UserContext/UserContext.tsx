@@ -32,9 +32,8 @@ interface UserContextProps {
     setUserInfo: (user: User) => void;
 }
 
-//defaulted to loggedin for testing purposes, change with authentication implementation
-//userId will be an invalid entry -> will delete entry after development, so no security worries for this fake user
-const tempId =  "61ef2a10c5c470fe1ca1cfd7";
+//the userId is a steamid
+const tempId =  "deleteme\"";
 
 const defaultValue = {
     userId: tempId,
