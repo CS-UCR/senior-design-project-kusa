@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import iSteamUserStats, iSteamUser, views, manageUser
+from . import iSteamUserStats, iSteamUser, views, manageUser, CreateThread, ListThreads
 
 urlpatterns = [
     path('test', views.test, name='test'),
@@ -26,5 +26,7 @@ urlpatterns = [
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
     path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
     path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
-    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser')
+    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
+    path('Chat/', ListThreads.as_view(), name='chat'),
+    path('Chat/create-thread', ListThreads.as_view(), name='create-thread')
 ]
