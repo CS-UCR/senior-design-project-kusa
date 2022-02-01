@@ -67,7 +67,7 @@ class FriendsList(models.Model):
         friends_list.remove_friend(self.user)
 
     def are_friends(self, friend):  # check if user are friends
-        if friend in self.firends.all():
+        if friend in self.friends.all():
             return True
         return False    
 
