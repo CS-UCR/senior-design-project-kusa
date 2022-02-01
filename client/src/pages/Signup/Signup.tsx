@@ -6,9 +6,9 @@ import { UserContext } from "../../contexts/UserContext/UserContext";
 import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../constants/backendURL";
+import { setUserToken } from "../../contexts/UserContext/utils/useUserStorage";
 
 import "./Signup.scss";
-import { setUserToken } from "../../contexts/UserContext/utils/useUserStorage";
 
 export const Signup: React.FC = () => {
     const { userId, isLoggedIn, setUserInfo } = React.useContext(UserContext);
@@ -30,8 +30,8 @@ export const Signup: React.FC = () => {
         window.location.href = `${BACKEND_URL}/login`;
         //need a new endpoint to send over the email after, or find a way to insert into the pipeline later
         setSteamComplete(true);
-        setUserInfo({ email });
         setUserToken(userId, tokenResponse);
+        setUserInfo({ email, isLoggedIn: tokenResponse ? true : false });
         setLoading(false);
     };
 

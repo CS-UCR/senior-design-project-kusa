@@ -1,6 +1,7 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
 from djongo import models
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
+from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -38,17 +39,15 @@ class SteamUserManager(BaseUserManager):
 
         return self._create_user(id, password, **extra_fields)
 
+
 class SteamUser(AbstractBaseUser, PermissionsMixin):
+    USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
     personaname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
-
-    #fields from Kusa's signup
-    email = models.EmailField(max_length=255, default="")
-    emailsEnabled = models.BooleanField(default=True)
 
     # Add the other fields that can be retrieved from the Web-API if required
 
@@ -63,6 +62,3 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
-
-    USERNAME_FIELD = 'id'
-    REQUIRED_FIELDS = []

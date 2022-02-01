@@ -7,17 +7,22 @@ import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import { BACKEND_URL } from "../../constants/backendURL";
+import { setUserToken } from "../../contexts/UserContext/utils/useUserStorage";
 
 export const Login: React.FC = () => {
     const [loading, setLoading] = React.useState(false);
-    const {setUserInfo} = React.useContext(UserContext);
+    const { userId, setUserInfo } = React.useContext(UserContext);
     const [steamComplete, setSteamComplete] = React.useState(false);
     const navigate = useNavigate();
 
     const authenticateSteam = () => {
+        //replace with a valid api call
+        const tokenResponse = "blah";
         setLoading(true);
         window.location.href = `${BACKEND_URL}/login`;
-        setUserInfo({isLoggedIn: true,})
+        setUserInfo({ isLoggedIn: true });
+        setUserToken(userId, tokenResponse);
+        setUserInfo({ isLoggedIn: tokenResponse ? true : false });
         setSteamComplete(true);
         setLoading(false);
     };

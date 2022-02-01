@@ -30,8 +30,18 @@ function App() {
     const routes = [
         { path: "/", name: "Landing", Component: Landing },
         //public routes go here
-        { path: "/login", name: "Home", Component: Login },
-        { path: "/signup", name: "Profile", Component: Signup },
+        {
+            path: "/login",
+            name: "Home",
+            publicOnlyRoute: true,
+            Component: Login,
+        },
+        {
+            path: "/signup",
+            name: "Profile",
+            publicOnlyRoute: true,
+            Component: Signup,
+        },
         //private routes go here
         {
             path: "/home",
@@ -75,35 +85,53 @@ function App() {
         const location = useLocation();
         return (
             <Routes>
-                {routes.map(({ path, name, Component, privateRoute }) => {
-                    if (privateRoute && !isLoggedIn)
+                {routes.map(
+                    ({
+                        path,
+                        name,
+                        Component,
+                        privateRoute,
+                        publicOnlyRoute,
+                    }) => {
+                        if (publicOnlyRoute && isLoggedIn) {
+                            return (
+                                <Route
+                                    key={name}
+                                    exact
+                                    path={path}
+                                    element={<Navigate to="/home" />}
+                                />
+                            );
+                        }
+                        if (privateRoute && !isLoggedIn)
+                            return (
+                                <Route
+                                    key={name}
+                                    exact
+                                    path={path}
+                                    element={<Navigate to="/" />}
+                                />
+                            );
                         return (
                             <Route
                                 key={name}
                                 exact
                                 path={path}
-                                element={<Navigate to="/" />}
+                                element={
+                                    <CSSTransition
+                                        appear
+                                        in={location.pathname === path}
+                                        key={name}
+                                        classNames="screen"
+                                        timeout={100}
+                                    >
+                                        <Component />
+                                    </CSSTransition>
+                                }
                             />
                         );
-                    return (
-                        <Route
-                            key={name}
-                            exact
-                            path={path}
-                            element={
-                                <CSSTransition
-                                    appear
-                                    in={location.pathname === path}
-                                    key={name}
-                                    classNames="screen"
-                                    timeout={100}
-                                >
-                                    <Component />
-                                </CSSTransition>
-                            }
-                        />
-                    );
-                })}
+                    }
+                )}
             </Routes>
         );
     });
