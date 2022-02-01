@@ -14,3 +14,19 @@ export const setUserStorageDarkMode = (
     if (!username) return;
     localStorage.setItem("darkMode", toggle.toString());
 };
+
+export const getUserToken = (username: string | null) => {
+    if (!username) return false;
+    let local = sessionStorage.getItem("userToken");
+    return local 
+};
+
+
+export const setUserToken = (
+    username: string | null,
+    token: string,
+) => {
+    if (!username) return;
+    sessionStorage.setItem("userToken", token);
+};
+

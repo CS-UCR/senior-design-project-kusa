@@ -7,10 +7,12 @@ export const LoginField: React.FC<any> = ({
     required,
     error,
     helperText,
+    setState,
 }) => (
     <TextField
         required={required}
         defaultValue={children}
+        onChange={setState ? (e) => setState(e.target.value) : () => {}}
         aria-describedby="component-helper-text"
         fullWidth
         sx={{

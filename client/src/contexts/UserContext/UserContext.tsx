@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
     getUserStorageDarkMode,
+    getUserToken,
     setUserStorageDarkMode,
 } from "./utils/useUserStorage";
 
@@ -9,13 +10,13 @@ interface Connection {
     name: string;
 }
 interface User {
-    userId: string;
-    name: string;
-    email: string;
-    emailStatus: boolean;
-    isLoggedIn: boolean;
-    darkMode: boolean | undefined;
-    connections: Connection[];
+    userId?: string;
+    name?: string;
+    email?: string;
+    emailStatus?: boolean;
+    isLoggedIn?: boolean;
+    darkMode?: boolean | undefined;
+    connections?: Connection[];
 }
 
 interface UserContextProps {
@@ -33,11 +34,13 @@ interface UserContextProps {
 
 //defaulted to loggedin for testing purposes, change with authentication implementation
 //userId will be an invalid entry -> will delete entry after development, so no security worries for this fake user
+const tempId =  "61ef2a10c5c470fe1ca1cfd7";
+
 const defaultValue = {
-    userId: "61ef2a10c5c470fe1ca1cfd7",
+    userId: tempId,
     email: "test@test.com",
     emailStatus: true,
-    isLoggedIn: false,
+    isLoggedIn: getUserToken(tempId) ? true : false,
     darkMode: false,
     name: "test_steam",
     connections: [{ title: "insta", name: "test_insta_hndle" }],
@@ -53,7 +56,7 @@ interface UserContextProviderProps {
     emailStatus?: boolean;
     isLoggedIn?: boolean;
     darkMode?: boolean;
-    connections: Connection[];
+    connections?: Connection[];
 }
 
 export const UserContext = React.createContext<UserContextProps>(defaultValue);

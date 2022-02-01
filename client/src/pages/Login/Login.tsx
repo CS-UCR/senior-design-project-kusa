@@ -1,20 +1,23 @@
 import * as React from "react";
-import { Container, Grid, Button, Typography } from "@mui/material";
+import { Container, Grid, Button } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import "./Login.scss";
 import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
+import { BACKEND_URL } from "../../constants/backendURL";
 
 export const Login: React.FC = () => {
     const [loading, setLoading] = React.useState(false);
+    const {setUserInfo} = React.useContext(UserContext);
     const [steamComplete, setSteamComplete] = React.useState(false);
     const navigate = useNavigate();
 
     const authenticateSteam = () => {
         setLoading(true);
-        // window.location.href = "http://127.0.0.1:8000/api/login";
+        window.location.href = `${BACKEND_URL}/login`;
+        setUserInfo({isLoggedIn: true,})
         setSteamComplete(true);
         setLoading(false);
     };

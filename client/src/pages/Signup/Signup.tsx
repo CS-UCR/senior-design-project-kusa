@@ -3,26 +3,41 @@ import { Button, Container, Grid, Typography } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { LoginField } from "../../components/Login/LoginField/LoginField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
-import "./Signup.scss";
 import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../constants/backendURL";
+
+import "./Signup.scss";
+import { setUserToken } from "../../contexts/UserContext/utils/useUserStorage";
 
 export const Signup: React.FC = () => {
-    const { setUserInfo } = React.useContext(UserContext);
+    const { userId, isLoggedIn, setUserInfo } = React.useContext(UserContext);
     const [loading, setLoading] = React.useState(false);
+    const [email, setEmail] = React.useState<string | undefined>(undefined);
     const [steamComplete, setSteamComplete] = React.useState(false);
     const [error, setError] = React.useState("");
     const navigate = useNavigate();
 
-    const sendSignUp = () => {};
-
-    const authenticateSteam = () => {};
+    const authenticateSteam = () => {
+        if (!email) {
+            setError("Enter an email address first.");
+            return;
+        }
+        //this should definitely be replaced...with a token from the api
+        const tokenResponse = "blah";
+        setLoading(true);
+        //TEMPORARILY redirect to steam - but we can't ensure the user actually logged in
+        window.location.href = `${BACKEND_URL}/login`;
+        //need a new endpoint to send over the email after, or find a way to insert into the pipeline later
+        setSteamComplete(true);
+        setUserInfo({ email });
+        setUserToken(userId, tokenResponse);
+        setLoading(false);
+    };
 
     return (
         <Container>
             <KusaBox
-                height="400px"
                 width="90%"
                 styles={{
                     mx: "auto",
@@ -42,11 +57,14 @@ export const Signup: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8}>
-                        <LoginField required>
+                        <LoginField required setState={setEmail}>
                             example@example.example
                         </LoginField>
                     </Grid>
-                    <Grid item>
+                    <Grid
+                        sx={{ p: 7, mx: "auto", width: "90%" }}
+                        textAlign="center"
+                    >
                         <Button
                             variant="contained"
                             sx={{
@@ -60,25 +78,9 @@ export const Signup: React.FC = () => {
                             }
                         >
                             {!steamComplete
-                                ? "complete with steam"
+                                ? "sign up with steam"
                                 : "steam completed"}
                         </Button>
-                    </Grid>
-                    <Grid
-                        sx={{ p: 7, mx: "auto", width: "90%" }}
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                        textAlign="center"
-                    >
-                        <Grid>
-                            <LoginButton
-                                variant="contained"
-                                onClick={sendSignUp}
-                            >
-                                sign up
-                            </LoginButton>
-                        </Grid>
                     </Grid>
                     <Typography>{error}</Typography>
                 </Grid>

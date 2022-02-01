@@ -16,7 +16,7 @@ from bson.objectid import ObjectId
 
 # PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
 def register_user(request):
-    #email = request.POST.get('email')
+    email = request.POST.get('email')
     try:
         user = SteamUser()
         user.email = "testmail"
