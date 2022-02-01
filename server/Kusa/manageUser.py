@@ -13,7 +13,6 @@ from Kusa.authentication import validate_token
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
-import jwt
 # PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
 def register_user(request):
     #email = request.POST.get('email')

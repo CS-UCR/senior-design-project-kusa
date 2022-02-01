@@ -3,7 +3,6 @@ from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from admin import settings
-import requests
 from django.views import View
 import jwt
 from Kusa.models import SteamUser
@@ -28,6 +27,12 @@ def get_token(request):
     else:
         return JsonResponse({'error': 'authentication failed'}, status=401, safe=False)
     
+"""
+Validates token and if successful returns steamid
+Parameters: request
+
+Returns: dict: {"steamid":steam id}
+"""
 def validate_token(request):
     try: 
         token = request.headers.get('Authorization') 
