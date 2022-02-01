@@ -37,13 +37,15 @@ urlpatterns = [
     #path('RegisterUser/', manageUser.register_user, name='RegisterUser')
 
 
-    path('add_post/', views.add_post),
-    path('update_post/<str:receiver_steamid>&<str:request_steamid>', friendList.update_post),
-    path('delete_post/<str:id>', views.delete_post),
-    path('read_post/<str:name>&<str:sender_steamid>',friendList.read_post),
+    path('add_post/', friendList.add_post),
+    path('update_post/<str:receiver_steamid>&<str:request_steamid>', friendList.update_friendRequest),
+    #path('delete_post/<str:id>', views.delete_post),
+    path('friendRequest/<str:receiver_name>&<str:sender_name>',friendList.friendRequest),
     path('read_post_all/',views.read_post_all),
+    path('getFriendList/<str:userName>', friendList.getFriendList),
+    path('getFriendRequest/<str:userName>', friendList.getFriendRequest),
 
-    path('update_post/<str:receiver_steamid>', friendList.update_post),
+    #path('update_post/<str:receiver_steamid>', friendList.update_friendRequest),
     
     
     

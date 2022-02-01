@@ -10,9 +10,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
+@csrf_exempt
+def add_post(request):
+    friendList = request.POST.get("FriendList").split(",")
+    friendRequest = request.POST.get("FriendRequest").split(",")
+    dummy=Test(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,FriendRequest=friendRequest)
+    dummy.save()
+    return HttpResponse("Inserted")
+
 
 @csrf_exempt
-def read_post(request,name,sender_steamid):
+def friendRequest(request,receiver_name,sender_name):
     
     # dummy = Dummy.objects.get(SteamID=id)
     # name = "User Name: " + dummy.Name
@@ -20,7 +28,7 @@ def read_post(request,name,sender_steamid):
     receiver_steamid = ""
     
     if request.method == 'GET':
-        test = Test.objects.filter(Name=name)
+        test = Test.objects.filter(Name=receiver_name)
         test_serializer = TestSerializer(test,many=True)
 
         if not test:
@@ -30,21 +38,46 @@ def read_post(request,name,sender_steamid):
                 for key in i:
                     if key == "SteamID":
                         receiver_steamid = i[key]
-                        val = update_post('',receiver_steamid,sender_steamid)
+                        val = update_friendRequest('',receiver_steamid,sender_name)
                         #return JsonResponse(receiver_steamid,safe=False)
-                        return HTTPResponse(val)
+                        return HTTPResponse(val, safe=False)
 
         
 
 @csrf_exempt
-def update_post(self,receiver_steamid,sender_steamid):
-    test = Test.objects.get(SteamID=receiver_steamid)
+def update_friendRequest(self,receiver_name,sender_name):
+    test = Test.objects.get(SteamID=receiver_name)
 
     #given "list indices must be integers or slices, not str" error when updating "FriendRequest". Need to figure out why
     #test.FriendRequest["newfriend"] = sender_steamid
-    test.FriendList["newfriend"] = sender_steamid
+    test.FriendRequest.append(sender_name) 
     test.save()
-    return HTTPResponse("")
+    return HTTPResponse("Friend Request Sent!")
+
+
+
+# @csrf_exempt
+# def delete_friend(self, rec)
+
+
+
+@csrf_exempt
+def getFriendList(self, userName):
+    test = Test.objects.get(Name=userName)
+    test_serializer = TestSerializer(test,many=True)
+    
+
+    return JsonResponse(test.FriendList,safe=False)
+        
+
+
+def getFriendRequest(self,userName):
+    test = Test.objects.get(Name=userName)
+    test_serializer = TestSerializer(test,many=True)
+    
+
+    return JsonResponse(test.FriendRequest,safe=False)
+
 
 
 #update_post works for "GamerOne" but not working for new created "Yuteng" (updating the FriendList)()
