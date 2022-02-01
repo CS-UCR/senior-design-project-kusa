@@ -12,7 +12,7 @@ import {LoginButton} from "../../components/Login/LoginButton/LoginButton";
 import { useState } from "react";
 
 export const Signup: React.FC = () => {
-    const {email,username } =
+    const {email } =
         React.useContext(UserContext);
     const [password, setPassword] = useState("");
     const [reenterPassword, setreenterPassword] = useState("");
