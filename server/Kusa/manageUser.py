@@ -1,3 +1,10 @@
+from django.http.response import JsonResponse
+from django.shortcuts import render
+from admin import settings
+from Kusa.models import User
+from datetime import date
+
+from admin.settings import CONNECTION_STRING
 import json
 from operator import truediv
 from django.http.response import JsonResponse
@@ -12,7 +19,6 @@ from bson.objectid import ObjectId
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
-
 
 # PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
 def register_user(request):
@@ -52,3 +58,4 @@ def deactivate_account(request):
         return JsonResponse({'result': "Deletion successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
+
