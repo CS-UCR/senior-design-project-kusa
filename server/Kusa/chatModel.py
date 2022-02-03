@@ -1,3 +1,6 @@
+# Chat model inspired by - http://legionscript.com/
+# https://www.youtube.com/watch?v=oxrQdZ5KqW0&list=PLPSM8rIid1a3TkwEmHyDALNuHhqiUiU5A&index=16
+
 from djongo import models
 from django.db import models
 from django.utils import timezone
