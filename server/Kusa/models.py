@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
+from django.contrib.postgres.fields import ArrayField
 class SteamUserManager(BaseUserManager):
     def _create_user(self, id, password, **extra_fields):
         """
@@ -47,9 +47,11 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
-
+    # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
+    # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # friend_requests = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # Add the other fields that can be retrieved from the Web-API if required
-
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -62,13 +64,4 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return self.personaname
 
-class User(models.Model):
-    # _id = models.ObjectIdField(editable=False)
-    email = models.CharField(max_length=255)
-    emailsEnabled = models.BooleanField(max_length=255)
-    password = models.CharField(max_length=255)
-    date = models.DateField(max_length=255)
-    steamname = models.CharField(max_length=255)
-    class Meta:
-        app_label = 'Kusa'
 
