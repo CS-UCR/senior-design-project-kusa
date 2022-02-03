@@ -38,7 +38,6 @@ def toggle_email(request):
         return JsonResponse({'result': "Insert successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
-
 @csrf_exempt
 def get_all_users(request):
     response = validate_token(request)

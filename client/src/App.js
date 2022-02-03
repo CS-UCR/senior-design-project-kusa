@@ -26,6 +26,7 @@ import "animate.css";
 
 function App() {
     const { isLoggedIn } = React.useContext(UserContext);
+
     const routes = [
         { path: "/", name: "Landing", Component: Landing },
         //public routes go here
