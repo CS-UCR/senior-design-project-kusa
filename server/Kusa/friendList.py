@@ -79,57 +79,28 @@ def getFriendRequest(self,userName):
     return JsonResponse(test.FriendRequest,safe=False)
 
 
+def acceptFriendRequest(self, account_name, accepting_name ):
+    test = Test.objects.get(Name = account_name)
 
-#update_post works for "GamerOne" but not working for new created "Yuteng" (updating the FriendList)()
-
-
-
-
-        
     
+    if accepting_name in test.FriendRequest:
+        test.FriendRequest.remove(account_name)
+
+        test.FriendList.append(account_name)
+
+        test.save()
+        return HTTPResponse("friend accepted")
+    else:
+        return HTTPResponse("error")
 
 
 
+def rejectFriendRequest(self, account_name, accepting_name):
+    test = Test.objects.get(Name = account_name)
 
-
-        # temp = Test.objects.get(SteamID="666666")
-        # temp_serializer = TestSerializer(temp,many=True)
-        # return HTTPResponse(temp_serializer.data)
-        
-        
-        
-
-         
-        # n = 0
-        # temp = Test.objects.get(SteamID = receiver_steamid).FriendRequest
-        # return JsonResponse(temp,safe=False)
-        # test = receiver_steamid
-        # print(test)
-        # print("test")
-        # #test.save()
-        # n+=1
-        # return HTTPResponse("Updated")
-        
-
-# @csrf_exempt
-# def update_post(self,receiver_steamid,request_steamid):
-
-
-#     n = 0
-#     test = Test.objects.get(SteamID = receiver_steamid).FriendRequest
-#     test[n] = request_steamid
-#     print(test)
-#     print("test")
-#     test.save()
-#     n+=1
-#     return HTTPResponse("Updated")
-
-    #friendList = request.POST.get("FriendList").split(",")
-
-    # else:
-    #     for i in test_serializer.data:
-    #         for key in i:
-    #             if key == "Name":
-    #                 return JsonResponse(i[key],safe=False)
-    # return JsonResponse(test_serializer.data,safe=False)
-    
+    if accepting_name in test.FriendRequest:
+        test.FriendRequest.remove(account_name)
+        test.save()
+        return HTTPResponse("friend request removed")
+    else:
+        return HTTPResponse("error")

@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { person } from "./personHelper";
+import { Person_New_Request } from "./friendRequestPersonHelper";
 import { wsv } from "./WSV";
 
 var thisAccountName = "Yuteng"
@@ -27,7 +27,7 @@ export function Invites()
 
     for (var i = 0; i < data.length; i++)
     {
-        array_of_people.push(person(data[i]))
+        array_of_people.push(Person_New_Request(data[i]))
         array_of_people.push(wsv())
     }
     
