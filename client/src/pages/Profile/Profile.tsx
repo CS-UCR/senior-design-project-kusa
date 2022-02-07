@@ -54,7 +54,6 @@ export const Profile: React.FC = () => {
         emailStatus,
         darkMode,
         connections,
-        isLoggedIn,
         setUserInfo,
         setEmailStatus,
     } = React.useContext(UserContext);

@@ -3,10 +3,7 @@ from operator import truediv
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from admin import settings
-<<<<<<< HEAD
 from Kusa.models import SteamUser
-=======
->>>>>>> ea907f4c694b639a0db5872562e7355dcacbece5
 from datetime import date
 from django.views.decorators.csrf import csrf_exempt
 from admin.settings import CONNECTION_STRING

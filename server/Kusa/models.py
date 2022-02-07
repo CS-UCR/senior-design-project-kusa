@@ -69,8 +69,3 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ea907f4c694b639a0db5872562e7355dcacbece5
