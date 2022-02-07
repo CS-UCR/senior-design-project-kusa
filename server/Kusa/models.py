@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
+from django.contrib.postgres.fields import ArrayField
 class SteamUserManager(BaseUserManager):
     def _create_user(self, id, password, **extra_fields):
         """
@@ -53,6 +53,10 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     email=models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
 
+    # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
+    # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # friend_requests = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # Add the other fields that can be retrieved from the Web-API if required
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
@@ -65,3 +69,8 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ea907f4c694b639a0db5872562e7355dcacbece5
