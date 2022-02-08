@@ -1,107 +1,104 @@
 import * as React from "react";
-import { Button, Container, Grid, Typography } from "@mui/material";
+import axios from "axios";
+import { Container, Grid, Typography } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { LoginField } from "../../components/Login/LoginField/LoginField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
-import { useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../../constants/backendURL";
 import { setUserToken } from "../../contexts/UserContext/utils/useUserStorage";
+import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
+import { BACKEND_URL } from "../../constants/backendURL";
 
 import "./Signup.scss";
+import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 
 export const Signup: React.FC = () => {
-    const { userId, isLoggedIn, setUserInfo } = React.useContext(UserContext);
+    const { userId, setUserInfo } = React.useContext(UserContext);
     const [loading, setLoading] = React.useState(false);
     const [email, setEmail] = React.useState<string | undefined>(undefined);
-    const [steamComplete, setSteamComplete] = React.useState(false);
     const [error, setError] = React.useState("");
-    const navigate = useNavigate();
 
-    const authenticateSteam = () => {
+    const sendSignUp = () => {
         if (!email) {
             setError("Enter an email address first.");
             return;
         }
-        //this should definitely be replaced...with a token from the api
-        const tokenResponse = "blah";
+        let tokenResponse;
         setLoading(true);
-        //TEMPORARILY redirect to steam - but we can't ensure the user actually logged in
-        window.location.href = `${BACKEND_URL}/login`;
+        axios
+            .get(`${BACKEND_URL}/getToken/`)
+            .then((response) => {
+                let result = JSON.parse(response.data);
+                tokenResponse = result.access_token;
+                setUserToken(userId, tokenResponse);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setError("An error occurred. Please try again later.");
+                setLoading(false);
+            });
         //need a new endpoint to send over the email after, or find a way to insert into the pipeline later
-        setSteamComplete(true);
-        setUserToken(userId, tokenResponse);
         setUserInfo({ email, isLoggedIn: tokenResponse ? true : false });
-        setLoading(false);
     };
 
     return (
         <Container>
-            <KusaBox
-                width="90%"
-                styles={{
-                    mx: "auto",
-                    width: "90%",
-                    padding: "2rem",
-                    marginTop: "7rem",
-                }}
-            >
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <Typography
-                            variant="h5"
-                            marginTop={1.5}
-                            color="neutral.main"
+            <>
+                <KusaHeader>
+                    now, complete your account with an email address:
+                </KusaHeader>
+                <KusaBox
+                    width="90%"
+                    styles={{
+                        mx: "auto",
+                        width: "90%",
+                        padding: "2rem",
+                        marginTop: "1rem",
+                    }}
+                >
+                    <Grid container spacing={2}>
+                        <Grid item xs={4}>
+                            <Typography
+                                variant="h5"
+                                marginTop={1.5}
+                                color="neutral.main"
+                            >
+                                email
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                            <LoginField required setState={setEmail}>
+                                example@example.example
+                            </LoginField>
+                        </Grid>
+                        <Grid
+                            sx={{ mx: "auto", width: "90%", marginTop: "2rem" }}
+                            textAlign="center"
                         >
-                            email
-                        </Typography>
+                            <Typography>{error}</Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={8}>
-                        <LoginField required setState={setEmail}>
-                            example@example.example
-                        </LoginField>
-                    </Grid>
-                    <Grid
-                        sx={{ p: 7, mx: "auto", width: "90%" }}
-                        textAlign="center"
-                    >
-                        <Button
-                            variant="contained"
-                            sx={{
-                                fontSize: "1.5rem",
-                                backgroundColor: "#171a21",
-                                color: "white",
-                                textTransform: "none",
-                            }}
-                            onClick={
-                                !steamComplete ? authenticateSteam : () => {}
-                            }
-                        >
-                            {!steamComplete
-                                ? "sign up with steam"
-                                : "steam completed"}
-                        </Button>
-                    </Grid>
-                    <Typography>{error}</Typography>
-                </Grid>
-            </KusaBox>
+                </KusaBox>
 
-            <Grid
-                sx={{ p: 3, width: "100%", marginLeft: "-.5rem" }}
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-            >
-                <Grid item>
-                    <LoginButton
-                        onClick={() => navigate("/login")}
-                        variant="contained"
-                    >
-                        or login
-                    </LoginButton>
+                <Grid
+                    sx={{ p: 3, width: "100%", marginLeft: "-.5rem" }}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    textAlign="center"
+                >
+                    <Grid item>
+                        <LoginButton
+                            onClick={() => sendSignUp()}
+                            variant="contained"
+                        >
+                            signup
+                        </LoginButton>
+                    </Grid>
                 </Grid>
-            </Grid>
+                <KusaLoadingSpinner loading={loading} />
+            </>
         </Container>
     );
 };

@@ -1,8 +1,11 @@
 from django.http.response import JsonResponse
+from django.shortcuts import redirect, render
 from admin import settings
 import requests
 from django.views import View
 import jwt
+from admin.settings import FRONTEND_URL
+
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf =  settings.CONF
 
@@ -17,3 +20,7 @@ def get_owned_games(request):
     return JsonResponse(response)
 
 
+def close_view(request):
+    response = redirect(FRONTEND_URL + '/steamauth')
+    response.set_cookie('steamid', request.user.steamid , max_age=1000)
+    return response

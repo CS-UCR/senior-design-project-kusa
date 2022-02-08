@@ -19,10 +19,10 @@ import {
 } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
-import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
 import "./App.css";
 import "animate.css";
+import { SteamAuth } from "./pages/SteamAuth/SteamAuth";
 
 function App() {
     const { isLoggedIn } = React.useContext(UserContext);
@@ -30,12 +30,6 @@ function App() {
     const routes = [
         { path: "/", name: "Landing", Component: Landing },
         //public routes go here
-        {
-            path: "/login",
-            name: "Home",
-            publicOnlyRoute: true,
-            Component: Login,
-        },
         {
             path: "/signup",
             name: "Profile",
@@ -78,6 +72,12 @@ function App() {
             name: "Achievements",
             privateRoute: true,
             Component: React.Fragment,
+        },
+        {
+            path: "/steamauth",
+            name: "Steam Auth",
+            publicOnlyRoute: true,
+            Component: SteamAuth,
         },
     ];
 

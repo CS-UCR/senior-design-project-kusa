@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-{% if user.is_authenticated %}
-    <meta http-equiv="refresh" content="0; URL=http://localhost:3000/home" />
-    localStorage.setItem("steamid", {{user.id}});
-{% else %}
-    <meta http-equiv="refresh" content="1; URL={% url "social:begin" "steam" %}" />
-{% endif %}
+<meta http-equiv="refresh" content="1; URL={% url "social:begin" "steam" %}" />
 </body>
 </html>

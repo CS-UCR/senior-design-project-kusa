@@ -31,6 +31,7 @@ urlpatterns = [
     # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
     path('login',authentication.LoginView.as_view(), name='login'),
     path('logout',authentication.LogoutView.as_view(), name='logout'),
+    path('close', views.close_view, name='close'),
     path('getToken/',authentication.get_token, name='getToken'),
     path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
     path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
