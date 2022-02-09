@@ -9,3 +9,7 @@ export const getSteamID = () => {
 export const getToken = () => {
     return Cookies.get("token");
 };
+
+export const removeToken = () =>{
+    return Cookies.remove("token")
+}

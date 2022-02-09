@@ -74,10 +74,9 @@ def deactivate_account(request):
 
 @csrf_exempt
 def add_email(request):
-    print(request.body)
     receiveRequest = json.loads(request.body)
     response = validate_token(receiveRequest)
-    uid = receiveRequest.get('userId')
+    uid = receiveRequest['userId']
     try:
         user = SteamUser.objects.get(pk=(uid))
         user.email = receiveRequest.get('email')

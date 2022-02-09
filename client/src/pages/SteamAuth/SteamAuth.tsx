@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Button, Container, Grid } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
-import { UserContext } from "../../contexts/UserContext/UserContext";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
-import { getToken } from "../../contexts/UserContext/utils/useUserCookies";
+import { getToken } from "../../contexts/UserContext/utils/useUserCookies.js";
 import { headers } from "../../constants/headers";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 import axios from "axios";
 
 export const SteamAuth: React.FC = () => {
@@ -14,33 +14,35 @@ export const SteamAuth: React.FC = () => {
     const token = getToken();
     const navigate = useNavigate();
 
-    if (token) {
-        axios
-            .post(`${BACKEND_URL}/getAUser/`, {
-                headers: {
-                    ...headers,
-                    Authorization: "Bearer " + getToken(),
-                },
-            })
-            .then((response) => {
-                const data = JSON.parse(response.data);
-                const userId = data.id;
-                const email = data.email;
-                const emailStatus = data.emailsEnabled;
-                const name = data.personaname;
-                setUserInfo({ userId, email, name, emailStatus });
-                
-                if (email !== "") {
-                    setUserInfo({ isLoggedIn: email !== "" });
-                    navigate("/home");
-                } else {
-                    navigate("/signup");
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
+    React.useEffect(() => {
+        if (token) {
+            axios
+                .post(`${BACKEND_URL}/getAUser/`, {
+                    headers: {
+                        ...headers,
+                        Authorization: "Bearer " + getToken(),
+                    },
+                })
+                //clean up later
+                .then((response) => {
+                    const data = response.data;
+                    const userId = data.id;
+                    const email = data.email;
+                    const emailStatus = data.emailsEnabled;
+                    const name = data.personaname;
+                    setUserInfo({ userId, email, name, emailStatus });
+                    console.log("Email is", email);
+                    if (email !== "") {
+                        setUserInfo({ isLoggedIn: true });
+                        navigate("/home")
+                    }
+                    else navigate("/signup");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [navigate, setUserInfo, token]);
 
     return (
         <Container>

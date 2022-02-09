@@ -26,7 +26,7 @@ export const Signup: React.FC = () => {
         setLoading(true);
         axios
             .post(`${BACKEND_URL}/addEmail/`, {
-                uid: userId,
+                userId: userId,
                 headers: {
                     ...headers,
                     Authorization: "Bearer " + tokenResponse,
@@ -34,32 +34,13 @@ export const Signup: React.FC = () => {
                 email: email,
             })
             .then(() => {
-                setUserInfo({ isLoggedIn: true });
+                setUserInfo({ isLoggedIn: true, email });
                 setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
                 setError("An error occurred. Please try again later.");
                 setLoading(false);
-            });
-        axios
-            .post(`${BACKEND_URL}/getAUser`, {
-                headers: {
-                    ...headers,
-                    Authorization: "Bearer " + tokenResponse,
-                },
-            })
-            //clean up later
-            .then((response) => {
-                const data = JSON.parse(response.data);
-                const email = data.email;
-                const emailStatus = data.emailsEnabled;
-                const name = data.personaname;
-                setUserInfo({ email, name, emailStatus });
-            })
-            .catch((err) => {
-                console.log(err);
-                setError(error);
             });
     };
 
