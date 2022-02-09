@@ -5,12 +5,11 @@ import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { LoginField } from "../../components/Login/LoginField/LoginField";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { LoginButton } from "../../components/Login/LoginButton/LoginButton";
-import { setUserToken } from "../../contexts/UserContext/utils/useUserStorage";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import { BACKEND_URL } from "../../constants/backendURL";
-
-import "./Signup.scss";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
+import { headers } from "../../constants/headers";
+import { getToken } from "../../contexts/UserContext/utils/useUserCookies";
 
 export const Signup: React.FC = () => {
     const { userId, setUserInfo } = React.useContext(UserContext);
@@ -23,14 +22,19 @@ export const Signup: React.FC = () => {
             setError("Enter an email address first.");
             return;
         }
-        let tokenResponse;
+        let tokenResponse = getToken();
         setLoading(true);
         axios
-            .get(`${BACKEND_URL}/getToken/`)
-            .then((response) => {
-                let result = JSON.parse(response.data);
-                tokenResponse = result.access_token;
-                setUserToken(userId, tokenResponse);
+            .post(`${BACKEND_URL}/addEmail/`, {
+                uid: userId,
+                headers: {
+                    ...headers,
+                    Authorization: "Bearer " + tokenResponse,
+                },
+                email: email,
+            })
+            .then(() => {
+                setUserInfo({ isLoggedIn: true });
                 setLoading(false);
             })
             .catch((err) => {
@@ -38,8 +42,25 @@ export const Signup: React.FC = () => {
                 setError("An error occurred. Please try again later.");
                 setLoading(false);
             });
-        //need a new endpoint to send over the email after, or find a way to insert into the pipeline later
-        setUserInfo({ email, isLoggedIn: tokenResponse ? true : false });
+        axios
+            .post(`${BACKEND_URL}/getAUser`, {
+                headers: {
+                    ...headers,
+                    Authorization: "Bearer " + tokenResponse,
+                },
+            })
+            //clean up later
+            .then((response) => {
+                const data = JSON.parse(response.data);
+                const email = data.email;
+                const emailStatus = data.emailsEnabled;
+                const name = data.personaname;
+                setUserInfo({ email, name, emailStatus });
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(error);
+            });
     };
 
     return (

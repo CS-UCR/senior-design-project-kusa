@@ -1,8 +1,7 @@
 import * as React from "react";
-import { getSteamID } from "./utils/useUserCookies.js";
+import { getSteamID, getToken } from "./utils/useUserCookies.js";
 import {
     getUserStorageDarkMode,
-    getUserToken,
     setUserStorageDarkMode,
 } from "./utils/useUserStorage";
 
@@ -24,7 +23,7 @@ interface UserContextProps {
     userId: string;
     name: string;
     isLoggedIn: boolean;
-    email: string;
+    email: string | null;
     emailStatus: boolean;
     darkMode: boolean | undefined;
     connections: Connection[];
@@ -34,12 +33,11 @@ interface UserContextProps {
 }
 
 //the userId is a steamid
-const steamid = getSteamID()
 const defaultValue = {
-    userId: steamid,
-    email: "test@test.com",
+    userId: "",
+    email: "",
     emailStatus: true,
-    isLoggedIn: getUserToken(steamid) ? true : false,
+    isLoggedIn: false,
     darkMode: false,
     name: "test_steam",
     connections: [{ title: "insta", name: "test_insta_hndle" }],

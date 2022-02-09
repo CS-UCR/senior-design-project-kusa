@@ -1,7 +1,11 @@
 import Cookies from "js-cookie";
 
 export const getSteamID = () => {
-    const steamid = Cookies.get("steamid");
+    const id = Cookies.get("steamid");
     Cookies.remove("steamid");
-    return steamid;
+    return id;
+};
+
+export const getToken = () => {
+    return Cookies.get("token");
 };

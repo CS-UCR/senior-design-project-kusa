@@ -14,16 +14,6 @@ from Kusa.authentication import validate_token
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
-# PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
-def register_user(request):
-    email = request.POST.get('email')
-    try:
-        user = SteamUser()
-        user.email = "testmail"
-        user.save()
-        return JsonResponse({'result': "Insert successful"}, status=201, safe=False)
-    except:
-        return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
 
 # enable csrf once we've figured out authentication
 # uid probably won't be directly sent -> expect to hash/dehash this
@@ -59,7 +49,7 @@ def delete_a_user(request):
         return response
 @csrf_exempt
 def steamuser_detail(request):       
-    response = validate_token(request)
+    response = validate_token(json.loads(request.body))
     if "steamid" in response:
         steamuser = SteamUser.objects.get(id=response["steamid"])
         steamuser_serializer = SteamUserSerializer(steamuser)
@@ -68,7 +58,6 @@ def steamuser_detail(request):
         return response
 
 # enable csrf once we've figured out authentication
-# uid probably won't be directly sent -> expect to hash/dehash this
 @csrf_exempt
 def deactivate_account(request):
     receiveRequest = json.loads(request.body)
@@ -79,3 +68,20 @@ def deactivate_account(request):
         return JsonResponse({'result': "Deletion successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
+
+
+
+
+@csrf_exempt
+def add_email(request):
+    print(request.body)
+    receiveRequest = json.loads(request.body)
+    response = validate_token(receiveRequest)
+    uid = receiveRequest.get('userId')
+    try:
+        user = SteamUser.objects.get(pk=(uid))
+        user.email = receiveRequest.get('email')
+        user.save()
+        return JsonResponse(response, status=201, safe=False)
+    except:
+        return JsonResponse(response, status=400, safe=False)
