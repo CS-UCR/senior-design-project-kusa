@@ -10,6 +10,7 @@ from bson.objectid import ObjectId
 from Kusa.models import SteamUser
 from Kusa.serializers import SteamUserSerializer
 from Kusa.authentication import validate_token
+from Kusa.data_collection import get_steam_user
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
@@ -60,9 +61,7 @@ def delete_a_user(request):
 def steamuser_detail(request):       
     response = validate_token(request)
     if "steamid" in response:
-        steamuser = SteamUser.objects.get(id=response["steamid"])
-        steamuser_serializer = SteamUserSerializer(steamuser)
-        return JsonResponse(steamuser_serializer.data, safe=False) 
+        return JsonResponse(get_steam_user(response["steamid"]), safe=False) 
     else:
         return response
 
