@@ -16,10 +16,6 @@ export const SteamAuth: React.FC = () => {
 
     React.useEffect(() => {
         if (token) {
-            console.log(
-                'we have a token and we are sending over',
-                getToken(),
-            )
             axios
                 .post(`${BACKEND_URL}/getAUser/`, {
                     headers: {
@@ -35,7 +31,6 @@ export const SteamAuth: React.FC = () => {
                     const emailStatus = data.emailsEnabled;
                     const name = data.personaname;
                     setUserInfo({ userId, email, name, emailStatus });
-                    console.log("Email is", email);
                     if (email !== "") {
                         setUserInfo({ isLoggedIn: true });
                         navigate("/home")
