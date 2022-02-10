@@ -42,11 +42,17 @@ class SteamUserManager(BaseUserManager):
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
+    steamid = models.CharField(max_length=17, unique=True)
     personaname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
+
+    #Kusa-signup specific fields
+    email=models.CharField(max_length=255, default="")
+    emailsEnabled = models.BooleanField(default=True)
+
     # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
     # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
@@ -63,5 +69,3 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
-
-

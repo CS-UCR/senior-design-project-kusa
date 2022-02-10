@@ -23,9 +23,9 @@ import { ProfileIcon } from "../../components/Profile/ProfileIcon/ProfileIcon";
 import { CSSTransition } from "react-transition-group";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
-import "./Profile.scss";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import { useNavigate } from "react-router-dom";
+import { removeToken } from "../../contexts/UserContext/utils/useUserCookies";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
@@ -55,7 +55,6 @@ export const Profile: React.FC = () => {
         emailStatus,
         darkMode,
         connections,
-        isLoggedIn,
         setUserInfo,
         setEmailStatus,
     } = React.useContext(UserContext);
@@ -89,6 +88,7 @@ export const Profile: React.FC = () => {
                     darkMode,
                     connections: [],
                 });
+                removeToken();
                 navigate("/");
                 setStatus("success");
                 setLoading(false);
