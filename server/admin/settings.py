@@ -47,11 +47,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'social_django',
     'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -228,3 +230,9 @@ SOCIAL_AUTH_PIPELINE = (
     # Use a custom function for this, since the details are provided separately
     'Kusa.pipeline.user_details',
 )
+
+
+#CORS Setup
+CORS_ALLOWED_ORIGINS = [
+    FRONTEND_URL,
+]

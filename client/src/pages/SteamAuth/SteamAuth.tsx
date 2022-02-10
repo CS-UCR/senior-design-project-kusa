@@ -16,6 +16,10 @@ export const SteamAuth: React.FC = () => {
 
     React.useEffect(() => {
         if (token) {
+            console.log(
+                'we have a token and we are sending over',
+                getToken(),
+            )
             axios
                 .post(`${BACKEND_URL}/getAUser/`, {
                     headers: {
