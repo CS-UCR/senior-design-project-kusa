@@ -3,22 +3,21 @@ from operator import truediv
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from admin import settings
-from Kusa.models import User
 from datetime import date
 from django.views.decorators.csrf import csrf_exempt
 from admin.settings import CONNECTION_STRING
 from bson.objectid import ObjectId
-
+from Kusa.models import SteamUser
+from Kusa.serializers import SteamUserSerializer
+from Kusa.authentication import validate_token
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
-
-
 # PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
 def register_user(request):
     #email = request.POST.get('email')
     try:
-        user = User()
+        user = SteamUser()
         user.email = "testmail"
         user.save()
         return JsonResponse({'result': "Insert successful"}, status=201, safe=False)
@@ -33,12 +32,39 @@ def toggle_email(request):
     emailStatus = receiveRequest.get('emailStatus')
     uid = receiveRequest.get('userID')
     try:
-        user = User.objects.get(pk=ObjectId(uid))
+        user = SteamUser.objects.get(pk=ObjectId(uid))
         user.emailsEnabled = emailStatus
         user.save()
         return JsonResponse({'result': "Insert successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
+@csrf_exempt
+def get_all_users(request):
+    response = validate_token(request)
+    if "steamid" in response:
+        steamusers = SteamUser.objects.all()
+        steamuser_serializer = SteamUserSerializer(steamusers,many=True)
+        return JsonResponse(steamuser_serializer.data, safe=False)
+    else:
+        return response
+@csrf_exempt
+def delete_a_user(request):
+    response = validate_token(request)
+    if "steamid" in response:
+        steamuser = SteamUser.objects.get(id=response["steamid"])
+        steamuser.delete()
+        return JsonResponse("Deleted Successfully",safe=False)
+    else:
+        return response
+@csrf_exempt
+def steamuser_detail(request):       
+    response = validate_token(request)
+    if "steamid" in response:
+        steamuser = SteamUser.objects.get(id=response["steamid"])
+        steamuser_serializer = SteamUserSerializer(steamuser)
+        return JsonResponse(steamuser_serializer.data, safe=False) 
+    else:
+        return response
 
 # enable csrf once we've figured out authentication
 # uid probably won't be directly sent -> expect to hash/dehash this
@@ -52,3 +78,4 @@ def deactivate_account(request):
         return JsonResponse({'result': "Deletion successful"}, status=201, safe=False)
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
+

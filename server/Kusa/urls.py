@@ -14,19 +14,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import iSteamUserStats, iSteamUser, views, manageUser, CreateThread, ListThreads
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, CreateThread, ListThreads
+from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
+
+app_name = "Kusa" 
 urlpatterns = [
-    path('test', views.test, name='test'),
+    # path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
     path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
     path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
+    # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    path('login',authentication.LoginView.as_view(), name='login'),
+    path('logout',authentication.LogoutView.as_view(), name='logout'),
+    path('getToken/',authentication.get_token, name='getToken'),
     path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
     path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
+    path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
+    path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
+    path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
-    path('Chat/', ListThreads.as_view(), name='chat'),
-    path('Chat/create-thread', ListThreads.as_view(), name='create-thread')
+    path('chat/', ListThreads.as_view(), name='chat'),
+    path('chat/create-thread', ListThreads.as_view(), name='create-thread')
+
 ]

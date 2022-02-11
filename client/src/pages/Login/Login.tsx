@@ -56,9 +56,14 @@ export const Login: React.FC = () => {
                         textAlign="center"
                     >
                         <Grid>
-                            <LoginButton variant="contained" onClick={login}>
+                            <LoginButton variant="contained" onClick={event =>  window.location.href='http://127.0.0.1:8000/api/login'}>
                                 login
                              </LoginButton>
+{/* 
+                            <a href="#" className="steambutton"><span>Login With Steam</span><div className="icon">
+                                    <i className="fa fa-steam-square"></i> */}
+
+                                {/* </div></a> */}
                         </Grid>
                     </Grid>
                 </Grid>
