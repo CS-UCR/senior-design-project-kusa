@@ -1,7 +1,5 @@
 import * as React from "react";
 import {
-    Box,
-    Button,
     Container,
     Grid,
     Typography,
@@ -13,7 +11,6 @@ import { default as trophy } from "../../assets/home/trophy.svg";
 import { default as run } from "../../assets/achievements/run.svg";
 import { default as karate } from "../../assets/achievements/karate.svg";
 import { default as seeding} from "../../assets/achievements/seeding.svg";
-import { UserContext } from "../../contexts/UserContext/UserContext";
 import KusaProgressBar from "../../components/Kusa/KusaProgressBar/KusaProgressBar";
 import "./Home.scss";
 
