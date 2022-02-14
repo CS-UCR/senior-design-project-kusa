@@ -6,7 +6,9 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.postgres.fields import ArrayField
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -47,11 +49,17 @@ class SteamUserManager(BaseUserManager):
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
+    steamid = models.CharField(max_length=17, unique=True)
     personaname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
+
+    #Kusa-signup specific fields
+    email=models.CharField(max_length=255, default="")
+    emailsEnabled = models.BooleanField(default=True)
+
     # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
     # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
