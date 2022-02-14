@@ -7,3 +7,6 @@ from .models import ThreadModel
 class ThreadForm(forms.Form):
     userID = forms.CharField(label = '')
     # userID = forms.CharField(label = '', max_length = 100) # if want to limit userID
+
+class MessageForm(forms.Form):
+    message = forms.CharField(label = '', max_length = 500)

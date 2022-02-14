@@ -1,14 +1,11 @@
 from django.http.response import JsonResponse
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-=======
->>>>>>> main
 from admin import settings
 from django.views import View
 from django.db.models import Q
-from Kusa.chatModel.models import ThreadModel
-from .forms import ThreadForm
+from Kusa.models import ThreadModel, MessageModel
+from .forms import ThreadForm, MessageForm
 import requests
 from django.views import View
 import jwt
@@ -65,3 +62,31 @@ class CreateThread(View):
         except: # if user cant be found, create new thread
             return redirect('create-thread')
 
+class ThreadView(View):
+    def get(self, request, pk, *args, **kwargs):
+        form = MessageForm()
+        thread = ThreadModel.objects.get(pk = pk)
+        message_list = MessageModel.objects.filter(thread__pk__contains = pk)
+        context = {
+            'thread': thread,
+            'form': form,
+            'message_list': message_list
+        }
+        return render(request, 'chat/thread.html', context)
+
+class CreateMessage(View):
+    def post(self, request, pk, *args, **kwargs):
+        thread = ThreadModel.objects.get(pk = pk)
+        if thread.receiver == request.user:
+            receiver = thread.user
+        else:
+            receiver = thread.receiver
+
+        message = MessageModel(
+            thread=thread,
+            sender_user=request.user,
+            receiver_user=receiver,
+            body=request.POST.get('message')
+        )
+        message.save()
+        return redirect('thread', pk = pk)

@@ -14,10 +14,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, CreateThread, ListThreads
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
-
+from Kusa.models import ThreadModel, MessageModel
+from .views import CreateThread, ListThreads, ThreadView, CreateMessage
 
 app_name = "Kusa" 
 urlpatterns = [
@@ -38,7 +39,8 @@ urlpatterns = [
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
-    path('chat/', ListThreads.as_view(), name='chat'),
-    path('chat/create-thread', ListThreads.as_view(), name='create-thread')
-
+    path('inbox/', ListThreads.as_view(), name='inbox'),
+    path('inbox/create-thread/', CreateThread.as_view(), name='create-thread'),
+    path('inbox/<int:pk>/', ThreadView.as_view(), name='thread'),
+    path('inbox/<int:pk>/create-message/', CreateMessage.as_view(), name='create-message'),
 ]
