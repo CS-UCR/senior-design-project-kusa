@@ -20,9 +20,11 @@ import {
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
 import { Signup } from "./pages/Signup/Signup";
+import { SteamAuth } from "./pages/SteamAuth/SteamAuth";
+import { AchieveContextProvider } from "./contexts/AchieveContext/AchieveContext";
+
 import "./App.css";
 import "animate.css";
-import { SteamAuth } from "./pages/SteamAuth/SteamAuth";
 
 function App() {
     const { isLoggedIn } = React.useContext(UserContext);
@@ -160,7 +162,9 @@ const ComposeApp = () => {
     return (
         <UserContextProvider>
             <CustomThemeProvider>
-                <App />
+                <AchieveContextProvider>
+                    <App />
+                </AchieveContextProvider>
             </CustomThemeProvider>
         </UserContextProvider>
     );
