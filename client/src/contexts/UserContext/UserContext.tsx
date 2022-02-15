@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getSteamID } from "./utils/useUserCookies.js";
 import {
     getUserStorageDarkMode,
     setUserStorageDarkMode,
@@ -9,20 +10,20 @@ interface Connection {
     name: string;
 }
 interface User {
-    userId: string;
-    name: string;
-    email: string;
-    emailStatus: boolean;
-    isLoggedIn: boolean;
-    darkMode: boolean | undefined;
-    connections: Connection[];
+    userId?: string;
+    name?: string;
+    email?: string;
+    emailStatus?: boolean;
+    isLoggedIn?: boolean;
+    darkMode?: boolean | undefined;
+    connections?: Connection[];
 }
 
 interface UserContextProps {
     userId: string;
     name: string;
     isLoggedIn: boolean;
-    email: string;
+    email: string | null;
     emailStatus: boolean;
     darkMode: boolean | undefined;
     connections: Connection[];
@@ -31,13 +32,12 @@ interface UserContextProps {
     setUserInfo: (user: User) => void;
 }
 
-//defaulted to loggedin for testing purposes, change with authentication implementation
-//userId will be an invalid entry -> will delete entry after development, so no security worries for this fake user
+//the userId is a steamid
 const defaultValue = {
-    userId: "61ef2a10c5c470fe1ca1cfd7",
-    email: "test@test.com",
+    userId: getSteamID(),
+    email: "",
     emailStatus: true,
-    isLoggedIn: true,
+    isLoggedIn: false,
     darkMode: false,
     name: "test_steam",
     connections: [{ title: "insta", name: "test_insta_hndle" }],
@@ -53,7 +53,7 @@ interface UserContextProviderProps {
     emailStatus?: boolean;
     isLoggedIn?: boolean;
     darkMode?: boolean;
-    connections: Connection[];
+    connections?: Connection[];
 }
 
 export const UserContext = React.createContext<UserContextProps>(defaultValue);

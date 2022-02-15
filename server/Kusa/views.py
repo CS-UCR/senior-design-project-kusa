@@ -1,3 +1,4 @@
+import json
 from django.http.response import JsonResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -9,12 +10,13 @@ from .forms import ThreadForm, MessageForm
 import requests
 from django.views import View
 import jwt
+from admin.settings import FRONTEND_URL
+from Kusa.authentication import get_token
+
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf =  settings.CONF
 
 # http://api.steampowered.com/<interface name>/<method name>/v<version>/?key=<api key>&format=<format>.
-def test(request):
-    return JsonResponse({'foo':'bar'})
 
 def get_owned_games(request):
     method = "/GetOwnedGames"
@@ -81,7 +83,6 @@ class CreateMessage(View):
             receiver = thread.user
         else:
             receiver = thread.receiver
-
         message = MessageModel(
             thread=thread,
             sender_user=request.user,
@@ -90,3 +91,12 @@ class CreateMessage(View):
         )
         message.save()
         return redirect('thread', pk = pk)
+        
+def close_view(request):
+    response = redirect(FRONTEND_URL + '/steamauth')
+    token = get_token(request)
+    response.set_cookie('token', (token), max_age=1000)
+    response.set_cookie('steamid', request.user.steamid, max_age=1000)
+    return response
+       
+

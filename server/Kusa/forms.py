@@ -5,7 +5,7 @@ from django import forms
 from .models import ThreadModel
 
 class ThreadForm(forms.Form):
-    userID = forms.CharField(label = '')
+    steamid = forms.CharField(label = '', max_length = 17)
     # userID = forms.CharField(label = '', max_length = 100) # if want to limit userID
 
 class MessageForm(forms.Form):

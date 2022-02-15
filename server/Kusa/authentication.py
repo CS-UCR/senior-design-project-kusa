@@ -15,7 +15,7 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('http://localhost:3000/')
-    
+
 def get_token(request):
     if request.user.is_authenticated:
         payload = {
@@ -23,9 +23,9 @@ def get_token(request):
             'steamid': request.user.id,
         }
         encoded = jwt.encode(payload, JWT_SECRET_KEY, algorithm='HS256')
-        return JsonResponse({'access_token:':encoded},safe=False)
+        return encoded
     else:
-        return JsonResponse({'error': 'authentication failed'}, status=401, safe=False)
+        return 'error'
     
 """
 Validates token and if successful returns steamid
@@ -35,7 +35,7 @@ Returns: dict: {"steamid":steam id}
 """
 def validate_token(request):
     try: 
-        token = request.headers.get('Authorization') 
+        token = request['headers']['Authorization']
         if token is None:
             return JsonResponse({'message': 'You do not have the permissions to access'}, status=404, safe=False) 
         PREFIX = 'Bearer '

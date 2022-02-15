@@ -1,19 +1,12 @@
 
 import * as React from "react";
 import {
-    Alert,
-    AlertColor,
-    Box,
-    Button,
-    Container,
     Grid,
-    Typography,
 } from "@mui/material";
 
 import { KusaBox } from "../../../components/Kusa/KusaBox/KusaBox";
 import { default as dog } from "../../../assets/friends/dog.svg"; //come back later
 import { default as message } from "../../../assets/friends/message.svg";
-import { KusaWSV } from "../../../components/Kusa/KusaWhiteSpaceVer/KusaWSV";
 
 const iconHeight = 40;
 
