@@ -1,6 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import * as React from "react";
 import { KusaBox } from "../Kusa/KusaBox/KusaBox";
+import KusaProgressBar from "../Kusa/KusaProgressBar/KusaProgressBar";
 import { achievementData } from "./utils/achievementData";
 
 interface AchievementProps {
@@ -8,13 +9,21 @@ interface AchievementProps {
     progress?: number;
 }
 
+//replace colors with a context color when we have time
 export const Achievement: React.FC<AchievementProps> = (props) => {
     const { id, progress } = props;
     const { title, description, image } = achievementData[id as string];
+
     const imageWidth = 190;
     const imageHeight = 190;
+    const height = 280;
+
     return (
-            <KusaBox width="25%" styles={{ padding: "1rem" }}>
+        <Grid item xs={4} style={{ display: "flex", flexDirection: "column" }}>
+            <KusaBox
+                styles={{ padding: "2rem", paddingBottom: "3rem" }}
+                height={height}
+            >
                 <Grid
                     container
                     sx={{
@@ -37,7 +46,7 @@ export const Achievement: React.FC<AchievementProps> = (props) => {
                         />
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography variant="h6" marginTop={1} color="#F9FBE8">
+                        <Typography variant="h5" marginTop={1} color="#F9FBE8" sx={{fontWeight: "bold"}}>
                             {title}
                         </Typography>
                     </Grid>
@@ -54,5 +63,16 @@ export const Achievement: React.FC<AchievementProps> = (props) => {
                     </Grid>
                 </Grid>
             </KusaBox>
+            <Box
+                width="80%"
+                style={{
+                    padding: "1rem",
+                    backgroundColor: "none",
+                    borderRadius: 0,
+                }}
+            >
+                <KusaProgressBar completed={progress} />
+            </Box>
+        </Grid>
     );
 };

@@ -28,71 +28,11 @@ export const Home: React.FC = () => {
                 />
                 achievements in your reach
             </KusaHeader>
-            <Grid justifyContent="space-between" container>
+            <Grid container spacing={5}>
                 {achievements.slice(0, 3).map((achievement, index) => (
                     <Achievement {...achievement} key={index} />
                 ))}
             </Grid>
-            <Grid container style={{ justifyContent: "space-between" }}>
-                <KusaBox
-                    width="25%"
-                    styles={{
-                        padding: "1rem",
-                        backgroundColor: "none",
-                        borderRadius: 0,
-                        boxShadow: 0,
-                    }}
-                >
-                    <Grid container>
-                        {testData.map((item, idx) => (
-                            <KusaProgressBar
-                                key={idx}
-                                completed={item.completed}
-                            />
-                        ))}
-                    </Grid>
-                </KusaBox>
-
-                <KusaBox
-                    width="25%"
-                    styles={{
-                        padding: "1rem",
-                        backgroundColor: "none",
-                        borderRadius: 0,
-                        boxShadow: 0,
-                    }}
-                >
-                    <Grid container>
-                        {testData2.map((item, idx) => (
-                            <KusaProgressBar
-                                key={idx}
-                                completed={item.completed}
-                            />
-                        ))}
-                    </Grid>
-                </KusaBox>
-
-                <KusaBox
-                    width="25%"
-                    styles={{
-                        padding: "1rem",
-                        backgroundColor: "none",
-                        borderRadius: 0,
-                        boxShadow: 0,
-                    }}
-                >
-                    <Grid container>
-                        {testData3.map((item, idx) => (
-                            <KusaProgressBar
-                                key={idx}
-                                completed={item.completed}
-                            />
-                        ))}
-                    </Grid>
-                </KusaBox>
-            </Grid>
-
- 
             <KusaHeader>
                 <img
                     src={chartbar}
