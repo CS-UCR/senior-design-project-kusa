@@ -61,18 +61,12 @@ export function SearchFriend()
         userName = value;
         setValue("");
         setOpen(false);
-        //getFriends(userName);
-        // friendsList = friends(userName) 
-        // console.log(friendsList)
-        //+ userName + "&" + thisAccountSteamID
         axios.get(baseURL + value + "&" + thisAccountName).then((response) => {
             setPost(response.data);
-            //console.log(response.data)
           });
         
         console.log(value)
-        //console.log(post)
-        //if (!post) return null;
+        
         
         
     }
@@ -113,8 +107,5 @@ export function SearchFriend()
         </Grid> 
         
     )
-
-    //need to do call post data to backend do logic search database
-    //right now just testing the frontend structure
     
 }

@@ -31,6 +31,7 @@ class Test(models.Model):
     SteamID = models.CharField(default='null',max_length=30)
     FriendList = models.JSONField(default=[])
     FriendRequest = models.JSONField(default=[])
+    
 
     # def _str_(self):
     #     return self.Name

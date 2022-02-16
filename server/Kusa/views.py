@@ -44,11 +44,7 @@ def add_post(request):
     return HttpResponse("Inserted")
    
     
-# def update_post(request,id):
-#     pass
 
-def delete_post(request,id):
-    pass
 
 def read_post(request,id):
     
@@ -57,10 +53,6 @@ def read_post(request,id):
     return HttpResponse(name)
 
     
-    # if request.method == 'GET':
-    #     dummy = Dummy.objects.all()
-    #     dummy_serializer = DummySerializer(dummy,many=True)
-    #     return JsonResponse(dummy_serializer.data,safe=False)
 
 
     

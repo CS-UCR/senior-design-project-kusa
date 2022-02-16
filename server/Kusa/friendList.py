@@ -48,16 +48,10 @@ def friendRequest(request,receiver_name,sender_name):
 def update_friendRequest(self,receiver_name,sender_name):
     test = Test.objects.get(SteamID=receiver_name)
 
-    #given "list indices must be integers or slices, not str" error when updating "FriendRequest". Need to figure out why
-    #test.FriendRequest["newfriend"] = sender_steamid
     test.FriendRequest.append(sender_name) 
     test.save()
     return HTTPResponse("Friend Request Sent!")
 
-
-
-# @csrf_exempt
-# def delete_friend(self, rec)
 
 
 
@@ -104,3 +98,14 @@ def rejectFriendRequest(self, account_name, accepting_name):
         return HTTPResponse("friend request removed")
     else:
         return HTTPResponse("error")
+
+
+def deleteFriend(self,account_name, delete_name):
+    test = Test.objects.get(Name = account_name)
+
+    if delete_name in test.FriendList:
+        test.FriendList.remove(delete_name)
+        test.save()
+        return HTTPResponse("friend removed")
+    else:
+        return HttpResponse("error")

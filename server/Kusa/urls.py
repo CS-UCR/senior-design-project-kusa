@@ -46,6 +46,7 @@ urlpatterns = [
     path('getFriendRequest/<str:userName>', friendList.getFriendRequest),
     path('acceptFriendRequest/<str:account_name>&<str:accepting_name>', friendList.acceptFriendRequest),
     path('rejectFriendRequest/<str:account_name>&<str:accepting_name>', friendList.rejectFriendRequest),
+    path('deleteFriend/<str:account_name>&<str:delete_name>', friendList.deleteFriend),
 
 
     #path('update_post/<str:receiver_steamid>', friendList.update_friendRequest),

@@ -7,7 +7,17 @@ import {
     Container,
     Grid,
     Typography,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    TextField,
+    
+    
 } from "@mui/material";
+
+import { useState } from "react";
 
 import { KusaBox } from "../../../components/Kusa/KusaBox/KusaBox";
 import { default as dog } from "../../../assets/friends/dog.svg"; //come back later
@@ -18,34 +28,41 @@ import { SearchFriend } from "./searchFriendsHelper";
 
 import axios from "axios";
 
+
+
+
+
 const iconHeight = 40;
 
 var thisAccountName = "Yuteng"
 
-const acceptURL = "http://127.0.0.1:8000/api/acceptFriendRequest/";
+const deleteURL = "http://127.0.0.1:8000/api/deleteFriend/";
 
-const rejectURL = "http://127.0.0.1:8000/api/rejectFriendRequest/"
 
-export function Person_New_Request(name:any)
+
+
+
+export function Person_FriendList(name:any)
 {
+    
 
-    const handleAccept = () => {
+    const HandleMore = () => {
         //pass name to the backend
-        axios.get(acceptURL + thisAccountName + "&" + name).then((response) => {
+        // axios.get(rejectURL + thisAccountName + "&" + name).then((response) => {
+        //     //console.log(response.data)
+        //   });
+          //{window.location.reload()}
+
+        // setOpen(true);
+          
+    }
+
+    const handleDelete = () => {
+        axios.get(deleteURL + thisAccountName + "&" + name).then((response) => {
             //console.log(response.data)
           });
           {window.location.reload()}
-    };
-
-
-    const handleReject = () => {
-        //pass name to the backend
-        axios.get(rejectURL + thisAccountName + "&" + name).then((response) => {
-            //console.log(response.data)
-          });
-          {window.location.reload()}
-    };
-
+    }
 
     return(
         <KusaBox width="90%" styles={{ padding: "2rem" }}>
@@ -64,24 +81,17 @@ export function Person_New_Request(name:any)
                     {name}
                 </Grid>
 
-                <Grid item xs={6}></Grid>
+                <Grid item xs={4}></Grid>              
 
-                
-                
-
-                <Button variant="contained" color="success" size="small" onClick={handleAccept}>
-                    accept
-                    
+                <Button variant="contained" color="success" size="small" onClick={HandleMore}>
+                    Chat
                 </Button>
 
-                <Grid item xs={1}></Grid>
+                <Grid item xs={2}></Grid>
 
-                <Button variant="contained" color="success" size="small" onClick={handleReject}>
-                    reject
+                <Button variant="contained" color="success" size="small" onClick={handleDelete}>
+                    Remove Friend
                 </Button>
-
-                
-
 
                 <Grid item xs={2}>
                 
@@ -95,3 +105,7 @@ export function Person_New_Request(name:any)
 
     );
 }
+
+
+
+
