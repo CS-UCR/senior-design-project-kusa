@@ -118,7 +118,7 @@ export const Home: React.FC = () => {
                 {achievements
                     .filter(
                         (achieve) =>
-                            achieve.progress !== 100 && achieve.progress > 0
+                            achieve.progress !== 100
                     )
                     .slice(0, 3)
                     .map((achievement, index) => (
