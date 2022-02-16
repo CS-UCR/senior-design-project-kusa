@@ -34,7 +34,7 @@ export const Landing: React.FC = () => {
                         onClick={() =>
                             isLoggedIn
                                 ? navigate("/home")
-                                : navigate("/signup")
+                                : navigate("/steamauth")
                         }
                         variant="contained"
                     >
