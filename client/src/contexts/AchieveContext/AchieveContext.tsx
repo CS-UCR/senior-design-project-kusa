@@ -21,7 +21,7 @@ const defaultValue: AchieveContextProps = {
         {
             id: "2",
             dateAchieved: new Date(),
-            progress: 100,
+            progress: 90,
         },
         {
             id: "3",
