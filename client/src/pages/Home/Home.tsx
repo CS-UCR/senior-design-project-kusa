@@ -43,22 +43,24 @@ export const Home: React.FC = () => {
     React.useEffect(() => {
         setLoading(true);
         //insert endpoint request here for playtime
+        //our real implementation would not be missing days as we gather this info everyday on the backend
         setPlayTime([
             {
                 id: "week",
                 color: "",
                 data: [
-                    { x: "02-07-22", y: 224 },
-                    { x: "02-08-22", y: 20 },
-                    { x: "02-09-22", y: 30 },
-                    { x: "02-10-22", y: 100 },
-                    { x: "02-11-22", y: 200 },
-                    { x: "02-12-22", y: 40 },
-                    { x: "02-13-22", y: 2 },
-                    { x: "02-14-22", y: 220 },
-                    { x: "02-15-22", y: 6 },
-                    { x: "02-16-22", y: 2 },
-                    { x: "02-21-22", y: 200 },
+                    { x: "2/01/2022", y: 224 },
+                    { x: "2/07/2022", y: 224 },
+                    { x: "2/08/2022", y: 20 },
+                    { x: "2/09/2022", y: 30 },
+                    { x: "2/10/2022", y: 100 },
+                    { x: "2/11/2022", y: 200 },
+                    { x: "2/12/2022", y: 40 },
+                    { x: "2/13/2022", y: 2 },
+                    { x: "2/14/2022", y: 220 },
+                    { x: "2/15/2022", y: 6 },
+                    { x: "2/16/2022", y: 2 },
+                    { x: "2/21/2022", y: 200 },
                 ],
             },
         ]);
@@ -68,6 +70,14 @@ export const Home: React.FC = () => {
     const getCurrentTime = () => {
         let shiftNum = 0;
         let copy = playTime;
+        const current = new Date().toLocaleDateString("en-US");
+        let currentIndex = 0;
+
+        copy[0]?.data.forEach((item, index) => {
+            if (item.x === current) currentIndex = index;
+        });
+
+        console.log("current index is",currentIndex, "from", current);
         switch (period) {
             case "week":
                 shiftNum = 7;
@@ -83,9 +93,12 @@ export const Home: React.FC = () => {
                 break;
         }
         if (!copy[0]?.data || !copy[0]) return [];
-        return ([
-            { ...playTime[0], data: copy[0].data.slice(0, shiftNum) },
-        ]);
+        return [
+            {
+                ...playTime[0],
+                data: copy[0].data.slice(currentIndex - shiftNum, currentIndex),
+            },
+        ];
     };
 
     return (
