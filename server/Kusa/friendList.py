@@ -39,8 +39,8 @@ def friendRequest(request,receiver_name,sender_name):
                     if key == "SteamID":
                         receiver_steamid = i[key]
                         val = update_friendRequest('',receiver_steamid,sender_name)
-                        #return JsonResponse(receiver_steamid,safe=False)
-                        return HTTPResponse(val, safe=False)
+                        return JsonResponse(receiver_steamid,safe=False)
+                        #return HTTPResponse(val, safe=False)
 
         
 
