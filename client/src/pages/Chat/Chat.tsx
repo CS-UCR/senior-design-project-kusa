@@ -43,38 +43,36 @@ export const Chat: React.FC = () => {
     const { darkMode } = React.useContext(UserContext);
 
     return (
-        <Container>
+        <Container sx={{ maxWidth:'100%'  }} maxWidth={false}>
             <KusaLoadingSpinner loading={loading} />
-            <KusaHeader styles={{ marginTop: "5rem" }}>
-                <img
-                    src={message}
-                    alt="message"
-                    width={iconHeight}
-                    height={iconHeight}
-                    style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
-                />
-                start chatting
-            </KusaHeader>
-
             <div className="Chat">
                 {/* chatMenu */}
-                <div className="chatMenu">
+                <KusaChatMenu>
                     <div className="chatMenuWrapper">
                         <input placeholder="Search for friends" className="chatMenuInput" />
                         <Conversation></Conversation>
                         <Conversation></Conversation>
                         <Conversation></Conversation>
                         <Conversation></Conversation>
+                        <Conversation></Conversation>
+                        <Conversation></Conversation>
+                        <Conversation></Conversation>
+                        <Conversation></Conversation>
                     </div>
-                </div>
+                </KusaChatMenu>
 
                 {/* chatBox */}
-                <div className="chatBox">
+                <KusaChatBox>
                     <div className="chatBoxWrapper">
                         <div className="chatBoxTop">
                             <Message own={false}/>
                             <Message own={true}/>
                             <Message own={false}/>
+                            <Message own={false}/>
+                            <Message own={false}/>
+                            <Message own={true}/>
+                            <Message own={true}/>
+                            <Message own={true}/>
                         </div>
                         <div className="chatBoxBottom">
                             <textarea
@@ -85,14 +83,14 @@ export const Chat: React.FC = () => {
                             <button className="chatSubmitButton"> Send </button>
                         </div>
                     </div>  
-                </div>
+                </KusaChatBox>
 
                 {/* chatOnline */}
-                <div className="chatOnline">
+                <KusaChatMenu>
                     <div className="chatOnlineWrapper">
                         <ChatOnline></ChatOnline>
                     </div>
-                </div>
+                </KusaChatMenu>
             </div>
         </Container>
     );

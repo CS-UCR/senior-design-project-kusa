@@ -22,7 +22,7 @@ export const KusaChatBox: React.FC<KusaChatBoxProps> = ({
             backgroundColor: "secondary.main",
             textAlign: "left",
             boxShadow: 1,
-            flex: 3.5,
+            flex: 5.5,
             ...styles
         }}
     >

@@ -17,12 +17,10 @@ export const KusaChatMenu: React.FC<KusaChatMenuProps> = ({
         sx={{
             borderRadius: 2,
             p: 2,
-            height: height,
-            width: width,
             backgroundColor: "secondary.main",
             textAlign: "left",
             boxShadow: 1,
-            flex: 3.5,
+            flex: 1.25,
             ...styles
         }}
     >
