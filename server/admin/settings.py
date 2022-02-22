@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
+    'Kusa',
+    
+    
     'social_django',
 ]
 
@@ -58,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'admin.urls'
@@ -162,6 +168,11 @@ CONF = {
     "steam_api_url": "http://api.steampowered.com",
 }
 
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000'
+]
+ 
 # todo - clean this up after login auth works
 API_KEY = STEAM_API_KEY
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']

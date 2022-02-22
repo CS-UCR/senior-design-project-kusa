@@ -1,17 +1,20 @@
 import * as React from "react";
 import {
-    Container,
+    Container, Grid,
 } from "@mui/material";
 
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
+import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { default as invite } from "../../assets/friends/invite_mail.svg";
 import { default as smile } from "../../assets/friends/creepySmile.svg";
 import { default as hand } from "../../assets/friends/hand.svg";
 
 
-import { invites } from "./FriendsListHelperFunc/InviteHelper";
-import { friends } from "./FriendsListHelperFunc/friendsHelper";
+import { Invites } from "./FriendsListHelperFunc/InviteHelper";
+import { Friends } from "./FriendsListHelperFunc/friendsHelper";
 import { blocked } from "./FriendsListHelperFunc/blockHelper";
+import { addFriends } from "./FriendsListHelperFunc/addFriendsHelper";
+
 
 
 
@@ -31,7 +34,7 @@ export const FriendsList: React.FC = () => {
                 invites
             </KusaHeader>
             
-            {invites()}
+            {Invites()}
             
 
             <KusaHeader>
@@ -42,10 +45,13 @@ export const FriendsList: React.FC = () => {
                     height={iconHeight}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
+                
                 friends
             </KusaHeader>
             
-            {friends()}
+            {addFriends()}
+            {Friends()}
+            
 
             
 
