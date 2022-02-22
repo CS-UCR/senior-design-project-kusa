@@ -69,3 +69,11 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
+
+class Conversation(models.Model):
+    members = models.JSONField(default=[])
+
+class Message(models.Model):
+    conversationID = models.CharField(default='null', max_length=50)
+    senderID = models.CharField(default='null', max_length=30)
+    text = models.CharField(max_length=1000)
