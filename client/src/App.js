@@ -79,6 +79,18 @@ function App() {
             publicOnlyRoute: true,
             Component: SteamAuth,
         },
+        {
+            path: "/inbox/",
+            name: "Inbox",
+            privateRoute: true,
+            Component: React.Fragment,
+        },
+        {
+            path: "/create_thread/",
+            name: "Create Thread",
+            privateRoute: true,
+            Component: React.Fragment,
+        },
     ];
 
     const AnimatedApp = React.memo(() => {
