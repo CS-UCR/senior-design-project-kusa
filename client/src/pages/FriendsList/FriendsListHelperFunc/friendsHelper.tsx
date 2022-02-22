@@ -7,7 +7,7 @@ import axios from "axios";
 
 const baseURL = "http://127.0.0.1:8000/api/getFriendList/";
 
-var thisAccountName = "Yuteng"
+var thisAccountName = "GamerFive"
 
 var data: any[] = []
 var array_of_people:any[] = []

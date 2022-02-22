@@ -65,16 +65,16 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return self.personaname
 
-class Gamer(models.Model):
-    UserID = models.CharField(default='000000',max_length=30)
-    Name = models.CharField(default='null',max_length=30)
-    Email = models.CharField(default='123@123',max_length=30)
-    SteamID = models.CharField(default='7890',max_length=30)
-    Achievements = models.CharField(default='null',max_length=120)
-    Blocked = models.CharField(default='null',max_length=120)
-    Friends = models.CharField(default='null',max_length=120)
-    FriendsRequest = models.CharField(default='null',max_length=120)
-    ProfilePic = models.CharField(default='whatever',max_length=120)
+# class Gamer(models.Model):
+#     UserID = models.CharField(default='000000',max_length=30)
+#     Name = models.CharField(default='null',max_length=30)
+#     Email = models.CharField(default='123@123',max_length=30)
+#     SteamID = models.CharField(default='7890',max_length=30)
+#     Achievements = models.CharField(default='null',max_length=120)
+#     Blocked = models.CharField(default='null',max_length=120)
+#     Friends = models.CharField(default='null',max_length=120)
+#     FriendsRequest = models.CharField(default='null',max_length=120)
+#     ProfilePic = models.CharField(default='whatever',max_length=120)
     # class Meta:
     #     app_label = 'Gamer'
 

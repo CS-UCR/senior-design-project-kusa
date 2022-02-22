@@ -25,32 +25,35 @@ def friendRequest(request,receiver_name,sender_name):
     # dummy = Dummy.objects.get(SteamID=id)
     # name = "User Name: " + dummy.Name
     # return HttpResponse(name)
-    receiver_steamid = ""
+    #receiver_steamid = ""
     
-    if request.method == 'GET':
-        test = Test.objects.filter(Name=receiver_name)
-        test_serializer = TestSerializer(test,many=True)
+    #if request.method == 'GET':
+        # test = Test.objects.filter(Name=receiver_name)
+        # test_serializer = TestSerializer(test,many=True)
 
-        if not test:
-            return JsonResponse("Invalid")
-        else:
-            for i in test_serializer.data:
-                for key in i:
-                    if key == "SteamID":
-                        receiver_steamid = i[key]
-                        val = update_friendRequest('',receiver_steamid,sender_name)
-                        return JsonResponse(receiver_steamid,safe=False)
+        # if not test:
+        #     return JsonResponse("Invalid")
+        # else:
+        #     for i in test_serializer.data:
+        #         for key in i:
+        #             if key == "SteamID":
+        #                 receiver_steamid = i[key]
+        #                 val = update_friendRequest('',receiver_steamid,sender_name)
+        #                 return JsonResponse(receiver_steamid,safe=False)
                         #return HTTPResponse(val, safe=False)
-
-        
-
-@csrf_exempt
-def update_friendRequest(self,receiver_name,sender_name):
-    test = Test.objects.get(SteamID=receiver_name)
-
-    test.FriendRequest.append(sender_name) 
+    test = Test.objects.get(Name = receiver_name) 
+    test.FriendRequest.append(sender_name)
     test.save()
     return HTTPResponse("Friend Request Sent!")
+        
+
+# @csrf_exempt
+# def update_friendRequest(self,receiver_name,sender_name):
+#     test = Test.objects.get(SteamID=receiver_name)
+
+#     test.FriendRequest.append(sender_name) 
+#     test.save()
+#     return HTTPResponse("Friend Request Sent!")
 
 
 
@@ -64,7 +67,7 @@ def getFriendList(self, userName):
     return JsonResponse(test.FriendList,safe=False)
         
 
-
+@csrf_exempt
 def getFriendRequest(self,userName):
     test = Test.objects.get(Name=userName)
     test_serializer = TestSerializer(test,many=True)
@@ -72,40 +75,47 @@ def getFriendRequest(self,userName):
 
     return JsonResponse(test.FriendRequest,safe=False)
 
-
+@csrf_exempt
 def acceptFriendRequest(self, account_name, accepting_name ):
     test = Test.objects.get(Name = account_name)
-
+    temp = Test.objects.get(Name = accepting_name)
+    #acceptFriendRequest(accepting_name,account_name)
     
     if accepting_name in test.FriendRequest:
-        test.FriendRequest.remove(account_name)
+        test.FriendRequest.remove(accepting_name)
 
-        test.FriendList.append(account_name)
+        test.FriendList.append(accepting_name)
 
+        temp.FriendList.append(account_name)
+
+        temp.save()
         test.save()
         return HTTPResponse("friend accepted")
     else:
         return HTTPResponse("error")
 
 
-
-def rejectFriendRequest(self, account_name, accepting_name):
+@csrf_exempt
+def rejectFriendRequest(self, account_name, reject_name):
     test = Test.objects.get(Name = account_name)
 
-    if accepting_name in test.FriendRequest:
-        test.FriendRequest.remove(account_name)
+    if reject_name in test.FriendRequest:
+        test.FriendRequest.remove(reject_name)
         test.save()
         return HTTPResponse("friend request removed")
     else:
         return HTTPResponse("error")
 
-
+@csrf_exempt
 def deleteFriend(self,account_name, delete_name):
     test = Test.objects.get(Name = account_name)
+    temp = Test.objects.get(Name = delete_name)
 
     if delete_name in test.FriendList:
         test.FriendList.remove(delete_name)
+        temp.FriendList.remove(account_name)
         test.save()
+        temp.save()
         return HTTPResponse("friend removed")
     else:
         return HttpResponse("error")

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Person_New_Request } from "./friendRequestPersonHelper";
 import { wsv } from "./WSV";
 
-var thisAccountName = "Yuteng"
+var thisAccountName = "GamerFive"
 
 
 var data = ["kusa","kusa"]

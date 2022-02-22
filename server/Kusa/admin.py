@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Gamer
+# from .models import Gamer
 
 # Register your models here.
 
@@ -10,11 +10,11 @@ from .models import Gamer
 
 # admin.site.register(FriendsList, FriendsListAdmin)
 
-class GamerAdmin(admin.ModelAdmin):
-    list_display = ('UserID','Name','Email','SteamID','Achievements','Blocked','Friends','FriendsRequest','ProfilePic')
+# class GamerAdmin(admin.ModelAdmin):
+#     list_display = ('UserID','Name','Email','SteamID','Achievements','Blocked','Friends','FriendsRequest','ProfilePic')
 
 
-admin.site.register(Gamer, GamerAdmin)    
+# admin.site.register(Gamer, GamerAdmin)    
 
 
 from Kusa.models import SteamUser

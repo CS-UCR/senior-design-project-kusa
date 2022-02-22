@@ -6,8 +6,8 @@ from admin import settings
 import requests
 
 from rest_framework import viewsets
-from .serializer import GamerSerializer,TestSerializer
-from .models import Gamer
+from .serializer import TestSerializer
+# from .models import Gamer
 from Kusa.models import Test
 from django.views.decorators.csrf import csrf_exempt
 from bson import ObjectId
@@ -35,9 +35,9 @@ def get_owned_games(request):
     return JsonResponse(response)
 
 
-class GamerView(viewsets.ModelViewSet):
-    serializer_class = GamerSerializer
-    queryset = Gamer.objects.all()
+# class GamerView(viewsets.ModelViewSet):
+#     serializer_class = GamerSerializer
+#     queryset = Gamer.objects.all()
 
 
 @csrf_exempt
