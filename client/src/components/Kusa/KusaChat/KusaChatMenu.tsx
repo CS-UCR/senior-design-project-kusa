@@ -5,7 +5,7 @@ interface KusaChatMenuProps {
     height?: number | string;
     width?: number | string;
     styles?: any,
-    children: React.ReactChild;
+    children: any;
 }
 export const KusaChatMenu: React.FC<KusaChatMenuProps> = ({
     height,
@@ -16,11 +16,13 @@ export const KusaChatMenu: React.FC<KusaChatMenuProps> = ({
     <Box
         sx={{
             borderRadius: 2,
-            p: 2,
+            p: 1,
+            width: width,
+            height: "87vh",
             backgroundColor: "secondary.main",
             textAlign: "left",
             boxShadow: 1,
-            flex: 1.25,
+            flex: 1.2,
             ...styles
         }}
     >

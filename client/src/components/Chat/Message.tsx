@@ -1,9 +1,6 @@
 import "../../components/Chat/Message.css";
-import React from 'react';
-import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export default function Message({own}:{own:any}) {
-  const { darkMode } = React.useContext(UserContext);
   return (
     <div className={own ? "message own" : "message"}>
         <div className="messageTop">

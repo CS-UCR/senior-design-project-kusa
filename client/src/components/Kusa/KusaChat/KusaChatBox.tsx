@@ -16,9 +16,9 @@ export const KusaChatBox: React.FC<KusaChatBoxProps> = ({
     <Box
         sx={{
             borderRadius: 2,
-            p: 2,
-            height: height,
+            p: 1,
             width: width,
+            height: "87vh",
             backgroundColor: "secondary.main",
             textAlign: "left",
             boxShadow: 1,

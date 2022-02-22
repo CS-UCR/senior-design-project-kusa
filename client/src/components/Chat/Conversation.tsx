@@ -1,9 +1,6 @@
 import "../../components/Chat/Conversation.css";
-import React from 'react';
-import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export default function Conversation() {
-  const { darkMode } = React.useContext(UserContext);
   return (
     <div className="conversation">
       <img className="conversationImg"

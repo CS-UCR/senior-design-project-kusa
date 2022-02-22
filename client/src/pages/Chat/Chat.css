@@ -1,7 +1,6 @@
 .Chat {
-    height: calc(100vh - 70px);
     display: flex;
-    gap: 10px;
+    gap: 24px;
   }
   
   .chatMenu {
@@ -24,6 +23,7 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    max-height: 98%;
   }
   
   .chatBoxTop {
@@ -40,8 +40,8 @@
   }
   
   .chatMessageInput {
-    width: 88%;
-    height: 50px;
+    width: 90%;
+    height: 40%;
     padding: 10px;
   }
   
@@ -62,8 +62,9 @@
   .chatMenuWrapper,
   .chatOnlineWrapper {
     padding: 10px;
-    height: 96%;
+    height: 87%;
     overflow-y: auto;
+    max-height: 90%;
   }
 
   .chatBoxWrapper {

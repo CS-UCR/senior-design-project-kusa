@@ -25,8 +25,9 @@
   }
   
   .messageBottom{
-    font-size: 12px;
+    font-size: 13px;
     margin-top: -10px;
+    color:rgb(242, 255, 220);
   }
   
   .message.own{

@@ -1,55 +1,53 @@
 import * as React from "react";
 import {
-    Box,
     Container,
-    Grid,
-    MenuItem,
-    Select,
-    Typography,
 } from "@mui/material";
 import "../../pages/Chat/Chat.css";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
-import { default as chartbar } from "../../assets/home/chart-bar.svg";
 import { default as message } from "../../assets/chat/message.svg";
-import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
-import { UserContext } from "../../contexts/UserContext/UserContext";
 import { KusaChatBox } from "../../components/Kusa/KusaChat/KusaChatBox";
 import { KusaChatMenu } from "../../components/Kusa/KusaChat/KusaChatMenu";
-import axios from "axios";
 import Conversation from "../../components/Chat/Conversation";
 import Message from "../../components/Chat/Message";
 import ChatOnline from "../../components/Chat/ChatOnline";
 
-
-const theme = {
-    axis: {
-        fontSize: "20px",
-        ticks: {
-            text: {
-                fill: "#ffffff",
-            },
-        },
-        legend: {
-            text: {
-                fill: "#aaaaaa",
-            },
-        },
-    },
-};
-
 export const Chat: React.FC = () => {
-    const [loading, setLoading] = React.useState(false);
-    const iconHeight = 40;
-    const { darkMode } = React.useContext(UserContext);
+    const iconHeight = 50;
 
     return (
-        <Container sx={{ maxWidth:'100%'  }} maxWidth={false}>
-            <KusaLoadingSpinner loading={loading} />
+        <Container sx={{
+            maxWidth:'100%',
+            maxHeight: '80%',}}
+            maxWidth={false}>
+
             <div className="Chat">
                 {/* chatMenu */}
                 <KusaChatMenu>
+                    <KusaHeader styles={{
+                        marginTop: "1rem",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        }}>
+                        <img
+                            src={message}
+                            alt="message"
+                            height={iconHeight}
+                            width={iconHeight}
+                            style={{ marginRight: ".8rem" }}
+                        />
+                        chats
+                    </KusaHeader>
                     <div className="chatMenuWrapper">
-                        <input placeholder="Search for friends" className="chatMenuInput" />
+                        <input
+                            placeholder="Search for friends"
+                            className="chatMenuInput"
+                        />
+                        <Conversation></Conversation>
+                        <Conversation></Conversation>
+                        <Conversation></Conversation>
                         <Conversation></Conversation>
                         <Conversation></Conversation>
                         <Conversation></Conversation>

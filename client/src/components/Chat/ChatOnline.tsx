@@ -1,9 +1,6 @@
 import "../../components/Chat/ChatOnline.css";
-import React from 'react';
-import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export default function ChatOnline() {
-  const { darkMode } = React.useContext(UserContext);
   return (
     <div className="chatOnline">
         <div className="chatOnlineFriend">
