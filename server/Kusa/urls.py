@@ -24,11 +24,17 @@ from Kusa import views
 
 # router = routers.DefaultRouter()
 # router.register('TestInfo', views.TestView)
+from django.urls import path
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
+from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
+app_name = "Kusa" 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include(router.urls)),
     path('test', views.test, name='test'),
+    # path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
@@ -53,4 +59,11 @@ urlpatterns = [
     
     
     
+    # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    path('login',authentication.LoginView.as_view(), name='login'),
+    path('logout',authentication.LogoutView.as_view(), name='logout'),
+    path('getToken/',authentication.getToken, name='getToken'),
+    path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
+    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser')
 ]

@@ -17,3 +17,9 @@ class GamerAdmin(admin.ModelAdmin):
 admin.site.register(Gamer, GamerAdmin)    
 
 
+from Kusa.models import SteamUser
+
+
+@admin.register(SteamUser)
+class SteamUserAdmin(admin.ModelAdmin):
+    pass

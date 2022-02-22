@@ -13,6 +13,11 @@ from django.views.decorators.csrf import csrf_exempt
 from bson import ObjectId
 
 
+from admin import settings
+import requests
+from django.views import View
+import jwt
+JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf =  settings.CONF
 
 # class FriendsListView(viewsets.ModelViewSet):
