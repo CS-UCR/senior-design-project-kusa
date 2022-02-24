@@ -11,7 +11,7 @@ from bson.objectid import ObjectId
 from Kusa.models import SteamUser
 from Kusa.serializers import SteamUserSerializer
 from Kusa.authentication import validate_token
-from Kusa.data_collection import get_steam_user
+from Kusa.data_collection import get_steam_user, gather_new_user_info
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
@@ -35,7 +35,7 @@ def get_all_users(request):
     response = validate_token(request)
     if "steamid" in response:
         steamusers = SteamUser.objects.all()
-        steamuser_serializer = SteamUserSerializer(steamusers,many=True)
+        steamuser_serializer = SteamUserSerializer(steamusers,many=True) 
         return JsonResponse(steamuser_serializer.data, safe=False)
     else:
         return response
@@ -80,6 +80,7 @@ def add_email(request):
         user = SteamUser.objects.get(pk=(uid))
         user.email = receiveRequest.get('email')
         user.save()
+        gather_new_user_info(uid)
         return JsonResponse(response, status=201, safe=False)
     except:
         return JsonResponse(response, status=400, safe=False)

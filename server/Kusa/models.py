@@ -38,7 +38,12 @@ class SteamUserManager(BaseUserManager):
 
         return self._create_user(id, password, **extra_fields)
 
+class Hours(models.Model):
+    item_id = models.IntegerField(primary_key=True)
+    hours = models.IntegerField(max_length=30)
 
+    def __str__(self):
+        return f'<{self.hours}>'
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
@@ -52,6 +57,9 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     #Kusa-signup specific fields
     email=models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
+    weekly_hours = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
+    # weekly_hours = ArrayField(models.CharField(max_length=10, blank=True),size=7)
+    # weekly_hours=models.JSONField(default=[])
 
     # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 

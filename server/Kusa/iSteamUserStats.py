@@ -46,4 +46,6 @@ def get_user_stats_for_game(request):
 def get_owned_games(steam_id):
     method = "/GetOwnedGames"
     response = requests.get(conf["steam_api_url"]+ "/IPlayerService" + method + "/v0001" + "/?key=" + conf["steam_api_key"] + "&steamid=" + steam_id + "&format=JSON").json()
-    return response["games"]
+    if "games" not in response["response"]:
+        return []
+    return response["response"]["games"]
