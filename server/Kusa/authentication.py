@@ -35,7 +35,7 @@ Returns: dict: {"steamid":steam id}
 """
 def validate_token(request):
     try: 
-        token = request.headers['Authorization']
+        token = request['headers']['Authorization']
         if token is None:
             return JsonResponse({'message': 'You do not have the permissions to access'}, status=404, safe=False) 
         PREFIX = 'Bearer '

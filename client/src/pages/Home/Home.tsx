@@ -158,7 +158,7 @@ export const Home: React.FC = () => {
                     metrics
                 </KusaHeader>
             </Box>
-            <KusaBox
+            {/* <KusaBox
                 width="90%"
                 height={390}
                 styles={{ marginBottom: "5rem", padding: "2rem" }}
@@ -195,7 +195,7 @@ export const Home: React.FC = () => {
                         Metrics are currently unavailable.
                     </Typography>
                 )}
-            </KusaBox>
+            </KusaBox> */}
         </Container>
     );
 };

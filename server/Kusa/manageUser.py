@@ -32,7 +32,7 @@ def toggle_email(request):
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
 @csrf_exempt
 def get_all_users(request):
-    response = validate_token(request)
+    response = validate_token(json.loads(request.body))
     if "steamid" in response:
         steamusers = SteamUser.objects.all()
         steamuser_serializer = SteamUserSerializer(steamusers,many=True) 
@@ -41,7 +41,7 @@ def get_all_users(request):
         return response
 @csrf_exempt
 def delete_a_user(request):
-    response = validate_token(request)
+    response = validate_token(json.loads(request.body))
     if "steamid" in response:
         steamuser = SteamUser.objects.get(id=response["steamid"])
         steamuser.delete()
@@ -49,7 +49,7 @@ def delete_a_user(request):
     else:
         return response
 @csrf_exempt
-def steamuser_detail(request):       
+def steamuser_detail(request):      
     response = validate_token(json.loads(request.body))
     if "steamid" in response:
         return JsonResponse(get_steam_user(response["steamid"]), safe=False) 
