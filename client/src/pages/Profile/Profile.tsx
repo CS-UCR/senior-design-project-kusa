@@ -26,6 +26,7 @@ import { headers } from "../../constants/headers";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "../../contexts/UserContext/utils/useUserCookies";
+import { getToken } from "../../contexts/UserContext/utils/useUserCookies.js";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
@@ -63,17 +64,21 @@ export const Profile: React.FC = () => {
     const [operation, setOperation] = React.useState<string>("");
     const navigate = useNavigate();
     const iconHeight = 40;
-
+    const authAxios = axios.create({
+        headers: {
+            ...headers,
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
     //implement with backend, sends requests to endpoints per action
     const getDeactivate = () => {
         setLoading(true);
-        axios
+        authAxios
             .post(
                 `${BACKEND_URL}/Deactivate/`,
                 JSON.stringify({
                     userID: userId,
                 }),
-                { headers: headers }
             )
             .then(() => {
                 setOperation(
@@ -101,14 +106,13 @@ export const Profile: React.FC = () => {
     };
     const getEmailToggle = () => {
         setLoading(true);
-        axios
+        authAxios
             .post(
                 `${BACKEND_URL}/ToggleUserEmail/`,
                 JSON.stringify({
                     emailStatus: !emailStatus,
                     userID: userId,
                 }),
-                { headers: headers }
             )
             .then(() => {
                 if (emailStatus)

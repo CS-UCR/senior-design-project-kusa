@@ -16,7 +16,12 @@ export const Signup: React.FC = () => {
     const [loading, setLoading] = React.useState(false);
     const [email, setEmail] = React.useState<string | undefined>(undefined);
     const [error, setError] = React.useState("");
-
+    const authAxios = axios.create({
+        headers: {
+            ...headers,
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
     const sendSignUp = () => {
         if (!email) {
             setError("Enter an email address first.");
@@ -24,13 +29,9 @@ export const Signup: React.FC = () => {
         }
         let tokenResponse = getToken();
         setLoading(true);
-        axios
+        authAxios
             .post(`${BACKEND_URL}/addEmail/`, {
                 userId: userId,
-                headers: {
-                    ...headers,
-                    Authorization: "Bearer " + tokenResponse,
-                },
                 email: email,
             })
             .then(() => {
