@@ -8,5 +8,5 @@ class KusaConfig(AppConfig):
     name = 'Kusa'
     def ready(self):
             from Kusa.scheduler import scheduler
-            scheduler.start()
+            # scheduler.start()
     

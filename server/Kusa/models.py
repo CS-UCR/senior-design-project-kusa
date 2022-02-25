@@ -57,7 +57,7 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     #Kusa-signup specific fields
     email=models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
-    weekly_hours = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
+    weekly_hours = models.CharField(max_length=255,default="")
     # weekly_hours = ArrayField(models.CharField(max_length=10, blank=True),size=7)
     # weekly_hours=models.JSONField(default=[])
 

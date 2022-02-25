@@ -34,3 +34,5 @@ def get_steam_user(steam_id):
     user = SteamUser.objects.get(id=steam_id)
     steamuser_serializer = SteamUserSerializer(user)
     return steamuser_serializer.data 
+
+
