@@ -1,4 +1,5 @@
 import datetime
+import json
 from Kusa.serializers import SteamUserSerializer
 from Kusa.models import SteamUser
 from Kusa.data_collection import get_total_playtime_hours
@@ -23,19 +24,37 @@ def update_all_users_playtime():
         user = SteamUser.objects.get(id=steam_id)
         weekly_hours = get_total_playtime_hours(steam_id)
         # print("weekly_hours",weekly_hours)
-        # print("user.weekly_hours: ", user.weekly_hours)
+        # print("user.weekly_hours: ", type(user.weekly_hours))
+        # if len(user.weekly_hours) > 0: 
+        #     hrs = str(user.weekly_hours)
+        #     hrs_arr= [ float(i) for i in hrs[1:-1].split(',') ]
+        #     hrs_arr.append(weekly_hours)
+        #     user.weekly_hours = hrs_arr
+        # else:
+        #     user.weekly_hours = [(weekly_hours)]
+        # hours_today = {
+        #     strftime("%m/%d/%Y", gmtime()):str(weekly_hours)
+        # }
+        # date_today = strftime("%m/%d/%Y", gmtime())
+        date_today = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        print("outside if statement user.weekly_hours:",user.weekly_hours)
+        print("type:",type(user.weekly_hours))
         if user.weekly_hours is not None: 
-            hrs = str(user.weekly_hours)
-            hrs_arr= [ float(i) for i in hrs[1:-1].split(',') ]
-            hrs_arr.append(weekly_hours)
-            user.weekly_hours = hrs_arr
+            hrs_dict = json.loads(str(user.weekly_hours))
+            print("hrs_dict:",hrs_dict)
+            print("type:",type(hrs_dict))
+            hrs_dict[date_today]= weekly_hours
+            user.weekly_hours = hrs_dict
+            print("user.weekly_hours:",user.weekly_hours)
         else:
-            user.weekly_hours = [weekly_hours]
+            print("before setting weekly hours")
+            user.weekly_hours = {date_today : str(weekly_hours)}  
+            print("just set weekly hours")
         # print("users'weekly:L",user.weekly_hours)
         # print("Len",len(user.weekly_hours))
         user.save()
-        # print("result:,",hrs_arr)
-        # print("end of loop ",i)
+        print("result:,",user.weekly_hours)
+        print("end of loop ",i)
 
 
 
