@@ -50,7 +50,6 @@ const StatusMap: { [key in AlertColor]: string } = {
 
 export const Profile: React.FC = () => {
     const {
-        userId,
         name,
         goal,
         email,
@@ -64,6 +63,7 @@ export const Profile: React.FC = () => {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
     const [edit, setEdit] = React.useState<boolean>(false);
+    const [newGoal, setNewGoal] = React.useState<string | null>(null);
     const navigate = useNavigate();
     const iconHeight = 40;
 
@@ -71,12 +71,9 @@ export const Profile: React.FC = () => {
     const getDeactivate = () => {
         setLoading(true);
         axios
-            .post(
+            .get(
                 `${BACKEND_URL}/Deactivate/`,
-                JSON.stringify({
-                    userID: userId,
-                }),
-                { headers: headers }
+                { withCredentials: true, headers }
             )
             .then(() => {
                 setOperation(
@@ -109,9 +106,8 @@ export const Profile: React.FC = () => {
                 `${BACKEND_URL}/ToggleUserEmail/`,
                 JSON.stringify({
                     emailStatus: !emailStatus,
-                    userID: userId,
                 }),
-                { headers: headers }
+                { headers, withCredentials: true }
             )
             .then(() => {
                 if (emailStatus)
@@ -127,8 +123,37 @@ export const Profile: React.FC = () => {
                 setLoading(false);
             });
     };
-
-    const changeGoal = (newGoal: string) => {};
+    const submitGoal = () => {
+        setLoading(true);
+        if (!newGoal || newGoal.length < 1) {
+            setStatus("error");
+            setOperation("Invalid goal provided");
+            setLoading(false);
+            return;
+        }
+        axios
+            .post(
+                `${BACKEND_URL}/UpdateGoal/`,
+                JSON.stringify({
+                    goal: newGoal,
+                }),
+                {
+                    headers,
+                    withCredentials: true,
+                }
+            )
+            .then(() => {
+                setOperation("Goal successfully changed.");
+                setUserInfo({ goal });
+                setStatus("success");
+                setLoading(false);
+            })
+            .catch((err) => {
+                setStatus("error");
+                setOperation("An error occurred");
+                setLoading(false);
+            });
+    };
 
     return (
         <Container>
@@ -204,9 +229,8 @@ export const Profile: React.FC = () => {
                             styles={{ width: "80%" }}
                             onChange={
                                 edit
-                                    ? (
-                                          e: React.ChangeEvent<HTMLInputElement>
-                                      ) => changeGoal(e.target.value)
+                                    ? (e: { target: HTMLInputElement }) =>
+                                          setNewGoal(e.target.value)
                                     : null
                             }
                             value={goal}
@@ -215,7 +239,13 @@ export const Profile: React.FC = () => {
                         </ProfileField>
                     </Grid>
                     <Grid item xs={1}>
-                        <Button onClick={() => setEdit(!edit)}>
+                        <Button
+                            onClick={() => {
+                                if (edit && newGoal) submitGoal();
+                                setNewGoal(null);
+                                setEdit(!edit);
+                            }}
+                        >
                             <img
                                 src={write}
                                 alt="edit"

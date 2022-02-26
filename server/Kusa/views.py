@@ -24,7 +24,6 @@ def close_view(request):
     response = redirect(FRONTEND_URL + '/steamauth')
     token = get_token(request)
     response.set_cookie('token', (token), max_age=1000)
-    response.set_cookie('steamid', request.user.steamid, max_age=1000)
     return response
        
 

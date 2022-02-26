@@ -23,6 +23,7 @@ export const ProfileField: React.FC<any> = ({
                 type="number"
                 onChange={onChange}
                 defaultValue={value}
+                disableUnderline
                 sx={{
                     paddingX:"1rem",
                     width: "100%",
@@ -32,6 +33,7 @@ export const ProfileField: React.FC<any> = ({
                     maxWidth: "78ch",
                     textAlign: "center",
                 }}
+                inputProps={{maxLength:5}}
             />
         ) : (
             <Typography
