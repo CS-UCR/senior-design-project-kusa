@@ -1,13 +1,7 @@
-from datetime import timedelta
-from django.http.response import JsonResponse
-from django.shortcuts import render
-from admin import settings
-import requests
-from Kusa.authentication import validate_token
 from Kusa.iSteamUserStats import get_owned_games
 from Kusa.models import SteamUser
 from Kusa.serializers import SteamUserSerializer
-from datetime import datetime
+from time import gmtime, strftime
 
         
 
@@ -24,9 +18,8 @@ def get_total_playtime_hours(steam_id):
     return overall_hours
 
 def gather_new_user_info(steam_id):
-    weekly_hours = [get_total_playtime_hours(steam_id)]
     user = SteamUser.objects.get(id=steam_id)
-    user.weekly_hours = weekly_hours
+    user.weekly_hours.append({'date':strftime("%m/%d/%Y", gmtime()), 'hours': get_total_playtime_hours(steam_id)})
     user.save()
     
     
@@ -34,5 +27,3 @@ def get_steam_user(steam_id):
     user = SteamUser.objects.get(id=steam_id)
     steamuser_serializer = SteamUserSerializer(user)
     return steamuser_serializer.data 
-
-
