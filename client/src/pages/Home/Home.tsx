@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
             if (item.x === current) currentIndex = index;
         });
 
-        console.log("current index is",currentIndex, "from", current);
+        console.log("current index is", currentIndex, "from", current);
         switch (period) {
             case "week":
                 shiftNum = 7;
@@ -116,10 +116,7 @@ export const Home: React.FC = () => {
             </KusaHeader>
             <Grid container spacing={5}>
                 {achievements
-                    .filter(
-                        (achieve) =>
-                            achieve.progress !== 100
-                    )
+                    .filter((achieve) => achieve.progress !== 100)
                     .slice(0, 3)
                     .map((achievement, index) => (
                         <Achievement {...achievement} key={index} />
@@ -191,7 +188,7 @@ export const Home: React.FC = () => {
                         theme={theme}
                     />
                 ) : (
-                    <Typography textAlign="center">
+                    <Typography textAlign="center" variant="h6" color="neutral.main">
                         Metrics are currently unavailable.
                     </Typography>
                 )}

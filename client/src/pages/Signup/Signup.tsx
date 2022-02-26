@@ -70,7 +70,7 @@ export const Signup: React.FC = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={8}>
-                            <LoginField required setState={setEmail}>
+                            <LoginField required setState={setEmail} type="email">
                                 example@example.example
                             </LoginField>
                         </Grid>

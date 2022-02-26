@@ -69,7 +69,15 @@ def deactivate_account(request):
     except:
         return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
 
-
+@csrf_exempt
+def adjust_goal(request):
+    response = validate_token(request)
+    if "steamid" in response:
+        steamuser = SteamUser.objects.get(id=response["steamid"])
+        steamuser.delete()
+        return JsonResponse("Deleted Successfully",safe=False)
+    else:
+        return response
 
 
 @csrf_exempt
