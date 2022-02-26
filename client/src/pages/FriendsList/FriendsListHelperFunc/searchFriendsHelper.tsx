@@ -25,7 +25,7 @@ var userName:string;
 var friendsList: {} | null | undefined = []
 //account holder id (whoever login we will have his steamid availible)
 
-var thisAccountName = "GamerFive"
+var thisAccountName = "Yuteng"
 
 const baseURL = "http://127.0.0.1:8000/api/friendRequest/";
 

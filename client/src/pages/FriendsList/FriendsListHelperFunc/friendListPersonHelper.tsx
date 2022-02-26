@@ -34,7 +34,7 @@ import axios from "axios";
 
 const iconHeight = 40;
 
-var thisAccountName = "GamerFive"
+var thisAccountName = "Yuteng"
 
 const deleteURL = "http://127.0.0.1:8000/api/deleteFriend/";
 

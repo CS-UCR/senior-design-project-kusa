@@ -20,7 +20,7 @@ import axios from "axios";
 
 const iconHeight = 40;
 
-var thisAccountName = "GamerFive"
+var thisAccountName = "Yuteng"
 
 
 const acceptURL = "http://127.0.0.1:8000/api/acceptFriendRequest/";
@@ -46,6 +46,7 @@ export function Person_New_Request(name:any)
             //console.log(response.data)
           });
           {window.location.reload()}
+          //{setTimeout(location.reload.bind(location), 60000)}
     };
 
 
