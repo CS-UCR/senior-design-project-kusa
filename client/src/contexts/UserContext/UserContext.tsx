@@ -40,7 +40,7 @@ const defaultValue = {
     emailStatus: true,
     isLoggedIn: false,
     darkMode: false,
-    goal: 30,
+    goal: 300,
     name: "test_steam",
     connections: [] as Connection[],
     setDarkMode: () => null,

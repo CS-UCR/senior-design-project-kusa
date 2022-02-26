@@ -15,7 +15,6 @@ import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
 import { Achievement } from "../../components/Achievement/Achievement";
 import { ResponsiveLine, Serie } from "@nivo/line";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
-import axios from "axios";
 
 const theme = {
     axis: {

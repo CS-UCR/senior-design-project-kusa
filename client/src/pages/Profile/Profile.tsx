@@ -63,7 +63,7 @@ export const Profile: React.FC = () => {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
     const [edit, setEdit] = React.useState<boolean>(false);
-    const [newGoal, setNewGoal] = React.useState<string | null>(null);
+    const [newGoal, setNewGoal] = React.useState<number | null>(null);
     const navigate = useNavigate();
     const iconHeight = 40;
 
@@ -125,7 +125,7 @@ export const Profile: React.FC = () => {
     };
     const submitGoal = () => {
         setLoading(true);
-        if (!newGoal || newGoal.length < 1) {
+        if (!newGoal || newGoal < 0) {
             setStatus("error");
             setOperation("Invalid goal provided");
             setLoading(false);
@@ -144,7 +144,7 @@ export const Profile: React.FC = () => {
             )
             .then(() => {
                 setOperation("Goal successfully changed.");
-                setUserInfo({ goal });
+                setUserInfo({ goal: newGoal });
                 setStatus("success");
                 setLoading(false);
             })
@@ -230,7 +230,7 @@ export const Profile: React.FC = () => {
                             onChange={
                                 edit
                                     ? (e: { target: HTMLInputElement }) =>
-                                          setNewGoal(e.target.value)
+                                          setNewGoal(parseInt(e.target.value))
                                     : null
                             }
                             value={goal}

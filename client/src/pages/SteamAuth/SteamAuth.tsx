@@ -28,7 +28,8 @@ export const SteamAuth: React.FC = () => {
                     const email = data.email;
                     const emailStatus = data.emailsEnabled;
                     const name = data.personaname;
-                    setUserInfo({ userId, email, name, emailStatus });
+                    const goal = data.goal;
+                    setUserInfo({ userId, email, name, emailStatus, goal });
                     if (email !== "") {
                         setUserInfo({ isLoggedIn: true });
                         navigate("/home")

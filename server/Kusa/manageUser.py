@@ -70,7 +70,8 @@ def adjust_goal(request):
     response = validate_token(request)
     if "steamid" in response:
         steamuser = SteamUser.objects.get(id=response["steamid"])
-        steamuser.delete()
+        steamuser.goal = json.loads(request.body)['goal']
+        steamuser.save()
         return JsonResponse("Deleted Successfully",safe=False)
     else:
         return response
