@@ -19,8 +19,10 @@ import {
 } from "./contexts/UserContext/UserContext";
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
-import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
+import { SteamAuth } from "./pages/SteamAuth/SteamAuth";
+import { AchieveContextProvider } from "./contexts/AchieveContext/AchieveContext";
+
 import "./App.css";
 import "animate.css";
 
@@ -30,8 +32,12 @@ function App() {
     const routes = [
         { path: "/", name: "Landing", Component: Landing },
         //public routes go here
-        { path: "/login", name: "Home", Component: Login },
-        { path: "/signup", name: "Profile", Component: Signup },
+        {
+            path: "/signup",
+            name: "Profile",
+            publicOnlyRoute: true,
+            Component: Signup,
+        },
         //private routes go here
         {
             path: "/home",
@@ -51,41 +57,83 @@ function App() {
             privateRoute: true,
             Component: FriendsList,
         },
+        {
+            path: "/chat",
+            name: "Chat",
+            privateRoute: true,
+            Component: React.Fragment,
+        },
+        {
+            path: "/garden",
+            name: "Garden",
+            privateRoute: true,
+            Component: React.Fragment,
+        },
+        {
+            path: "/achievements",
+            name: "Achievements",
+            privateRoute: true,
+            Component: React.Fragment,
+        },
+        {
+            path: "/steamauth",
+            name: "Steam Auth",
+            publicOnlyRoute: true,
+            Component: SteamAuth,
+        },
     ];
 
     const AnimatedApp = React.memo(() => {
         const location = useLocation();
         return (
             <Routes>
-                {routes.map(({ path, name, Component, privateRoute }) => {
-                    if (privateRoute && !isLoggedIn)
+                {routes.map(
+                    ({
+                        path,
+                        name,
+                        Component,
+                        privateRoute,
+                        publicOnlyRoute,
+                    }) => {
+                        if (publicOnlyRoute && isLoggedIn) {
+                            return (
+                                <Route
+                                    key={name}
+                                    exact
+                                    path={path}
+                                    element={<Navigate to="/home" />}
+                                />
+                            );
+                        }
+                        if (privateRoute && !isLoggedIn)
+                            return (
+                                <Route
+                                    key={name}
+                                    exact
+                                    path={path}
+                                    element={<Navigate to="/" />}
+                                />
+                            );
                         return (
                             <Route
                                 key={name}
                                 exact
                                 path={path}
-                                element={<Navigate to="/" />}
+                                element={
+                                    <CSSTransition
+                                        appear
+                                        in={location.pathname === path}
+                                        key={name}
+                                        classNames="screen"
+                                        timeout={100}
+                                    >
+                                        <Component />
+                                    </CSSTransition>
+                                }
                             />
                         );
-                    return (
-                        <Route
-                            key={name}
-                            exact
-                            path={path}
-                            element={
-                                <CSSTransition
-                                    appear
-                                    in={location.pathname === path}
-                                    key={name}
-                                    classNames="screen"
-                                    timeout={100}
-                                >
-                                    <Component />
-                                </CSSTransition>
-                            }
-                        />
-                    );
-                })}
+                    }
+                )}
             </Routes>
         );
     });
@@ -114,7 +162,9 @@ const ComposeApp = () => {
     return (
         <UserContextProvider>
             <CustomThemeProvider>
-                <App />
+                <AchieveContextProvider>
+                    <App />
+                </AchieveContextProvider>
             </CustomThemeProvider>
         </UserContextProvider>
     );

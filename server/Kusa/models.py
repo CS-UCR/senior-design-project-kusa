@@ -7,7 +7,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
+from django.contrib.postgres.fields import ArrayField
 class SteamUserManager(BaseUserManager):
     def _create_user(self, id, password, **extra_fields):
         """
@@ -45,14 +45,22 @@ class SteamUserManager(BaseUserManager):
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
+    steamid = models.CharField(max_length=17, unique=True)
     personaname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
 
-    # Add the other fields that can be retrieved from the Web-API if required
+    #Kusa-signup specific fields
+    email=models.CharField(max_length=255, default="")
+    emailsEnabled = models.BooleanField(default=True)
 
+    # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
+    # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # friend_requests = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    # Add the other fields that can be retrieved from the Web-API if required
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

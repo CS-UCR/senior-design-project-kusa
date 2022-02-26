@@ -47,15 +47,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
-    'rest_framework',
-    
-    
-    
+    "corsheaders",
     'social_django',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -120,6 +118,10 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -173,11 +175,13 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
  
+FRONTEND_URL = "http://localhost:3000"
+
 # todo - clean this up after login auth works
 API_KEY = STEAM_API_KEY
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/login'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/close'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 
 AUTH_USER_MODEL = 'Kusa.SteamUser'
@@ -232,3 +236,9 @@ SOCIAL_AUTH_PIPELINE = (
     # Use a custom function for this, since the details are provided separately
     'Kusa.pipeline.user_details',
 )
+
+
+#CORS Setup
+CORS_ALLOWED_ORIGINS = [
+    FRONTEND_URL,
+]

@@ -29,6 +29,7 @@ from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
+
 app_name = "Kusa" 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -60,10 +61,19 @@ urlpatterns = [
     
     
     # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
-    path('login',authentication.LoginView.as_view(), name='login'),
-    path('logout',authentication.LogoutView.as_view(), name='logout'),
-    path('getToken/',authentication.getToken, name='getToken'),
-    path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    # path('login',authentication.LoginView.as_view(), name='login'),
+    # path('logout',authentication.LogoutView.as_view(), name='logout'),
+    # path('getToken/',authentication.getToken, name='getToken'),
+    # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
+    
+    path('login', authentication.LoginView.as_view(), name='login'),
+    path('logout', authentication.LogoutView.as_view(), name='logout'),
+    path('close', views.close_view, name='close'),
+    path('getToken/', authentication.get_token, name='getToken'),
+    path('addEmail/', manageUser.add_email, name="addEmail"),
     path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
+    path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
+    path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
+    path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser')
 ]
