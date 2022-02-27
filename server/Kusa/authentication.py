@@ -27,13 +27,14 @@ def get_token(request):
     else:
         return 'error'
     
-"""
-Validates token and if successful returns steamid
-Parameters: request
 
-Returns: dict: {"steamid":steam id}
-"""
 def validate_token(request):
+    """
+    Validates token and if successful returns steamid
+    Parameters: request
+
+    Returns: dict: {"steamid":steam id}
+    """
     try: 
         token = request.headers.get('Authorization') 
         if token is None:

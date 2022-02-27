@@ -19,11 +19,10 @@ def get_total_playtime_hours(steam_id):
 
 def gather_new_user_info(steam_id):
     user = SteamUser.objects.get(id=steam_id)
-    user.weekly_hours.append({'date':strftime("%m/%d/%Y", gmtime()), 'hours': get_total_playtime_hours(steam_id)})
+    user.daily_hours.append({'date':strftime("%m/%d/%Y", gmtime()), 'hours': get_total_playtime_hours(steam_id)})
     user.save()
     
-    
-    # returns a steam user 
+     
 def get_steam_user(steam_id):       
     user = SteamUser.objects.get(id=steam_id)
     if user is None:

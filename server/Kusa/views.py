@@ -1,18 +1,11 @@
-import json
 from django.http.response import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from admin import settings
-import requests
-from django.views import View
-import jwt
 from admin.settings import FRONTEND_URL
 from Kusa.authentication import get_token
-import requests
-from Kusa.models import SteamUser
-from Kusa.serializers import SteamUserSerializer
 from Kusa.authentication import validate_token
-from ast import literal_eval
 from Kusa.data_collection import get_steam_user
+from collections import OrderedDict #keep this line for get_user_daily_hours 
 
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf =  settings.CONF
@@ -27,13 +20,20 @@ def close_view(request):
     response.set_cookie('steamid', request.user.steamid, max_age=1000)
     return response
 
-def get_user_weekly_hours(request):
+
+def get_user_daily_hours(request):
+    """
+    will return an array of the user's daily hours
+    Parameters: request
+
+    Returns: returns a list of json obj -> [{"date" : date1, "hours" : num_hours1},{"date" : date2, "hours" : num_hours2}]
+    """
     response = validate_token(request)
     if "steamid" in response:   
         user =  get_steam_user(response["steamid"])
-        weekly_hours = user['weekly_hours']
-        if len(weekly_hours) == 0:
-            weekly_hours = '[]'
-        return JsonResponse(literal_eval(weekly_hours), safe=False)
-    else:
+        daily_hours = user['daily_hours']
+        list_of_json = [dict(day) for day in eval(daily_hours)]
+        return JsonResponse(list_of_json , safe=False)
+    else: 
         return response
+    

@@ -62,12 +62,7 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     #Kusa-signup specific fields
     email=models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
-    # weekly_hours = models.CharField(max_length=255,default="")
-    # weekly_hours =  models.ArrayField(
-    #     model_container=HoursPlayed,
-    #     model_form_class=HoursPlayedForm
-    # )
-    weekly_hours=models.JSONField(default=[])
+    daily_hours=models.JSONField(default=[])
 
     # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 

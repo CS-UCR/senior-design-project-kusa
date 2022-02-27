@@ -13,7 +13,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
 from django.urls import path
+
 from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
 
 
@@ -36,5 +38,5 @@ urlpatterns = [
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
-    path('get_user_weekly_hours/', views.get_user_weekly_hours, name='get_user_weekly_hours'),
+    path('get_user_daily_hours/', views.get_user_daily_hours, name='get_user_daily_hours'),
 ]
