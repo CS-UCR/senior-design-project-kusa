@@ -8,9 +8,7 @@ from time import gmtime, strftime
 def update_all_users_playtime():
     print("Current Time =", strftime("%Y-%m-%d %H:%M:%S", gmtime()))
     steamusers = SteamUser.objects.all()
-    # print("got all steam users")
     steamuser_serializer = SteamUserSerializer(steamusers,many=True)
-    # print("len:",len(steamuser_serializer.data))
     for i in range(len(steamuser_serializer.data)):
         entry = steamuser_serializer.data[i]
         steam_id = entry['id']
@@ -24,7 +22,6 @@ def update_all_users_playtime():
 def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
-    # run this job every 2 minutes
-    scheduler.add_job(update_all_users_playtime, 'interval', minutes=1, id='update_all_users_playtime',misfire_grace_time=None)
+    # run this job once every 24 hrs 
+    scheduler.add_job(update_all_users_playtime, 'interval', hours=24, id='update_all_users_playtime',misfire_grace_time=None)
     scheduler.start()
-    print("Scheduler started...")
