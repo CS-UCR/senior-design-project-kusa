@@ -37,18 +37,7 @@ class SteamUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(id, password, **extra_fields)
-class HoursPlayed(models.Model):
-    date = models.CharField(max_length=200)
-    hours_played = models.EmailField()
-    class Meta:
-        abstract = True
-        
-class HoursPlayedForm(forms.ModelForm):
-    class Meta:
-        model = HoursPlayed
-        fields = (
-            'date', 'hours_played'
-        )
+
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
