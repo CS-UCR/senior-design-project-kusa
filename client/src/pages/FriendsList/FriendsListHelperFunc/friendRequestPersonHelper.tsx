@@ -27,6 +27,8 @@ const acceptURL = "http://127.0.0.1:8000/api/acceptFriendRequest/";
 
 const rejectURL = "http://127.0.0.1:8000/api/rejectFriendRequest/"
 
+
+
 export function Person_New_Request(name:any)
 {
 
@@ -35,8 +37,8 @@ export function Person_New_Request(name:any)
         axios.get(acceptURL + thisAccountName + "&" + name).then((response) => {
             //console.log(response.data)
           });
-          {window.location.reload()}
-          {window.location.reload()}
+          
+          
     };
 
 
@@ -45,7 +47,7 @@ export function Person_New_Request(name:any)
         axios.get(rejectURL + thisAccountName + "&" + name).then((response) => {
             //console.log(response.data)
           });
-          {window.location.reload()}
+          
           //{setTimeout(location.reload.bind(location), 60000)}
     };
 

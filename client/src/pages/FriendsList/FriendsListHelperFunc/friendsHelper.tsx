@@ -37,7 +37,7 @@ export function Friends()
         array_of_people.push(wsv())
     }
     
-    console.log(array_of_people)
+    
     return array_of_people
     
 

@@ -34,7 +34,7 @@ app_name = "Kusa"
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include(router.urls)),
-    path('test', views.test, name='test'),
+    # path('test', views.test, name='test'),
     # path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),

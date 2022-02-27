@@ -2,6 +2,7 @@
 import * as React from "react";
 import {
     Grid,
+    Button,
 } from "@mui/material";
 
 import { KusaBox } from "../../../components/Kusa/KusaBox/KusaBox";

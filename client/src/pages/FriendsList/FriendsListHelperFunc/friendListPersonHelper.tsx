@@ -61,9 +61,8 @@ export function Person_FriendList(name:any)
         axios.get(deleteURL + thisAccountName + "&" + name).then((response) => {
             //console.log(response.data)
           });
-          {window.location.reload()}
-          {window.location.reload()}
           
+        
     }
 
     return(

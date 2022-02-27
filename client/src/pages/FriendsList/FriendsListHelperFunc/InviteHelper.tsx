@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Person_New_Request } from "./friendRequestPersonHelper";
 import { wsv } from "./WSV";
 
+import axios from "axios";
+
 var thisAccountName = "Yuteng"
 
 
@@ -18,6 +20,11 @@ export function Invites()
             const response = await fetch(`http://127.0.0.1:8000/api/getFriendRequest/${thisAccountName}`)
             const data = await response.json();
             setData(data)
+
+            // axios.get("http://127.0.0.1:8000/api/getFriendRequest/${thisAccountName}").then((response) => {
+            //     //console.log(response.data)
+            //     setData(response.data)
+            //   });
         }
     )();
     },[]);
