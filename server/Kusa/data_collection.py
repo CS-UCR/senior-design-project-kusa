@@ -23,7 +23,10 @@ def gather_new_user_info(steam_id):
     user.save()
     
     
+    # returns a steam user 
 def get_steam_user(steam_id):       
     user = SteamUser.objects.get(id=steam_id)
+    if user is None:
+        return {} 
     steamuser_serializer = SteamUserSerializer(user)
     return steamuser_serializer.data 

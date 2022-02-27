@@ -6,7 +6,6 @@ from django_apscheduler.jobstores import DjangoJobStore
 from time import gmtime, strftime
 
 def update_all_users_playtime():
-    print("Current Time =", strftime("%Y-%m-%d %H:%M:%S", gmtime()))
     steamusers = SteamUser.objects.all()
     steamuser_serializer = SteamUserSerializer(steamusers,many=True)
     for i in range(len(steamuser_serializer.data)):
