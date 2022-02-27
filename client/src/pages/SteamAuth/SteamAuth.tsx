@@ -22,7 +22,10 @@ export const SteamAuth: React.FC = () => {
     React.useEffect(() => {
         if (token) {
             authAxios
-                .post(`${BACKEND_URL}/getAUser/`)
+                .get(`${BACKEND_URL}/getAUser/`, {
+                    headers, 
+                    withCredentials: true,
+                })
                 //clean up later
                 .then((response) => {
                     const data = response.data;
@@ -30,7 +33,8 @@ export const SteamAuth: React.FC = () => {
                     const email = data.email;
                     const emailStatus = data.emailsEnabled;
                     const name = data.personaname;
-                    setUserInfo({ userId, email, name, emailStatus });
+                    const goal = data.goal;
+                    setUserInfo({ userId, email, name, emailStatus, goal });
                     if (email !== "") {
                         setUserInfo({ isLoggedIn: true });
                         navigate("/home")

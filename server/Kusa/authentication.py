@@ -36,13 +36,10 @@ def validate_token(request):
     Returns: dict: {"steamid":steam id}
     """
     try: 
-        token = request.headers.get('Authorization') 
+        token = request.COOKIES.get('token')
         if token is None:
             return JsonResponse({'message': 'You do not have the permissions to access'}, status=404, safe=False) 
-        PREFIX = 'Bearer '
-        if not token.startswith(PREFIX):
-            raise ValueError({'message':'Invalid token'})
-        decoded = jwt.decode(token[len(PREFIX):], JWT_SECRET_KEY, algorithms=["HS256"])
+        decoded = jwt.decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
         steamid = decoded['steamid']
         return ({"steamid":steamid})
     except jwt.exceptions.DecodeError:

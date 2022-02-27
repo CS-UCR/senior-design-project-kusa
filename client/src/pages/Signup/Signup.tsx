@@ -27,12 +27,13 @@ export const Signup: React.FC = () => {
             setError("Enter an email address first.");
             return;
         }
-        let tokenResponse = getToken();
         setLoading(true);
         authAxios
             .post(`${BACKEND_URL}/addEmail/`, {
                 userId: userId,
                 email: email,
+            }, {
+                headers, withCredentials: true
             })
             .then(() => {
                 setUserInfo({ isLoggedIn: true, email });
@@ -71,7 +72,7 @@ export const Signup: React.FC = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={8}>
-                            <LoginField required setState={setEmail}>
+                            <LoginField required setState={setEmail} type="email">
                                 example@example.example
                             </LoginField>
                         </Grid>

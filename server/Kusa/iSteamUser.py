@@ -1,5 +1,4 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
 from admin import settings
 import requests
 from Kusa.authentication import validate_token
