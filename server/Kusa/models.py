@@ -55,6 +55,7 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     #Kusa-signup specific fields
     email=models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
+    goal = models.IntegerField(default=40)
 
     # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 

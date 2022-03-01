@@ -15,6 +15,7 @@ import { KusaButton } from "../../components/Kusa/KusaButton/KusaButton";
 import { default as linkSVG } from "../../assets/profile/link.svg";
 import { default as suitcase } from "../../assets/profile/suitcase.svg";
 import { default as twitter } from "../../assets/socials/twitter.svg";
+import { default as write } from "../../assets/profile/write.svg";
 import { default as steam } from "../../assets/socials/steam.svg";
 import { default as insta } from "../../assets/socials/insta.svg";
 import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
@@ -49,8 +50,8 @@ const StatusMap: { [key in AlertColor]: string } = {
 
 export const Profile: React.FC = () => {
     const {
-        userId,
         name,
+        goal,
         email,
         emailStatus,
         darkMode,
@@ -61,6 +62,8 @@ export const Profile: React.FC = () => {
     const [status, setStatus] = React.useState<AlertColor | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
+    const [edit, setEdit] = React.useState<boolean>(false);
+    const [newGoal, setNewGoal] = React.useState<number | null>(null);
     const navigate = useNavigate();
     const iconHeight = 40;
 
@@ -68,12 +71,9 @@ export const Profile: React.FC = () => {
     const getDeactivate = () => {
         setLoading(true);
         axios
-            .post(
+            .get(
                 `${BACKEND_URL}/Deactivate/`,
-                JSON.stringify({
-                    userID: userId,
-                }),
-                { headers: headers }
+                { withCredentials: true, headers }
             )
             .then(() => {
                 setOperation(
@@ -106,15 +106,45 @@ export const Profile: React.FC = () => {
                 `${BACKEND_URL}/ToggleUserEmail/`,
                 JSON.stringify({
                     emailStatus: !emailStatus,
-                    userID: userId,
                 }),
-                { headers: headers }
+                { headers, withCredentials: true }
             )
             .then(() => {
                 if (emailStatus)
                     setOperation("Email notifications have been removed.");
                 else setOperation("Email notifications have been enabled.");
                 setEmailStatus(!emailStatus);
+                setStatus("success");
+                setLoading(false);
+            })
+            .catch((err) => {
+                setStatus("error");
+                setOperation("An error occurred");
+                setLoading(false);
+            });
+    };
+    const submitGoal = () => {
+        setLoading(true);
+        if (!newGoal || newGoal < 0) {
+            setStatus("error");
+            setOperation("Invalid goal provided");
+            setLoading(false);
+            return;
+        }
+        axios
+            .post(
+                `${BACKEND_URL}/UpdateGoal/`,
+                JSON.stringify({
+                    goal: newGoal,
+                }),
+                {
+                    headers,
+                    withCredentials: true,
+                }
+            )
+            .then(() => {
+                setOperation("Goal successfully changed.");
+                setUserInfo({ goal: newGoal });
                 setStatus("success");
                 setLoading(false);
             })
@@ -177,6 +207,56 @@ export const Profile: React.FC = () => {
                         <ProfileField>
                             {emailStatus ? "enabled" : "disabled"}
                         </ProfileField>
+                    </Grid>
+                </Grid>
+            </KusaBox>
+            <KusaBox
+                width="90%"
+                styles={{ marginTop: "1rem", padding: "2rem" }}
+            >
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <Typography
+                            variant="h5"
+                            marginTop={1.5}
+                            color="neutral.main"
+                        >
+                            goal
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <ProfileField
+                            styles={{ width: "80%" }}
+                            onChange={
+                                edit
+                                    ? (e: { target: HTMLInputElement }) =>
+                                          setNewGoal(parseInt(e.target.value))
+                                    : null
+                            }
+                            value={goal}
+                        >
+                            {goal} hours
+                        </ProfileField>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Button
+                            onClick={() => {
+                                if (edit && newGoal) submitGoal();
+                                setNewGoal(null);
+                                setEdit(!edit);
+                            }}
+                        >
+                            <img
+                                src={write}
+                                alt="edit"
+                                width={iconHeight}
+                                height={iconHeight}
+                                style={{
+                                    marginRight: "1rem",
+                                    marginBottom: "-0.5rem",
+                                }}
+                            />
+                        </Button>
                     </Grid>
                 </Grid>
             </KusaBox>

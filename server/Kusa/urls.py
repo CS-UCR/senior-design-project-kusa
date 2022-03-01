@@ -71,6 +71,7 @@ urlpatterns = [
     path('close', views.close_view, name='close'),
     path('getToken/', authentication.get_token, name='getToken'),
     path('addEmail/', manageUser.add_email, name="addEmail"),
+    path('UpdateGoal/', manageUser.adjust_goal, name='UpdateGoal'),
     path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
     path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
