@@ -6,5 +6,4 @@ class KusaConfig(AppConfig):
     def ready(self):
             from Kusa.scheduler import scheduler
             scheduler.start()
-
     

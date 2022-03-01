@@ -79,7 +79,7 @@ export const Profile: React.FC = () => {
         authAxios
             .get(
                 `${BACKEND_URL}/Deactivate/`,
-                { withCredentials: true, headers }
+                { withCredentials: true, headers}
             )
             .then(() => {
                 setOperation(
