@@ -9,20 +9,26 @@ import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadin
 import { BACKEND_URL } from "../../constants/backendURL";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { headers } from "../../constants/headers";
+import { getToken } from "../../contexts/UserContext/utils/useUserCookies";
 
 export const Signup: React.FC = () => {
     const { userId, setUserInfo } = React.useContext(UserContext);
     const [loading, setLoading] = React.useState(false);
     const [email, setEmail] = React.useState<string | undefined>(undefined);
     const [error, setError] = React.useState("");
-
+    const authAxios = axios.create({
+        headers: {
+            ...headers,
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
     const sendSignUp = () => {
         if (!email) {
             setError("Enter an email address first.");
             return;
         }
         setLoading(true);
-        axios
+        authAxios
             .post(`${BACKEND_URL}/addEmail/`, {
                 userId: userId,
                 email: email,
