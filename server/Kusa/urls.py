@@ -39,5 +39,5 @@ urlpatterns = [
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
-    path('get_user_daily_hours/', views.get_user_daily_hours, name='get_user_daily_hours'),
+    path('getDailyHours/', views.get_user_daily_hours, name='get_user_daily_hours'),
 ]
