@@ -48,6 +48,9 @@ import axios from "axios";
 import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
 import { default as dog } from "../../../assets/friends/dog.svg"; //come back later
 import { setRangeValue } from "react-tsparticles";
+
+import { KusaWhiteSpace } from "./WhiteSpace";
+
 const iconHeight = 40;
 var thisAccountName = "Yuteng"
 
@@ -59,7 +62,7 @@ const deleteURL = "http://127.0.0.1:8000/api/deleteFriend/";
 
 
 
-export const FriendsListField: React.FC<any> = ({ name, setData, data }) =>
+export const FriendsListField: React.FC<any> = ({ name, setFriendList, friendList }) =>
 {
 
     
@@ -67,8 +70,11 @@ export const FriendsListField: React.FC<any> = ({ name, setData, data }) =>
         axios.get(deleteURL + thisAccountName + "&" + name).then((response) => {
             //console.log(response.data)
           });
+        console.log(friendList)
+        var newFriendList = friendList.filter(function(e: string) {return e !== name})
+        console.log(newFriendList)
+        setFriendList(newFriendList)
         
-        setData([])
     }
     
     
@@ -76,41 +82,43 @@ export const FriendsListField: React.FC<any> = ({ name, setData, data }) =>
     
 
     return(
-        <KusaBox width="90%" styles={{ padding: "2rem" }}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={1}>
-                        <img
+        <><KusaBox width="90%" styles={{ padding: "2rem" }}>
+            <Grid container spacing={1}>
+                <Grid item xs={1}>
+                    <img
                         src={dog}
                         alt="invite"
                         width={iconHeight}
                         height={iconHeight}
-                        style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}/>
-                        </Grid>
-                        <Grid item xs={1}/>
-                            
-                        <Grid item xs={1}>
-                            {name}
-                            
-                        </Grid>
+                        style={{ marginRight: "1rem", marginBottom: "-0.5rem" }} />
+                </Grid>
+                <Grid item xs={1} />
 
-                        <Grid item xs={4}></Grid>              
+                <Grid item xs={1}>
+                    {name}
 
-                        <Button variant="contained" color="success" size="small" >
-                            Chat
-                        </Button>
+                </Grid>
 
-                        <Grid item xs={2}></Grid>
+                <Grid item xs={4}></Grid>
 
-                        <Button variant="contained" color="success" size="small" onClick={handleDelete}>
-                            Remove Friend
-                        </Button>
+                <Button variant="contained" color="success" size="small">
+                    Chat
+                </Button>
 
-                        <Grid item xs={2}>
-                        
-                        </Grid>
-                        
-                    </Grid>
-                    
-                </KusaBox>
+                <Grid item xs={2}></Grid>
+
+                <Button variant="contained" color="success" size="small" onClick={handleDelete}>
+                    Remove Friend
+                </Button>
+
+                <Grid item xs={2}>
+
+                </Grid>
+
+            </Grid>
+
+
+
+        </KusaBox><KusaWhiteSpace></KusaWhiteSpace></>
     );
 }

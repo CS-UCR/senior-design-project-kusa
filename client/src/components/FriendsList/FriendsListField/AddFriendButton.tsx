@@ -21,6 +21,8 @@ import {
 } from "@mui/material";
 import { FormatUnderlinedSharp } from "@mui/icons-material";
 
+import { KusaWhiteSpace } from "./WhiteSpace";
+
 var userName:string;
 var friendsList: {} | null | undefined = []
 //account holder id (whoever login we will have his steamid availible)
@@ -29,11 +31,10 @@ var thisAccountName = "Yuteng"
 
 const baseURL = "http://127.0.0.1:8000/api/friendRequest/";
 
-export function SearchFriend()
-{
-    
 
-    
+
+export const AddFriend: React.FC<any> = ({ name, setFriendList, friendList }) =>
+{
     // const [post, setPost] = React.useState(null);
 
     const [open, setOpen] = React.useState(false);
@@ -66,13 +67,10 @@ export function SearchFriend()
           });
         
         console.log(value)
-        
-        
-        
     }
 
     return(
-        <Grid>
+        <><Grid>
             <Button variant="contained" color="success" onClick={handleClickOpen}>
                 add friends
             </Button>
@@ -92,20 +90,24 @@ export function SearchFriend()
                         variant="outlined"
                         // sx={{input:{color:'black'}}}
                         // color = "success"
-                        value = {value}
-                        onChange={handleChange}
-                    />
+                        value={value}
+                        onChange={handleChange} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSearch} >search</Button>
+                    <Button onClick={handleSearch}>search</Button>
                     {/* {GetHelper(value)} */}
                 </DialogActions>
             </Dialog>
             {/* {friendsList} */}
-            
-        </Grid> 
+
+        </Grid><KusaWhiteSpace></KusaWhiteSpace></>
         
-    )
-    
+    );
+
+        
 }
+
+
+    
+    

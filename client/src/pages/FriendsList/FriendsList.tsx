@@ -10,13 +10,16 @@ import { default as smile } from "../../assets/friends/creepySmile.svg";
 import { default as hand } from "../../assets/friends/hand.svg";
 
 
-import { Invites } from "./FriendsListHelperFunc/InviteHelper";
-import { Friends } from "./FriendsListHelperFunc/friendsHelper";
-import { blocked } from "./FriendsListHelperFunc/blockHelper";
-import { addFriends } from "./FriendsListHelperFunc/addFriendsHelper";
+
+
+
 
 import { useEffect, useState } from "react";
 import { FriendsListField } from "../../components/FriendsList/FriendsListField/FriendsListField";
+import { InviteListField } from "../../components/FriendsList/FriendsListField/InviteListField";
+import { AddFriend } from "../../components/FriendsList/FriendsListField/AddFriendButton";
+
+
 import { render } from "@testing-library/react";
 
 const baseURL = "http://127.0.0.1:8000/api/getFriendList/";
@@ -29,31 +32,39 @@ var array_of_people:any[] = []
 
 export const FriendsList: React.FC = () => {
 
-    const[data,setData] = useState([]);
+    const[inviteList,setInviteList] = useState([]);
+
+    useEffect(() => {
+    (
+        async () => {
+            const response = await fetch(`http://127.0.0.1:8000/api/getFriendRequest/${thisAccountName}`)
+            const inviteList = await response.json();
+            setInviteList(inviteList)
+
+        }
+    )();
+    },[]);
+
+
+
+
+    const[friendList,setFriendList] = useState([]);
 
     useEffect(() => {
     (
         async () => {
             const response = await fetch(`http://127.0.0.1:8000/api/getFriendList/${thisAccountName}` )
-            const data = await response.json();
-            setData(data)
+            const friendList = await response.json();
+            setFriendList(friendList)
             
         }
     )();
     },[]);
-    console.log(data)
-
-    const refresh = () => {
-        
-    }
     
-    // array_of_people = []
 
-    // for (var i = 0; i < data.length; i++)
-    // {
-    //     array_of_people.push(Person_FriendList(data[i]))
-    //     array_of_people.push(wsv())
-    // }
+    
+    
+    
 
 
     const iconHeight = 40;
@@ -71,7 +82,9 @@ export const FriendsList: React.FC = () => {
                 invites
             </KusaHeader>
             
-            {Invites()}
+            
+
+            {inviteList.map(x => <InviteListField name={x} setInviteList={setInviteList} inviteList={inviteList} setFriendList={setFriendList} friendList={friendList}></InviteListField>)}
             
 
             <KusaHeader>
@@ -86,22 +99,12 @@ export const FriendsList: React.FC = () => {
                 friends
             </KusaHeader>
             
-            {addFriends()}
-            {/* {Friends()} */}
             
-            {/* /{loop} */}
-            {/* for(int i = x )
-            {
-                return(
-                    <FriendsList person={array_of_people[i]}> </FriendsList>
-                )
-                
-            } */}
-
-            {/* {data.map(x => <FriendsList> </FriendsList>)} */}
             
-            {data.map(x => <FriendsListField name={x} setData={setData}></FriendsListField>)}
-            {console.log(data)}
+            <AddFriend></AddFriend>
+            
+            {friendList.map(x => <FriendsListField name={x} setFriendList={setFriendList} friendList={friendList}></FriendsListField>) }
+            {console.log(friendList)}
 
             <KusaHeader>
                 <img
@@ -114,7 +117,7 @@ export const FriendsList: React.FC = () => {
                 blocked
             </KusaHeader>
 
-            {blocked()}
+            {/* {blocked()} */}
             
         </Container>
     );
