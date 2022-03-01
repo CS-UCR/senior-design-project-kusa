@@ -15,7 +15,6 @@ import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
 import { Achievement } from "../../components/Achievement/Achievement";
 import { ResponsiveLine, Serie } from "@nivo/line";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
-import axios from "axios";
 
 const theme = {
     axis: {
@@ -60,6 +59,8 @@ export const Home: React.FC = () => {
                     { x: "2/14/2022", y: 220 },
                     { x: "2/15/2022", y: 6 },
                     { x: "2/16/2022", y: 2 },
+                    { x: "2/17/2022", y: 2 },
+                    { x: "2/18/2022", y: 10 },
                     { x: "2/21/2022", y: 200 },
                 ],
             },
@@ -71,13 +72,12 @@ export const Home: React.FC = () => {
         let shiftNum = 0;
         let copy = playTime;
         const current = new Date().toLocaleDateString("en-US");
-        let currentIndex = 0;
+        let currentIndex = playTime[0]?.data.length;
 
         copy[0]?.data.forEach((item, index) => {
             if (item.x === current) currentIndex = index;
         });
 
-        console.log("current index is",currentIndex, "from", current);
         switch (period) {
             case "week":
                 shiftNum = 7;
@@ -116,10 +116,7 @@ export const Home: React.FC = () => {
             </KusaHeader>
             <Grid container spacing={5}>
                 {achievements
-                    .filter(
-                        (achieve) =>
-                            achieve.progress !== 100
-                    )
+                    .filter((achieve) => achieve.progress !== 100)
                     .slice(0, 3)
                     .map((achievement, index) => (
                         <Achievement {...achievement} key={index} />
@@ -191,7 +188,7 @@ export const Home: React.FC = () => {
                         theme={theme}
                     />
                 ) : (
-                    <Typography textAlign="center">
+                    <Typography textAlign="center" variant="h6" color="neutral.main">
                         Metrics are currently unavailable.
                     </Typography>
                 )}

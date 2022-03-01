@@ -9,7 +9,6 @@ import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadin
 import { BACKEND_URL } from "../../constants/backendURL";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { headers } from "../../constants/headers";
-import { getToken } from "../../contexts/UserContext/utils/useUserCookies";
 
 export const Signup: React.FC = () => {
     const { userId, setUserInfo } = React.useContext(UserContext);
@@ -22,16 +21,13 @@ export const Signup: React.FC = () => {
             setError("Enter an email address first.");
             return;
         }
-        let tokenResponse = getToken();
         setLoading(true);
         axios
             .post(`${BACKEND_URL}/addEmail/`, {
                 userId: userId,
-                headers: {
-                    ...headers,
-                    Authorization: "Bearer " + tokenResponse,
-                },
                 email: email,
+            }, {
+                headers, withCredentials: true
             })
             .then(() => {
                 setUserInfo({ isLoggedIn: true, email });
@@ -70,7 +66,7 @@ export const Signup: React.FC = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={8}>
-                            <LoginField required setState={setEmail}>
+                            <LoginField required setState={setEmail} type="email">
                                 example@example.example
                             </LoginField>
                         </Grid>
