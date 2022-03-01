@@ -3,22 +3,18 @@ from django.dispatch import receiver
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 import pymongo
-from .serializer import ConversationSerializer
+from .serializers import ConversationSerializer
 from Kusa.models import Conversation
 from django.views.decorators.csrf import csrf_exempt
 
-# new convo
+#add new convo
 @csrf_exempt
-def newConversation(request, senderID, self):
-    #newConversation = Conversation
-        #members:[req.body.senderID, req.body.receiverID]
-    newConversation = Conversation("members").split(",")
-    #newConversation = Conversation(senderID=request.POST.get("senderID"), receiverID=request.POST.get("SteamID"))
-    if savedConversation == newConversation.save():
-        return JsonResponse(savedConversation, status=200)
-
-    else:
-        return JsonResponse(conversation_serializer.errors, status=500)
+def addConversation(request):
+    members = request.POST.get("members").split(",")
+    newConversation = Conversation(members = members)
+    newConversation.save()
+    #return JsonResponse(newMessage.data, status=200, safe=False)
+    return HttpResponse("Conversation added")
 
 # get convo of a user
     # try
@@ -26,6 +22,12 @@ def newConversation(request, senderID, self):
         # return json(convo) 
     # catch
         # return json(error)
+@csrf_exempt
+def getConversation(self, userID):
+    conversations = Conversation.objects.get(members=userID)
+    conversation_serializer = ConversationSerializer(conversations, many=True)
+    return JsonResponse(conversations.members, safe=False)
+
 
 
 

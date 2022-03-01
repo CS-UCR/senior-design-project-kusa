@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, messages, conversations
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
@@ -36,5 +36,9 @@ urlpatterns = [
     path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
-    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser')
+    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
+    path('addMessage/', messages.addMessage, name='addMessage'),
+    path('getMessage/<str:conversationID>', messages.getMessage, name='getMessage'),
+    path('addConversation/', conversations.addConversation, name='addConversation'),
+    path('getConversation/<str:userID>', conversations.getConversation, name='getConversation'),
 ]

@@ -3,31 +3,21 @@ from django.dispatch import receiver
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 import pymongo
-from .serializer import MessageSerializer
+from .serializers import MessageSerializer
 from Kusa.models import Message
 from django.views.decorators.csrf import csrf_exempt
 
 # add message
 @csrf_exempt
-def getMessage(request, JsonResponse):
-    if request.method == 'GET':
-        messages = Message.objects.filter(conversationID)
-        message_serializer = MessageSerializer(messages, many=True)
-        if not messages:
-            return JsonResponse(message_serializer.errors, status=500)
-        else:
-            return JsonResponse(messages, status=200)
-
-
+def addMessage(request):
+    newMessage = Message(conversationID = request.POST.get("conversationID"), senderID = request.POST.get("senderID"), text = request.POST.get("text"))
+    newMessage.save()
+    #return JsonResponse(newMessage.data, status=200, safe=False)
+    return HttpResponse("Message added")
 
 # get message
 @csrf_exempt
-def getMessage(request, JsonResponse, conversationID):
-    if request.method == 'GET':
-        messages = Message.objects.filter(conversationID)
-        message_serializer = MessageSerializer(messages, many=True)
-        if not messages:
-            return JsonResponse(message_serializer.errors, status=500)
-        else:
-            return JsonResponse(messages, status=200)
-
+def getMessage(self, conversationID):
+    messages = Message.objects.get(conversationID=conversationID)
+    message_serializer = MessageSerializer(messages, many=True)
+    return JsonResponse(messages.text, safe=False)
