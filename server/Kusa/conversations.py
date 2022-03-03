@@ -11,24 +11,24 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def addConversation(request):
     members = request.POST.get("members").split(",")
+    #members = {senderID, receiverID}
     newConversation = Conversation(members = members)
     newConversation.save()
     #return JsonResponse(newMessage.data, status=200, safe=False)
     return HttpResponse("Conversation added")
 
 # get convo of a user
-    # try
-        # convo.filter(in members userID)
-        # return json(convo) 
-    # catch
-        # return json(error)
 @csrf_exempt
 def getConversation(self, userID):
-    conversations = Conversation.objects.get(members=userID)
+    conversations = Conversation.objects.filter(members__contains=userID)
     conversation_serializer = ConversationSerializer(conversations, many=True)
-    return JsonResponse(conversations.members, safe=False)
-
-
-
+    return JsonResponse(conversation_serializer.data, safe=False)
+    #return HttpResponse("Conversation found")
 
 # get convo two users
+# @csrf_exempt
+# def getConversation(self, firstUserID, secondUserID):
+#     conversations = Conversation.objects.filter(members__value__contains=userID)
+#     conversation_serializer = ConversationSerializer(conversations, many=True)
+#     #return JsonResponse(conversation_serializer.data, safe=False)
+#     return HttpResponse("Conversation found")
