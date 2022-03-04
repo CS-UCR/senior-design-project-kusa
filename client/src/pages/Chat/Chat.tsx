@@ -120,7 +120,8 @@ export const Chat: React.FC = () => {
                                     value={newMessage}
                                     >
                                 </textarea>
-                                <button className="chatSubmitButton" onClick={handleSubmit}>
+                                <button className="chatSubmitButton">
+                                {/* <button className="chatSubmitButton" onClick={handleSubmit}> */}
                                  Send 
                                 </button>
                         
