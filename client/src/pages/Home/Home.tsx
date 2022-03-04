@@ -15,6 +15,14 @@ import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
 import { Achievement } from "../../components/Achievement/Achievement";
 import { ResponsiveLine, Serie } from "@nivo/line";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
+import axios from "axios";
+import { BACKEND_URL } from "../../constants/backendURL";
+import { headers } from "../../constants/headers";
+
+interface HourData {
+    date: string;
+    hours: number;
+}
 
 const theme = {
     axis: {
@@ -43,28 +51,23 @@ export const Home: React.FC = () => {
         setLoading(true);
         //insert endpoint request here for playtime
         //our real implementation would not be missing days as we gather this info everyday on the backend
-        setPlayTime([
-            {
-                id: "week",
-                color: "",
-                data: [
-                    { x: "2/01/2022", y: 224 },
-                    { x: "2/07/2022", y: 224 },
-                    { x: "2/08/2022", y: 20 },
-                    { x: "2/09/2022", y: 30 },
-                    { x: "2/10/2022", y: 100 },
-                    { x: "2/11/2022", y: 200 },
-                    { x: "2/12/2022", y: 40 },
-                    { x: "2/13/2022", y: 2 },
-                    { x: "2/14/2022", y: 220 },
-                    { x: "2/15/2022", y: 6 },
-                    { x: "2/16/2022", y: 2 },
-                    { x: "2/17/2022", y: 2 },
-                    { x: "2/18/2022", y: 10 },
-                    { x: "2/21/2022", y: 200 },
-                ],
-            },
-        ]);
+        axios
+            .get(`${BACKEND_URL}/getPlaytime`, {
+                headers,
+                withCredentials: true,
+            })
+            .then((payload) => {
+                let holder: Serie[] = [{ id: "playtime", color: "", data: [] }];
+                payload.data.forEach((item: HourData) =>
+                    holder[0].data.push({ x: item.date, y: item.hours })
+                );
+                setPlayTime(holder);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setPlayTime([]);
+                console.log(err);
+            });
         setLoading(false);
     }, []);
 
@@ -173,7 +176,7 @@ export const Home: React.FC = () => {
                             reverse: false,
                         }}
                         axisLeft={{
-                            format: (value) => `${value}min`,
+                            format: (value) => `${value}hr`,
                         }}
                         lineWidth={5}
                         pointLabelYOffset={1}
@@ -188,7 +191,11 @@ export const Home: React.FC = () => {
                         theme={theme}
                     />
                 ) : (
-                    <Typography textAlign="center" variant="h6" color="neutral.main">
+                    <Typography
+                        textAlign="center"
+                        variant="h6"
+                        color="neutral.main"
+                    >
                         Metrics are currently unavailable.
                     </Typography>
                 )}

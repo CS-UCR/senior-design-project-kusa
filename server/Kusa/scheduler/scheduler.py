@@ -23,8 +23,7 @@ def update_all_users_playtime():
         if not has_duplicate_entry(date,list_of_json):
             entry.daily_hours.append({'date': date, 'hours': get_total_playtime_hours(steam_id)})
             entry.save()
-    
-    
+
 def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
