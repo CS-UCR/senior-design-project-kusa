@@ -15,4 +15,4 @@ class ConversationSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ('conversationID','senderID','text')
+        fields = ('conversationID','senderID','text','timestamp')

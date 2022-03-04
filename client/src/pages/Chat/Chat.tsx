@@ -10,10 +10,59 @@ import { KusaChatMenu } from "../../components/Kusa/KusaChat/KusaChatMenu";
 import Conversation from "../../components/Chat/Conversation";
 import Message from "../../components/Chat/Message";
 import ChatOnline from "../../components/Chat/ChatOnline";
+import { UserContext } from "../../contexts/UserContext/UserContext";
+import { BACKEND_URL } from "../../constants/backendURL";
+import axios from "axios";
 
 export const Chat: React.FC = () => {
     const iconHeight = 50;
+    const [conversations, setConversations] = React.useState([]);
+    const [currentChat, setCurrentChat] = React.useState(null);
+    const [messages, setMessages] = React.useState([]);
+    const [newMessage, setNewMessage] = React.useState("");
+    const { userId } = React.useContext(UserContext);
+    
+    React.useEffect(() => {
+        const getConversation = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_URL}/getConversation/` + userId);
+                setConversations(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getConversation();
+    }, [userId]);
+    
+    React.useEffect(() => {
+        const getMessages = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_URL}/getMessage/` + currentChat!['_id']);
+                setMessages(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getMessages();
+    }, [currentChat]);
+    
+    // const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    //     // e.preventDefault();
+    //     const message = {
+    //         conversationID: currentChat!['_id'],
+    //         senderID: userId,
+    //         text: newMessage,
+    //     };
 
+    //     try {
+    //         const res = await axios.post(`${BACKEND_URL}/addMessage/`, message);
+    //         setMessages([...messages]);
+    //         setNewMessage("");
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
+    
     return (
         <Container sx={{
             maxWidth:'100%',
@@ -45,43 +94,43 @@ export const Chat: React.FC = () => {
                             placeholder="Search for friends"
                             className="chatMenuInput"
                         />
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
-                        <Conversation></Conversation>
+                        {conversations.map((c)=> (
+                            <div onClick={()=>setCurrentChat(c)}>
+                                <Conversation conversation={c} currentUser={userId}/>
+                            </div>
+                        ))}
                     </div>
                 </KusaChatMenu>
 
                 {/* chatBox */}
                 <KusaChatBox>
                     <div className="chatBoxWrapper">
-                        <div className="chatBoxTop">
-                            <Message own={false}/>
-                            <Message own={true}/>
-                            <Message own={false}/>
-                            <Message own={false}/>
-                            <Message own={false}/>
-                            <Message own={true}/>
-                            <Message own={true}/>
-                            <Message own={true}/>
-                        </div>
-                        <div className="chatBoxBottom">
-                            <textarea
-                                className="chatMessageInput"
-                                placeholder="write something..."
-                            >
-                            </textarea>
-                            <button className="chatSubmitButton"> Send </button>
-                        </div>
+                        {currentChat ? (
+                            <>
+                            <div className="chatBoxTop">
+                                {messages.map((m)=> (
+                                    <Message messages={m} own={m['senderID'] === userId}/>
+                                ))}
+                            </div>
+                            <div className="chatBoxBottom">
+                                <textarea
+                                    className="chatMessageInput"
+                                    placeholder="write something..."
+                                    onChange={(e)=>setNewMessage(e.target.value)}
+                                    value={newMessage}
+                                    >
+                                </textarea>
+                                <button className="chatSubmitButton" onClick={handleSubmit}>
+                                 Send 
+                                </button>
+                        
+                            </div>
+                            </>) : (
+                            <span className="noConversationText">
+                                Click on a user to start a chat.
+                            </span>)}  
                     </div>  
-                </KusaChatBox>
+                    </KusaChatBox>
 
                 {/* chatOnline */}
                 <KusaChatMenu>
@@ -93,3 +142,4 @@ export const Chat: React.FC = () => {
         </Container>
     );
 };
+

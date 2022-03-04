@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 # add message
 @csrf_exempt
 def addMessage(request):
-    newMessage = Message(conversationID = request.POST.get("conversationID"), senderID = request.POST.get("senderID"), text = request.POST.get("text"))
+    newMessage = Message(conversationID = request.POST.get("conversationID"), senderID = request.POST.get("senderID"), text = request.POST.get("text"), timestamp = request.POST.get("timestamp"))
     newMessage.save()
     #return JsonResponse(newMessage.data, status=200, safe=False)
     return HttpResponse("Message added")
@@ -18,6 +18,6 @@ def addMessage(request):
 # get message
 @csrf_exempt
 def getMessage(self, conversationID):
-    messages = Message.objects.get(conversationID=conversationID)
+    messages = Message.objects.filter(conversationID__contains=conversationID)
     message_serializer = MessageSerializer(messages, many=True)
-    return JsonResponse(messages.text, safe=False)
+    return JsonResponse(message_serializer.data, safe=False)

@@ -28,7 +28,6 @@ def getConversation(self, userID):
 # get convo two users
 # @csrf_exempt
 # def getConversation(self, firstUserID, secondUserID):
-#     conversations = Conversation.objects.filter(members__value__contains=userID)
+#     conversations = Conversation.objects.find_one(members__contains=userID)
 #     conversation_serializer = ConversationSerializer(conversations, many=True)
-#     #return JsonResponse(conversation_serializer.data, safe=False)
-#     return HttpResponse("Conversation found")
+#     return JsonResponse(conversation_serializer.data, safe=False)

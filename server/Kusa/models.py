@@ -72,9 +72,11 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
         return self.personaname
 
 class Conversation(models.Model):
-    members = models.JSONField(default=[])
+    _id = models.UUIDField(primary_key=True, unique=True)
+    members = models.JSONField(null=True)
 
 class Message(models.Model):
     conversationID = models.CharField(default='null', max_length=50)
     senderID = models.CharField(default='null', max_length=30)
     text = models.CharField(max_length=1000)
+    timestamp = models.DateTimeField(auto_now_add=True)
