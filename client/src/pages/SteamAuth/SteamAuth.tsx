@@ -13,10 +13,15 @@ export const SteamAuth: React.FC = () => {
     const { setUserInfo } = React.useContext(UserContext);
     const token = getToken();
     const navigate = useNavigate();
-
+    const authAxios = axios.create({
+        headers: {
+            ...headers,
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
     React.useEffect(() => {
         if (token) {
-            axios
+            authAxios
                 .get(`${BACKEND_URL}/getAUser/`, {
                     headers, 
                     withCredentials: true,
