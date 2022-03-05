@@ -14,6 +14,7 @@ from pathlib import Path
 from environ import Env
 import os
 
+
 # Setup Environment
 env = Env()
 env.read_env(env_file='admin/.env')
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'social_django',
     'rest_framework',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -242,3 +244,4 @@ SOCIAL_AUTH_PIPELINE = (
 CORS_ALLOWED_ORIGINS = [
     FRONTEND_URL,
 ]
+CORS_ALLOW_CREDENTIALS = True

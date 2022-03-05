@@ -8,6 +8,7 @@ export const LoginField: React.FC<any> = ({
     error,
     helperText,
     setState,
+    type,
 }) => (
     <TextField
         required={required}
@@ -24,6 +25,7 @@ export const LoginField: React.FC<any> = ({
         }}
         error={error}
         helperText={helperText}
+        type={type}
         variant="filled"
     />
 );

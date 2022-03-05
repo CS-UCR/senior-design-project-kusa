@@ -24,10 +24,12 @@ from Kusa import views
 
 # router = routers.DefaultRouter()
 # router.register('TestInfo', views.TestView)
+
+
 from django.urls import path
+
 from . import authentication, iSteamUserStats, iSteamUser, views, manageUser
-from django.conf.urls import url
-from django.contrib.auth.decorators import login_required
+
 
 
 app_name = "Kusa" 
@@ -66,14 +68,18 @@ urlpatterns = [
     # path('getToken/',authentication.getToken, name='getToken'),
     # path('RegisterUser/', manageUser.register_user, name='RegisterUser'),
     
+    path('GetFriendList/', iSteamUser.get_friend_list, name='GetFriendList'),
+    path('GetOwnedGames/', iSteamUserStats.get_owned_games, name='GetOwnedGames'),
     path('login', authentication.LoginView.as_view(), name='login'),
     path('logout', authentication.LogoutView.as_view(), name='logout'),
     path('close', views.close_view, name='close'),
     path('getToken/', authentication.get_token, name='getToken'),
     path('addEmail/', manageUser.add_email, name="addEmail"),
+    path('UpdateGoal/', manageUser.adjust_goal, name='UpdateGoal'),
     path('ToggleUserEmail/', manageUser.toggle_email, name='ToggleEmail'),
     path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
-    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser')
+    path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
+    path('getDailyHours/', views.get_user_daily_hours, name='get_user_daily_hours'),
 ]

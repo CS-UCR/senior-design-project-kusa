@@ -4,7 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 from djongo import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from django.db import models
+from django import forms
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.postgres.fields import ArrayField
@@ -41,7 +41,6 @@ class SteamUserManager(BaseUserManager):
 
         return self._create_user(id, password, **extra_fields)
 
-
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
@@ -55,6 +54,8 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     #Kusa-signup specific fields
     email=models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
+    daily_hours=models.JSONField(default=[])
+    goal = models.IntegerField(default=40)
 
     # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 

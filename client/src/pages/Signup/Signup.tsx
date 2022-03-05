@@ -16,22 +16,24 @@ export const Signup: React.FC = () => {
     const [loading, setLoading] = React.useState(false);
     const [email, setEmail] = React.useState<string | undefined>(undefined);
     const [error, setError] = React.useState("");
-
+    const authAxios = axios.create({
+        headers: {
+            ...headers,
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
     const sendSignUp = () => {
         if (!email) {
             setError("Enter an email address first.");
             return;
         }
-        let tokenResponse = getToken();
         setLoading(true);
-        axios
+        authAxios
             .post(`${BACKEND_URL}/addEmail/`, {
                 userId: userId,
-                headers: {
-                    ...headers,
-                    Authorization: "Bearer " + tokenResponse,
-                },
                 email: email,
+            }, {
+                headers, withCredentials: true
             })
             .then(() => {
                 setUserInfo({ isLoggedIn: true, email });
@@ -70,7 +72,7 @@ export const Signup: React.FC = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={8}>
-                            <LoginField required setState={setEmail}>
+                            <LoginField required setState={setEmail} type="email">
                                 example@example.example
                             </LoginField>
                         </Grid>
