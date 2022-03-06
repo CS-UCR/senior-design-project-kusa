@@ -42,7 +42,7 @@ urlpatterns = [
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
     path('GetPlayerSummaries/', iSteamUser.get_player_summaries, name='GetPlayerSummaries'),
-    path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
+    #path('GetOwnedGames/', views.get_owned_games, name='GetOwnedGames'),
     #path('RegisterUser/', manageUser.register_user, name='RegisterUser')
 
 
