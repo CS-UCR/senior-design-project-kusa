@@ -51,10 +51,9 @@ import { setRangeValue } from "react-tsparticles";
 
 import { KusaWhiteSpace } from "./WhiteSpace";
 
+import { BACKEND_URL } from "../../../constants/backendURL";
+
 const iconHeight = 40;
-var thisAccountName = "Yuteng"
-
-const deleteURL = "http://127.0.0.1:8000/api/deleteFriend/";
 
 
 
@@ -62,16 +61,17 @@ const deleteURL = "http://127.0.0.1:8000/api/deleteFriend/";
 
 
 
-export const FriendsListField: React.FC<any> = ({ name, setFriendList, friendList }) =>
+
+export const FriendsListField: React.FC<any> = ({ friendName, setFriendList, friendList, userId, thisAccountName}) =>
 {
 
     
     const handleDelete = () => {
-        axios.get(deleteURL + thisAccountName + "&" + name).then((response) => {
+        axios.get(`${BACKEND_URL}/deleteFriend/` + thisAccountName + "&" + friendName).then((response) => {
             //console.log(response.data)
           });
         console.log(friendList)
-        var newFriendList = friendList.filter(function(e: string) {return e !== name})
+        var newFriendList = friendList.filter(function(e: string) {return e !== friendName})
         console.log(newFriendList)
         setFriendList(newFriendList)
         
@@ -95,7 +95,7 @@ export const FriendsListField: React.FC<any> = ({ name, setFriendList, friendLis
                 <Grid item xs={1} />
 
                 <Grid item xs={1}>
-                    {name}
+                    {friendName}
 
                 </Grid>
 

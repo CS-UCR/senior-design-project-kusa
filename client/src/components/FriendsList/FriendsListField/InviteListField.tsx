@@ -47,33 +47,32 @@ import {
 import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
 import { default as dog } from "../../../assets/friends/dog.svg"; //come back later
 
+import { BACKEND_URL } from "../../../constants/backendURL";
 
 import axios from "axios";
 
 const iconHeight = 40;
 
-var thisAccountName = "Yuteng"
 
 
-const acceptURL = "http://127.0.0.1:8000/api/acceptFriendRequest/";
-
-const rejectURL = "http://127.0.0.1:8000/api/rejectFriendRequest/"
 
 
-export const InviteListField: React.FC<any> = ({ name, setInviteList, inviteList, setFriendList, friendList }) => {
+
+
+export const InviteListField: React.FC<any> = ({ personName, setInviteList, inviteList, setFriendList, friendList, thisAccountName }) => {
 
     const handleAccept = () => {
         //pass name to the backend
-        axios.get(acceptURL + thisAccountName + "&" + name).then((response) => {
+        axios.get(`${BACKEND_URL}/acceptFriendRequest/` + thisAccountName + "&" + personName).then((response) => {
             //console.log(response.data)
           });
 
         //remove person from invitelist
-        var newInviteList = inviteList.filter(function(e:string) {return e !== name})
+        var newInviteList = inviteList.filter(function(e:string) {return e !== personName})
         setInviteList(newInviteList)
         
         //add person to friendlist
-        friendList.push(name)
+        friendList.push(personName)
         setFriendList(friendList)
           
     };
@@ -81,12 +80,12 @@ export const InviteListField: React.FC<any> = ({ name, setInviteList, inviteList
 
     const handleReject = () => {
         //pass name to the backend
-        axios.get(rejectURL + thisAccountName + "&" + name).then((response) => {
+        axios.get(`${BACKEND_URL}/rejectFriendRequest/` + thisAccountName + "&" + personName).then((response) => {
             //console.log(response.data)
           });
         
         console.log(inviteList)
-        var newInviteList = inviteList.filter(function(e:string) {return e !== name})
+        var newInviteList = inviteList.filter(function(e:string) {return e !== personName})
         setInviteList(newInviteList)
         console.log(newInviteList)
 
@@ -113,7 +112,7 @@ export const InviteListField: React.FC<any> = ({ name, setInviteList, inviteList
                             
                         <Grid item xs={1}>
                             
-                            {name}
+                            {personName}
                         </Grid>
 
                         <Grid item xs={4}></Grid>              

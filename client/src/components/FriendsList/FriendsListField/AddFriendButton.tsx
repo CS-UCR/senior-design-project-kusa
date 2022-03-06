@@ -23,26 +23,23 @@ import { FormatUnderlinedSharp } from "@mui/icons-material";
 
 import { KusaWhiteSpace } from "./WhiteSpace";
 
+import { BACKEND_URL } from "../../../constants/backendURL";
 var userName:string;
 var friendsList: {} | null | undefined = []
-//account holder id (whoever login we will have his steamid availible)
-
-var thisAccountName = "Yuteng"
-
-const baseURL = "http://127.0.0.1:8000/api/friendRequest/";
 
 
 
-export const AddFriend: React.FC<any> = ({ name, setFriendList, friendList }) =>
+
+export const AddFriend: React.FC<any> = ({ thisAccountName, name, setFriendList, friendList }) =>
 {
-    // const [post, setPost] = React.useState(null);
+    
 
     const [open, setOpen] = React.useState(false);
     
     
     const [value, setValue] = useState("");
 
-    const [post, setPost] = useState(null);
+    // const [post, setPost] = useState(null);
 
     const handleChange = (e: { target: { value: any; }; }) => {
         setValue(e.target.value)
@@ -62,8 +59,8 @@ export const AddFriend: React.FC<any> = ({ name, setFriendList, friendList }) =>
         userName = value;
         setValue("");
         setOpen(false);
-        axios.get(baseURL + value + "&" + thisAccountName).then((response) => {
-            setPost(response.data);
+        axios.get(`${BACKEND_URL}/friendRequest/` + value + "&" + thisAccountName).then((response) => {
+            
           });
         
         console.log(value)

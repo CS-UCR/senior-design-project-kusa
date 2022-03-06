@@ -19,27 +19,38 @@ import { FriendsListField } from "../../components/FriendsList/FriendsListField/
 import { InviteListField } from "../../components/FriendsList/FriendsListField/InviteListField";
 import { AddFriend } from "../../components/FriendsList/FriendsListField/AddFriendButton";
 
+import { UserContext } from "../../contexts/UserContext/UserContext";
 
 import { render } from "@testing-library/react";
 
-const baseURL = "http://127.0.0.1:8000/api/getFriendList/";
-
-var thisAccountName = "Yuteng"
+import { BACKEND_URL } from "../../constants/backendURL";
 
 
-var array_of_people:any[] = []
+
+
+
+
+
+
 
 
 export const FriendsList: React.FC = () => {
+
+    const
+    {
+        userId,
+        name,
+    } = React.useContext(UserContext);
 
     const[inviteList,setInviteList] = useState([]);
 
     useEffect(() => {
     (
         async () => {
-            const response = await fetch(`http://127.0.0.1:8000/api/getFriendRequest/${thisAccountName}`)
+            const response = await fetch(`${BACKEND_URL}/getFriendRequest/${name}`)
             const inviteList = await response.json();
             setInviteList(inviteList)
+            console.log(setInviteList)
 
         }
     )();
@@ -53,7 +64,7 @@ export const FriendsList: React.FC = () => {
     useEffect(() => {
     (
         async () => {
-            const response = await fetch(`http://127.0.0.1:8000/api/getFriendList/${thisAccountName}` )
+            const response = await fetch(`${BACKEND_URL}/getFriendList/${name}` )
             const friendList = await response.json();
             setFriendList(friendList)
             
@@ -81,10 +92,12 @@ export const FriendsList: React.FC = () => {
                 />
                 invites
             </KusaHeader>
+            {console.log(userId)}
+            {console.log(name)}
             
             
 
-            {inviteList.map(x => <InviteListField name={x} setInviteList={setInviteList} inviteList={inviteList} setFriendList={setFriendList} friendList={friendList}></InviteListField>)}
+            {inviteList.map(x => <InviteListField personName={x} setInviteList={setInviteList} inviteList={inviteList} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></InviteListField>)}
             
 
             <KusaHeader>
@@ -101,10 +114,10 @@ export const FriendsList: React.FC = () => {
             
             
             
-            <AddFriend></AddFriend>
-            
-            {friendList.map(x => <FriendsListField name={x} setFriendList={setFriendList} friendList={friendList}></FriendsListField>) }
+            <AddFriend thisAccountName={name}></AddFriend>
             {console.log(friendList)}
+            {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>) }
+            
 
             <KusaHeader>
                 <img
