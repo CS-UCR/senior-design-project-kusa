@@ -25,7 +25,7 @@ import { render } from "@testing-library/react";
 
 import { BACKEND_URL } from "../../constants/backendURL";
 
-
+import {Link} from "react-router-dom";
 
 
 
@@ -36,6 +36,7 @@ import { BACKEND_URL } from "../../constants/backendURL";
 
 export const FriendsList: React.FC = () => {
 
+    
     const
     {
         userId,
@@ -66,15 +67,14 @@ export const FriendsList: React.FC = () => {
         async () => {
             const response = await fetch(`${BACKEND_URL}/getFriendList/${name}` )
             const friendList = await response.json();
-            setFriendList(friendList)
+            setFriendList(friendList);
             
         }
     )();
     },[]);
     
 
-    
-    
+
     
 
 
@@ -127,7 +127,10 @@ export const FriendsList: React.FC = () => {
                     height={iconHeight}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
-                blocked
+                
+                
+
+
             </KusaHeader>
 
             {/* {blocked()} */}
