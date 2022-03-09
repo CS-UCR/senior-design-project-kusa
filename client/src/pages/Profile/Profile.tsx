@@ -165,6 +165,7 @@ export const Profile: React.FC = () => {
                 <IconBriefcase
                     width={iconHeight}
                     height={iconHeight}
+                    strokeWidth={2}
                     color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
@@ -254,6 +255,7 @@ export const Profile: React.FC = () => {
                                     marginRight: "1rem",
                                     marginBottom: "-0.5rem",
                                 }}
+                                strokeWidth={2}
                             />
                         </Button>
                     </Grid>
@@ -261,6 +263,7 @@ export const Profile: React.FC = () => {
             </KusaBox>
             <KusaHeader>
                 <IconLink
+                    strokeWidth={2}
                     height={iconHeight}
                     color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
@@ -319,6 +322,7 @@ export const Profile: React.FC = () => {
                 <IconSettings
                     height={iconHeight}
                     width={iconHeight}
+                    strokeWidth={2}
                     color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />

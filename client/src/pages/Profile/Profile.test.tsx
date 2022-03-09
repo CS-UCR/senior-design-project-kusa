@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { shallow } from "enzyme";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";

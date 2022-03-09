@@ -45,6 +45,7 @@ export const Home: React.FC = () => {
     const [period, setPeriod] = React.useState<string>("week");
     const [loading, setLoading] = React.useState(false);
     const iconHeight = 40;
+    const yellow = "#FDED5E";
 
     React.useEffect(() => {
         setLoading(true);
@@ -107,7 +108,13 @@ export const Home: React.FC = () => {
         <Container>
             <KusaLoadingSpinner loading={loading} />
             <KusaHeader styles={{ marginTop: "5rem" }}>
-                <IconTrophy height={iconHeight}/>
+                <IconTrophy
+                    height={iconHeight}
+                    width={iconHeight}
+                    color={yellow}
+                    strokeWidth={2}
+                    style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
+                />
                 achievements in your reach
             </KusaHeader>
             <Grid container spacing={5}>
@@ -137,7 +144,12 @@ export const Home: React.FC = () => {
                     <MenuItem value="year">Year</MenuItem>
                 </Select>
                 <KusaHeader>
-                    <IconChartBar height={iconHeight}/>
+                    <IconChartBar
+                        height={iconHeight}
+                        color="white"
+                        strokeWidth={2}
+                        style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
+                    />
                     metrics
                 </KusaHeader>
             </Box>
