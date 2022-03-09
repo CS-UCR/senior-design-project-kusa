@@ -115,7 +115,7 @@ class User(models.Model):
         app_label = 'Kusa'
 
 class Conversation(models.Model):
-    _id = models.UUIDField(primary_key=True, unique=True)
+    _id = models.ObjectIdField()
     members = models.JSONField(null=True)
 
 class Message(models.Model):

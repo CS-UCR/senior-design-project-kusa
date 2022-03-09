@@ -12,9 +12,9 @@ from django.views.decorators.csrf import csrf_exempt
 def addConversation(request):
     members = request.POST.get("members").split(",")
     #members = {senderID, receiverID}
-    newConversation = Conversation(members = members)
-    newConversation.save()
-    #return JsonResponse(newMessage.data, status=200, safe=False)
+    newConversation = Conversation.objects.create(members = members)
+    #newConversation.save()
+    #return JsonResponse(newConversation.data, status=200, safe=False)
     return HttpResponse("Conversation added")
 
 # get convo of a user

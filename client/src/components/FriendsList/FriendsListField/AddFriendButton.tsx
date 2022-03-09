@@ -24,19 +24,18 @@ import { FormatUnderlinedSharp } from "@mui/icons-material";
 import { KusaWhiteSpace } from "./WhiteSpace";
 
 import { BACKEND_URL } from "../../../constants/backendURL";
-var userName:string;
+var userName: string;
 var friendsList: {} | null | undefined = []
 
 
 
 
-export const AddFriend: React.FC<any> = ({ thisAccountName, name, setFriendList, friendList }) =>
-{
-    
+export const AddFriend: React.FC<any> = ({ thisAccountName, name, setFriendList, friendList }) => {
+
 
     const [open, setOpen] = React.useState(false);
-    
-    
+
+
     const [value, setValue] = useState("");
 
     // const [post, setPost] = useState(null);
@@ -48,27 +47,27 @@ export const AddFriend: React.FC<any> = ({ thisAccountName, name, setFriendList,
     const handleClickOpen = () => {
         setOpen(true);
     };
-    
+
     const handleClose = () => {
-       
+
         setOpen(false);
     };
 
     const handleSearch = () => {
-         //if user input is null ask them to make a input or cancel -----------------------------------------------
+        //if user input is null ask them to make a input or cancel -----------------------------------------------
         userName = value;
         setValue("");
         setOpen(false);
         axios.get(`${BACKEND_URL}/friendRequest/` + value + "&" + thisAccountName).then((response) => {
-            
-          });
-        
+
+        });
+
         console.log(value)
     }
 
-    return(
+    return (
         <><Grid>
-            <Button variant="contained" color="success" onClick={handleClickOpen}>
+            <Button variant="contained" color="secondary" onClick={handleClickOpen}>
                 add friends
             </Button>
             <Dialog open={open} onClose={handleClose} color="warning">
@@ -99,10 +98,10 @@ export const AddFriend: React.FC<any> = ({ thisAccountName, name, setFriendList,
             {/* {friendsList} */}
 
         </Grid><KusaWhiteSpace></KusaWhiteSpace></>
-        
+
     );
 
-        
+
 }
 
 

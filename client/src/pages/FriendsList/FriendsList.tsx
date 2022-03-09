@@ -25,7 +25,7 @@ import { render } from "@testing-library/react";
 
 import { BACKEND_URL } from "../../constants/backendURL";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -36,52 +36,52 @@ import {Link} from "react-router-dom";
 
 export const FriendsList: React.FC = () => {
 
-    
+
     const
-    {
-        userId,
-        name,
-    } = React.useContext(UserContext);
+        {
+            userId,
+            name,
+        } = React.useContext(UserContext);
 
-    const[inviteList,setInviteList] = useState([]);
-
-    useEffect(() => {
-    (
-        async () => {
-            const response = await fetch(`${BACKEND_URL}/getFriendRequest/${name}`)
-            const inviteList = await response.json();
-            setInviteList(inviteList)
-            console.log(setInviteList)
-
-        }
-    )();
-    },[]);
-
-
-
-
-    const[friendList,setFriendList] = useState([]);
+    const [inviteList, setInviteList] = useState([]);
 
     useEffect(() => {
-    (
-        async () => {
-            const response = await fetch(`${BACKEND_URL}/getFriendList/${name}` )
-            const friendList = await response.json();
-            setFriendList(friendList);
-            
-        }
-    )();
-    },[]);
-    
+        (
+            async () => {
+                const response = await fetch(`${BACKEND_URL}/getFriendRequest/${name}`)
+                const inviteList = await response.json();
+                setInviteList(inviteList)
+                console.log(setInviteList)
+
+            }
+        )();
+    }, []);
 
 
-    
+
+
+    const [friendList, setFriendList] = useState([]);
+
+    useEffect(() => {
+        (
+            async () => {
+                const response = await fetch(`${BACKEND_URL}/getFriendList/${name}`)
+                const friendList = await response.json();
+                setFriendList(friendList);
+
+            }
+        )();
+    }, []);
+
+
+
+
 
 
     const iconHeight = 40;
     return (
         <Container>
-            
+
             <KusaHeader>
                 <img
                     src={invite}
@@ -94,11 +94,11 @@ export const FriendsList: React.FC = () => {
             </KusaHeader>
             {console.log(userId)}
             {console.log(name)}
-            
-            
+
+
 
             {inviteList.map(x => <InviteListField personName={x} setInviteList={setInviteList} inviteList={inviteList} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></InviteListField>)}
-            
+
 
             <KusaHeader>
                 <img
@@ -108,16 +108,16 @@ export const FriendsList: React.FC = () => {
                     height={iconHeight}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
-                
+
                 friends
             </KusaHeader>
-            
-            
-            
+
+
+
             <AddFriend thisAccountName={name}></AddFriend>
             {console.log(friendList)}
-            {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>) }
-            
+            {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>)}
+
 
             <KusaHeader>
                 <img
@@ -127,14 +127,14 @@ export const FriendsList: React.FC = () => {
                     height={iconHeight}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
-                
-                
+
+
 
 
             </KusaHeader>
 
             {/* {blocked()} */}
-            
+
         </Container>
     );
 };

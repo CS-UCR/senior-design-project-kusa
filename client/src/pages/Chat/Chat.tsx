@@ -18,7 +18,7 @@ export const Chat: React.FC = () => {
     const iconHeight = 50;
     const [conversations, setConversations] = React.useState([]);
     const [currentChat, setCurrentChat] = React.useState(null);
-    const [messages, setMessages] = React.useState([]);
+    const [messages, setMessages] = React.useState<Array<any>>([]);
     const [newMessage, setNewMessage] = React.useState("");
     const { userId } = React.useContext(UserContext);
     
@@ -46,22 +46,21 @@ export const Chat: React.FC = () => {
         getMessages();
     }, [currentChat]);
     
-    // const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    //     // e.preventDefault();
-    //     const message = {
-    //         conversationID: currentChat!['_id'],
-    //         senderID: userId,
-    //         text: newMessage,
-    //     };
+    const handleSubmit = async (e: { preventDefault: any }) => {
+        const message = {
+            conversationID: currentChat!['_id'],
+            senderID: userId,
+            text: newMessage,
+        };
 
-    //     try {
-    //         const res = await axios.post(`${BACKEND_URL}/addMessage/`, message);
-    //         setMessages([...messages]);
-    //         setNewMessage("");
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // };
+        try {
+            const res = await axios.post(`${BACKEND_URL}/addMessage/`, message);
+            setMessages([...messages, res.data]);
+            setNewMessage("");
+        } catch (err) {
+            console.log(err);
+        }
+    };
     
     return (
         <Container sx={{
@@ -120,8 +119,8 @@ export const Chat: React.FC = () => {
                                     value={newMessage}
                                     >
                                 </textarea>
-                                <button className="chatSubmitButton">
-                                {/* <button className="chatSubmitButton" onClick={handleSubmit}> */}
+                                {/* <button className="chatSubmitButton"> */}
+                                <button className="chatSubmitButton" onClick={handleSubmit}>
                                  Send 
                                 </button>
                         
