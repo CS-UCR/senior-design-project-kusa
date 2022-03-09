@@ -9,8 +9,7 @@ import {
 } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
-import { default as chartbar } from "../../assets/home/chart-bar.svg";
-import { default as trophy } from "../../assets/home/trophy.svg";
+import { IconChartBar, IconTrophy } from "@tabler/icons";
 import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
 import { Achievement } from "../../components/Achievement/Achievement";
 import { ResponsiveLine, Serie } from "@nivo/line";
@@ -108,13 +107,7 @@ export const Home: React.FC = () => {
         <Container>
             <KusaLoadingSpinner loading={loading} />
             <KusaHeader styles={{ marginTop: "5rem" }}>
-                <img
-                    src={trophy}
-                    alt="trophy"
-                    width={iconHeight}
-                    height={iconHeight}
-                    style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
-                />
+                <IconTrophy height={iconHeight}/>
                 achievements in your reach
             </KusaHeader>
             <Grid container spacing={5}>
@@ -144,17 +137,7 @@ export const Home: React.FC = () => {
                     <MenuItem value="year">Year</MenuItem>
                 </Select>
                 <KusaHeader>
-                    <img
-                        src={chartbar}
-                        alt="chartbar"
-                        width={iconHeight}
-                        height={iconHeight}
-                        style={{
-                            marginRight: "1rem",
-                            marginBottom: "-0.5rem",
-                            display: "inline-block",
-                        }}
-                    />
+                    <IconChartBar height={iconHeight}/>
                     metrics
                 </KusaHeader>
             </Box>
