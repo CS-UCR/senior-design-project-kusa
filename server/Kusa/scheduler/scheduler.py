@@ -39,6 +39,6 @@ def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
     # run this job once every 24 hrs
-    scheduler.add_job(update_all_users_playtime, 'interval', minutes=1,
+    scheduler.add_job(update_all_users_playtime, 'interval', hours=24,
                       id='update_all_users_playtime', misfire_grace_time=None)
     scheduler.start()
