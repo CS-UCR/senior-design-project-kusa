@@ -52,7 +52,6 @@ def send_user_email(steam_id):
         if(datetime.today().isocalendar()[1] == datetime.strptime(value['date'], "%m/%d/%Y").isocalendar()[1]):
             sum += value['hours']
         if(sum > goal):
-            print("sum is greater than goal")
             try:
                 send_mail("Kusa Playtime Exceeded", 'You exceeded your goal for this week! Better luck next time. Remember, you can change your goal in the Kusa app.', settings.EMAIL_HOST_USER, [user['email']], fail_silently=False)
                 success = True
