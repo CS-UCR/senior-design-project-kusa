@@ -40,7 +40,6 @@ def get_user_daily_hours(request):
     else:
         return response
 
-<<<<<<< HEAD
 def get_user_achievements(request):
     """
     will return an array of the user's achievements
@@ -56,7 +55,6 @@ def get_user_achievements(request):
         return JsonResponse(list_of_json , safe=False)
     else: 
         return response
-=======
 
 def send_user_email(steam_id):
     success = False
@@ -75,4 +73,3 @@ def send_user_email(steam_id):
             except SMTPException as e:
                 print(e)
     return JsonResponse({'success': success}, safe=False)
->>>>>>> develop
