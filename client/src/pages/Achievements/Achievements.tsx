@@ -6,27 +6,11 @@ import {
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { default as trophy } from "../../assets/home/trophy.svg";
 import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
-import { AchievementRow } from "../../components/Achievement/AchievementRow";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import axios from "axios";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
-
-const theme = {
-    axis: {
-        fontSize: "20px",
-        ticks: {
-            text: {
-                fill: "#ffffff",
-            },
-        },
-        legend: {
-            text: {
-                fill: "#aaaaaa",
-            },
-        },
-    },
-};
+import { AchievementRow } from "../../components/Achievement/AchievementRow/AchievementRow";
 
 export const Achievements: React.FC = () => {
     const { achievements, setAchievements } = React.useContext(AchieveContext);

@@ -1,16 +1,17 @@
 import { Box, Grid, Typography } from "@mui/material";
 import * as React from "react";
-import { KusaBox } from "../Kusa/KusaBox/KusaBox";
-import KusaProgressBar from "../Kusa/KusaProgressBar/KusaProgressBar";
-import { achievementData } from "./utils/achievementData";
+import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
+import KusaProgressBar from "../../Kusa/KusaProgressBar/KusaProgressBar";
+import { achievementData } from "../utils/achievementData";
 import "./AchievementRow.css";
+
 interface AchievementProps {
-    id: string;
+    id?: string;
     progress?: number;
     date_achieved?: string;
 }
 
-//replace colors with a context color when we have time
+
 export const AchievementRow: React.FC<AchievementProps> = (props) => {
     const { id, progress, date_achieved } = props;
     const { title, description, image } = achievementData[id as string];

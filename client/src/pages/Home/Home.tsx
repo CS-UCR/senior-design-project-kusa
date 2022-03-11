@@ -11,12 +11,13 @@ import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { IconChartBar, IconTrophy } from "@tabler/icons";
 import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
-import { Achievement } from "../../components/Achievement/Achievement";
+import { Achievement } from "../../components/Achievement/Achievement/Achievement";
 import { ResponsiveLine, Serie } from "@nivo/line";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import axios from "axios";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
+
 
 interface HourData {
     date: string;
@@ -40,7 +41,7 @@ const theme = {
 };
 
 export const Home: React.FC = () => {
-    const { achievements } = React.useContext(AchieveContext);
+    const { achievements, setAchievements } = React.useContext(AchieveContext);
     const [playTime, setPlayTime] = React.useState<Serie[]>([]);
     const [period, setPeriod] = React.useState<string>("week");
     const [loading, setLoading] = React.useState(false);
@@ -49,8 +50,22 @@ export const Home: React.FC = () => {
 
     React.useEffect(() => {
         setLoading(true);
-        //insert endpoint request here for playtime
-        //our real implementation would not be missing days as we gather this info everyday on the backend
+        axios
+        .get(`${BACKEND_URL}/getAchievements`, {
+            headers,
+            withCredentials: true,
+        })
+        .then((response) => {
+            console.log(response.data)
+            const achievements = response.data
+            setAchievements({achievements});
+            setLoading(false);
+        })
+        .catch((err) => {
+            setAchievements([] as any);
+            console.log(err);
+        });
+        
         axios
             .get(`${BACKEND_URL}/getPlaytime`, {
                 headers,
@@ -146,6 +161,7 @@ export const Home: React.FC = () => {
                 <KusaHeader>
                     <IconChartBar
                         height={iconHeight}
+                        width={iconHeight}
                         color="white"
                         strokeWidth={2}
                         style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}

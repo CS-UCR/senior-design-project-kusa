@@ -1,8 +1,9 @@
 import { Box, Grid, Typography } from "@mui/material";
 import * as React from "react";
-import { KusaBox } from "../Kusa/KusaBox/KusaBox";
-import KusaProgressBar from "../Kusa/KusaProgressBar/KusaProgressBar";
-import { achievementData } from "./utils/achievementData";
+import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
+import KusaProgressBar from "../../Kusa/KusaProgressBar/KusaProgressBar";
+import { achievementData } from "../utils/achievementData";
+
 import "./Achievement.css";
 interface AchievementProps {
     id: string;
