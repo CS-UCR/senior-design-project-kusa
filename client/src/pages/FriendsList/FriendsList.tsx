@@ -48,7 +48,7 @@ export const FriendsList: React.FC = () => {
     useEffect(() => {
     (
         async () => {
-            const response = await fetch(`${BACKEND_URL}/getFriendRequest/${name}`)
+            const response = await fetch(`${BACKEND_URL}/getFriendRequest/${userId}`)
             const inviteList = await response.json();
             setInviteList(inviteList)
             console.log(setInviteList)
@@ -65,7 +65,7 @@ export const FriendsList: React.FC = () => {
     useEffect(() => {
     (
         async () => {
-            const response = await fetch(`${BACKEND_URL}/getFriendList/${name}` )
+            const response = await fetch(`${BACKEND_URL}/getFriendList/${userId}` )
             const friendList = await response.json();
             setFriendList(friendList);
             
@@ -114,7 +114,7 @@ export const FriendsList: React.FC = () => {
             
             
             
-            <AddFriend thisAccountName={name}></AddFriend>
+            <AddFriend thisAccountUserId={userId}></AddFriend>
             {console.log(friendList)}
             {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>) }
             

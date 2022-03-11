@@ -61,6 +61,11 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    FriendList = models.JSONField(default=[])
+    FriendRequest = models.JSONField(default=[])
+    
+    
+    
     objects = SteamUserManager()
 
     def get_short_name(self):
@@ -71,18 +76,10 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
 
 
-class Test(models.Model):
-    Name = models.CharField(default='null',max_length=30)
-    SteamID = models.CharField(default='null',max_length=30)
-    FriendList = models.JSONField(default=[])
-    FriendRequest = models.JSONField(default=[])
+# class Test(models.Model):
+#     Name = models.CharField(default='null',max_length=30)
+#     SteamID = models.CharField(default='null',max_length=30)
+#     FriendList = models.JSONField(default=[])
+#     FriendRequest = models.JSONField(default=[])
     
-class User(models.Model):
-    email = models.CharField(max_length=255)
-    emailsEnabled = models.BooleanField(max_length=255)
-    password = models.CharField(max_length=255)
-    date = models.DateField(max_length=255)
-    steamname = models.CharField(max_length=255)
-    class Meta:
-        app_label = 'Kusa'
 

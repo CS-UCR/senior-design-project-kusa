@@ -6,9 +6,9 @@ from admin import settings
 import requests
 
 from rest_framework import viewsets
-from .serializer import TestSerializer
+# from .serializer import TestSerializer
 # from .models import Gamer
-from Kusa.models import Test
+from Kusa.models import SteamUser
 from django.views.decorators.csrf import csrf_exempt
 from bson import ObjectId
 
@@ -42,28 +42,28 @@ conf = settings.CONF
 def add_post(request):
     friendList = request.POST.get("FriendList").split(",")
     friendRequest = request.POST.get("FriendRequest").split(",")
-    dummy=Test(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,FriendRequest=friendRequest)
+    dummy=SteamUser(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,FriendRequest=friendRequest)
     dummy.save()
     return HttpResponse("Inserted")
    
     
 
 
-def read_post(request,id):
+# def read_post(request,id):
     
-    test = Test.objects.get(SteamID=id)
-    name = "User Name: " + test.Name
-    return HttpResponse(name)
+#     test = SteamUser.objects.get(SteamID=id)
+#     name = "User Name: " + test.Name
+#     return HttpResponse(name)
 
     
 
 
     
-def read_post_all(request):
-    if request.method == 'GET':
-        test = Test.objects.all()
-        test_serializer = TestSerializer(test,many=True)
-        return JsonResponse(test_serializer.data,safe=False)
+# def read_post_all(request):
+#     if request.method == 'GET':
+#         test = SteamUser.objects.all()
+#         test_serializer = TestSerializer(test,many=True)
+#         return JsonResponse(test_serializer.data,safe=False)
 def close_view(request):
     response = redirect(FRONTEND_URL + '/steamauth')
     token = get_token(request)
