@@ -19,9 +19,12 @@ def get_total_playtime_hours(steam_id):
 
 def gather_new_user_info(steam_id):
     user = SteamUser.objects.get(id=steam_id)
-    user.daily_hours.append({'date':strftime("%m/%d/%Y", gmtime()), 'hours': get_total_playtime_hours(steam_id)})
-    for i in range(1, NUM_ACHIEVEMENTS + 1):
-        user.achievements.append({"id": i, "progress": 0, "date_achieved":""})
+    date = strftime("%m/%d/%Y", gmtime())
+    user.daily_hours.append({'date':date, 'hours': get_total_playtime_hours(steam_id)})
+    # first achievement is free 
+    user.achievements.append({"id": 1, "progress": 100, "date_achieved": date})
+    for i in range(2, NUM_ACHIEVEMENTS + 1):
+        user.achievements.append({"id": i, "progress": 0, "date_achieved": ""})
     user.save()
     
      

@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { default as trophy } from "../../assets/home/trophy.svg";
-import { Achievement,AchievementsList, AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
+import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
 import { AchievementRow } from "../../components/Achievement/AchievementRow";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import axios from "axios";

@@ -2,7 +2,7 @@ import * as React from "react";
 
 export interface Achievement {
     id: string;
-    date_achieved?: Date;
+    date_achieved?: string;
     progress: number;
 }
 export interface AchievementsList{

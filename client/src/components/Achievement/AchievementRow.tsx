@@ -7,11 +7,12 @@ import "./AchievementRow.css";
 interface AchievementProps {
     id: string;
     progress?: number;
+    date_achieved?: string;
 }
 
 //replace colors with a context color when we have time
 export const AchievementRow: React.FC<AchievementProps> = (props) => {
-    const { id, progress } = props;
+    const { id, progress, date_achieved } = props;
     const { title, description, image } = achievementData[id as string];
 
 
@@ -42,7 +43,7 @@ export const AchievementRow: React.FC<AchievementProps> = (props) => {
                             {title} 
                         </Typography>
                         <Typography display="inline" variant="h5" marginTop={1} color="#ECEFF4" >
-                            {"- " + description} 
+                            {" - " + description} 
                         </Typography>
                         <Box
                             width="100%"
@@ -53,6 +54,11 @@ export const AchievementRow: React.FC<AchievementProps> = (props) => {
                             }}
                         >
                             <KusaProgressBar completed={progress} />
+                            {date_achieved !== "" &&
+                                <Typography align="right" variant="h6" marginTop={1} color="#ECEFF4" >
+                                    {"unlocked on " + date_achieved} 
+                                </Typography>
+                            }
                         </Box>
                     </Grid>
                 </KusaBox>
