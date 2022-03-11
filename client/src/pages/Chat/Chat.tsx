@@ -54,14 +54,15 @@ export const Chat: React.FC = () => {
         };
 
         try {
-            const res = await axios.post(`${BACKEND_URL}/addMessage/`, message);
+            const res = await axios.post(`${BACKEND_URL}/addMessage/`, JSON.stringify(message));
+            console.log(message);
             setMessages([...messages, res.data]);
             setNewMessage("");
         } catch (err) {
             console.log(err);
         }
     };
-    
+
     return (
         <Container sx={{
             maxWidth:'100%',
