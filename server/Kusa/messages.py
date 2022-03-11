@@ -12,15 +12,11 @@ import json
 @csrf_exempt
 def addMessage(request):
     body = json.loads(request.body)
-    # newMessage = Message(conversationID = request.POST.get("conversationID"), senderID = request.POST.get("senderID"), text=request.POST.get("text"), timestamp=request.POST.get("timestamp"))
-    #newMessage = request.POST.get('conversationID','senderID','text','timestamp')
     newMessage = Message()
     newMessage.conversationID = body.get("conversationID")
     newMessage.senderID = body.get("senderID")
     newMessage.text = body.get("text")
-    #newMessage.timestamp = body.get("timestamp")
     newMessage.save()
-    #return JsonResponse(newMessage, status=200, safe=False)
     return HttpResponse("Message added")
 
 

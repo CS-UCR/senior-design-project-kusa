@@ -133,11 +133,11 @@ export const Chat: React.FC = () => {
                     </KusaChatBox>
 
                 {/* chatOnline */}
-                <KusaChatMenu>
+                {/* <KusaChatMenu>
                     <div className="chatOnlineWrapper">
                         <ChatOnline></ChatOnline>
                     </div>
-                </KusaChatMenu>
+                </KusaChatMenu> */}
             </div>
         </Container>
     );
