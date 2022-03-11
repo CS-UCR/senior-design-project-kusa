@@ -1,3 +1,10 @@
+from django.http.response import JsonResponse
+from django.shortcuts import render
+from admin import settings
+#from Kusa.models import User
+from datetime import date
+
+from admin.settings import CONNECTION_STRING
 import json
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -16,7 +23,16 @@ conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
 
+
+
+
+
+# enable csrf once we've figured out authentication
+# uid probably won't be directly sent -> expect to hash/dehash this
+
 #csrf check not implemented through proper middleware - thus csrf_exempt
+
+
 @csrf_exempt
 def toggle_email(request):
     receiveRequest = json.loads(request.body)
