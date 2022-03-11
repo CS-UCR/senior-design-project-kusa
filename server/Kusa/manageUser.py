@@ -25,26 +25,7 @@ interface = "/Users/"
 
 
 
-#test with just getting a user email and inserting into mongodb atlas
-# def register_user(request):
-#     #email = request.GET.get('email')
-#     try:
-#         user = User()
-#         user.email = "testmail"
-#         user.save()
-#         return JsonResponse({'result':"Inset successful"}, status=201, safe=False)
-#     except:
-#         return JsonResponse({'result':"An exception occurred"}, status=400, safe=False)
-# PLACEHOLDER test with just getting a user email and inserting into mongodb atlas
-def register_user(request):
-    #email = request.POST.get('email')
-    try:
-        user = User()
-        user.email = "testmail"
-        user.save()
-        return JsonResponse({'result': "Insert successful"}, status=201, safe=False)
-    except:
-        return JsonResponse({'result': "An exception occurred"}, status=400, safe=False)
+
 
 # enable csrf once we've figured out authentication
 # uid probably won't be directly sent -> expect to hash/dehash this

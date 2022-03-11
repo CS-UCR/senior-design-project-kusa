@@ -30,16 +30,12 @@ from django.core.mail import send_mail
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf = settings.CONF
 
-# class FriendsListView(viewsets.ModelViewSet):
-#     serializer_class = FriendsListSerializer
-#     queryset = FriendsList.objects.all()
+
 
 # http://api.steampowered.com/<interface name>/<method name>/v<version>/?key=<api key>&format=<format>.
 
 
-# class GamerView(viewsets.ModelViewSet):
-#     serializer_class = GamerSerializer
-#     queryset = Gamer.objects.all()
+
 
 
 @csrf_exempt
@@ -64,10 +60,6 @@ def read_post(request,id):
 
     
 def read_post_all(request):
-    # dummy = Dummy.objects.all()
-    # name = dummy.all()
-    # return HttpResponse(name)
-
     if request.method == 'GET':
         test = Test.objects.all()
         test_serializer = TestSerializer(test,many=True)
