@@ -49,12 +49,12 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     avatarfull = models.CharField(max_length=255)
 
     #Kusa-signup specific fields
-    email=models.CharField(max_length=255, default="")
+    email = models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
-    daily_hours=models.JSONField(default=[])
+    daily_hours = models.JSONField(default=[])
     goal = models.IntegerField(default=40)
 
-    # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    achievements = models.JSONField(default=[])
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
     # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # friend_requests = ArrayField(models.CharField(max_length=10, blank=True),size=8)

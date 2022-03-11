@@ -1,20 +1,16 @@
 import * as React from "react";
 import {
-    Box,
     Container,
     Grid,
-    MenuItem,
-    Select,
-    Typography,
 } from "@mui/material";
-import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
-import { default as chartbar } from "../../assets/home/chart-bar.svg";
 import { default as trophy } from "../../assets/home/trophy.svg";
-import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
+import { Achievement,AchievementsList, AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
 import { AchievementRow } from "../../components/Achievement/AchievementRow";
-import { ResponsiveLine, Serie } from "@nivo/line";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
+import axios from "axios";
+import { BACKEND_URL } from "../../constants/backendURL";
+import { headers } from "../../constants/headers";
 
 const theme = {
     axis: {
@@ -33,11 +29,28 @@ const theme = {
 };
 
 export const Achievements: React.FC = () => {
-    const { achievements } = React.useContext(AchieveContext);
+    const { achievements, setAchievements } = React.useContext(AchieveContext);
     const [loading, setLoading] = React.useState(false);
     const iconHeight = 40;
-
-
+    React.useEffect(() => {
+        setLoading(true);
+        axios
+        .get(`${BACKEND_URL}/getAchievements`, {
+            headers,
+            withCredentials: true,
+        })
+        .then((response) => {
+            console.log(response.data)
+            const achievements = response.data
+            setAchievements({achievements});
+            setLoading(false);
+        })
+        .catch((err) => {
+            setAchievements([] as any);
+            console.log(err);
+        });
+        setLoading(false);
+    }, []);
     return (
         <Container>
             <KusaHeader styles={{ marginTop: "5rem" }}>
@@ -50,14 +63,11 @@ export const Achievements: React.FC = () => {
             />
             achievements
             </KusaHeader> 
-            {/* <Grid container spacing={5}> */}
                 {achievements
-                    .filter((achieve) => achieve.progress !== 100)
-                    .slice(0, 3)
                     .map((achievement, index) => (
                         <AchievementRow {...achievement} key={index} />
                     ))}
-            {/* </Grid> */}
+            <KusaLoadingSpinner loading={loading} />
         </Container>
     )
 };

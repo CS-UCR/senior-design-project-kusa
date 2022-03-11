@@ -40,4 +40,5 @@ urlpatterns = [
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
     path('getDailyHours/', views.get_user_daily_hours, name='get_user_daily_hours'),
+    path('getAchievements/', views.get_user_achievements, name='get_user_daily_hours'),
 ]
