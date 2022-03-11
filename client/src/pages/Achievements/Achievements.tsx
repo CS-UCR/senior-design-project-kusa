@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-    Container,
-    Grid,
-} from "@mui/material";
+import { Container} from "@mui/material";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { default as trophy } from "../../assets/home/trophy.svg";
 import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";

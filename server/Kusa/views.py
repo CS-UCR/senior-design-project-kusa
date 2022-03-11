@@ -14,8 +14,6 @@ from django.core.mail import send_mail
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf = settings.CONF
 
-# http://api.steampowered.com/<interface name>/<method name>/v<version>/?key=<api key>&format=<format>.
-
 
 def close_view(request):
     response = redirect(FRONTEND_URL + '/steamauth')
@@ -42,9 +40,6 @@ def get_user_daily_hours(request):
 
 def get_user_achievements(request):
     """
-    will return an array of the user's achievements
-    Parameters: request
-
     Returns: returns a list of json obj -> [{id" : 1, "progress" : 0, "date_achieved" : "N/A"},...,{id" : 10, "progress" : 20, "date_achieved" : "03/10/2022"}]
     """
     response = validate_token(request)

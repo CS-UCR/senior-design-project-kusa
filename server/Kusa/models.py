@@ -53,12 +53,8 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     emailsEnabled = models.BooleanField(default=True)
     daily_hours = models.JSONField(default=[])
     goal = models.IntegerField(default=40)
-
     achievements = models.JSONField(default=[])
-    # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
-    # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
-    # friend_requests = ArrayField(models.CharField(max_length=10, blank=True),size=8)
-    # Add the other fields that can be retrieved from the Web-API if required
+
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
