@@ -80,6 +80,7 @@ urlpatterns = [
     path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
+    path('getPlaytime/', views.get_user_daily_hours, name='get_playtime'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
     path('getDailyHours/', views.get_user_daily_hours, name='get_user_daily_hours'),
 ]
