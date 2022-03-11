@@ -12,10 +12,14 @@ import {
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { KusaButton } from "../../components/Kusa/KusaButton/KusaButton";
-import { default as linkSVG } from "../../assets/profile/link.svg";
-import { default as suitcase } from "../../assets/profile/suitcase.svg";
+import {
+    IconBriefcase,
+    IconSettings,
+    IconPencil,
+    IconLink,
+} from "@tabler/icons";
+
 import { default as twitter } from "../../assets/socials/twitter.svg";
-import { default as write } from "../../assets/profile/write.svg";
 import { default as steam } from "../../assets/socials/steam.svg";
 import { default as insta } from "../../assets/socials/insta.svg";
 import { ProfileField } from "../../components/Profile/ProfileField/ProfileField";
@@ -27,7 +31,6 @@ import { headers } from "../../constants/headers";
 import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "../../contexts/UserContext/utils/useUserCookies";
-import { getToken } from "../../contexts/UserContext/utils/useUserCookies.js";
 
 //revisit - have some weird render issues with animations here
 const bounceStyles = {
@@ -67,20 +70,14 @@ export const Profile: React.FC = () => {
     const [newGoal, setNewGoal] = React.useState<number | null>(null);
     const navigate = useNavigate();
     const iconHeight = 40;
-    const authAxios = axios.create({
-        headers: {
-            ...headers,
-            Authorization: `Bearer ${getToken()}`
-        }
-    })
     //implement with backend, sends requests to endpoints per action
     const getDeactivate = () => {
         setLoading(true);
-        authAxios
-            .get(
-                `${BACKEND_URL}/Deactivate/`,
-                { withCredentials: true, headers}
-            )
+        axios
+            .get(`${BACKEND_URL}/Deactivate/`, {
+                withCredentials: true,
+                headers,
+            })
             .then(() => {
                 setOperation(
                     "Your account has been deactivated. Logging out momentarily."
@@ -107,7 +104,7 @@ export const Profile: React.FC = () => {
     };
     const getEmailToggle = () => {
         setLoading(true);
-        authAxios
+        axios
             .post(
                 `${BACKEND_URL}/ToggleUserEmail/`,
                 JSON.stringify({
@@ -165,11 +162,11 @@ export const Profile: React.FC = () => {
         <Container>
             <KusaLoadingSpinner loading={loading} />
             <KusaHeader>
-                <img
-                    src={suitcase}
-                    alt="suit"
+                <IconBriefcase
                     width={iconHeight}
                     height={iconHeight}
+                    strokeWidth={2}
+                    color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 your information
@@ -252,26 +249,23 @@ export const Profile: React.FC = () => {
                                 setEdit(!edit);
                             }}
                         >
-                            <img
-                                src={write}
-                                alt="edit"
-                                width={iconHeight}
-                                height={iconHeight}
+                            <IconPencil
+                                color="white"
                                 style={{
                                     marginRight: "1rem",
                                     marginBottom: "-0.5rem",
                                 }}
+                                strokeWidth={2}
                             />
                         </Button>
                     </Grid>
                 </Grid>
             </KusaBox>
             <KusaHeader>
-                <img
-                    src={linkSVG}
-                    alt="link"
-                    width={iconHeight}
+                <IconLink
+                    strokeWidth={2}
                     height={iconHeight}
+                    color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 account links
@@ -325,11 +319,11 @@ export const Profile: React.FC = () => {
                 </Grid>
             </KusaBox>
             <KusaHeader>
-                <img
-                    src={suitcase}
-                    alt="suit"
-                    width={iconHeight}
+                <IconSettings
                     height={iconHeight}
+                    width={iconHeight}
+                    strokeWidth={2}
+                    color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 account options

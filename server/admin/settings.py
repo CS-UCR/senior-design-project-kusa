@@ -30,6 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 STEAM_API_KEY = env('STEAM_API_KEY')
 JWT_SECRET_KEY = env('JWT_SECRET_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
@@ -91,7 +92,8 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-CONNECTION_STRING = 'mongodb+srv://kusaDbAdmin:{}@cluster0.wrtor.mongodb.net/main?retryWrites=true&w=majority'.format(DB_PASS)
+CONNECTION_STRING = 'mongodb+srv://kusaDbAdmin:{}@cluster0.wrtor.mongodb.net/main?retryWrites=true&w=majority'.format(
+    DB_PASS)
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -107,7 +109,7 @@ DATABASES = {
             'loggers': {
                 'djongo': {
                     'level': 'DEBUG',
-                    'propagate': False,                        
+                    'propagate': False,
                 }
             },
         }
@@ -240,8 +242,18 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 
-#CORS Setup
+# CORS Setup
 CORS_ALLOWED_ORIGINS = [
     FRONTEND_URL,
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+# Email Setup
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASS')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
