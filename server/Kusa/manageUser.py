@@ -54,7 +54,6 @@ def steamuser_detail(request):
         return JsonResponse(get_steam_user(response["steamid"]), safe=False) 
     else:
         return response
-
 @csrf_exempt
 def deactivate_account(request):
     response = validate_token(request)
