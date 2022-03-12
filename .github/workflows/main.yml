@@ -5,7 +5,8 @@ on:
   # Triggers the workflow on pull to main and develop
   pull_request:
     branches: [ main, develop]
-
+  workflow_dispatch:
+  
 jobs:
   test:
     runs-on: ubuntu-latest 
@@ -20,9 +21,11 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Install dependencies
+      working-directory: ./client
       run: npm install 
       
     - name: Run tests
+      working-directory: ./client
       run: npm test
       
     - name: Comment on Pull Request
