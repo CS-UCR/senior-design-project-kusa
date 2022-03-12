@@ -146,6 +146,12 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - animate.css
   - mui
   - react-transition-group
+  - jest
+  - enzyme
+  - tabler
+  - nivo
+  - axios
+  - sass
 
 
 ### Server Dependencies
@@ -153,3 +159,7 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - requests
   - djongo
   - sqlparse
+  - django-apscheduler
+  - django-cors-headers
+  - djangorestframework
+  - social-auth-app-django
