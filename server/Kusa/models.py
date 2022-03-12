@@ -83,3 +83,13 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 #     FriendRequest = models.JSONField(default=[])
     
 
+class Conversation(models.Model):
+    _id = models.ObjectIdField()
+    members = models.JSONField(null=True)
+
+class Message(models.Model):
+    conversationID = models.CharField(default='null', max_length=50)
+    senderID = models.CharField(default='null', max_length=30)
+    text = models.CharField(max_length=1000)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    avatar = models.CharField(max_length=255)
