@@ -99,7 +99,7 @@ pip3 install -r requirements.txt
 ```
 6. run the server
 ```sh
-python manage.py runserver
+python manage.py runserver --noreload
 ```
 7. Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 ### React Setup  
