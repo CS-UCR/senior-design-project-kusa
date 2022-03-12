@@ -6,9 +6,9 @@
 - [Usage](#usage)
 - [Project Setup](#project-setup)
   - [Docker Setup](#docker-setup)
-  - [React Setup](#react-setup)
   - [Django Setup](#django-setup)
   - [React Setup](#react-setup)
+  - [Running Tests](#running-tests)
 - [Diagrams](#diagrams)
 - [Dependencies](#dependencies)
 
@@ -99,7 +99,7 @@ pip3 install -r requirements.txt
 ```
 6. run the server
 ```sh
-python manage.py runserver
+python manage.py runserver --noreload
 ```
 7. Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 ### React Setup  
@@ -120,6 +120,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+### Running Tests
+Kusa's clients has a suite of tests that run on every PR in `main` or `develop`. These tests can also be ran locally.
+1. cd into the `client` directory
+2. install client packages with `npm install`
+3. run tests with `npm test`
+4. test results will be displayed in the console
 
 ## Diagrams
 
@@ -146,6 +152,12 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - animate.css
   - mui
   - react-transition-group
+  - jest
+  - enzyme
+  - tabler
+  - nivo
+  - axios
+  - sass
 
 
 ### Server Dependencies
@@ -153,3 +165,7 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - requests
   - djongo
   - sqlparse
+  - django-apscheduler
+  - django-cors-headers
+  - djangorestframework
+  - social-auth-app-django
