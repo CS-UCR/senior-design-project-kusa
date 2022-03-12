@@ -23,7 +23,7 @@ import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
 import { default as dog } from "../../../assets/friends/dog.svg"; //come back later
 
 import { BACKEND_URL } from "../../../constants/backendURL";
-
+import { KusaWhiteSpace } from "./WhiteSpace";
 import axios from "axios";
 
 const iconHeight = 40;
@@ -77,13 +77,17 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
             //console.log(response.data)
           });
         
-          for(var i = 0; i < inviteList.length; i++)
-          {
-              if(inviteList[i][personName] === personInfo[personName])
-              {
+        for(var i = 0; i < inviteList.length; i++)
+        {
+            if(inviteList[i][personName] === personInfo[personName])
+            {
                 inviteList.splice(i,1);
-              }
-          }
+                var newInviteList = inviteList
+            }
+        }
+        
+        var newInviteList = inviteList.filter(function(e: string) {return e !== personInfo[personName] })
+        setInviteList(newInviteList)
 
     };
 
@@ -94,44 +98,42 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
     return(
 
-        <KusaBox width="90%" styles={{ padding: "2rem" }}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={1}>
-                        <img
+        <><KusaBox width="90%" styles={{ padding: "2rem" }}>
+            <Grid container spacing={1}>
+                <Grid item xs={1}>
+                    <img
                         src={personInfo[personImg]}
                         alt="invite"
                         width={iconHeight}
                         height={iconHeight}
-                        style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}/>
-                        </Grid>
-                        <Grid item xs={1}/>
-                            
-                        <Grid item xs={1}>
-                            
-                            {personInfo[personName]}
-                        </Grid>
+                        style={{ marginRight: "1rem", marginBottom: "-0.5rem" }} />
+                </Grid>
+                <Grid item xs={1} />
 
-                        <Grid item xs={4}></Grid>              
+                <Grid item xs={1}>
 
-                        <Button variant="contained" color="success" size="small" onClick={handleAccept} >
-                            Accept
-                        </Button>
+                    {personInfo[personName]}
+                </Grid>
 
-                        <Grid item xs={2}></Grid>
+                <Grid item xs={4}></Grid>
 
-                        <Button variant="contained" color="success" size="small" onClick={handleReject}>
-                            Reject
-                        </Button>
+                <Button variant="contained" color="success" size="small" onClick={handleAccept}>
+                    Accept
+                </Button>
 
-                        <Grid item xs={2}>
-                        
-                        </Grid>
-                        
-                    </Grid>
-                    
-                </KusaBox>
+                <Grid item xs={2}></Grid>
 
+                <Button variant="contained" color="success" size="small" onClick={handleReject}>
+                    Reject
+                </Button>
 
+                <Grid item xs={2}>
+
+                </Grid>
+
+            </Grid>
+
+        </KusaBox><KusaWhiteSpace></KusaWhiteSpace></>
     );
 
 

@@ -117,21 +117,9 @@ export const FriendsList: React.FC = () => {
             {friendList.map(x => <FriendsListField friendInfo={x} friendList={friendList} setFriendList={setFriendList}  userId={userId}></FriendsListField>) }
             
             
-            <KusaHeader>
-                <img
-                    src={hand}
-                    alt="hand"
-                    width={iconHeight}
-                    height={iconHeight}
-                    style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
-                />
-                
-                
+            
 
-
-            </KusaHeader>
-
-            {/* {blocked()} */}
+            
             
         </Container>
     );
