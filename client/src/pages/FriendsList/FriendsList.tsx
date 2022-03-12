@@ -34,6 +34,7 @@ import {Link} from "react-router-dom";
 
 
 
+
 export const FriendsList: React.FC = () => {
 
     
@@ -51,7 +52,7 @@ export const FriendsList: React.FC = () => {
             const response = await fetch(`${BACKEND_URL}/getFriendRequest/${userId}`)
             const inviteList = await response.json();
             setInviteList(inviteList)
-            console.log(setInviteList)
+            console.log(inviteList)
 
         }
     )();
@@ -68,13 +69,10 @@ export const FriendsList: React.FC = () => {
             const response = await fetch(`${BACKEND_URL}/getFriendList/${userId}` )
             const friendList = await response.json();
             setFriendList(friendList);
-            
         }
     )();
     },[]);
     
-
-
     
 
 
@@ -91,13 +89,14 @@ export const FriendsList: React.FC = () => {
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 invites
+                {console.log(inviteList)}
             </KusaHeader>
-            {console.log(userId)}
-            {console.log(name)}
+            {/* {console.log(userId)}
+            {console.log(name)} */}
             
             
 
-            {inviteList.map(x => <InviteListField personName={x} setInviteList={setInviteList} inviteList={inviteList} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></InviteListField>)}
+            {inviteList.map(x => <InviteListField personInfo={x} inviteList={inviteList} setInviteList={setInviteList}  setFriendList={setFriendList} friendList={friendList} userId={userId}></InviteListField>)}
             
 
             <KusaHeader>
@@ -113,12 +112,11 @@ export const FriendsList: React.FC = () => {
             </KusaHeader>
             
             
-            
+           
             <AddFriend thisAccountUserId={userId}></AddFriend>
-            {console.log(friendList)}
-            {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>) }
+            {friendList.map(x => <FriendsListField friendInfo={x} friendList={friendList} setFriendList={setFriendList}  userId={userId}></FriendsListField>) }
             
-
+            
             <KusaHeader>
                 <img
                     src={hand}

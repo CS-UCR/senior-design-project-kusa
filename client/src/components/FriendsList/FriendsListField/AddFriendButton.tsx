@@ -75,7 +75,7 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
                 <DialogTitle>Search Friend</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please type the user name below
+                        Please type the user's steamid below
                     </DialogContentText>
                     <TextField
                         autoFocus

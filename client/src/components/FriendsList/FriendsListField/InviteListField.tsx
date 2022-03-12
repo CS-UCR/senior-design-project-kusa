@@ -1,30 +1,5 @@
 
 
-// export const ProfileField: React.FC<any> = ({ children, styles }) => (
-//     <Box
-//         sx={{
-//             boxShadow: 2,
-//             borderRadius: 2,
-//             height: "4rem",
-//             backgroundColor: "secondary.contrastText",
-//             alignItems: "bottom",
-//             verticalAlign: "text-bottom",
-//             justifyContent: "center",
-//             ...styles,
-//         }}
-//     >
-//         <Typography
-//             variant="subtitle1"
-//             fontSize="1.2rem"
-//             lineHeight={3.5}
-//             maxWidth="78ch"
-//             textAlign="center"
-//         >
-//             {children}
-//         </Typography>
-//     </Box>
-// );
-
 import * as React from "react";
 import {
     Alert,
@@ -53,41 +28,62 @@ import axios from "axios";
 
 const iconHeight = 40;
 
+const personSteamid = 0;
+const personName = 1;
+const personImg = 2;
 
 
 
 
 
-
-export const InviteListField: React.FC<any> = ({ personName, setInviteList, inviteList, setFriendList, friendList, thisAccountName }) => {
+export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInviteList, friendList, setFriendList, userId }) => {
 
     const handleAccept = () => {
         //pass name to the backend
-        axios.get(`${BACKEND_URL}/acceptFriendRequest/` + thisAccountName + "&" + personName).then((response) => {
+        axios.get(`${BACKEND_URL}/acceptFriendRequest/` + userId + "&" + personInfo[personSteamid]).then((response) => {
             //console.log(response.data)
           });
+        
+        var newFriend;  
 
         //remove person from invitelist
-        var newInviteList = inviteList.filter(function(e:string) {return e !== personName})
+        for(var i = 0; i < inviteList.length; i++)
+        {
+            console.log(inviteList)
+            if(inviteList[i][personName] === personInfo[personName])
+            {
+                var newFriend = inviteList[i]
+                inviteList.splice(i,1);
+                var newInviteList = inviteList
+                
+            }
+        }
+
+        var newInviteList = inviteList.filter(function(e: string) {return e !== personInfo[personName] })
         setInviteList(newInviteList)
         
         //add person to friendlist
-        friendList.push(personName)
+        
+        friendList.push(newFriend)
         setFriendList(friendList)
+        
           
     };
 
 
     const handleReject = () => {
         //pass name to the backend
-        axios.get(`${BACKEND_URL}/rejectFriendRequest/` + thisAccountName + "&" + personName).then((response) => {
+        axios.get(`${BACKEND_URL}/rejectFriendRequest/` + userId + "&" + personInfo[personSteamid]).then((response) => {
             //console.log(response.data)
           });
         
-        console.log(inviteList)
-        var newInviteList = inviteList.filter(function(e:string) {return e !== personName})
-        setInviteList(newInviteList)
-        console.log(newInviteList)
+          for(var i = 0; i < inviteList.length; i++)
+          {
+              if(inviteList[i][personName] === personInfo[personName])
+              {
+                inviteList.splice(i,1);
+              }
+          }
 
     };
 
@@ -102,7 +98,7 @@ export const InviteListField: React.FC<any> = ({ personName, setInviteList, invi
                     <Grid container spacing={1}>
                         <Grid item xs={1}>
                         <img
-                        src={dog}
+                        src={personInfo[personImg]}
                         alt="invite"
                         width={iconHeight}
                         height={iconHeight}
@@ -112,7 +108,7 @@ export const InviteListField: React.FC<any> = ({ personName, setInviteList, invi
                             
                         <Grid item xs={1}>
                             
-                            {personName}
+                            {personInfo[personName]}
                         </Grid>
 
                         <Grid item xs={4}></Grid>              

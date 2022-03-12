@@ -34,22 +34,32 @@ const iconHeight = 40;
 
 
 
+const friendSteamid = 0;
+const friendName = 1;
+const friendImg = 2;
 
 
 
 
-
-export const FriendsListField: React.FC<any> = ({ friendName, setFriendList, friendList, userId, thisAccountName}) =>
+export const FriendsListField: React.FC<any> = ({ friendInfo, friendList,setFriendList, userId}) =>
 {
 
     
     const handleDelete = () => {
-        axios.get(`${BACKEND_URL}/deleteFriend/` + thisAccountName + "&" + friendName).then((response) => {
+        axios.get(`${BACKEND_URL}/deleteFriend/` + userId + "&" + friendInfo[friendSteamid]).then((response) => {
             //console.log(response.data)
           });
         console.log(friendList)
-        var newFriendList = friendList.filter(function(e: string) {return e !== friendName})
-        console.log(newFriendList)
+
+        for(var i = 0; i < friendList.length; i++)
+        {
+            if(friendList[i][friendName] === friendInfo[friendName])
+            {
+                friendList.splice(i,1);
+                var newFriendList = friendList
+            }
+        }
+        var newFriendList = friendList.filter(function(e: string) {return e !== friendInfo[friendName] })
         setFriendList(newFriendList)
         
     }
@@ -63,7 +73,7 @@ export const FriendsListField: React.FC<any> = ({ friendName, setFriendList, fri
             <Grid container spacing={1}>
                 <Grid item xs={1}>
                     <img
-                        src={dog}
+                        src={friendInfo[friendImg]}
                         alt="invite"
                         width={iconHeight}
                         height={iconHeight}
@@ -72,7 +82,7 @@ export const FriendsListField: React.FC<any> = ({ friendName, setFriendList, fri
                 <Grid item xs={1} />
 
                 <Grid item xs={1}>
-                    {friendName}
+                    {friendInfo[friendName]}
 
                 </Grid>
 
