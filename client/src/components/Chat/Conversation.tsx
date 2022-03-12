@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import "../../components/Chat/Conversation.css";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { UserContext } from "../../contexts/UserContext/UserContext";
+import {default as loading} from "../../assets/chat/loading.gif";
 
 export default function Conversation(conversation: any, currentUser: string) {
 
@@ -34,7 +35,7 @@ export default function Conversation(conversation: any, currentUser: string) {
   return (
     <div className="conversation">
       <img className="conversationImg"
-        src={user ? user!['avatar'] : 'https://www.egames.news/__export/1643581808590/sites/debate/img/2022/01/30/my_dress-up_darling_x3x.jpg_242310155.jpg'}
+        src={user ? user!['avatar'] : loading}
         alt=""
       />
       <span className="conversationName">

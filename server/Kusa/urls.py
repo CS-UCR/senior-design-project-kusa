@@ -19,12 +19,6 @@ from . import iSteamUserStats, iSteamUser, views, manageUser,friendList
 from rest_framework import routers
 from Kusa import views
 
-# router = routers.DefaultRouter()
-# router.register(r'todos',views.FriendsListView,'todo')
-
-# router = routers.DefaultRouter()
-# router.register('TestInfo', views.TestView)
-
 
 from django.urls import path
 from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, messages, conversations, models
@@ -36,9 +30,6 @@ from django.contrib.auth.decorators import login_required
 app_name = "Kusa" 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include(router.urls)),
-    # path('test', views.test, name='test'),
-    # path('test', views.test, name='test'),
     path('GetGlobalAchievementPercentagesForApp/', iSteamUserStats.get_global_achievement_percentages_for_app, name='GetGlobalAchievementPercentagesForApp'),
     path('GetPlayerAchievements/', iSteamUserStats.get_player_achievements, name='GetPlayerAchievements'),
     path('GetUserStatsForGame/', iSteamUserStats.get_user_stats_for_game, name='GetUserStatsForGame'),
@@ -50,8 +41,8 @@ urlpatterns = [
     path('add_post/', friendList.add_post),
     #path('update_post/<str:receiver_steamid>&<str:request_steamid>', friendList.update_friendRequest),
     #path('delete_post/<str:id>', views.delete_post),
-    path('friendRequest/<str:receiver_name>&<str:sender_name>',friendList.friendRequest),
-    path('read_post_all/',views.read_post_all),
+    path('friendRequest/<str:receiver_steamid>&<str:sender_steamid>',friendList.friendRequest),
+    # path('read_post_all/',views.read_post_all),
     path('getFriendList/<str:userName>', friendList.getFriendList),
     path('getFriendRequest/<str:userName>', friendList.getFriendRequest),
     path('acceptFriendRequest/<str:account_name>&<str:accepting_name>', friendList.acceptFriendRequest),
@@ -81,6 +72,7 @@ urlpatterns = [
     path('getAllUsers/', manageUser.get_all_users, name='get_all_users'),
     path('deleteAUser/', manageUser.delete_a_user, name='delete_a_user'),
     path('getAUser/', manageUser.steamuser_detail, name='steamuser_detail'),
+    path('getPlaytime/', views.get_user_daily_hours, name='get_playtime'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
     path('getDailyHours/', views.get_user_daily_hours, name='get_user_daily_hours'),
     path('addMessage/', messages.addMessage, name='addMessage'),

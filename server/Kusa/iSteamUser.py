@@ -36,4 +36,3 @@ def searchForFriend(self, userID):
     steam_serializer = SteamUserSerializer(friend, many=True)
     return JsonResponse(steam_serializer.data, safe=False)
     #return HttpResponse("Conversation found")
-

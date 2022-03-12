@@ -1,20 +1,7 @@
 from rest_framework import serializers
-from Kusa.models import Test
+# from Kusa.models import Test
 
-
-#need serializers to convert model instances to JSON so that the frontend can work with the received data
-# class FriendsListSerializer(serializers.ModelSerializer):
-#     name = serializers.PrimaryKeyRelatedField(queryset=FriendsList.objects.all())
+# class TestSerializer(serializers.ModelSerializer):
 #     class Meta:
-#         model = FriendsList
-#         fields = ('id','name','steamid')
-
-# class GamerSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Gamer
-#         fields = ('UserID','Name','Email','SteamID','Achievements','Blocked','Friends','FriendsRequest','ProfilePic')
-
-class TestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Test
-        fields = ('Name', 'FriendList', 'SteamID')
+#         model = Test
+#         fields = ('Name', 'FriendList', 'SteamID')

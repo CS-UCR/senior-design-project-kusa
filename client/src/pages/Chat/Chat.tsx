@@ -46,16 +46,16 @@ export const Chat: React.FC = () => {
         getMessages();
     }, [currentChat]);
     
+    
     const handleSubmit = async (e: { preventDefault: any }) => {
         const message = {
             conversationID: currentChat!['_id'],
             senderID: userId,
             text: newMessage,
         };
-
+        
         try {
             const res = await axios.post(`${BACKEND_URL}/addMessage/`, JSON.stringify(message));
-            console.log(message);
             setMessages([...messages, res.data]);
             setNewMessage("");
         } catch (err) {
@@ -96,7 +96,7 @@ export const Chat: React.FC = () => {
                         />
                         {conversations.map((c)=> (
                             <div onClick={()=>setCurrentChat(c)}>
-                                <Conversation conversation={c} currentUser={userId}/>
+                                <Conversation conversation={c} currentUser={userId} />
                             </div>
                         ))}
                     </div>
@@ -121,7 +121,7 @@ export const Chat: React.FC = () => {
                                     >
                                 </textarea>
                                 <button className="chatSubmitButton" onClick={handleSubmit}>
-                                Send 
+                                SEND
                                 </button>
                         
                             </div>

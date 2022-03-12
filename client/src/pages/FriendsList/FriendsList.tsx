@@ -46,12 +46,12 @@ export const FriendsList: React.FC = () => {
     const [inviteList, setInviteList] = useState([]);
 
     useEffect(() => {
-        (
-            async () => {
-                const response = await fetch(`${BACKEND_URL}/getFriendRequest/${name}`)
-                const inviteList = await response.json();
-                setInviteList(inviteList)
-                console.log(setInviteList)
+    (
+        async () => {
+            const response = await fetch(`${BACKEND_URL}/getFriendRequest/${userId}`)
+            const inviteList = await response.json();
+            setInviteList(inviteList)
+            console.log(setInviteList)
 
             }
         )();
@@ -63,17 +63,16 @@ export const FriendsList: React.FC = () => {
     const [friendList, setFriendList] = useState([]);
 
     useEffect(() => {
-        (
-            async () => {
-                const response = await fetch(`${BACKEND_URL}/getFriendList/${name}`)
-                const friendList = await response.json();
-                setFriendList(friendList);
-
-            }
-        )();
-    }, []);
-
-
+    (
+        async () => {
+            const response = await fetch(`${BACKEND_URL}/getFriendList/${userId}` )
+            const friendList = await response.json();
+            setFriendList(friendList);
+            
+        }
+    )();
+    },[]);
+    
 
 
 
@@ -111,10 +110,10 @@ export const FriendsList: React.FC = () => {
 
                 friends
             </KusaHeader>
-
-
-
-            <AddFriend thisAccountName={name}></AddFriend>
+            
+            
+            
+            <AddFriend thisAccountUserId={userId}></AddFriend>
             {console.log(friendList)}
             {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>)}
 
