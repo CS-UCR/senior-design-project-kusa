@@ -6,9 +6,9 @@
 - [Usage](#usage)
 - [Project Setup](#project-setup)
   - [Docker Setup](#docker-setup)
-  - [React Setup](#react-setup)
   - [Django Setup](#django-setup)
   - [React Setup](#react-setup)
+  - [Running Tests](#running-tests)
 - [Diagrams](#diagrams)
 - [Dependencies](#dependencies)
 
@@ -120,6 +120,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+### Running Tests
+Kusa's clients has a suite of tests that run on every PR in `main` or `develop`. These tests can also be ran locally.
+1. cd into the `client` directory
+2. install client packages with `npm install`
+3. run tests with `npm test`
+4. test results will be displayed in the console
 
 ## Diagrams
 
