@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 
-# from .serializer import TestSerializer
+
 from Kusa.models import SteamUser
 
 from django.views.decorators.csrf import csrf_exempt
@@ -27,39 +27,31 @@ def friendRequest(request,receiver_steamid,sender_steamid):
     return HTTPResponse("Friend Request Sent!")
         
 
-# @csrf_exempt
-# def update_friendRequest(self,receiver_name,sender_name):
-#     test = Test.objects.get(SteamID=receiver_name)
-
-#     test.FriendRequest.append(sender_name) 
-#     test.save()
-#     return HTTPResponse("Friend Request Sent!")
-
 
 
 
 @csrf_exempt
-def getFriendList(self, userName):
-    steamUser = SteamUser.objects.get(Name=userName)
-    # test_serializer = TestSerializer(test,many=True)
-    
-
-    return JsonResponse(test.FriendList,safe=False)
+def getFriendList(self, userSteamId):
+    steamUser = SteamUser.objects.get(steamid=userSteamId)
+    return JsonResponse(steamUser.FriendList,safe=False)
         
 
 @csrf_exempt
-def getFriendRequest(self,userName):
-    steamUser = SteamUser.objects.get(Name=userName)
-    # test_serializer = TestSerializer(test,many=True)
-    
+def getFriendRequest(self,userSteamId):
+    steamUser = SteamUser.objects.get(steamid=userSteamId)
+    arrayOfSteamIds = steamUser.FriendRequest
+    arrayOfNames = []
+    for ids in arrayOfSteamIds:
+        temp = SteamUser.objects.get(steamid=ids)
+        arrayOfNames.append(temp.personaname)
 
-    return JsonResponse(steamUser.FriendRequest,safe=False)
+    return JsonResponse(arrayOfNames,safe=False)
+    
 
 @csrf_exempt
 def acceptFriendRequest(self, account_name, accepting_name ):
-    steamUser = SteamUser.objects.get(Name = account_name)
-    temp = SteamUser.objects.get(Name = accepting_name)
-    #acceptFriendRequest(accepting_name,account_name)
+    steamUser = SteamUser.objects.get(personaname = account_name)
+    temp = SteamUser.objects.get(personaname = accepting_name)
     
     if accepting_name in steamUser.FriendRequest:
         steamUser.FriendRequest.remove(accepting_name)
@@ -77,7 +69,7 @@ def acceptFriendRequest(self, account_name, accepting_name ):
 
 @csrf_exempt
 def rejectFriendRequest(self, account_name, reject_name):
-    steamUser = SteamUser.objects.get(Name = account_name)
+    steamUser = SteamUser.objects.get(personaname = account_name)
 
     if reject_name in steamUser.FriendRequest:
         steamUser.FriendRequest.remove(reject_name)
@@ -88,8 +80,8 @@ def rejectFriendRequest(self, account_name, reject_name):
 
 @csrf_exempt
 def deleteFriend(self,account_name, delete_name):
-    steamUser = SteamUser.objects.get(Name = account_name)
-    temp = SteamUser.objects.get(Name = delete_name)
+    steamUser = SteamUser.objects.get(personaname = account_name)
+    temp = SteamUser.objects.get(personaname = delete_name)
 
     if delete_name in steamUser.FriendList:
         steamUser.FriendList.remove(delete_name)

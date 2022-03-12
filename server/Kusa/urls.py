@@ -38,12 +38,9 @@ urlpatterns = [
 
 
     path('add_post/', friendList.add_post),
-    #path('update_post/<str:receiver_steamid>&<str:request_steamid>', friendList.update_friendRequest),
-    #path('delete_post/<str:id>', views.delete_post),
     path('friendRequest/<str:receiver_steamid>&<str:sender_steamid>',friendList.friendRequest),
-    # path('read_post_all/',views.read_post_all),
-    path('getFriendList/<str:userName>', friendList.getFriendList),
-    path('getFriendRequest/<str:userName>', friendList.getFriendRequest),
+    path('getFriendList/<str:userSteamId>', friendList.getFriendList),
+    path('getFriendRequest/<str:userSteamId>', friendList.getFriendRequest),
     path('acceptFriendRequest/<str:account_name>&<str:accepting_name>', friendList.acceptFriendRequest),
     path('rejectFriendRequest/<str:account_name>&<str:reject_name>', friendList.rejectFriendRequest),
     path('deleteFriend/<str:account_name>&<str:delete_name>', friendList.deleteFriend),
