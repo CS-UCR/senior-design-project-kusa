@@ -35,8 +35,8 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
     
 
     const [open, setOpen] = React.useState(false);
-    
-    
+
+
     const [value, setValue] = useState("");
 
     // const [post, setPost] = useState(null);
@@ -48,9 +48,9 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
     const handleClickOpen = () => {
         setOpen(true);
     };
-    
+
     const handleClose = () => {
-       
+
         setOpen(false);
     };
 
@@ -66,9 +66,9 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
         console.log(value)
     }
 
-    return(
+    return (
         <><Grid>
-            <Button variant="contained" color="success" onClick={handleClickOpen}>
+            <Button variant="contained" color="secondary" onClick={handleClickOpen}>
                 add friends
             </Button>
             <Dialog open={open} onClose={handleClose} color="warning">
@@ -99,10 +99,10 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
             {/* {friendsList} */}
 
         </Grid><KusaWhiteSpace></KusaWhiteSpace></>
-        
+
     );
 
-        
+
 }
 
 
