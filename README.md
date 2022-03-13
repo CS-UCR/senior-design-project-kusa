@@ -170,6 +170,7 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - nivo
   - axios
   - sass
+  - timeago.js
 
 
 ### Server Dependencies
