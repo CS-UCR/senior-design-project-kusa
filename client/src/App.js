@@ -5,6 +5,7 @@ import { Profile } from "./pages/Profile/Profile";
 import { FriendsList } from "./pages/FriendsList/FriendsList";
 import { Landing } from "./pages/Landing/Landing.tsx";
 import { Achievements } from "./pages/Achievements/Achievements.tsx";
+import { Chat } from "./pages/Chat/Chat";
 import ReactDOM from "react-dom";
 import {
     BrowserRouter,
@@ -62,7 +63,7 @@ function App() {
             path: "/chat",
             name: "Chat",
             privateRoute: true,
-            Component: React.Fragment,
+            Component: Chat,
         },
         {
             path: "/garden",
