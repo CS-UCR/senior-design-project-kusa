@@ -137,7 +137,7 @@ npm install
 ```sh 
 npm test 
 ``` 
-6. test results will be displayed in the console
+4. test results will be displayed in the console
 
 ## Diagrams
 

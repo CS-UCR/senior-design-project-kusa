@@ -60,6 +60,7 @@ export const Profile: React.FC = () => {
         emailStatus,
         darkMode,
         connections,
+        userId,
         setUserInfo,
         setEmailStatus,
     } = React.useContext(UserContext);
@@ -184,6 +185,18 @@ export const Profile: React.FC = () => {
                     </Grid>
                     <Grid item xs={8}>
                         <ProfileField>{name}</ProfileField>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Typography
+                            variant="h5"
+                            marginTop={1.5}
+                            color="neutral.main"
+                        >
+                            steamid
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <ProfileField>{userId}</ProfileField>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
