@@ -6,9 +6,9 @@
 - [Usage](#usage)
 - [Project Setup](#project-setup)
   - [Docker Setup](#docker-setup)
-  - [React Setup](#react-setup)
   - [Django Setup](#django-setup)
   - [React Setup](#react-setup)
+  - [Running Tests](#running-tests)
 - [Diagrams](#diagrams)
 - [Dependencies](#dependencies)
 
@@ -38,16 +38,19 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ![darkLanding](https://user-images.githubusercontent.com/65988711/144960403-cbef342a-3d25-4bd2-8e68-d9a0ea114348.gif)
 
 ### Login/Signin Page
-![lightLoginSignup](https://user-images.githubusercontent.com/65988711/144959935-29c22e92-8ba9-46f7-bd18-0cd7f4dc3718.gif)
-![darkLoginSignup](https://user-images.githubusercontent.com/65988711/144959931-e5d6fd45-03a8-4c48-b4d1-8c9101841a00.gif)
+![signinprocessdemo](https://user-images.githubusercontent.com/43893085/158038051-a2d83121-afcd-4b7d-9020-fec72db0849e.gif)
+![lightsteamauth](https://user-images.githubusercontent.com/43893085/158038002-b62b5d51-01a9-428c-aee1-ba21be854157.png)
+![steamsignin](https://user-images.githubusercontent.com/43893085/158038013-a32fc2d7-658e-436f-8ab5-0c1e6cd4706a.png)
+![darkemailpage](https://user-images.githubusercontent.com/43893085/158038025-e21c8d35-cf5e-4317-b39d-db5bde30b1fe.png)
 
 ### Home Page
 ![lightHome](https://user-images.githubusercontent.com/65988711/144959906-c98d920e-c136-4774-af01-d5bc6b7f29f7.png)
 ![darkHome](https://user-images.githubusercontent.com/65988711/144959907-44acf42d-25f6-43c1-b10b-b00ee69a4604.png)
 
 ### Profile Page
-![lightProfile](https://user-images.githubusercontent.com/65988711/144959918-bbfc8b6e-c079-43e5-ab86-70a577e68774.gif)
-![darkProfile](https://user-images.githubusercontent.com/65988711/144960143-800a44bb-9643-4ddb-81e4-c268a8614de1.gif)
+![profiledemo](https://user-images.githubusercontent.com/43893085/158037937-02490233-0b7c-4963-b81d-74e6395dd962.gif)
+![lightprofile](https://user-images.githubusercontent.com/43893085/158037974-80f8caad-276c-4d6f-82e7-7f5953197c27.png)
+![darkprofile](https://user-images.githubusercontent.com/43893085/158037965-e2f5115f-78ee-4063-998f-983c8012b508.png)
 
 
 ## Project Setup
@@ -99,7 +102,7 @@ pip3 install -r requirements.txt
 ```
 6. run the server
 ```sh
-python manage.py runserver
+python manage.py runserver --noreload
 ```
 7. Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 ### React Setup  
@@ -120,6 +123,21 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+### Running Tests
+Kusa's clients has a suite of tests that run on every PR in `main` or `develop`. These tests can also be ran locally.
+1. cd into the `client` directory
+```sh 
+cd client/ 
+``` 
+2. install client packages with `npm install`
+```sh 
+npm install 
+``` 
+3. run tests with `npm test`
+```sh 
+npm test 
+``` 
+6. test results will be displayed in the console
 
 ## Diagrams
 
@@ -146,6 +164,13 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - animate.css
   - mui
   - react-transition-group
+  - jest
+  - enzyme
+  - tabler
+  - nivo
+  - axios
+  - sass
+  - timeago.js
 
 
 ### Server Dependencies
@@ -153,3 +178,7 @@ Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.co
   - requests
   - djongo
   - sqlparse
+  - django-apscheduler
+  - django-cors-headers
+  - djangorestframework
+  - social-auth-app-django
