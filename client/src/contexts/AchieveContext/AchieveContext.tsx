@@ -1,41 +1,37 @@
 import * as React from "react";
 
-interface Achievement {
+export interface Achievement {
     id: string;
-    dateAchieved?: Date;
+    date_achieved?: string;
     progress: number;
 }
-
-interface AchieveContextProps {
-    goal: number;
+export interface AchievementsList{
     achievements: Achievement[];
 }
+interface AchievementsContextProps {
+    achievements: Achievement[];
+    setAchievements: (achievements: AchievementsList) => void;
+}
 
-const defaultValue: AchieveContextProps = {
-    goal: 20,
-    achievements: [
-        {
-            id: "1",
-            progress: 30,
-        },
-        {
-            id: "2",
-            dateAchieved: new Date(),
-            progress: 90,
-        },
-        {
-            id: "3",
-            progress: 60,
-        },
-    ],
+const defaultValue: AchievementsContextProps  = {
+    achievements: [] as Achievement[],
+    setAchievements: (a : AchievementsList) => null,
 };
 
+interface AchieveContextProviderProps {
+    achievements: Achievement[] | [];
+}
 export const AchieveContext =
-    React.createContext<AchieveContextProps>(defaultValue);
+    React.createContext<AchievementsContextProps>(defaultValue);
 
 export const AchieveContextProvider: React.FC<React.FC> = (props) => {
-    const [state, setState] = React.useState(defaultValue);
-
+    const setAchievements = (a : AchieveContextProviderProps) => {
+        setState((prevState) => ({ ...prevState, ...a }));
+    };
+    const [state, setState] = React.useState({
+        ...defaultValue,
+        setAchievements,
+    });
     return (
         <AchieveContext.Provider value={state}>
             {props.children}

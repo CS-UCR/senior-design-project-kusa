@@ -4,7 +4,7 @@ from Kusa.serializers import SteamUserSerializer
 from time import gmtime, strftime
 
         
-
+NUM_ACHIEVEMENTS = 10
 def get_total_playtime_hours(steam_id):
     games_arr = get_owned_games(steam_id)
     overall_hours = 0 
@@ -14,12 +14,17 @@ def get_total_playtime_hours(steam_id):
         # game_title = game["name"]
         # playtime_forever = game["playtime_forever"]
         # game_img_url = "http://media.steampowered.com/steamcommunity/public/images/apps/" + app_id  + "/" + game["img_logo_url"] +".jpg"
-        overall_hours += game["playtime_forever"]
+        overall_hours += game["playtime_forever"]//60
     return overall_hours
 
 def gather_new_user_info(steam_id):
     user = SteamUser.objects.get(id=steam_id)
-    user.daily_hours.append({'date':strftime("%m/%d/%Y", gmtime()), 'hours': get_total_playtime_hours(steam_id)})
+    date = strftime("%m/%d/%Y", gmtime())
+    user.daily_hours.append({'date':date, 'hours': get_total_playtime_hours(steam_id)})
+    # first achievement is free 
+    user.achievements.append({"id": 1, "progress": 100, "date_achieved": date})
+    for i in range(2, NUM_ACHIEVEMENTS + 1):
+        user.achievements.append({"id": i, "progress": 0, "date_achieved": ""})
     user.save()
     
      

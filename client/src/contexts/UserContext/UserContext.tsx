@@ -16,6 +16,7 @@ interface User {
     isLoggedIn?: boolean;
     goal?: number;
     darkMode?: boolean | undefined;
+    avatar?: string;
     connections?: Connection[];
 }
 
@@ -27,6 +28,7 @@ interface UserContextProps {
     emailStatus: boolean;
     goal: number;
     darkMode: boolean | undefined;
+    avatar?: string;
     connections: Connection[];
     setDarkMode: (toggle: boolean) => void;
     setEmailStatus: (toggle: boolean) => void;
@@ -42,6 +44,7 @@ const defaultValue = {
     darkMode: false,
     goal: 300,
     name: "test_steam",
+    avatar: "",
     connections: [] as Connection[],
     setDarkMode: () => null,
     setEmailStatus: () => null,
@@ -56,6 +59,7 @@ interface UserContextProviderProps {
     emailStatus?: boolean;
     isLoggedIn?: boolean;
     darkMode?: boolean;
+    avatar?: string;
     connections?: Connection[] | [];
 }
 

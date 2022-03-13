@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 export const LoginButton = styled(Button)(({ theme }) => ({
   color: '#FDED5E',
-  backgroundColor: '#1E4418',
+  backgroundColor: 'primary',
   '&:hover': {
     backgroundColor: '#4a7843',
   },

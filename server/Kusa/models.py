@@ -52,10 +52,13 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     avatarfull = models.CharField(max_length=255)
 
     #Kusa-signup specific fields
-    email=models.CharField(max_length=255, default="")
+    email = models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
-    daily_hours=models.JSONField(default=[])
+    daily_hours = models.JSONField(default=[])
     goal = models.IntegerField(default=40)
+    achievements = models.JSONField(default=[])
+    # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
+    # Add the other fields that can be retrieved from the Web-API if required
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
@@ -73,13 +76,16 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
-
-
-
-# class Test(models.Model):
-#     Name = models.CharField(default='null',max_length=30)
-#     SteamID = models.CharField(default='null',max_length=30)
-#     FriendList = models.JSONField(default=[])
-#     FriendRequest = models.JSONField(default=[])
     
+
+class Conversation(models.Model):
+    _id = models.ObjectIdField()
+    members = models.JSONField(null=True)
+
+class Message(models.Model):
+    conversationID = models.CharField(default='null', max_length=50)
+    senderID = models.CharField(default='null', max_length=30)
+    text = models.CharField(max_length=1000)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    avatar = models.CharField(max_length=255)
 
