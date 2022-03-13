@@ -24,7 +24,7 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
         //remove person from invitelist
         for (var i = 0; i < inviteList.length; i++) {
-            if (inviteList[i][personName] === personInfo[personName]){
+            if (inviteList[i][personSteamid] === personInfo[personSteamid]){
                 var newFriend = inviteList[i]
                 inviteList.splice(i, 1);
                 var newInviteList = inviteList
@@ -46,7 +46,7 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
         axios.get(`${BACKEND_URL}/rejectFriendRequest/` + userId + "&" + personInfo[personSteamid])
 
         for (var i = 0; i < inviteList.length; i++) {
-            if (inviteList[i][personName] === personInfo[personName]) {
+            if (inviteList[i][personSteamid] === personInfo[personSteamid]) {
                 inviteList.splice(i, 1);
                 var newInviteList = inviteList
                 break;

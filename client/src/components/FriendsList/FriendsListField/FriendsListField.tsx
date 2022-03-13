@@ -24,7 +24,7 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList, setFri
 
 
         for (var i = 0; i < friendList.length; i++) {
-            if (friendList[i][friendName] === friendInfo[friendName]) {
+            if (friendList[i][friendSteamid] === friendInfo[friendSteamid]) {
                 friendList.splice(i, 1);
                 var newFriendList = friendList
             }
