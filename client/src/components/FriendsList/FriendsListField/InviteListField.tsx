@@ -1,41 +1,18 @@
-
-
 import * as React from "react";
 import {
-    Alert,
-    AlertColor,
-    Box,
     Button,
-    Container,
     Grid,
-    Typography,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    TextField,
-
-
 } from "@mui/material";
 
 import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
-import { default as dog } from "../../../assets/friends/dog.svg"; //come back later
-
 import { BACKEND_URL } from "../../../constants/backendURL";
 import { KusaWhiteSpace } from "./WhiteSpace";
 import axios from "axios";
 import { KusaHeader } from "../../Kusa/KusaHeader/KusaHeader";
-
 const iconHeight = 60;
-
 const personSteamid = 0;
 const personName = 1;
 const personImg = 2;
-
-
-
-
 
 export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInviteList, friendList, setFriendList, userId }) => {
 
@@ -65,10 +42,7 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
         friendList.push(newFriend)
         setFriendList(friendList)
-
-
     };
-
 
     const handleReject = () => {
         //pass name to the backend
@@ -88,15 +62,10 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
     };
 
-
-
-
-
-
     return (
 
         <><KusaBox width="90%" styles={{ padding: "2rem" }}>
-            <Grid container spacing={1} alignContent="center" marginTop="-10px" marginBottom="-10px">
+            <Grid container spacing={1} alignContent="center" marginTop="-10px" marginBottom="-10px" flexWrap="nowrap">
                 <Grid item xs={1}>
                     <img
                         src={personInfo[personImg]}
@@ -138,10 +107,5 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
         </KusaBox><KusaWhiteSpace></KusaWhiteSpace></>
     );
-
-
-
-
-
 }
 
