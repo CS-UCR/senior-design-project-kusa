@@ -17,11 +17,7 @@ const Navbar = () => {
           <NavLink to='/home' >
             <IconHome2 />
           </NavLink>
-
-          <NavLink to='/garden' activeStyle>
-            <IconPlant/>
-          </NavLink>
-
+    
           <NavLink to='/chat' activeStyle>
             <IconMessage/>
           </NavLink>
@@ -36,10 +32,6 @@ const Navbar = () => {
 
           <NavLink to='/profile' activeStyle>
             <IconUsers/>
-          </NavLink>
-
-          <NavLink to='/settings' activeStyle>
-            <IconMenu2/>
           </NavLink>
         </NavMenu>
       </Nav>
