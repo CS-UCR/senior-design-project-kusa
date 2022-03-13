@@ -8,6 +8,7 @@ export const LoginField: React.FC<any> = ({
     error,
     helperText,
     setState,
+    type,
 }) => (
     <TextField
         required={required}
@@ -17,11 +18,14 @@ export const LoginField: React.FC<any> = ({
         fullWidth
         sx={{
             boxShadow: 2,
-            textColor: "neutral.main",
+            textColor: "secondary.contrastText",
+            borderWidth: "1px",
+            borderColor: "secondary.contrastText !important",
             ...styles,
         }}
         error={error}
         helperText={helperText}
+        type={type}
         variant="filled"
     />
 );

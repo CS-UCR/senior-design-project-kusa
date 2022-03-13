@@ -12,8 +12,13 @@ import {
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
 import { KusaButton } from "../../components/Kusa/KusaButton/KusaButton";
-import { default as linkSVG } from "../../assets/profile/link.svg";
-import { default as suitcase } from "../../assets/profile/suitcase.svg";
+import {
+    IconBriefcase,
+    IconSettings,
+    IconPencil,
+    IconLink,
+} from "@tabler/icons";
+
 import { default as twitter } from "../../assets/socials/twitter.svg";
 import { default as steam } from "../../assets/socials/steam.svg";
 import { default as insta } from "../../assets/socials/insta.svg";
@@ -49,32 +54,31 @@ const StatusMap: { [key in AlertColor]: string } = {
 
 export const Profile: React.FC = () => {
     const {
-        userId,
         name,
+        goal,
         email,
         emailStatus,
         darkMode,
         connections,
+        userId,
         setUserInfo,
         setEmailStatus,
     } = React.useContext(UserContext);
     const [status, setStatus] = React.useState<AlertColor | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [operation, setOperation] = React.useState<string>("");
+    const [edit, setEdit] = React.useState<boolean>(false);
+    const [newGoal, setNewGoal] = React.useState<number | null>(null);
     const navigate = useNavigate();
     const iconHeight = 40;
-
     //implement with backend, sends requests to endpoints per action
     const getDeactivate = () => {
         setLoading(true);
         axios
-            .post(
-                `${BACKEND_URL}/Deactivate/`,
-                JSON.stringify({
-                    userID: userId,
-                }),
-                { headers: headers }
-            )
+            .get(`${BACKEND_URL}/Deactivate/`, {
+                withCredentials: true,
+                headers,
+            })
             .then(() => {
                 setOperation(
                     "Your account has been deactivated. Logging out momentarily."
@@ -106,9 +110,8 @@ export const Profile: React.FC = () => {
                 `${BACKEND_URL}/ToggleUserEmail/`,
                 JSON.stringify({
                     emailStatus: !emailStatus,
-                    userID: userId,
                 }),
-                { headers: headers }
+                { headers, withCredentials: true }
             )
             .then(() => {
                 if (emailStatus)
@@ -124,16 +127,47 @@ export const Profile: React.FC = () => {
                 setLoading(false);
             });
     };
+    const submitGoal = () => {
+        setLoading(true);
+        if (!newGoal || newGoal < 0) {
+            setStatus("error");
+            setOperation("Invalid goal provided");
+            setLoading(false);
+            return;
+        }
+        axios
+            .post(
+                `${BACKEND_URL}/UpdateGoal/`,
+                JSON.stringify({
+                    goal: newGoal,
+                }),
+                {
+                    headers,
+                    withCredentials: true,
+                }
+            )
+            .then(() => {
+                setOperation("Goal successfully changed.");
+                setUserInfo({ goal: newGoal });
+                setStatus("success");
+                setLoading(false);
+            })
+            .catch((err) => {
+                setStatus("error");
+                setOperation("An error occurred");
+                setLoading(false);
+            });
+    };
 
     return (
         <Container>
             <KusaLoadingSpinner loading={loading} />
             <KusaHeader>
-                <img
-                    src={suitcase}
-                    alt="suit"
+                <IconBriefcase
                     width={iconHeight}
                     height={iconHeight}
+                    strokeWidth={2}
+                    color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 your information
@@ -151,6 +185,18 @@ export const Profile: React.FC = () => {
                     </Grid>
                     <Grid item xs={8}>
                         <ProfileField>{name}</ProfileField>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Typography
+                            variant="h5"
+                            marginTop={1.5}
+                            color="neutral.main"
+                        >
+                            steamid
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <ProfileField>{userId}</ProfileField>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
@@ -180,12 +226,59 @@ export const Profile: React.FC = () => {
                     </Grid>
                 </Grid>
             </KusaBox>
+            <KusaBox
+                width="90%"
+                styles={{ marginTop: "1rem", padding: "2rem" }}
+            >
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <Typography
+                            variant="h5"
+                            marginTop={1.5}
+                            color="neutral.main"
+                        >
+                            goal
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <ProfileField
+                            styles={{ width: "80%" }}
+                            onChange={
+                                edit
+                                    ? (e: { target: HTMLInputElement }) =>
+                                          setNewGoal(parseInt(e.target.value))
+                                    : null
+                            }
+                            value={goal}
+                        >
+                            {goal} hours
+                        </ProfileField>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Button
+                            onClick={() => {
+                                if (edit && newGoal) submitGoal();
+                                setNewGoal(null);
+                                setEdit(!edit);
+                            }}
+                        >
+                            <IconPencil
+                                color="white"
+                                style={{
+                                    marginRight: "1rem",
+                                    marginBottom: "-0.5rem",
+                                }}
+                                strokeWidth={2}
+                            />
+                        </Button>
+                    </Grid>
+                </Grid>
+            </KusaBox>
             <KusaHeader>
-                <img
-                    src={linkSVG}
-                    alt="link"
-                    width={iconHeight}
+                <IconLink
+                    strokeWidth={2}
                     height={iconHeight}
+                    color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 account links
@@ -239,11 +332,11 @@ export const Profile: React.FC = () => {
                 </Grid>
             </KusaBox>
             <KusaHeader>
-                <img
-                    src={suitcase}
-                    alt="suit"
-                    width={iconHeight}
+                <IconSettings
                     height={iconHeight}
+                    width={iconHeight}
+                    strokeWidth={2}
+                    color="white"
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 account options

@@ -4,6 +4,8 @@ import { Home } from "./pages/Home/Home.tsx";
 import { Profile } from "./pages/Profile/Profile";
 import { FriendsList } from "./pages/FriendsList/FriendsList";
 import { Landing } from "./pages/Landing/Landing.tsx";
+import { Achievements } from "./pages/Achievements/Achievements.tsx";
+import { Chat } from "./pages/Chat/Chat";
 import ReactDOM from "react-dom";
 import {
     BrowserRouter,
@@ -20,9 +22,11 @@ import {
 import { GlobalStyles } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
 import { Signup } from "./pages/Signup/Signup";
+import { SteamAuth } from "./pages/SteamAuth/SteamAuth";
+import { AchieveContextProvider } from "./contexts/AchieveContext/AchieveContext";
+
 import "./App.css";
 import "animate.css";
-import { SteamAuth } from "./pages/SteamAuth/SteamAuth";
 
 function App() {
     const { isLoggedIn } = React.useContext(UserContext);
@@ -59,7 +63,7 @@ function App() {
             path: "/chat",
             name: "Chat",
             privateRoute: true,
-            Component: React.Fragment,
+            Component: Chat,
         },
         {
             path: "/garden",
@@ -71,7 +75,7 @@ function App() {
             path: "/achievements",
             name: "Achievements",
             privateRoute: true,
-            Component: React.Fragment,
+            Component: Achievements,
         },
         {
             path: "/steamauth",
@@ -160,7 +164,9 @@ const ComposeApp = () => {
     return (
         <UserContextProvider>
             <CustomThemeProvider>
-                <App />
+                <AchieveContextProvider>
+                    <App />
+                </AchieveContextProvider>
             </CustomThemeProvider>
         </UserContextProvider>
     );

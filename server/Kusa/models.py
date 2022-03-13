@@ -1,7 +1,10 @@
+from email.policy import default
+from django.forms import CharField
+from django.contrib.postgres.fields import ArrayField
 from djongo import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from django.db import models
+from django import forms
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.postgres.fields import ArrayField
@@ -38,7 +41,6 @@ class SteamUserManager(BaseUserManager):
 
         return self._create_user(id, password, **extra_fields)
 
-
 class SteamUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'id'
     id = models.CharField(max_length=17, unique=True,primary_key=True)
@@ -50,18 +52,23 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     avatarfull = models.CharField(max_length=255)
 
     #Kusa-signup specific fields
-    email=models.CharField(max_length=255, default="")
+    email = models.CharField(max_length=255, default="")
     emailsEnabled = models.BooleanField(default=True)
-
-    # achievements = ArrayField(models.CharField(max_length=10, blank=True),size=8)
+    daily_hours = models.JSONField(default=[])
+    goal = models.IntegerField(default=40)
+    achievements = models.JSONField(default=[])
     # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
-    # friends = ArrayField(models.CharField(max_length=10, blank=True),size=8)
-    # friend_requests = ArrayField(models.CharField(max_length=10, blank=True),size=8)
     # Add the other fields that can be retrieved from the Web-API if required
+
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    FriendList = models.JSONField(default=[])
+    FriendRequest = models.JSONField(default=[])
+    
+    
+    
     objects = SteamUserManager()
 
     def get_short_name(self):
@@ -69,3 +76,16 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.personaname
+    
+
+class Conversation(models.Model):
+    _id = models.ObjectIdField()
+    members = models.JSONField(null=True)
+
+class Message(models.Model):
+    conversationID = models.CharField(default='null', max_length=50)
+    senderID = models.CharField(default='null', max_length=30)
+    text = models.CharField(max_length=1000)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    avatar = models.CharField(max_length=255)
+

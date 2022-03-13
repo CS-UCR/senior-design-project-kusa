@@ -1,7 +1,8 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
 from admin import settings
 import requests
+from Kusa.models import SteamUser
+from .serializers import SteamUserSerializer
 from Kusa.authentication import validate_token
 
 conf =  settings.CONF
@@ -28,3 +29,10 @@ def get_friend_list(request):
         return JsonResponse(response)
     else:
         return response
+
+# search for a friend
+def searchForFriend(self, userID):
+    friend = SteamUser.objects.filter(steamid__contains=userID)
+    steam_serializer = SteamUserSerializer(friend, many=True)
+    return JsonResponse(steam_serializer.data, safe=False)
+    #return HttpResponse("Conversation found")

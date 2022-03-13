@@ -1,242 +1,215 @@
 import * as React from "react";
 import {
+    Box,
     Container,
     Grid,
+    MenuItem,
+    Select,
     Typography,
 } from "@mui/material";
 import { KusaBox } from "../../components/Kusa/KusaBox/KusaBox";
 import { KusaHeader } from "../../components/Kusa/KusaHeader/KusaHeader";
-import { default as chartbar } from "../../assets/home/chart-bar.svg";
-import { default as trophy } from "../../assets/home/trophy.svg";
-import { default as run } from "../../assets/achievements/run.svg";
-import { default as karate } from "../../assets/achievements/karate.svg";
-import { default as seeding} from "../../assets/achievements/seeding.svg";
-import KusaProgressBar from "../../components/Kusa/KusaProgressBar/KusaProgressBar";
-import "./Home.scss";
+import { IconChartBar, IconTrophy } from "@tabler/icons";
+import { AchieveContext } from "../../contexts/AchieveContext/AchieveContext";
+import { Achievement } from "../../components/Achievement/Achievement/Achievement";
+import { ResponsiveLine, Serie } from "@nivo/line";
+import { KusaLoadingSpinner } from "../../components/Kusa/KusaSpinner/KusaLoadingSpinner";
+import axios from "axios";
+import { BACKEND_URL } from "../../constants/backendURL";
+import { headers } from "../../constants/headers";
 
 
-// can prolly get data from UserContext when we add achievements
+interface HourData {
+    date: string;
+    hours: number;
+}
+
+const theme = {
+    axis: {
+        fontSize: "20px",
+        ticks: {
+            text: {
+                fill: "#ffffff",
+            },
+        },
+        legend: {
+            text: {
+                fill: "#aaaaaa",
+            },
+        },
+    },
+};
+
 export const Home: React.FC = () => {
+    const { achievements, setAchievements } = React.useContext(AchieveContext);
+    const [playTime, setPlayTime] = React.useState<Serie[]>([]);
+    const [period, setPeriod] = React.useState<string>("week");
+    const [loading, setLoading] = React.useState(false);
     const iconHeight = 40;
-    const achievementHeight = 200;
-    const testData = [
-        { bgcolor: "", completed: 30 },
-      ];
-      
-      const testData2 = [
-        { bgcolor: "", completed: 60 },
-      ];
-     
-      const testData3 = [
-        { bgcolor: "", completed: 100 },
-      ];
-      
+    const yellow = "#FDED5E";
+
+    React.useEffect(() => {
+        setLoading(true);
+        axios
+        .get(`${BACKEND_URL}/getAchievements`, {
+            headers,
+            withCredentials: true,
+        })
+        .then((response) => {
+            console.log(response.data)
+            const achievements = response.data
+            setAchievements({achievements});
+            setLoading(false);
+        })
+        .catch((err) => {
+            setAchievements([] as any);
+            console.log(err);
+        });
+        
+        axios
+            .get(`${BACKEND_URL}/getPlaytime`, {
+                headers,
+                withCredentials: true,
+            })
+            .then((payload) => {
+                let holder: Serie[] = [{ id: "playtime", color: "", data: [] }];
+                payload.data.forEach((item: HourData) =>
+                    holder[0].data.push({ x: item.date, y: item.hours })
+                );
+                setPlayTime(holder);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setPlayTime([]);
+                console.log(err);
+            });
+        setLoading(false);
+    }, []);
+
+    const getCurrentTime = () => {
+        let shiftNum = 0;
+        let copy = playTime;
+        const current = new Date().toLocaleDateString("en-US");
+        let currentIndex = playTime[0]?.data.length;
+
+        copy[0]?.data.forEach((item, index) => {
+            if (item.x === current) currentIndex = index;
+        });
+
+        switch (period) {
+            case "week":
+                shiftNum = 7;
+                break;
+            case "month":
+                shiftNum = 30;
+                break;
+            case "year":
+                shiftNum = 365;
+                break;
+            default:
+                shiftNum = 7;
+                break;
+        }
+        if (!copy[0]?.data || !copy[0]) return [];
+        return [
+            {
+                ...playTime[0],
+                data: copy[0].data.slice(currentIndex - shiftNum, currentIndex),
+            },
+        ];
+    };
+
     return (
         <Container>
-
-{/* Achievements In Your Reach */}        
-        <KusaHeader styles={{ marginTop: "7rem" }}>
-            <img
-                src={trophy}
-                alt="trophy"
-                width={iconHeight}
-                height={iconHeight}
-                style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
-            />
-            achievements in your reach
-        </KusaHeader>
-
-        <Grid container style={{justifyContent: "space-between" }}>
-                <KusaBox width="25%" styles={{ padding: "1rem"}}>
-                    <Grid container 
-                        sx={{
-                            alignContent: "center",
-                            alignItems: "center",
-                            flexDirection: "column",
-                            flexWrap: "nowrap",
-                            }}>
-                        <Grid item xs={10}>
-                            <img
-                                src={run}
-                                alt="run"
-                                width={achievementHeight}
-                                height={achievementHeight}
-                                style={{ alignContent: "center", alignItems: "center" }}
-                            />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Typography
-                                variant="h6"
-                                marginTop={1}
-                                color="#F9FBE8"
-                            >
-                                can't stop wont' stop
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Typography
-                                marginTop={1}
-                                marginLeft={-2}
-                                marginRight={-2}
-                                
-                                textAlign="center"
-                                color="#F9FBE8"
-                            >
-                                maintain your streak for one week
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </KusaBox>
-                
-                <KusaBox width="25%" styles={{ padding: "1rem"}}>
-                    <Grid container 
-                        sx={{
-                            alignContent: "center",
-                            alignItems: "center",
-                            flexDirection: "column",
-                            flexWrap: "nowrap",
-                            }}>
-                        <Grid item xs={10}>
-                            <img
-                                src={karate}
-                                alt="karate"
-                                width={achievementHeight}
-                                height={achievementHeight}
-                                style={{ alignContent: "center", alignItems: "center" }}
-                            />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Typography
-                                variant="h6"
-                                marginTop={1}
-                                color="#F9FBE8"
-                            >
-                                kick your habits
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Typography
-                                marginTop={1}
-                                marginLeft={-2}
-                                marginRight={-2}
-                                marginBottom={1}
-                                textAlign="center"
-                                color="#F9FBE8"
-                            >
-                               play 30 minutes less than last week
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </KusaBox>
-                
-                <KusaBox width="25%" styles={{ padding: "1rem"}}>
-                    <Grid container 
-                        sx={{
-                            alignContent: "center",
-                            alignItems: "center",
-                            flexDirection: "column",
-                            flexWrap: "nowrap",}}>
-                        <Grid item xs={10}>
-                            <img
-                                src={seeding}
-                                alt="seeding"
-                                width={achievementHeight}
-                                height={achievementHeight}
-                                style={{ alignContent: "center", alignItems: "center" }}
-                            />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Typography
-                                variant="h6"
-                                marginTop={1}
-                                color="#F9FBE8"
-                            >
-                                touch some grass
-                            </Typography>
-                        </Grid>
-
-                        <Grid item xs={10}>
-                            <Typography
-                                marginTop={1}
-                                marginLeft={-2}
-                                marginRight={-2}
-                                marginBottom={1}
-                                textAlign="center"
-                                color="#F9FBE8"
-                            >
-                                link up with another user and go outside
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </KusaBox>
-            </Grid>
-            
-            <Grid container style={{justifyContent: "space-between" }}>
-                <KusaBox
-                    width="25%" 
-                    styles={{
-                        padding: "1rem",
-                        backgroundColor: "none",
-                        borderRadius: 0,
-                        boxShadow: 0 }}>
-
-                    <Grid container>
-                        {testData.map((item, idx) => (
-                            <KusaProgressBar key={idx} completed={item.completed} />
-                        ))}
-                    </Grid>
-                </KusaBox>
-                
-                <KusaBox
-                    width="25%" 
-                    styles={{
-                        padding: "1rem",
-                        backgroundColor: "none",
-                        borderRadius: 0,
-                        boxShadow: 0 }}>
-
-                    <Grid container>
-                        {testData2.map((item, idx) => (
-                            <KusaProgressBar key={idx} completed={item.completed} />
-                        ))}
-                    </Grid>
-                </KusaBox>
-
-                <KusaBox
-                    width="25%" 
-                    styles={{
-                        padding: "1rem",
-                        backgroundColor: "none",
-                        borderRadius: 0,
-                        boxShadow: 0 }}>
-
-                    <Grid container>
-                        {testData3.map((item, idx) => (
-                            <KusaProgressBar key={idx} completed={item.completed} />
-                        ))}
-                    </Grid>
-                </KusaBox>
-                
-            </Grid>
-
-{/* Upcoming Metrics */}
-            <KusaHeader>
-                <img
-                    src={chartbar}
-                    alt="chartbar"
-                    width={iconHeight}
+            <KusaLoadingSpinner loading={loading} />
+            <KusaHeader styles={{ marginTop: "5rem" }}>
+                <IconTrophy
                     height={iconHeight}
+                    width={iconHeight}
+                    color={yellow}
+                    strokeWidth={2}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
-                upcoming metrics
+                achievements in your reach
             </KusaHeader>
+            <Grid container spacing={5}>
+                {achievements
+                    .filter((achieve) => achieve.progress !== 100)
+                    .slice(0, 3)
+                    .map((achievement, index) => (
+                        <Achievement {...achievement} key={index} />
+                    ))}
+            </Grid>
+            <Box style={{ marginBottom: "3rem" }}>
+                <Select
+                    label="Week"
+                    variant="filled"
+                    value={period ?? "week"}
+                    style={{ float: "right" }}
+                    onChange={(e) => {
+                        setPeriod(e.target.value);
+                        getCurrentTime();
+                    }}
+                    sx={{
+                        color: "secondary.contrastText",
+                    }}
+                >
+                    <MenuItem value="week">Week</MenuItem>
+                    <MenuItem value="month">Month</MenuItem>
+                    <MenuItem value="year">Year</MenuItem>
+                </Select>
+                <KusaHeader>
+                    <IconChartBar
+                        height={iconHeight}
+                        width={iconHeight}
+                        color="white"
+                        strokeWidth={2}
+                        style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
+                    />
+                    metrics
+                </KusaHeader>
+            </Box>
             <KusaBox
                 width="90%"
+                height={390}
                 styles={{ marginBottom: "5rem", padding: "2rem" }}
             >
-                <Grid container spacing={2}>
- 
-                </Grid>
+                {getCurrentTime()[0]?.data.length > 0 ? (
+                    <ResponsiveLine
+                        data={getCurrentTime()}
+                        colors={{ scheme: "accent" }}
+                        xScale={{ type: "point" }}
+                        yScale={{
+                            type: "linear",
+                            min: "auto",
+                            max: "auto",
+                            stacked: true,
+                            reverse: false,
+                        }}
+                        axisLeft={{
+                            format: (value) => `${value}hr`,
+                        }}
+                        lineWidth={5}
+                        pointLabelYOffset={1}
+                        pointSize={12}
+                        curve="monotoneX"
+                        pointBorderWidth={3}
+                        useMesh={true}
+                        enableSlices={false}
+                        enableGridY={false}
+                        margin={{ top: 10, right: 20, bottom: 60, left: 80 }}
+                        animate={true}
+                        theme={theme}
+                    />
+                ) : (
+                    <Typography
+                        textAlign="center"
+                        variant="h6"
+                        color="neutral.main"
+                    >
+                        Metrics are currently unavailable.
+                    </Typography>
+                )}
             </KusaBox>
         </Container>
     );

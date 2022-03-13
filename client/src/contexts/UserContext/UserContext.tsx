@@ -1,5 +1,4 @@
 import * as React from "react";
-import { getSteamID } from "./utils/useUserCookies.js";
 import {
     getUserStorageDarkMode,
     setUserStorageDarkMode,
@@ -15,7 +14,9 @@ interface User {
     email?: string;
     emailStatus?: boolean;
     isLoggedIn?: boolean;
+    goal?: number;
     darkMode?: boolean | undefined;
+    avatar?: string;
     connections?: Connection[];
 }
 
@@ -25,7 +26,9 @@ interface UserContextProps {
     isLoggedIn: boolean;
     email: string | null;
     emailStatus: boolean;
+    goal: number;
     darkMode: boolean | undefined;
+    avatar?: string;
     connections: Connection[];
     setDarkMode: (toggle: boolean) => void;
     setEmailStatus: (toggle: boolean) => void;
@@ -34,13 +37,15 @@ interface UserContextProps {
 
 //the userId is a steamid
 const defaultValue = {
-    userId: getSteamID(),
+    userId: "",
     email: "",
     emailStatus: true,
     isLoggedIn: false,
     darkMode: false,
+    goal: 300,
     name: "test_steam",
-    connections: [{ title: "insta", name: "test_insta_hndle" }],
+    avatar: "",
+    connections: [] as Connection[],
     setDarkMode: () => null,
     setEmailStatus: () => null,
     setUserInfo: () => null,
@@ -50,10 +55,12 @@ interface UserContextProviderProps {
     userId?: string;
     name?: string;
     email?: string;
+    goal?: number;
     emailStatus?: boolean;
     isLoggedIn?: boolean;
     darkMode?: boolean;
-    connections?: Connection[];
+    avatar?: string;
+    connections?: Connection[] | [];
 }
 
 export const UserContext = React.createContext<UserContextProps>(defaultValue);
