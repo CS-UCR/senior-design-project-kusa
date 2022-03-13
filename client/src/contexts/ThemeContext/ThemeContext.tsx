@@ -65,11 +65,11 @@ const lightTheme = createTheme(
         palette: {
             //light green for backgrounds
             primary: {
-                main: "#A4E762",
+                main: "#007500",
                 dark: "#355A24",
                 //gradient is stored under light
                 light: "linear-gradient(to bottom, #A4E762, #355A24)",
-                contrastText: "#000",
+                contrastText: "#F9FBE8",
             },
             //light browns for boxes
             secondary: {

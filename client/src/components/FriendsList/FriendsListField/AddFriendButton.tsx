@@ -68,23 +68,24 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
 
     return(
         <><Grid>
-            <Button variant="contained" color="success" onClick={handleClickOpen}>
+            <Button variant="contained" color="primary" onClick={handleClickOpen} style={{fontWeight:"bold"}}>
                 add friends
             </Button>
             <Dialog open={open} onClose={handleClose} color="warning">
-                <DialogTitle>Search Friend</DialogTitle>
+                <DialogTitle style={{fontWeight:"bold"}}>Search Friend</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
+                    <DialogContentText style={{fontWeight:"bold", color:"green"}}>
                         Please type the user's steamid below
                     </DialogContentText>
                     <TextField
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="User Name"
+                        label="steamid"
                         type="name"
                         fullWidth
                         variant="outlined"
+                        
                         // sx={{input:{color:'black'}}}
                         // color = "success"
                         value={value}
