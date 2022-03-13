@@ -13,19 +13,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import path
 from Kusa import achievements
 from . import iSteamUserStats, iSteamUser, views, manageUser,friendList
-
-from rest_framework import routers
 from Kusa import views
-
-
 from django.urls import path
-from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, messages, conversations, models
-from django.conf.urls import url
-from django.contrib.auth.decorators import login_required
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, messages, conversations
+
 
 
 
@@ -83,5 +77,5 @@ urlpatterns = [
     path('addConversation/', conversations.addConversation, name='addConversation'),
     path('getConversation/<str:userID>', conversations.getConversation, name='getConversation'),
     path('searchForFriend/<str:userID>', iSteamUser.searchForFriend, name='searchForFriend'),
-
+    path('test', achievements.check_goal, name='getConversation'),
 ]

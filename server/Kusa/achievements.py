@@ -1,4 +1,3 @@
-from operator import le
 from time import gmtime, strftime
 from Kusa.data_collection import get_steam_user
 from Kusa.models import SteamUser
@@ -19,6 +18,7 @@ ACHIEVEMENTS_MAP = {
 
 #run only once a day    
 def check_goal(steam_id):
+    steam_id = "76561198140390897"
     steamuser = get_steam_user(steam_id)    
     daily_hours = steamuser['daily_hours']
     goal = steamuser['goal']
@@ -27,45 +27,36 @@ def check_goal(steam_id):
     achievements = get_achievements(steam_id)
     achievement_index = ACHIEVEMENTS_MAP["can’t stop won’t stop"]
     if len(list_of_hours) >= 2:
-        hours_today = int(list_of_hours[-1]["hours"]) - int(list_of_hours[-2]["hours"])
-        hours_this_week = achievements[achievement_index]["total_hours"] + hours_today
+        weekly_achievement = achievements[achievement_index]
+        monthly_achievement = achievements[ACHIEVEMENTS_MAP["staying on track"]]
+        hours_today = list_of_hours[-1]["hours"] - list_of_hours[-2]["hours"]
+        weekly_achievement["total_hours"] += hours_today
+        hours_this_week = weekly_achievement["total_hours"]
         steamuser_obj = SteamUser.objects.get(id=steam_id)
         if hours_this_week < goal:
-            achievements[achievement_index]["daily_streak"] += 1  
-            streak = achievements[achievement_index]["daily_streak"]
+            weekly_achievement["daily_streak"] += 1  
+            streak = weekly_achievement["daily_streak"]
             if streak == 7 and achievements[achievement_index]["progress"] != 100:  #completed weekly achievement 
-                achievements[ACHIEVEMENTS_MAP["staying on track"]]["progress"] = 25 
-                achievements[achievement_index]["total_hours"] = 0 
-                achievements[achievement_index]["daily_streak"] = streak 
-                achievements[achievement_index]["week_streak"] = 1 
+                weekly_achievement["total_hours"] = 0 
                 complete_achievement(achievements, achievement_index, steamuser_obj)
-            else: #weekly not completed, should still update total hours and progress 
-                if achievements[achievement_index]["progress"] != 100:
-                    achievements[achievement_index]["total_hours"] += hours_today 
-                    achievements[achievement_index]["progress"] = format((streak/7)*100,".2f")
-                    achievements[ACHIEVEMENTS_MAP["staying on track"]]["progress"] = format((streak/28)*100,".2f")
-                    achievements[achievement_index]["daily_streak"] = streak
+            else: #weekly achievement not completed -> should still update total hours and progress 
+                if weekly_achievement["progress"] != 100:
+                    weekly_achievement["progress"] = format((streak/7)*100,".2f")
                 else:
-                    achievements[ACHIEVEMENTS_MAP["staying on track"]]["progress"] = format((streak/28)*100,".2f")
-                    if streak//7 in [1,2,3]: #on end of week day 7, 14, etc. we should reset the weekly_hours to be 0 
-                        achievements[achievement_index]["total_hours"] = 0 
-                        achievements[achievement_index]["week_streak"] = streak//7
-                    elif streak//7 == 4 and achievements[ACHIEVEMENTS_MAP["staying on track"]]["progress"] != 100:
+                    if streak//7 in [1,2,3]: #on end of week 1,2,3 etc. we should reset the weekly_hours to be 0 
+                        weekly_achievement["total_hours"] = 0 
+                    elif streak//7 == 4 and monthly_achievement["progress"] != 100: #4 week streak wow! -> finish achievement 
                         complete_achievement(achievements, ACHIEVEMENTS_MAP["staying on track"], steamuser_obj)
-                    else:
-                        achievements[achievement_index]["total_hours"] += hours_today 
-                        achievements[achievement_index]["daily_streak"] = streak
-                
-                steamuser_obj.achievements=achievements
-                steamuser_obj.save()
+            weekly_achievement["week_streak"] = streak//7 
+            monthly_achievement["progress"] = format((streak/28)*100,".2f")
         else: #streak broke -> reset 
-            achievements[achievement_index]["total_hours"] = 0 
-            achievements[achievement_index]["week_streak"] = 0 
-            achievements[achievement_index]["daily_streak"] = 0
-            if achievements[ACHIEVEMENTS_MAP["staying on track"]]["progress"] != 100:
-                achievements[ACHIEVEMENTS_MAP["staying on track"]]["progress"] = 0 
-            steamuser_obj.achievements=achievements
-            steamuser_obj.save()
+            weekly_achievement["total_hours"] = 0 
+            weekly_achievement["week_streak"] = 0 
+            weekly_achievement["daily_streak"] = 0
+            if monthly_achievement["progress"] != 100:
+                monthly_achievement["progress"] = 0 
+        steamuser_obj.achievements=achievements
+        steamuser_obj.save()
             
 def check_decreased_weekly_hours(steam_id):
     # [ACHIEVEMENT CHECK]
@@ -86,7 +77,6 @@ def get_achievements(steam_id):
     list_of_achievements = [dict(a) for a in eval(achievements)]
     return list_of_achievements
 
-# If progress is not passed in, it means complete the achievement with progress = 100 
 def complete_achievement(achievements, achievement_index, user):          
     achievements[achievement_index]["progress"] = 100    
     achievements[achievement_index]["date_achieved"] = strftime("%m/%d/%Y", gmtime())

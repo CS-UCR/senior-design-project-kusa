@@ -1,8 +1,6 @@
 import json
 from django.http.response import JsonResponse
-from django.shortcuts import render
 from admin import settings
-from datetime import date
 from django.views.decorators.csrf import csrf_exempt
 from admin.settings import CONNECTION_STRING
 from bson.objectid import ObjectId
