@@ -1,12 +1,9 @@
 from http.client import HTTPResponse
-from django.dispatch import receiver
 from django.http import HttpResponse
 from django.http.response import JsonResponse
-
-# from .serializer import TestSerializer
 from Kusa.models import SteamUser
-
 from django.views.decorators.csrf import csrf_exempt
+
 
 
 

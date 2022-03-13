@@ -7,6 +7,7 @@ from time import gmtime, strftime
 from collections import OrderedDict
 from Kusa.data_collection import get_steam_user
 from Kusa.views import send_user_email
+from Kusa.achievements import check_goal, check_decreased_weekly_hours
 
 
 def has_duplicate_entry(date, array):
@@ -23,6 +24,9 @@ def update_all_users_playtime():
     for entry in steamuser_serializer.data:
         # gather and submit playtime if user has no entry for current date
         steam_id = entry['id']
+        # [ACHIEVEMENT CHECKS]
+        check_goal(steam_id)
+        check_decreased_weekly_hours(steam_id)
         daily_hours = get_steam_user(steam_id)['daily_hours']
         list_of_json = [dict(day) for day in eval(daily_hours)]
         if not has_duplicate_entry(date, list_of_json):
@@ -32,8 +36,6 @@ def update_all_users_playtime():
         # send email if sum of hours is over goal for current week
         if(get_steam_user(steam_id)['emailsEnabled']):
             send_user_email(steam_id)
-      
-
 
 def start():
     scheduler = BackgroundScheduler()
