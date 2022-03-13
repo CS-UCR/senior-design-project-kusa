@@ -135,6 +135,7 @@ export const Home: React.FC = () => {
             <Grid container spacing={5}>
                 {achievements
                     .filter((achieve) => achieve.progress !== 100)
+                    .sort((a, b) => { return b.progress - a.progress }) 
                     .slice(0, 3)
                     .map((achievement, index) => (
                         <Achievement {...achievement} key={index} />

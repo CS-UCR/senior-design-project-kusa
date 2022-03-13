@@ -54,11 +54,15 @@ export const achievementData: AchievementDataType = {
     "9": {
         title: "super achiever",
         image: <IconCrown/>,
-        description: "get 10 achievements",
+        description: "get 5 achievements",
     },
-    "10": {
-        title: "pwned",
-        image: <IconTrash/>,
-        description: "blocked a user",
-    },
+
 };
+
+
+//     "10": {
+//         title: "pwned",
+//         image: <IconTrash/>,
+//         description: "blocked a user",
+//     },
+// };

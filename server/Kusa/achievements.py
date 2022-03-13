@@ -4,7 +4,7 @@ from Kusa.data_collection import get_steam_user
 from Kusa.models import SteamUser
 from collections import OrderedDict  # keep this line for check_goal
 
-NUM_ACHIEVEMENTS = 10
+NUM_ACHIEVEMENTS = 9
 ACHIEVEMENTS_MAP = {
     "a new step" : 0,
     "goal in!": 1,
@@ -15,7 +15,6 @@ ACHIEVEMENTS_MAP = {
     "squad goals": 6,
     "toggled": 7,
     "super achiever": 8,
-    "pwned": 9,
 }
 
 #run only once a day    
@@ -69,6 +68,7 @@ def check_goal(steam_id):
             steamuser_obj.save()
             
 def check_decreased_weekly_hours(steam_id):
+    # [ACHIEVEMENT CHECK]
     steamuser = get_steam_user(steam_id)
     daily_hours = steamuser['daily_hours']
     list_of_hours = [dict(day) for day in eval(daily_hours)]
@@ -96,7 +96,7 @@ def complete_achievement(achievements, achievement_index, user):
     for achievement in achievements:
         if achievement["progress"] == 100:
             total_completed_achievements += 1 
-    if total_completed_achievements >= 10 and achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] != 100:
+    if total_completed_achievements >= 5 and achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] != 100:
         achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] = 100
         achievements[ACHIEVEMENTS_MAP["super achiever"]]["date_achieved"] = strftime("%m/%d/%Y", gmtime())
     
