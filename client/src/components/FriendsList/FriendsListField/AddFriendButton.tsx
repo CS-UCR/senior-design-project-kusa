@@ -62,8 +62,6 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
         axios.get(`${BACKEND_URL}/friendRequest/` + value + "&" + thisAccountUserId).then((response) => {
             
           });
-        
-        console.log(value)
     }
 
     return (

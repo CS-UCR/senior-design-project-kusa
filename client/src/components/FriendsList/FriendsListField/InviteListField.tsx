@@ -19,7 +19,6 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
     const handleAccept = () => {
         //pass name to the backend
         axios.get(`${BACKEND_URL}/acceptFriendRequest/` + userId + "&" + personInfo[personSteamid]).then((response) => {
-            //console.log(response.data)
         });
 
         var newFriend;
@@ -47,7 +46,6 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
     const handleReject = () => {
         //pass name to the backend
         axios.get(`${BACKEND_URL}/rejectFriendRequest/` + userId + "&" + personInfo[personSteamid]).then((response) => {
-            //console.log(response.data)
         });
 
         for (var i = 0; i < inviteList.length; i++) {

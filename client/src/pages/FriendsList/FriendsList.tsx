@@ -24,8 +24,6 @@ export const FriendsList: React.FC = () => {
             const response = await fetch(`${BACKEND_URL}/getFriendRequest/${userId}`)
             const inviteList = await response.json();
             setInviteList(inviteList)
-            console.log(inviteList)
-
             }
         )();
     }, []);
@@ -55,7 +53,6 @@ export const FriendsList: React.FC = () => {
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
                 invites
-                {console.log(inviteList)}
             </KusaHeader>
            
             {inviteList.map(x => <InviteListField personInfo={x} inviteList={inviteList} setInviteList={setInviteList}  setFriendList={setFriendList} friendList={friendList} userId={userId}></InviteListField>)}
