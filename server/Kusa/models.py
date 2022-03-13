@@ -1,3 +1,6 @@
+from email.policy import default
+from django.forms import CharField
+from django.contrib.postgres.fields import ArrayField
 from djongo import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -54,11 +57,18 @@ class SteamUser(AbstractBaseUser, PermissionsMixin):
     daily_hours = models.JSONField(default=[])
     goal = models.IntegerField(default=40)
     achievements = models.JSONField(default=[])
+    # blocked = ArrayField(models.CharField(max_length=10, blank=True),size=8) 
+    # Add the other fields that can be retrieved from the Web-API if required
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    FriendList = models.JSONField(default=[])
+    FriendRequest = models.JSONField(default=[])
+    
+    
+    
     objects = SteamUserManager()
 
     def get_short_name(self):

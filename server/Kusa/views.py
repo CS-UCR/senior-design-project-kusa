@@ -1,3 +1,15 @@
+from django.http import HttpResponse
+from django.http.response import JsonResponse
+from django.shortcuts import render
+from rest_framework.serializers import Serializer
+from admin import settings
+import requests
+from rest_framework import viewsets
+from time import gmtime, strftime
+from Kusa.models import SteamUser
+from django.views.decorators.csrf import csrf_exempt
+from bson import ObjectId
+import json
 from smtplib import SMTPException
 from django.http import BadHeaderError
 from django.http.response import JsonResponse
@@ -6,14 +18,24 @@ from admin import settings
 from admin.settings import FRONTEND_URL
 from Kusa.authentication import get_token
 from Kusa.authentication import validate_token
-from Kusa.data_collection import get_steam_user
 from collections import OrderedDict  # keep this line for get_user_daily_hours
 from datetime import datetime
 from django.core.mail import send_mail
+from Kusa.data_collection import get_steam_user
+
 
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf = settings.CONF
 
+
+@csrf_exempt
+def add_post(request):
+    friendList = request.POST.get("FriendList").split(",")
+    friendRequest = request.POST.get("FriendRequest").split(",")
+    dummy=SteamUser(Name=request.POST.get("Name"),SteamID = request.POST.get("SteamID"),FriendList=friendList,FriendRequest=friendRequest)
+    dummy.save()
+    return HttpResponse("Inserted")
+   
 
 def close_view(request):
     response = redirect(FRONTEND_URL + '/steamauth')
@@ -46,10 +68,11 @@ def get_user_achievements(request):
     if "steamid" in response:   
         user =  get_steam_user(response["steamid"])
         achievements = user['achievements']
-        list_of_json = [dict(day) for day in eval(achievements)]
+        list_of_json = [dict(a) for a in eval(achievements)]
         return JsonResponse(list_of_json , safe=False)
     else: 
         return response
+
 
 def send_user_email(steam_id):
     success = False

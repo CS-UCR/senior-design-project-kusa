@@ -7,6 +7,7 @@ from time import gmtime, strftime
 from collections import OrderedDict
 from Kusa.data_collection import get_steam_user
 from Kusa.views import send_user_email
+from Kusa.achievements import check_goal
 
 
 def has_duplicate_entry(date, array):
@@ -41,4 +42,6 @@ def start():
     # run this job once every 24 hrs
     scheduler.add_job(update_all_users_playtime, 'interval', hours=24,
                       id='update_all_users_playtime', misfire_grace_time=None)
+    scheduler.add_job(check_goal, 'interval', hours=24,
+                      id='check_goal', misfire_grace_time=None)
     scheduler.start()
