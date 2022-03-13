@@ -91,8 +91,7 @@ export const FriendsList: React.FC = () => {
                 invites
                 {console.log(inviteList)}
             </KusaHeader>
-            {/* {console.log(userId)}
-            {console.log(name)} */}
+           
             
             
 
