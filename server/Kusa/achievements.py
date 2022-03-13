@@ -77,18 +77,20 @@ def get_achievements(steam_id):
     list_of_achievements = [dict(a) for a in eval(achievements)]
     return list_of_achievements
 
-def complete_achievement(achievements, achievement_index, user):          
+def complete_achievement(achievements, achievement_index, user):        
+    date = strftime("%m/%d/%Y", gmtime())
     achievements[achievement_index]["progress"] = 100    
-    achievements[achievement_index]["date_achieved"] = strftime("%m/%d/%Y", gmtime())
+    achievements[achievement_index]["date_achieved"] = date
     
     # [ACHIEVEMENT CHECK]   
-    total_completed_achievements = 0
-    for achievement in achievements:
-        if achievement["progress"] == 100:
-            total_completed_achievements += 1 
-    if total_completed_achievements >= 5 and achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] != 100:
-        achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] = 100
-        achievements[ACHIEVEMENTS_MAP["super achiever"]]["date_achieved"] = strftime("%m/%d/%Y", gmtime())
+    if achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] != 100:
+        total_completed_achievements = 0
+        for achievement in achievements:
+            if achievement["progress"] == 100:
+                total_completed_achievements += 1 
+        if total_completed_achievements >= 5:
+            achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] = 100
+            achievements[ACHIEVEMENTS_MAP["super achiever"]]["date_achieved"] = date
     
     user.achievements=achievements
     user.save()
