@@ -17,7 +17,7 @@ const Navbar = () => {
           <NavLink to='/home' >
             <IconHome2 />
           </NavLink>
-    
+
           <NavLink to='/chat' activeStyle>
             <IconMessage/>
           </NavLink>
