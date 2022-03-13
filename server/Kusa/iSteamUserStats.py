@@ -1,7 +1,6 @@
 from django.http.response import JsonResponse
 from admin import settings
 import requests
-
 from Kusa.authentication import validate_token
 
 conf =  settings.CONF
