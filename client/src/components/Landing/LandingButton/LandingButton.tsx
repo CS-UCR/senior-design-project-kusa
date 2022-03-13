@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 export const LandingButton = styled(Button)(() => ({
   color: '#FDED5E',
-  backgroundColor: '#1E4418',
+  backgroundColor: 'secondary',
   '&:hover': {
     backgroundColor: '#4a7843',
   },
