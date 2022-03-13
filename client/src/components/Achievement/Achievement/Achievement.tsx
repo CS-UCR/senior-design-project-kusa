@@ -1,9 +1,10 @@
 import { Box, Grid, Typography } from "@mui/material";
 import * as React from "react";
-import { KusaBox } from "../Kusa/KusaBox/KusaBox";
-import KusaProgressBar from "../Kusa/KusaProgressBar/KusaProgressBar";
-import { achievementData } from "./utils/achievementData";
+import { KusaBox } from "../../Kusa/KusaBox/KusaBox";
+import KusaProgressBar from "../../Kusa/KusaProgressBar/KusaProgressBar";
+import { achievementData } from "../utils/achievementData";
 
+import "./Achievement.css";
 interface AchievementProps {
     id: string;
     progress?: number;
@@ -14,8 +15,6 @@ export const Achievement: React.FC<AchievementProps> = (props) => {
     const { id, progress } = props;
     const { title, description, image } = achievementData[id as string];
 
-    const imageWidth = 190;
-    const imageHeight = 190;
     const height = 280;
 
     return (
@@ -34,16 +33,9 @@ export const Achievement: React.FC<AchievementProps> = (props) => {
                     }}
                 >
                     <Grid item xs={10}>
-                        <img
-                            src={image}
-                            alt={title}
-                            width={imageWidth}
-                            height={imageHeight}
-                            style={{
-                                alignContent: "center",
-                                alignItems: "center",
-                            }}
-                        />
+                        <div className="home-achievement-icon-tabler">
+                            {image}
+                        </div>
                     </Grid>
                     <Grid item xs={10}>
                         <Typography variant="h5" marginTop={1} color="#F9FBE8" sx={{fontWeight: "bold"}}>

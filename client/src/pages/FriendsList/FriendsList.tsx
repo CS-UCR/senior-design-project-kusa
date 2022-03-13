@@ -25,7 +25,7 @@ import { render } from "@testing-library/react";
 
 import { BACKEND_URL } from "../../constants/backendURL";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -36,14 +36,14 @@ import {Link} from "react-router-dom";
 
 export const FriendsList: React.FC = () => {
 
-    
-    const
-    {
-        userId,
-        name,
-    } = React.useContext(UserContext);
 
-    const[inviteList,setInviteList] = useState([]);
+    const
+        {
+            userId,
+            name,
+        } = React.useContext(UserContext);
+
+    const [inviteList, setInviteList] = useState([]);
 
     useEffect(() => {
     (
@@ -53,14 +53,14 @@ export const FriendsList: React.FC = () => {
             setInviteList(inviteList)
             console.log(setInviteList)
 
-        }
-    )();
-    },[]);
+            }
+        )();
+    }, []);
 
 
 
 
-    const[friendList,setFriendList] = useState([]);
+    const [friendList, setFriendList] = useState([]);
 
     useEffect(() => {
     (
@@ -75,13 +75,12 @@ export const FriendsList: React.FC = () => {
     
 
 
-    
 
 
     const iconHeight = 40;
     return (
         <Container>
-            
+
             <KusaHeader>
                 <img
                     src={invite}
@@ -94,11 +93,11 @@ export const FriendsList: React.FC = () => {
             </KusaHeader>
             {console.log(userId)}
             {console.log(name)}
-            
-            
+
+
 
             {inviteList.map(x => <InviteListField personName={x} setInviteList={setInviteList} inviteList={inviteList} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></InviteListField>)}
-            
+
 
             <KusaHeader>
                 <img
@@ -108,7 +107,7 @@ export const FriendsList: React.FC = () => {
                     height={iconHeight}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
-                
+
                 friends
             </KusaHeader>
             
@@ -116,8 +115,8 @@ export const FriendsList: React.FC = () => {
             
             <AddFriend thisAccountUserId={userId}></AddFriend>
             {console.log(friendList)}
-            {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>) }
-            
+            {friendList.map(x => <FriendsListField friendName={x} setFriendList={setFriendList} friendList={friendList} userId={userId} thisAccountName={name}></FriendsListField>)}
+
 
             <KusaHeader>
                 <img
@@ -127,14 +126,14 @@ export const FriendsList: React.FC = () => {
                     height={iconHeight}
                     style={{ marginRight: "1rem", marginBottom: "-0.5rem" }}
                 />
-                
-                
+
+
 
 
             </KusaHeader>
 
             {/* {blocked()} */}
-            
+
         </Container>
     );
 };

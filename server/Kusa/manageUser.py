@@ -67,7 +67,7 @@ def delete_a_user(request):
 def steamuser_detail(request):     
     response = validate_token(request)
     if "steamid" in response:
-        return JsonResponse(get_steam_user(response["steamid"]), safe=False) 
+        return JsonResponse(get_steam_user(response["steamid"]), safe=False)
     else:
         return response
 @csrf_exempt

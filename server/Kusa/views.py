@@ -87,6 +87,21 @@ def get_user_daily_hours(request):
     else:
         return response
 
+def get_user_achievements(request):
+    """
+    will return an array of the user's achievements
+    Parameters: request
+
+    Returns: returns a list of json obj -> [{id" : 1, "progress" : 0, "date_achieved" : "N/A"},...,{id" : 10, "progress" : 20, "date_achieved" : "03/10/2022"}]
+    """
+    response = validate_token(request)
+    if "steamid" in response:   
+        user =  get_steam_user(response["steamid"])
+        achievements = user['achievements']
+        list_of_json = [dict(day) for day in eval(achievements)]
+        return JsonResponse(list_of_json , safe=False)
+    else: 
+        return response
 
 def send_user_email(steam_id):
     success = False
