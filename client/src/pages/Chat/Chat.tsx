@@ -21,7 +21,7 @@ export const Chat: React.FC = () => {
     const [messages, setMessages] = React.useState<Array<any>>([]);
     const [newMessage, setNewMessage] = React.useState("");
     const { userId } = React.useContext(UserContext);
-    
+
     React.useEffect(() => {
         const getConversation = async () => {
             try {
@@ -33,7 +33,7 @@ export const Chat: React.FC = () => {
         };
         getConversation();
     }, [userId]);
-    
+
     React.useEffect(() => {
         const getMessages = async () => {
             try {
@@ -45,15 +45,15 @@ export const Chat: React.FC = () => {
         };
         getMessages();
     }, [currentChat]);
-    
-    
+
+
     const handleSubmit = async (e: { preventDefault: any }) => {
         const message = {
             conversationID: currentChat!['_id'],
             senderID: userId,
             text: newMessage,
         };
-        
+
         try {
             const res = await axios.post(`${BACKEND_URL}/addMessage/`, JSON.stringify(message));
             setMessages([...messages, res.data]);
@@ -63,12 +63,11 @@ export const Chat: React.FC = () => {
         }
     };
 
-    
-
     return (
         <Container sx={{
-            maxWidth:'100%',
-            maxHeight: '80%',}}
+            maxWidth: '100%',
+            maxHeight: '80%',
+        }}
             maxWidth={false}>
 
             <div className="Chat">
@@ -81,13 +80,13 @@ export const Chat: React.FC = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        }}>
+                    }}>
                         <img
                             src={message}
                             alt="message"
                             height={iconHeight}
                             width={iconHeight}
-                            style={{ marginRight: ".8rem" }}
+                            style={{ marginRight: ".8rem"}}
                         />
                         chats
                     </KusaHeader>
@@ -96,9 +95,8 @@ export const Chat: React.FC = () => {
                             placeholder="Search for friends"
                             className="chatMenuInput"
                         />
-                        
-                        {conversations.map((c)=> (
-                            <div onClick={()=>setCurrentChat(c)}>
+                        {conversations.map((c) => (
+                            <div onClick={() => setCurrentChat(c)}>
                                 <Conversation conversation={c} currentUser={userId} />
                             </div>
                         ))}
@@ -110,30 +108,30 @@ export const Chat: React.FC = () => {
                     <div className="chatBoxWrapper">
                         {currentChat ? (
                             <>
-                            <div className="chatBoxTop">
-                                {messages.map((m)=> (
-                                    <Message messages={m} own={m['senderID'] === userId}/>
-                                ))}
-                            </div>
-                            <div className="chatBoxBottom">
-                                <textarea
-                                    className="chatMessageInput"
-                                    placeholder="write something..."
-                                    onChange={(e)=>setNewMessage(e.target.value)}
-                                    value={newMessage}
+                                <div className="chatBoxTop">
+                                    {messages.map((m) => (
+                                        <Message messages={m} own={m['senderID'] === userId} />
+                                    ))}
+                                </div>
+                                <div className="chatBoxBottom">
+                                    <textarea
+                                        className="chatMessageInput"
+                                        placeholder="write something..."
+                                        onChange={(e) => setNewMessage(e.target.value)}
+                                        value={newMessage}
                                     >
-                                </textarea>
-                                <button className="chatSubmitButton" onClick={handleSubmit}>
-                                SEND
-                                </button>
-                        
-                            </div>
+                                    </textarea>
+                                    <button className="chatSubmitButton" onClick={handleSubmit}>
+                                        SEND
+                                    </button>
+
+                                </div>
                             </>) : (
                             <span className="noConversationText">
                                 Click on a user to start a chat.
-                            </span>)}  
-                    </div>  
-                    </KusaChatBox>
+                            </span>)}
+                    </div>
+                </KusaChatBox>
 
                 {/* chatOnline */}
                 {/* <KusaChatMenu>
