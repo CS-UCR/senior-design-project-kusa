@@ -90,6 +90,8 @@ def complete_achievement(achievements, achievement_index, user):
         if total_completed_achievements >= 5:
             achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] = 100
             achievements[ACHIEVEMENTS_MAP["super achiever"]]["date_achieved"] = date
+        else:
+            achievements[ACHIEVEMENTS_MAP["super achiever"]]["progress"] = format((total_completed_achievements/5 )*100,".2f")
     
     user.achievements=achievements
     user.save()
