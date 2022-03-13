@@ -63,6 +63,8 @@ export const Chat: React.FC = () => {
         }
     };
 
+    
+
     return (
         <Container sx={{
             maxWidth:'100%',
@@ -94,6 +96,7 @@ export const Chat: React.FC = () => {
                             placeholder="Search for friends"
                             className="chatMenuInput"
                         />
+                        
                         {conversations.map((c)=> (
                             <div onClick={()=>setCurrentChat(c)}>
                                 <Conversation conversation={c} currentUser={userId} />

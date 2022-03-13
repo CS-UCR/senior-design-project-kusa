@@ -47,11 +47,11 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList,setFrie
 {
 
     
+    
     const handleDelete = () => {
         axios.get(`${BACKEND_URL}/deleteFriend/` + userId + "&" + friendInfo[friendSteamid]).then((response) => {
-            //console.log(response.data)
           });
-        console.log(friendList)
+        
 
         for(var i = 0; i < friendList.length; i++)
         {
@@ -66,7 +66,11 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList,setFrie
         
     }
     
-    
+    const handleChat = () => {
+        axios.get(`${BACKEND_URL}/addConversation/` + userId + "&" + friendInfo[friendSteamid]).then((response) => {
+        });
+    }
+        
     
     
 
@@ -109,7 +113,7 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList,setFrie
                 <Grid item xs={2}></Grid>
 
                 <Link to="/chat" style={{ textDecoration: 'none'}}>
-                    <Button variant="contained" size="large"  color="primary" style={{fontSize:12, fontWeight:"bold", maxWidth: '50px', minHeight: '37px', maxHeight:'37px', marginTop: "0.5rem", marginBottom: "0.5rem"}}>
+                    <Button variant="contained" size="large"  color="primary" onClick={handleChat} style={{fontSize:12, fontWeight:"bold", maxWidth: '50px', minHeight: '37px', maxHeight:'37px', marginTop: "0.5rem", marginBottom: "0.5rem"}} >
                         Chat
                     </Button>
                 </Link>
