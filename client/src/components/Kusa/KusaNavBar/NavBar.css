@@ -1,10 +1,10 @@
-.icon-tabler {
+.navbar-icon-tabler .icon-tabler{
   color: #627e62;
   width: 35px;
   height: 35px;
   stroke-width: 1.5;
 }
 
-.active .icon-tabler{
+.navbar-icon-tabler .active  .icon-tabler{
   color: #F9FBE8;
 }

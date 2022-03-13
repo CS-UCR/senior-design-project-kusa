@@ -75,10 +75,11 @@ urlpatterns = [
     path('getPlaytime/', views.get_user_daily_hours, name='get_playtime'),
     path('Deactivate/', manageUser.deactivate_account, name='DeactivateUser'),
     path('getDailyHours/', views.get_user_daily_hours, name='get_user_daily_hours'),
+    path('getAchievements/', views.get_user_achievements, name='get_user_daily_hours'),
     path('addMessage/', messages.addMessage, name='addMessage'),
     path('getMessage/<str:conversationID>', messages.getMessage, name='getMessage'),
     path('addConversation/', conversations.addConversation, name='addConversation'),
     path('getConversation/<str:userID>', conversations.getConversation, name='getConversation'),
     path('searchForFriend/<str:userID>', iSteamUser.searchForFriend, name='searchForFriend'),
-    # path('getTwoConversation/<str:firstUserID><str:secondUserID>', conversations.getTwoConversation, name='getTwoConversation'),
+
 ]
