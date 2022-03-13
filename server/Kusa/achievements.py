@@ -18,7 +18,6 @@ ACHIEVEMENTS_MAP = {
 
 #run only once a day    
 def check_goal(steam_id):
-    steam_id = "76561198140390897"
     steamuser = get_steam_user(steam_id)    
     daily_hours = steamuser['daily_hours']
     goal = steamuser['goal']
