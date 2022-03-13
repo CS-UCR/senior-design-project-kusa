@@ -4,15 +4,11 @@ from django.shortcuts import render
 from rest_framework.serializers import Serializer
 from admin import settings
 import requests
-
 from rest_framework import viewsets
-# from .serializer import TestSerializer
-# from .models import Gamer
+from time import gmtime, strftime
 from Kusa.models import SteamUser
 from django.views.decorators.csrf import csrf_exempt
 from bson import ObjectId
-
-
 import json
 from smtplib import SMTPException
 from django.http import BadHeaderError
@@ -22,20 +18,14 @@ from admin import settings
 from admin.settings import FRONTEND_URL
 from Kusa.authentication import get_token
 from Kusa.authentication import validate_token
-from Kusa.data_collection import get_steam_user
 from collections import OrderedDict  # keep this line for get_user_daily_hours
 from datetime import datetime
 from django.core.mail import send_mail
+from Kusa.data_collection import get_steam_user
+
 
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 conf = settings.CONF
-
-
-
-# http://api.steampowered.com/<interface name>/<method name>/v<version>/?key=<api key>&format=<format>.
-
-
-
 
 
 @csrf_exempt
@@ -46,24 +36,7 @@ def add_post(request):
     dummy.save()
     return HttpResponse("Inserted")
    
-    
 
-
-# def read_post(request,id):
-    
-#     test = SteamUser.objects.get(SteamID=id)
-#     name = "User Name: " + test.Name
-#     return HttpResponse(name)
-
-    
-
-
-    
-# def read_post_all(request):
-#     if request.method == 'GET':
-#         test = SteamUser.objects.all()
-#         test_serializer = TestSerializer(test,many=True)
-#         return JsonResponse(test_serializer.data,safe=False)
 def close_view(request):
     response = redirect(FRONTEND_URL + '/steamauth')
     token = get_token(request)
@@ -89,19 +62,17 @@ def get_user_daily_hours(request):
 
 def get_user_achievements(request):
     """
-    will return an array of the user's achievements
-    Parameters: request
-
     Returns: returns a list of json obj -> [{id" : 1, "progress" : 0, "date_achieved" : "N/A"},...,{id" : 10, "progress" : 20, "date_achieved" : "03/10/2022"}]
     """
     response = validate_token(request)
     if "steamid" in response:   
         user =  get_steam_user(response["steamid"])
         achievements = user['achievements']
-        list_of_json = [dict(day) for day in eval(achievements)]
+        list_of_json = [dict(a) for a in eval(achievements)]
         return JsonResponse(list_of_json , safe=False)
     else: 
         return response
+
 
 def send_user_email(steam_id):
     success = False

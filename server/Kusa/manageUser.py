@@ -1,24 +1,14 @@
-from django.http.response import JsonResponse
-from django.shortcuts import render
-from admin import settings
-#from Kusa.models import User
-from datetime import date
-
-from admin.settings import CONNECTION_STRING
 import json
 from django.http.response import JsonResponse
-from django.shortcuts import render
 from admin import settings
-from Kusa.models import SteamUser
-from datetime import date
 from django.views.decorators.csrf import csrf_exempt
 from admin.settings import CONNECTION_STRING
 from bson.objectid import ObjectId
 from Kusa.models import SteamUser
 from Kusa.serializers import SteamUserSerializer
 from Kusa.authentication import validate_token
-from Kusa.data_collection import get_steam_user
-from Kusa.data_collection import gather_new_user_info
+from Kusa.data_collection import get_steam_user, gather_new_user_info
+from Kusa.achievements import get_achievements, ACHIEVEMENTS_MAP, complete_achievement
 conf = settings.CONF
 format = "JSON"
 interface = "/Users/"
@@ -39,9 +29,16 @@ def toggle_email(request):
     response = validate_token(request)
     emailStatus = receiveRequest.get('emailStatus')
     try:
-        user = SteamUser.objects.get(pk=response['steamid'])
+        steamid = response['steamid']
+        user = SteamUser.objects.get(pk=steamid)
         user.emailsEnabled = emailStatus
         user.save()
+        
+        # [ACHIEVEMENT CHECK]
+        achievements = get_achievements(steamid)
+        if(achievements[ACHIEVEMENTS_MAP["toggled"]]["progress"] != 100):
+            complete_achievement(achievements,ACHIEVEMENTS_MAP["toggled"],user)
+            
         return JsonResponse("Succesfully toggled email", status=201, safe=False)
     except:
         return JsonResponse(response, status=400, safe=False)
@@ -83,9 +80,16 @@ def deactivate_account(request):
 def adjust_goal(request):
     response = validate_token(request)
     if "steamid" in response:
-        steamuser = SteamUser.objects.get(id=response["steamid"])
+        steamid = response["steamid"]
+        steamuser = SteamUser.objects.get(id=steamid)
         steamuser.goal = json.loads(request.body)['goal']
         steamuser.save()
+        
+        # [ACHIEVEMENT CHECK]
+        achievements = get_achievements(steamid)
+        if(achievements[ACHIEVEMENTS_MAP["goal in!"]]["progress"] != 100):
+            complete_achievement(achievements, ACHIEVEMENTS_MAP["goal in!"], steamuser)
+            
         return JsonResponse("Deleted Successfully",safe=False)
     else:
         return response
@@ -101,3 +105,5 @@ def add_email(request):
         return JsonResponse("Email added", status=201, safe=False)
     except:
         return JsonResponse(response, status=400, safe=False)
+    
+

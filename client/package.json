@@ -35,7 +35,7 @@
         "react-tsparticles": "^1.37.5",
         "sass": "^1.43.4",
         "styled-components": "^5.3.3",
-        "timeago.js": "^4.0.2",
+        "timeago.js": "^4.0.0-beta.3",
         "ts-jest": "^26.5.5",
         "typescript": "^4.5.2",
         "web-vitals": "^1.1.2"
