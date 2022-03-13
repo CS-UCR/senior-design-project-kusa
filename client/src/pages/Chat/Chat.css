@@ -1,0 +1,108 @@
+.Chat {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .chatMenu {
+    flex: 1.75;
+  }
+  
+  .chatMenuInput {
+    width:90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0px;
+    margin: 0 auto;
+    width:93.5%;
+    display: block;
+    font-size: medium;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .chatBox {
+    flex: 5.5;
+  }
+  
+  .chatBoxWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    max-height: 98%;
+  }
+  
+  .chatBoxTop {
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;
+  }
+  
+  .chatBoxBottom {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .chatMessageInput {
+    width: 92%;
+    height: 40%;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: medium;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .chatSubmitButton {
+    width: 70px;
+    height: 40px;
+    background-color:rgb(82, 159, 21);
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .chatOnline {
+    flex: 1.5;
+  }
+  
+  .chatMenuWrapper,
+  .chatOnlineWrapper {
+    padding: 10px;
+    height: 87%;
+    overflow-y: auto;
+    max-height: 90%;
+  }
+
+  .chatBoxWrapper {
+    padding: 10px;
+    height: 100%;
+  }
+  
+  .noConversationText {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    font-size: 50px;
+    color: rgb(249, 251, 232);
+    cursor: default;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .chatMenu {
+      flex: 1;
+    }
+  
+    .chatMenuInput {
+      display: none;
+    }
+  
+    .chatBox{
+      flex: 10;
+    }
+  
+    .chatOnline{
+      flex: 1px;
+    }
+  }

@@ -12,6 +12,10 @@
   overflow-y: overlay;
 }
 
+.overflow-y-overlay {
+  overflow: auto;
+}
+
 .screen-appear {
   opacity: 0;
 }
