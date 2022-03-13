@@ -39,6 +39,8 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList, setFri
         axios.get(`${BACKEND_URL}/addConversation/` + userId + "&" + friendInfo[friendSteamid]).then(() => {
             navigate('/chat');
         })
+        
+        
     }
     
 

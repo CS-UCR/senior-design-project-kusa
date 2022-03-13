@@ -24,7 +24,8 @@ def friendRequest(request,receiver_steamid,sender_steamid):
     steamUser = SteamUser.objects.get(steamid = receiver_steamid) 
     steamUser.FriendRequest.append(sender_steamid)
     steamUser.save()
-    return HTTPResponse("Friend Request Sent!")
+    return JsonResponse("Friend Request Sent!",safe=False)
+    
         
 
 @csrf_exempt
@@ -70,22 +71,25 @@ def getFriendRequest(self,userSteamId):
     
 
 @csrf_exempt
-def acceptFriendRequest(self, account_steamid, accepting_steamid ):
+def acceptFriendRequest(self, account_steamid, accepting_steamid):
     steamUser = SteamUser.objects.get(steamid = account_steamid)
     temp = SteamUser.objects.get(steamid = accepting_steamid)
     
     if accepting_steamid in steamUser.FriendRequest:
+        
         steamUser.FriendRequest.remove(accepting_steamid)
 
         steamUser.FriendList.append(accepting_steamid)
+        steamUser.save()
+        
 
         temp.FriendList.append(account_steamid)
 
         temp.save()
         steamUser.save()
-        return HTTPResponse("friend accepted")
+        return JsonResponse("friend accepted",safe=False)
     else:
-        return HTTPResponse("error")
+        return JsonResponse("error",safe=False)
 
 
 @csrf_exempt
@@ -95,9 +99,9 @@ def rejectFriendRequest(self, account_steamid, reject_steamid):
     if reject_steamid in steamUser.FriendRequest:
         steamUser.FriendRequest.remove(reject_steamid)
         steamUser.save()
-        return HTTPResponse("friend request removed")
+        return JsonResponse("friend request removed", safe=False)
     else:
-        return HTTPResponse("error")
+        return JsonResponse("error", safe=False)
 
 @csrf_exempt
 def deleteFriend(self,account_steamid, delete_steamid):
@@ -109,6 +113,6 @@ def deleteFriend(self,account_steamid, delete_steamid):
         temp.FriendList.remove(account_steamid)
         steamUser.save()
         temp.save()
-        return HTTPResponse("friend removed")
+        return JsonResponse("friend removed", safe=False)
     else:
-        return HttpResponse("error")
+        return JsonResponse("error", safe=False)

@@ -23,9 +23,10 @@ def addConversation(self,account_steamid,receiver_steamid):
         newConversation.members = temp
         newConversation.save()
     
-        return HTTPResponse("new conv added")
+        return JsonResponse("new conv added", safe=False)
+        
     else:
-        return HttpResponse("conv exsits")
+        return JsonResponse("conv exsits", safe=False)
 
     
     #return JsonResponse(newConversation.data, status=200, safe=False)
