@@ -18,10 +18,13 @@ def add_post(request):
 
 @csrf_exempt
 def friendRequest(request,receiver_steamid,sender_steamid):
-    steamUser = SteamUser.objects.get(steamid = receiver_steamid) 
-    steamUser.FriendRequest.append(sender_steamid)
-    steamUser.save()
-    return JsonResponse("Friend Request Sent!",safe=False)
+    steamUser = SteamUser.objects.get(steamid = receiver_steamid)
+    if sender_steamid in steamUser.FriendRequest or sender_steamid in steamUser.FriendList:
+        return JsonResponse("Friend Request exsit or You are friend already!",safe=False)
+    else:
+        steamUser.FriendRequest.append(sender_steamid)
+        steamUser.save()
+        return JsonResponse("Friend Request Sent!",safe=False)
     
         
 

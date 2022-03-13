@@ -75,11 +75,11 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList, setFri
 
                 <Grid item xs={2}></Grid>
 
-                {/* <Link to="/chat" style={{ textDecoration: 'none' }}> */}
+               
                     <Button variant="contained" size="large" color="primary" onClick={() =>{handleChat()}} style={{ fontSize: 12, fontWeight: "bold", maxWidth: '50px', minHeight: '37px', maxHeight: '37px', marginTop: "0.5rem", marginBottom: "0.5rem" }} >
                         Chat
                     </Button>
-                {/* </Link> */}
+               
 
                 <Grid item xs={1}></Grid>
 

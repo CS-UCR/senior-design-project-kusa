@@ -18,19 +18,17 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
     const handleAccept = () => {
         //pass name to the backend
-        axios.get(`${BACKEND_URL}/acceptFriendRequest/` + userId + "&" + personInfo[personSteamid]).then((response) => {
-        });
+        axios.get(`${BACKEND_URL}/acceptFriendRequest/` + userId + "&" + personInfo[personSteamid])
 
         var newFriend;
 
         //remove person from invitelist
         for (var i = 0; i < inviteList.length; i++) {
-            console.log(inviteList)
-            if (inviteList[i][personName] === personInfo[personName]) {
+            if (inviteList[i][personName] === personInfo[personName]){
                 var newFriend = inviteList[i]
                 inviteList.splice(i, 1);
                 var newInviteList = inviteList
-
+                break;
             }
         }
 
@@ -45,13 +43,13 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
 
     const handleReject = () => {
         //pass name to the backend
-        axios.get(`${BACKEND_URL}/rejectFriendRequest/` + userId + "&" + personInfo[personSteamid]).then((response) => {
-        });
+        axios.get(`${BACKEND_URL}/rejectFriendRequest/` + userId + "&" + personInfo[personSteamid])
 
         for (var i = 0; i < inviteList.length; i++) {
             if (inviteList[i][personName] === personInfo[personName]) {
                 inviteList.splice(i, 1);
                 var newInviteList = inviteList
+                break;
             }
         }
 

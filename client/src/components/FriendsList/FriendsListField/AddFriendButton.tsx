@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-//import { getFriends } from "./friendsHelper";
-// import { GetHelper } from "./getHelper";
 import axios from "axios";
 
 import {
@@ -24,10 +22,6 @@ import { FormatUnderlinedSharp } from "@mui/icons-material";
 import { KusaWhiteSpace } from "./WhiteSpace";
 
 import { BACKEND_URL } from "../../../constants/backendURL";
-// var userId:string;
-// var friendsList: {} | null | undefined = []
-
-
 
 
 export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, friendList }) =>
@@ -38,8 +32,6 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
 
 
     const [value, setValue] = useState("");
-
-    // const [post, setPost] = useState(null);
 
     const handleChange = (e: { target: { value: any; }; }) => {
         setValue(e.target.value)
@@ -55,13 +47,9 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
     };
 
     const handleSearch = () => {
-         //if user input is null ask them to make a input or cancel -----------------------------------------------
-        // userId = value;
         setValue("");
         setOpen(false);
-        axios.get(`${BACKEND_URL}/friendRequest/` + value + "&" + thisAccountUserId).then((response) => {
-            
-          });
+        axios.get(`${BACKEND_URL}/friendRequest/` + value + "&" + thisAccountUserId)
     }
 
     return (
@@ -83,19 +71,14 @@ export const AddFriend: React.FC<any> = ({ thisAccountUserId, setFriendList, fri
                         type="name"
                         fullWidth
                         variant="outlined"
-                        
-                        // sx={{input:{color:'black'}}}
-                        // color = "success"
                         value={value}
                         onChange={handleChange} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSearch}>search</Button>
-                    {/* {GetHelper(value)} */}
                 </DialogActions>
             </Dialog>
-            {/* {friendsList} */}
 
         </Grid><KusaWhiteSpace></KusaWhiteSpace></>
 
