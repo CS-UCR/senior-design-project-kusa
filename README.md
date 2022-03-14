@@ -50,7 +50,7 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ### Profile Page
 #### Deactivating Account
 ![profile](https://user-images.githubusercontent.com/65988711/158109979-8f085460-e61e-492c-8198-7412e66f104e.gif)
-#### Toggle Emails
+#### Toggle Emails/Set Goals
 ![profileD](https://user-images.githubusercontent.com/65988711/158109985-1d91fe2e-7571-4d94-a986-e49f9f299985.gif)
 
 
