@@ -32,7 +32,7 @@ export const InviteListField: React.FC<any> = ({ personInfo, inviteList, setInvi
             }
         }
 
-        var newInviteList = inviteList.filter(function (e: string) { return e !== personInfo[personName] })
+        var newInviteList = inviteList.filter(function (e: string) { return e !== personInfo[personSteamid] })
         setInviteList(newInviteList)
 
         //add person to friendlist

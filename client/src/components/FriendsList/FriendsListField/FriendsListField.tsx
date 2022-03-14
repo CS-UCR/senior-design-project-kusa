@@ -19,8 +19,7 @@ const friendImg = 2;
 
 export const FriendsListField: React.FC<any> = ({ friendInfo, friendList, setFriendList, userId }) => {
     const handleDelete = () => {
-        axios.get(`${BACKEND_URL}/deleteFriend/` + userId + "&" + friendInfo[friendSteamid]).then((response) => {
-        });
+        axios.get(`${BACKEND_URL}/deleteFriend/` + userId + "&" + friendInfo[friendSteamid])
 
 
         for (var i = 0; i < friendList.length; i++) {
@@ -29,7 +28,7 @@ export const FriendsListField: React.FC<any> = ({ friendInfo, friendList, setFri
                 var newFriendList = friendList
             }
         }
-        var newFriendList = friendList.filter(function (e: string) { return e !== friendInfo[friendName] })
+        var newFriendList = friendList.filter(function (e: string) { return e !== friendInfo[friendSteamid] })
         setFriendList(newFriendList)
 
     }
