@@ -75,19 +75,20 @@ def get_user_achievements(request):
 
 
 def send_user_email(steam_id):
-    success = False
     user = get_steam_user(steam_id)
     daily_hours = user['daily_hours']
     goal = user['goal']
     list_of_json = [dict(day) for day in eval(daily_hours)]
-    sum = 0
+    sum = 20000
     for value in list_of_json:
-        if(datetime.today().isocalendar()[1] == datetime.strptime(value['date'], "%m/%d/%Y").isocalendar()[1]):
-            sum += value['hours']
+        #if(datetime.today().isocalendar()[1] == datetime.strptime(value['date'], "%m/%d/%Y").isocalendar()[1]):
+            #print("in isocal compare")
+            #sum = value['hours']
         if(sum > goal):
             try:
-                send_mail("Kusa Playtime Exceeded", 'You exceeded your goal for this week! Better luck next time. Remember, you can change your goal in the Kusa app.', settings.EMAIL_HOST_USER, [user['email']], fail_silently=False)
-                success = True
-            except SMTPException as e:
+                send_mail("Kusa Playtime Exceeded", "You exceeded your goal for this week! Better luck next time. Remember, you can change your goal in the Kusa app.", settings.EMAIL_HOST_USER, [user['email']], fail_silently=False)
+                print('After sending email yay ayayaya')
+            except Exception as e:
                 print(e)
-    return JsonResponse({'success': success}, safe=False)
+            return
+            

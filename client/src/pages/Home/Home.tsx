@@ -18,7 +18,6 @@ import axios from "axios";
 import { BACKEND_URL } from "../../constants/backendURL";
 import { headers } from "../../constants/headers";
 
-
 interface HourData {
     date: string;
     hours: number;
@@ -51,21 +50,21 @@ export const Home: React.FC = () => {
     React.useEffect(() => {
         setLoading(true);
         axios
-        .get(`${BACKEND_URL}/getAchievements`, {
-            headers,
-            withCredentials: true,
-        })
-        .then((response) => {
-            console.log(response.data)
-            const achievements = response.data
-            setAchievements({achievements});
-            setLoading(false);
-        })
-        .catch((err) => {
-            setAchievements([] as any);
-            console.log(err);
-        });
-        
+            .get(`${BACKEND_URL}/getAchievements`, {
+                headers,
+                withCredentials: true,
+            })
+            .then((response) => {
+                console.log(response.data);
+                const achievements = response.data;
+                setAchievements({ achievements });
+                setLoading(false);
+            })
+            .catch((err) => {
+                setAchievements([] as any);
+                console.log(err);
+            });
+
         axios
             .get(`${BACKEND_URL}/getPlaytime`, {
                 headers,
@@ -133,13 +132,16 @@ export const Home: React.FC = () => {
                 achievements in your reach
             </KusaHeader>
             <Grid container spacing={5}>
-                {achievements
-                    .filter((achieve) => achieve.progress !== 100)
-                    .sort((a, b) => { return b.progress - a.progress }) 
-                    .slice(0, 3)
-                    .map((achievement, index) => (
-                        <Achievement {...achievement} key={index} />
-                    ))}
+                {achievements.length > 1 &&
+                    achievements
+                        .filter((achieve) => achieve.progress !== 100)
+                        .sort((a, b) => {
+                            return b.progress - a.progress;
+                        })
+                        .slice(0, 3)
+                        .map((achievement, index) => (
+                            <Achievement {...achievement} key={index} />
+                        ))}
             </Grid>
             <Box style={{ marginBottom: "3rem" }}>
                 <Select
