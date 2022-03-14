@@ -34,8 +34,8 @@ This project benefits gamers by
 Demo: https://youtu.be/3zdM_QOe3G0
 
 ### Landing Page
-![landing](https://user-images.githubusercontent.com/65988711/158109845-![landingD](https://user-images.githubusercontent.com/65988711/158109856-3cc696d1-74f9-46ea-a662-98f083b55b09.gif)
-6c4e5c51-5570-48fa-8492-0ae75f7a9b17.gif)
+![landing](https://user-images.githubusercontent.com/65988711/158111493-f14adc58-a948-4b0d-8b38-bf9d68d44c6c.gif)
+![landingD](https://user-images.githubusercontent.com/65988711/158111501-aeb99a28-4119-42cf-8018-aa1d74025cc0.gif)
 
 
 ### Login/Signin Page
@@ -60,6 +60,10 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ### Friend Page
 ![friendPage](https://user-images.githubusercontent.com/65988711/158110125-5731948f-e743-447c-89d0-6ea073a1690b.png)
 ![friendPageD](https://user-images.githubusercontent.com/65988711/158110131-9f258241-e6a0-4364-b0c9-9777631af4f9.png)
+#Adding Friend
+
+#Removing Friend
+![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
 
 
 ### Chat Page
