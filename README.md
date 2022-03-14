@@ -57,6 +57,7 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ### Achievements Page
 ![achievements](https://user-images.githubusercontent.com/65988711/158110030-24c2f0e9-e2ef-407a-9b5d-447a02ff21fd.gif)
 ![achievementsD](https://user-images.githubusercontent.com/65988711/158110043-5ba7784b-c9a4-4cd1-a63d-158efbe154ac.gif)
+
 ####Earning Achievements
 ![earnAchievement](https://user-images.githubusercontent.com/65988711/158127494-4cca58b2-fae5-4818-baa4-89c1f1450c3a.gif)
 
@@ -64,8 +65,10 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ### Friend Page
 ![friendPage](https://user-images.githubusercontent.com/65988711/158110125-5731948f-e743-447c-89d0-6ea073a1690b.png)
 ![friendPageD](https://user-images.githubusercontent.com/65988711/158110131-9f258241-e6a0-4364-b0c9-9777631af4f9.png)
+
 #### Adding Friend
 ![addFriend](https://user-images.githubusercontent.com/65988711/158123507-d61e4b28-0c92-4f5c-a85a-7b1010568435.gif)
+
 #### Removing Friend
 ![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
 ![startNewChat](https://user-images.githubusercontent.com/65988711/158132287-429108b5-1170-4cb7-a1c9-c2aea8f92452.gif)
