@@ -103,8 +103,11 @@ def acceptFriendRequest(self, account_steamid, accepting_steamid):
         achievements = get_achievements(account_steamid)
         if(achievements[ACHIEVEMENTS_MAP["power of friendship"]]["progress"] != 100):
             complete_achievement(achievements, ACHIEVEMENTS_MAP["power of friendship"], steamUser)
-        elif(achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] != 100) and (len(steamUser.FriendList) >=5):
-            complete_achievement(achievements, ACHIEVEMENTS_MAP["squad goals"], steamUser)
+        elif(achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] != 100):
+            if len(steamUser.FriendList) >=5:
+                complete_achievement(achievements, ACHIEVEMENTS_MAP["squad goals"], steamUser)
+            else:
+                achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] = (len(steamUser.FriendList)/5)*100 
         return JsonResponse("friend accepted",safe=False)
     else:
         return JsonResponse("error",safe=False)
