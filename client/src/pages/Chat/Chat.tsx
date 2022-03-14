@@ -91,10 +91,10 @@ export const Chat: React.FC = () => {
                         chats
                     </KusaHeader>
                     <div className="chatMenuWrapper">
-                        <input
+                        {/* <input
                             placeholder="Search for friends"
                             className="chatMenuInput"
-                        />
+                        /> */}
                         {conversations.map((c) => (
                             <div onClick={() => setCurrentChat(c)}>
                                 <Conversation conversation={c} currentUser={userId} />
