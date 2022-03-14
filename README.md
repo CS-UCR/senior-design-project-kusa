@@ -60,9 +60,9 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ### Friend Page
 ![friendPage](https://user-images.githubusercontent.com/65988711/158110125-5731948f-e743-447c-89d0-6ea073a1690b.png)
 ![friendPageD](https://user-images.githubusercontent.com/65988711/158110131-9f258241-e6a0-4364-b0c9-9777631af4f9.png)
-#Adding Friend
-
-#Removing Friend
+## dding Friend
+![addFriend](https://user-images.githubusercontent.com/65988711/158123507-d61e4b28-0c92-4f5c-a85a-7b1010568435.gif)
+## emoving Friend
 ![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
 
 
