@@ -71,7 +71,6 @@ Demo: https://youtu.be/3zdM_QOe3G0
 
 #### Removing Friend
 ![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
-![startNewChat](https://user-images.githubusercontent.com/65988711/158132287-429108b5-1170-4cb7-a1c9-c2aea8f92452.gif)
 
 
 ### Chat Page
