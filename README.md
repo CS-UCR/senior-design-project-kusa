@@ -57,7 +57,9 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ### Achievements Page
 ![achievements](https://user-images.githubusercontent.com/65988711/158110030-24c2f0e9-e2ef-407a-9b5d-447a02ff21fd.gif)
 ![achievementsD](https://user-images.githubusercontent.com/65988711/158110043-5ba7784b-c9a4-4cd1-a63d-158efbe154ac.gif)
-#Earning Achievements
+####Earning Achievements
+![earnAchievement](https://user-images.githubusercontent.com/65988711/158127494-4cca58b2-fae5-4818-baa4-89c1f1450c3a.gif)
+
 
 ### Friend Page
 ![friendPage](https://user-images.githubusercontent.com/65988711/158110125-5731948f-e743-447c-89d0-6ea073a1690b.png)
