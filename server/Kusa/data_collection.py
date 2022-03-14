@@ -27,6 +27,8 @@ def gather_new_user_info(steam_id):
     for i in range(2, NUM_ACHIEVEMENTS + 1):
         if i-1== ACHIEVEMENTS_MAP["can’t stop won’t stop"]:
             user.achievements.append({"id": i, "progress": 0, "date_achieved": "", "total_hours": 0, "week_streak": 0, "daily_streak": 0})
+        elif i-1== ACHIEVEMENTS_MAP["super achiever"]:
+            user.achievements.append({"id": i, "progress": 20, "date_achieved": ""})
         else:
             user.achievements.append({"id": i, "progress": 0, "date_achieved": ""})
     user.save()

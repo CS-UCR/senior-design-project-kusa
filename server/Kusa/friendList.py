@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http.response import JsonResponse
 from Kusa.models import SteamUser
 from django.views.decorators.csrf import csrf_exempt
-
+from Kusa.achievements import get_achievements, ACHIEVEMENTS_MAP, complete_achievement
 
 
 
@@ -100,6 +100,29 @@ def acceptFriendRequest(self, account_steamid, accepting_steamid):
         temp.FriendList.append(account_steamid)
         temp.save()
         
+         # [ACHIEVEMENT CHECK]
+        achievements = get_achievements(account_steamid)
+        if(achievements[ACHIEVEMENTS_MAP["power of friendship"]]["progress"] != 100):
+            complete_achievement(achievements, ACHIEVEMENTS_MAP["power of friendship"], steamUser)
+        elif(achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] != 100):
+            if len(steamUser.FriendList) >=5:
+                complete_achievement(achievements, ACHIEVEMENTS_MAP["squad goals"], steamUser)
+            else:
+                achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] = (len(steamUser.FriendList)/5)*100 
+                steamUser.achievements = achievements
+                steamUser.save()
+                
+        achievements = get_achievements(accepting_steamid)
+        if(achievements[ACHIEVEMENTS_MAP["power of friendship"]]["progress"] != 100):
+            complete_achievement(achievements, ACHIEVEMENTS_MAP["power of friendship"], temp)
+        elif(achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] != 100):
+            if len(temp.FriendList) >=5:
+                complete_achievement(achievements, ACHIEVEMENTS_MAP["squad goals"], temp)
+            else:
+                achievements[ACHIEVEMENTS_MAP["squad goals"]]["progress"] = (len(temp.FriendList)/5)*100 
+                temp.achievements = achievements
+                temp.save()
+                
         return JsonResponse("friend accepted",safe=False)
     else:
         return JsonResponse("error",safe=False)
