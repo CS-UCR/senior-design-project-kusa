@@ -34,8 +34,8 @@ This project benefits gamers by
 Demo: https://youtu.be/3zdM_QOe3G0
 
 ### Landing Page
-![landing](https://user-images.githubusercontent.com/65988711/158109845-![landingD](https://user-images.githubusercontent.com/65988711/158109856-3cc696d1-74f9-46ea-a662-98f083b55b09.gif)
-6c4e5c51-5570-48fa-8492-0ae75f7a9b17.gif)
+![landing](https://user-images.githubusercontent.com/65988711/158111493-f14adc58-a948-4b0d-8b38-bf9d68d44c6c.gif)
+![landingD](https://user-images.githubusercontent.com/65988711/158111501-aeb99a28-4119-42cf-8018-aa1d74025cc0.gif)
 
 
 ### Login/Signin Page
@@ -48,23 +48,36 @@ Demo: https://youtu.be/3zdM_QOe3G0
 
 
 ### Profile Page
+#### Deactivating Account
 ![profile](https://user-images.githubusercontent.com/65988711/158109979-8f085460-e61e-492c-8198-7412e66f104e.gif)
+#### Toggle Emails/Set Goals
 ![profileD](https://user-images.githubusercontent.com/65988711/158109985-1d91fe2e-7571-4d94-a986-e49f9f299985.gif)
 
 
 ### Achievements Page
 ![achievements](https://user-images.githubusercontent.com/65988711/158110030-24c2f0e9-e2ef-407a-9b5d-447a02ff21fd.gif)
 ![achievementsD](https://user-images.githubusercontent.com/65988711/158110043-5ba7784b-c9a4-4cd1-a63d-158efbe154ac.gif)
-#Earning Achievements
+
+#### Earning Achievements
+![earnAchievement](https://user-images.githubusercontent.com/65988711/158127494-4cca58b2-fae5-4818-baa4-89c1f1450c3a.gif)
+
 
 ### Friend Page
 ![friendPage](https://user-images.githubusercontent.com/65988711/158110125-5731948f-e743-447c-89d0-6ea073a1690b.png)
 ![friendPageD](https://user-images.githubusercontent.com/65988711/158110131-9f258241-e6a0-4364-b0c9-9777631af4f9.png)
 
+#### Adding Friend
+![addFriend](https://user-images.githubusercontent.com/65988711/158123507-d61e4b28-0c92-4f5c-a85a-7b1010568435.gif)
+
+#### Removing Friend
+![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
+
 
 ### Chat Page
 ![chatPage](https://user-images.githubusercontent.com/65988711/158110169-aa55ba76-1ceb-47fa-9a37-e011b80258af.gif)
 ![chatPageD](https://user-images.githubusercontent.com/65988711/158110173-c141fab2-79ad-4045-9c42-2caa1433e993.gif)
+#### Start New Chat
+![startNewChat](https://user-images.githubusercontent.com/65988711/158133920-25d3c956-d440-4c64-96ab-36ea2e9260e0.gif)
 
 
 ## Project Setup
