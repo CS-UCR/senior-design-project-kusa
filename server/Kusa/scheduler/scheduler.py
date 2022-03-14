@@ -24,6 +24,7 @@ def update_all_users_playtime():
     for entry in steamuser_serializer.data:
         # gather and submit playtime if user has no entry for current date
         steam_id = entry['id']
+        print(steam_id)
         # [ACHIEVEMENT CHECKS]
         check_goal(steam_id)
         check_decreased_weekly_hours(steam_id)
@@ -36,11 +37,12 @@ def update_all_users_playtime():
         # send email if sum of hours is over goal for current week
         if(get_steam_user(steam_id)['emailsEnabled']):
             send_user_email(steam_id)
+        print("after it all")
 
 def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
     # run this job once every 24 hrs
-    scheduler.add_job(update_all_users_playtime, 'interval', hours=24,
+    scheduler.add_job(update_all_users_playtime, 'interval', seconds=15,
                       id='update_all_users_playtime', misfire_grace_time=None)
     scheduler.start()
