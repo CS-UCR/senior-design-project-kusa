@@ -68,11 +68,14 @@ Demo: https://youtu.be/3zdM_QOe3G0
 ![addFriend](https://user-images.githubusercontent.com/65988711/158123507-d61e4b28-0c92-4f5c-a85a-7b1010568435.gif)
 #### Removing Friend
 ![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
+![startNewChat](https://user-images.githubusercontent.com/65988711/158132287-429108b5-1170-4cb7-a1c9-c2aea8f92452.gif)
 
 
 ### Chat Page
 ![chatPage](https://user-images.githubusercontent.com/65988711/158110169-aa55ba76-1ceb-47fa-9a37-e011b80258af.gif)
 ![chatPageD](https://user-images.githubusercontent.com/65988711/158110173-c141fab2-79ad-4045-9c42-2caa1433e993.gif)
+#### Start New Chat
+![startNewChat](https://user-images.githubusercontent.com/65988711/158133920-25d3c956-d440-4c64-96ab-36ea2e9260e0.gif)
 
 
 ## Project Setup
