@@ -41,6 +41,8 @@ def check_goal(steam_id):
             else: #weekly achievement not completed -> should still update total hours and progress 
                 if weekly_achievement["progress"] != 100:
                     weekly_achievement["progress"] = format((streak/7)*100,".2f")
+                    if float(monthly_achievement["progress"]) > 100:
+                        monthly_achievement["progress"] = 100
                 else:
                     if streak//7 in [1,2,3]: #on end of week 1,2,3 etc. we should reset the weekly_hours to be 0 
                         weekly_achievement["total_hours"] = 0 
@@ -48,6 +50,8 @@ def check_goal(steam_id):
                         complete_achievement(achievements, ACHIEVEMENTS_MAP["staying on track"], steamuser_obj)
             weekly_achievement["week_streak"] = streak//7 
             monthly_achievement["progress"] = format((streak/28)*100,".2f")
+            if float(monthly_achievement["progress"]) > 100:
+                        monthly_achievement["progress"] = 100
         else: #streak broke -> reset 
             weekly_achievement["total_hours"] = 0 
             weekly_achievement["week_streak"] = 0 

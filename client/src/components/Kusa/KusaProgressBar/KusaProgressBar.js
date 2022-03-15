@@ -23,7 +23,6 @@ const KusaProgressBar = (props) => {
       color: '#F9FBE8',
       fontWeight: '600'
     }
-  
     return (
       <div style={containerStyles}>
         <div style={fillerStyles}>
