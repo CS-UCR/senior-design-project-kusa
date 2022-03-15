@@ -13,17 +13,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from . import iSteamUserStats, iSteamUser, views, manageUser,friendList
-
-from rest_framework import routers
-from Kusa import views
-
-
 from django.urls import path
-from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, messages, conversations, models
-from django.conf.urls import url
-from django.contrib.auth.decorators import login_required
+from . import iSteamUserStats, iSteamUser, views, manageUser,friendList
+from Kusa import views
+from django.urls import path
+from . import authentication, iSteamUserStats, iSteamUser, views, manageUser, messages, conversations
+
 
 
 
@@ -39,15 +34,12 @@ urlpatterns = [
 
 
     path('add_post/', friendList.add_post),
-    #path('update_post/<str:receiver_steamid>&<str:request_steamid>', friendList.update_friendRequest),
-    #path('delete_post/<str:id>', views.delete_post),
     path('friendRequest/<str:receiver_steamid>&<str:sender_steamid>',friendList.friendRequest),
-    # path('read_post_all/',views.read_post_all),
-    path('getFriendList/<str:userName>', friendList.getFriendList),
-    path('getFriendRequest/<str:userName>', friendList.getFriendRequest),
-    path('acceptFriendRequest/<str:account_name>&<str:accepting_name>', friendList.acceptFriendRequest),
-    path('rejectFriendRequest/<str:account_name>&<str:reject_name>', friendList.rejectFriendRequest),
-    path('deleteFriend/<str:account_name>&<str:delete_name>', friendList.deleteFriend),
+    path('getFriendList/<str:userSteamId>', friendList.getFriendList),
+    path('getFriendRequest/<str:userSteamId>', friendList.getFriendRequest),
+    path('acceptFriendRequest/<str:account_steamid>&<str:accepting_steamid>', friendList.acceptFriendRequest),
+    path('rejectFriendRequest/<str:account_steamid>&<str:reject_steamid>', friendList.rejectFriendRequest),
+    path('deleteFriend/<str:account_steamid>&<str:delete_steamid>', friendList.deleteFriend),
 
 
     #path('update_post/<str:receiver_steamid>', friendList.update_friendRequest),
@@ -78,8 +70,7 @@ urlpatterns = [
     path('getAchievements/', views.get_user_achievements, name='get_user_daily_hours'),
     path('addMessage/', messages.addMessage, name='addMessage'),
     path('getMessage/<str:conversationID>', messages.getMessage, name='getMessage'),
-    path('addConversation/', conversations.addConversation, name='addConversation'),
+    path('addConversation/<str:account_steamid>&<str:receiver_steamid>', conversations.addConversation, name='addConversation'),
     path('getConversation/<str:userID>', conversations.getConversation, name='getConversation'),
     path('searchForFriend/<str:userID>', iSteamUser.searchForFriend, name='searchForFriend'),
-
 ]

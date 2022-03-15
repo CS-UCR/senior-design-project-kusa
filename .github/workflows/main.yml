@@ -1,0 +1,35 @@
+name: Client Unit Tests
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pull to main and develop
+  pull_request:
+    branches: [ main, develop]
+  workflow_dispatch:
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest 
+    
+    steps:
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: 12
+        
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      working-directory: ./client
+      run: npm install 
+      
+    - name: Run tests
+      working-directory: ./client
+      run: npm test
+      
+    - name: Comment on Pull Request
+      uses: thollander/actions-comment-pull-request@v1.0.4
+      with:
+        message: 'Test results for current PR are available. Action completed.'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

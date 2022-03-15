@@ -34,23 +34,50 @@ This project benefits gamers by
 Demo: https://youtu.be/3zdM_QOe3G0
 
 ### Landing Page
-![lightLanding](https://user-images.githubusercontent.com/65988711/144960400-a49ca631-fd30-4544-8de9-bc842f632ce4.gif)
-![darkLanding](https://user-images.githubusercontent.com/65988711/144960403-cbef342a-3d25-4bd2-8e68-d9a0ea114348.gif)
+![landing](https://user-images.githubusercontent.com/65988711/158111493-f14adc58-a948-4b0d-8b38-bf9d68d44c6c.gif)
+![landingD](https://user-images.githubusercontent.com/65988711/158111501-aeb99a28-4119-42cf-8018-aa1d74025cc0.gif)
+
 
 ### Login/Signin Page
-![signinprocessdemo](https://user-images.githubusercontent.com/43893085/158038051-a2d83121-afcd-4b7d-9020-fec72db0849e.gif)
-![lightsteamauth](https://user-images.githubusercontent.com/43893085/158038002-b62b5d51-01a9-428c-aee1-ba21be854157.png)
-![steamsignin](https://user-images.githubusercontent.com/43893085/158038013-a32fc2d7-658e-436f-8ab5-0c1e6cd4706a.png)
-![darkemailpage](https://user-images.githubusercontent.com/43893085/158038025-e21c8d35-cf5e-4317-b39d-db5bde30b1fe.png)
+![signUp](https://user-images.githubusercontent.com/65988711/158109876-9244f63d-8a7e-4ace-83fa-327f2576742b.gif)
+
 
 ### Home Page
-![lightHome](https://user-images.githubusercontent.com/65988711/144959906-c98d920e-c136-4774-af01-d5bc6b7f29f7.png)
-![darkHome](https://user-images.githubusercontent.com/65988711/144959907-44acf42d-25f6-43c1-b10b-b00ee69a4604.png)
+![home](https://user-images.githubusercontent.com/65988711/158109943-dfbcc8d3-550f-4d31-8990-7a5b44666c29.gif)
+![homeD](https://user-images.githubusercontent.com/65988711/158109964-a07d7b5f-f845-4b8a-a6dc-6069fb17fe44.gif)
+
 
 ### Profile Page
-![profiledemo](https://user-images.githubusercontent.com/43893085/158037937-02490233-0b7c-4963-b81d-74e6395dd962.gif)
-![lightprofile](https://user-images.githubusercontent.com/43893085/158037974-80f8caad-276c-4d6f-82e7-7f5953197c27.png)
-![darkprofile](https://user-images.githubusercontent.com/43893085/158037965-e2f5115f-78ee-4063-998f-983c8012b508.png)
+#### Deactivating Account
+![profile](https://user-images.githubusercontent.com/65988711/158109979-8f085460-e61e-492c-8198-7412e66f104e.gif)
+#### Toggle Emails/Set Goals
+![profileD](https://user-images.githubusercontent.com/65988711/158109985-1d91fe2e-7571-4d94-a986-e49f9f299985.gif)
+
+
+### Achievements Page
+![achievements](https://user-images.githubusercontent.com/65988711/158110030-24c2f0e9-e2ef-407a-9b5d-447a02ff21fd.gif)
+![achievementsD](https://user-images.githubusercontent.com/65988711/158110043-5ba7784b-c9a4-4cd1-a63d-158efbe154ac.gif)
+
+#### Earning Achievements
+![earnAchievement](https://user-images.githubusercontent.com/65988711/158127494-4cca58b2-fae5-4818-baa4-89c1f1450c3a.gif)
+
+
+### Friend Page
+![friendPage](https://user-images.githubusercontent.com/65988711/158110125-5731948f-e743-447c-89d0-6ea073a1690b.png)
+![friendPageD](https://user-images.githubusercontent.com/65988711/158110131-9f258241-e6a0-4364-b0c9-9777631af4f9.png)
+
+#### Adding Friend
+![addFriend](https://user-images.githubusercontent.com/65988711/158123507-d61e4b28-0c92-4f5c-a85a-7b1010568435.gif)
+
+#### Removing Friend
+![removeFriend](https://user-images.githubusercontent.com/65988711/158111560-46384804-5f34-41a6-8cc1-b1cc6302580c.gif)
+
+
+### Chat Page
+![chatPage](https://user-images.githubusercontent.com/65988711/158110169-aa55ba76-1ceb-47fa-9a37-e011b80258af.gif)
+![chatPageD](https://user-images.githubusercontent.com/65988711/158110173-c141fab2-79ad-4045-9c42-2caa1433e993.gif)
+#### Start New Chat
+![startNewChat](https://user-images.githubusercontent.com/65988711/158133920-25d3c956-d440-4c64-96ab-36ea2e9260e0.gif)
 
 
 ## Project Setup
